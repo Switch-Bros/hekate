@@ -39,7 +39,7 @@ void _toggle_autorcm(bool enable)
 
 	if (!emmc_initialize(false))
 	{
-		EPRINTF("Failed to init eMMC.");
+		EPRINTF("eMMC konnte nicht inizialisiert werden.");
 		goto out;
 	}
 
@@ -73,10 +73,10 @@ void _toggle_autorcm(bool enable)
 	emmc_end();
 
 	if (enable)
-		gfx_printf("%kAutoRCM mode enabled!%k",  TXT_CLR_ORANGE, TXT_CLR_DEFAULT);
+		gfx_printf("%kAutoRCM Modus ist aktiviert!%k",  TXT_CLR_ORANGE, TXT_CLR_DEFAULT);
 	else
-		gfx_printf("%kAutoRCM mode disabled!%k", TXT_CLR_GREENISH, TXT_CLR_DEFAULT);
-	gfx_printf("\n\nPress any key...\n");
+		gfx_printf("%kAutoRCM Modus ist deaktiviert!%k", TXT_CLR_GREENISH, TXT_CLR_DEFAULT);
+	gfx_printf("\n\nDruecke beliebige Taste...\n");
 
 out:
 	btn_wait();
@@ -92,7 +92,7 @@ void menu_autorcm()
 
 	if (h_cfg.rcm_patched)
 	{
-		WPRINTF("This device is RCM patched and the\nfunction is disabled to avoid BRICKS!\n");
+		WPRINTF("Diese Konsole hat gepatchten RCM\nFunktion ist deaktiviert um BRICK zu verhindern!\n");
 		btn_wait();
 
 		return;
@@ -103,7 +103,7 @@ void menu_autorcm()
 
 	if (!emmc_initialize(false))
 	{
-		EPRINTF("Failed to init eMMC.");
+		EPRINTF("eMMC konnte nicht inizialisiert werden.");
 		btn_wait();
 
 		return;
@@ -129,7 +129,7 @@ void menu_autorcm()
 	ment_t *ments = (ment_t *)malloc(sizeof(ment_t) * 6);
 
 	ments[0].type = MENT_BACK;
-	ments[0].caption = "Back";
+	ments[0].caption = "Zurueck";
 
 	ments[1].type = MENT_CHGLINE;
 
@@ -137,23 +137,23 @@ void menu_autorcm()
 	ments[3].type = MENT_CHGLINE;
 	if (disabled)
 	{
-		ments[2].caption = "Status: Disabled!";
+		ments[2].caption = "Status: Deaktiviert!";
 		ments[2].color   = TXT_CLR_GREENISH;
-		ments[4].caption = "Enable AutoRCM";
+		ments[4].caption = "Aktiviere AutoRCM";
 		ments[4].handler = _enable_autorcm;
 	}
 	else
 	{
-		ments[2].caption = "Status: Enabled!";
+		ments[2].caption = "Status: Aktiviert!";
 		ments[2].color   = TXT_CLR_ORANGE;
-		ments[4].caption = "Disable AutoRCM";
+		ments[4].caption = "Deaktiviere AutoRCM";
 		ments[4].handler = _disable_autorcm;
 	}
 	ments[4].type = MENT_HDLR_RE;
 	ments[4].data = NULL;
 
 	memset(&ments[5], 0, sizeof(ment_t));
-	menu_t menu = {ments, "This corrupts BOOT0!", 0, 0};
+	menu_t menu = {ments, "Das beschaedigt BOOT0!", 0, 0};
 
 	tui_do_menu(&menu);
 }
