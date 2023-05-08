@@ -219,7 +219,7 @@ static void _save_fb_to_bmp()
 	// Create notification box.
 	lv_obj_t * mbox = lv_mbox_create(lv_layer_top(), NULL);
 	lv_mbox_set_recolor_text(mbox, true);
-	lv_mbox_set_text(mbox, SYMBOL_CAMERA"  #FFDD00 Saving screenshot...#");
+	lv_mbox_set_text(mbox, SYMBOL_CAMERA"  #FFDD00 Speichere Screenshot...#");
 	lv_obj_set_width(mbox, LV_DPI * 4);
 	lv_obj_set_top(mbox, true);
 	lv_obj_align(mbox, NULL, LV_ALIGN_IN_TOP_LEFT, 0, 0);
@@ -300,9 +300,9 @@ static void _save_fb_to_bmp()
 	free(fb);
 
 	if (!res)
-		lv_mbox_set_text(mbox, SYMBOL_CAMERA"  #96FF00 Screenshot saved!#");
+		lv_mbox_set_text(mbox, SYMBOL_CAMERA"  #96FF00 Screenshot gespeichert!#");
 	else
-		lv_mbox_set_text(mbox, SYMBOL_WARNING"  #FFDD00 Screenshot failed!#");
+		lv_mbox_set_text(mbox, SYMBOL_WARNING"  #FFDD00 Screenshot fehlgeschlagen!#");
 	manual_system_maintenance(true);
 	lv_mbox_start_auto_close(mbox, 4000);
 
@@ -472,7 +472,7 @@ static bool _jc_virt_mouse_read(lv_indev_data_t *data)
 				console_enabled = true;
 				gfx_con_getpos(&gfx_con.savedx, &gfx_con.savedy);
 				gfx_con_setpos(964, 630);
-				gfx_printf("Press -/+ to close");
+				gfx_printf("Druecke -/+ zum schliessen");
 				gfx_con_setpos(gfx_con.savedx, gfx_con.savedy);
 			}
 			else
@@ -751,22 +751,22 @@ lv_res_t nyx_generic_onoff_toggle(lv_obj_t *btn)
 
 		if (!(lv_btn_get_state(btn) & LV_BTN_STATE_TGL_REL))
 		{
-			strcat(label_text, "#D0D0D0    OFF#");
+			strcat(label_text, "#D0D0D0    AUS#");
 			lv_label_set_text(label_btn, label_text);
 		}
 		else
 		{
-			s_printf(label_text, "%s%s%s", label_text, text_color, "    ON #");
+			s_printf(label_text, "%s%s%s", label_text, text_color, "    AN #");
 			lv_label_set_text(label_btn, label_text);
 		}
 	}
 	else
 	{
 		if (!(lv_btn_get_state(btn) & LV_BTN_STATE_TGL_REL))
-			lv_label_set_text(label_btn, "#D0D0D0 OFF#");
+			lv_label_set_text(label_btn, "#D0D0D0 AUS#");
 		else
 		{
-			s_printf(label_text, "%s%s", text_color, " ON #");
+			s_printf(label_text, "%s%s", text_color, " AN #");
 			lv_label_set_text(label_btn, label_text);
 		}
 	}

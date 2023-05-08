@@ -58,9 +58,9 @@ static void _create_window_emummc()
 
 	lv_obj_t *win;
 	if (!mbr_ctx.part_idx)
-		win = nyx_create_window_custom_close_btn(SYMBOL_DRIVE"  Create SD File emuMMC", _action_emummc_window_close);
+		win = nyx_create_window_custom_close_btn(SYMBOL_DRIVE"  Erstelle emuMMC auf SD-Karte", _action_emummc_window_close);
 	else
-		win = nyx_create_window_custom_close_btn(SYMBOL_DRIVE"  Create SD Partition emuMMC", _action_emummc_window_close);
+		win = nyx_create_window_custom_close_btn(SYMBOL_DRIVE"  Erstelle emuMMC Parition auf SD-Karte", _action_emummc_window_close);
 
 	//Disable buttons.
 	nyx_window_toggle_buttons(win, true);
@@ -202,8 +202,8 @@ static void _create_mbox_emummc_raw()
 	lv_obj_set_style(dark_bg, &mbox_darken);
 	lv_obj_set_size(dark_bg, LV_HOR_RES, LV_VER_RES);
 
-	static const char *mbox_btn_format[] = { "\222Continue", "\222Cancel", "" };
-	static char *mbox_btn_parts[] = { "\262Part 1", "\262Part 2", "\262Part 3", "\222Cancel", "" };
+	static const char *mbox_btn_format[] = { "\222Fortfahren", "\222Abbrechen", "" };
+	static char *mbox_btn_parts[] = { "\262Part 1", "\262Part 2", "\262Part 3", "\222Abbrechen", "" };
 	lv_obj_t * mbox = lv_mbox_create(dark_bg, NULL);
 	lv_mbox_set_recolor_text(mbox, true);
 	lv_obj_set_width(mbox, LV_HOR_RES / 9 * 6);

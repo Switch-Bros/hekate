@@ -148,14 +148,14 @@ static lv_res_t _create_mbox_autorcm_status(lv_obj_t *btn)
 	if (enabled)
 	{
 		lv_mbox_set_text(mbox,
-			"AutoRCM is now #C7EA46 ENABLED!#\n\n"
+			"AutoRCM ist jetzt #C7EA46 AKTIVIERT!#\n\n"
 			"You can now automatically enter RCM by only pressing #FF8000 POWER#.\n"
 			"Use the AutoRCM button here again if you want to remove it later on.");
 	}
 	else
 	{
 		lv_mbox_set_text(mbox,
-			"AutoRCM is now #FF8000 DISABLED!#\n\n"
+			"AutoRCM ist jetzt #FF8000 DEAKTIVIERT!#\n\n"
 			"The boot process is now normal and you need the #FF8000 VOL+# + #FF8000 HOME# (jig) combo to enter RCM.\n");
 	}
 
@@ -179,14 +179,14 @@ static lv_res_t _create_mbox_hid(usb_ctxt_t *usbs)
 	lv_obj_set_style(dark_bg, &mbox_darken);
 	lv_obj_set_size(dark_bg, LV_HOR_RES, LV_VER_RES);
 
-	static const char *mbox_btn_map[] = { "\251", "\262Close", "\251", "" };
-	static const char *mbox_btn_map2[] = { "\251", "\222Close", "\251", "" };
+	static const char *mbox_btn_map[] = { "\251", "\262Schliessen", "\251", "" };
+	static const char *mbox_btn_map2[] = { "\251", "\222Schliessen", "\251", "" };
 	lv_obj_t *mbox = lv_mbox_create(dark_bg, NULL);
 	lv_mbox_set_recolor_text(mbox, true);
 
 	char *txt_buf = malloc(SZ_4K);
 
-	s_printf(txt_buf, "#FF8000 HID Emulation#\n\n#C7EA46 Device:# ");
+	s_printf(txt_buf, "#FF8000 HID Emulation#\n\n#C7EA46 Geraet:# ");
 
 	if (usbs->type == USB_HID_GAMEPAD)
 		strcat(txt_buf, "Gamepad");
@@ -203,7 +203,7 @@ static lv_res_t _create_mbox_hid(usb_ctxt_t *usbs)
 
 	lv_obj_t *lbl_tip = lv_label_create(mbox, NULL);
 	lv_label_set_recolor(lbl_tip, true);
-	lv_label_set_static_text(lbl_tip, "Note: To end it, press #C7EA46 L3# + #C7EA46 HOME# or remove the cable.");
+	lv_label_set_static_text(lbl_tip, "Hinweis: To end it, press #C7EA46 L3# + #C7EA46 HOME# or remove the cable.");
 	lv_obj_set_style(lbl_tip, &hint_small_style);
 
 	lv_mbox_add_btns(mbox, mbox_btn_map, mbox_action);
@@ -224,21 +224,21 @@ static lv_res_t _create_mbox_ums(usb_ctxt_t *usbs)
 	lv_obj_set_style(dark_bg, &mbox_darken);
 	lv_obj_set_size(dark_bg, LV_HOR_RES, LV_VER_RES);
 
-	static const char *mbox_btn_map[] = { "\251", "\262Close", "\251", "" };
-	static const char *mbox_btn_map2[] = { "\251", "\222Close", "\251", "" };
+	static const char *mbox_btn_map[] = { "\251", "\262Schliessen", "\251", "" };
+	static const char *mbox_btn_map2[] = { "\251", "\222Schliessen", "\251", "" };
 	lv_obj_t *mbox = lv_mbox_create(dark_bg, NULL);
 	lv_mbox_set_recolor_text(mbox, true);
 
 	char *txt_buf = malloc(SZ_4K);
 
-	s_printf(txt_buf, "#FF8000 USB Mass Storage#\n\n#C7EA46 Device:# ");
+	s_printf(txt_buf, "#FF8000 USB Massenspeicher#\n\n#C7EA46 Geraet:# ");
 
 	if (usbs->type == MMC_SD)
 	{
 		switch (usbs->partition)
 		{
 		case 0:
-			strcat(txt_buf, "SD Card");
+			strcat(txt_buf, "SD-Karte");
 			break;
 		case EMMC_GPP + 1:
 			strcat(txt_buf, "emuMMC GPP");
