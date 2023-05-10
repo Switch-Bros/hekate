@@ -804,10 +804,10 @@ bool nyx_emmc_check_battery_enough()
 		lv_mbox_set_recolor_text(mbox, true);
 
 		lv_mbox_set_text(mbox,
-			"#FF8000 Battery Check#\n\n"
-			"#FFDD00 Battery is not enough to carry on#\n"
-			"#FFDD00 with selected operation!#\n\n"
-			"Charge to at least #C7EA46 3650 mV#, and try again!");
+			"#FF8000 Ueberpruefe Akku#\n\n"
+			"#FFDD00 Der Akku ist zu schwach um mit dem#\n"
+			"#FFDD00 gewaehlten Vorgang weiterzumachen!#\n\n"
+			"Lade ihn auf bis #C7EA46 3650 mV#, und Versuch es nochmal!");
 
 		lv_mbox_add_btns(mbox, mbox_btn_map, mbox_action);
 		lv_obj_set_width(mbox, LV_HOR_RES / 9 * 5);
@@ -831,10 +831,10 @@ static void _nyx_sd_card_issues(void *param)
 	lv_mbox_set_recolor_text(mbox, true);
 
 	lv_mbox_set_text(mbox,
-		"#FF8000 SD Card Issues Check#\n\n"
-		"#FFDD00 The SD Card is initialized in 1-bit mode!#\n"
-		"#FFDD00 This might mean detached or broken connector!#\n\n"
-		"You might want to check\n#C7EA46 Console Info# -> #C7EA46 microSD#");
+		"#FF8000 Ueberpruefe SD-Karte#\n\n"
+		"#FFDD00 Die SD-Karte wird im 1-Bit-Modus initialisiert!#\n"
+		"#FFDD00 Kann sein das sich der Konnektor geloest hat oder gebrochen ist.!#\n\n"
+		"Schau mal in\n#C7EA46 Konsoleninfo# -> #C7EA46 SD-Karte#");
 
 	lv_mbox_add_btns(mbox, mbox_btn_map, mbox_action);
 	lv_obj_set_width(mbox, LV_HOR_RES / 9 * 5);
@@ -891,7 +891,7 @@ lv_obj_t *nyx_create_standard_window(const char *win_title)
 	lv_win_set_style(win, LV_WIN_STYLE_BG, &win_bg_style);
 	lv_obj_set_size(win, LV_HOR_RES, LV_VER_RES);
 
-	close_btn = lv_win_add_btn(win, NULL, SYMBOL_CLOSE" Close", lv_win_close_action_custom);
+	close_btn = lv_win_add_btn(win, NULL, SYMBOL_CLOSE" Schliessen", lv_win_close_action_custom);
 
 	return win;
 }
@@ -909,7 +909,7 @@ lv_obj_t *nyx_create_window_custom_close_btn(const char *win_title, lv_action_t 
 	lv_win_set_style(win, LV_WIN_STYLE_BG, &win_bg_style);
 	lv_obj_set_size(win, LV_HOR_RES, LV_VER_RES);
 
-	close_btn = lv_win_add_btn(win, NULL, SYMBOL_CLOSE" Close", rel_action);
+	close_btn = lv_win_add_btn(win, NULL, SYMBOL_CLOSE" Schliessen", rel_action);
 
 	return win;
 }

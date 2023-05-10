@@ -325,16 +325,16 @@ lv_res_t create_window_backup_restore_tool(lv_obj_t *btn)
 	if (!emmc_btn_ctxt.restore)
 	{
 		lv_label_set_static_text(label_txt2,
-			"Allows you to backup the BOOT physical partitions.\n"
-			"They contain the BCT, keys and various package1.\n"
-			"#FF8000 These are paired with the RAW GPP backup.#");
+			"Erlaubt dir das sichern der physischen BOOT Partitionen.\n"
+			"Enthaelt das BCT, Keys und verschiedene package1.\n"
+			"#FF8000 Diese sind mit der RAW GPP Sicherung gepaart.#");
 	}
 	else
 	{
 		lv_label_set_static_text(label_txt2,
-			"Allows you to restore the BOOT physical partitions.\n"
-			"They contain the BCT, keys and various package1.\n"
-			"#FF8000 These are paired with the RAW GPP restore.#");
+			"Erlaubt dir das wiederherstellen der physischen BOOT Partitionen.\n"
+			"Enthaelt das BCT, Keys und verschiedene package1.\n"
+			"#FF8000 Diese sind mit der RAW GPP Sicherung gepaart.#");
 	}
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, btn1, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3);
@@ -355,16 +355,16 @@ lv_res_t create_window_backup_restore_tool(lv_obj_t *btn)
 	if (!emmc_btn_ctxt.restore)
 	{
 		lv_label_set_static_text(label_txt2,
-			"Allows you to backup the GPP physical partition.\n"
-			"It contains, CAL0, various package2, SYSTEM, USER, etc.\n"
-			"#FF8000 This is paired with the BOOT0/1 backups.#");
+			"Erlaubt dir das sichern der physischen GPP Partition.\n"
+			"Enthaelt CAL0, verschiedene package2, SYSTEM, USER, etc.\n"
+			"#FF8000 Diese sind mit der BOOT0/1 Sicherung gepaart.#");
 	}
 	else
 	{
 		lv_label_set_static_text(label_txt2,
-			"Allows you to restore the GPP physical partition.\n"
-			"It contains, CAL0, various package2, SYSTEM, USER, etc.\n"
-			"#FF8000 This is paired with the BOOT0/1 restore.#");
+			"Erlaubt dir das wiederherstellen der physischen GPP Partition.\n"
+			"Enthaelt CAL0, verschiedene package2, SYSTEM, USER, etc.\n"
+			"#FF8000 Diese sind mit der BOOT0/1 Sicherung gepaart.#");
 	}
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, btn2, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3);
@@ -382,7 +382,7 @@ lv_res_t create_window_backup_restore_tool(lv_obj_t *btn)
 	lv_label_set_static_text(label_sep, "");
 
 	lv_obj_t *label_txt3 = lv_label_create(h2, NULL);
-	lv_label_set_static_text(label_txt3, "GPP Partitions");
+	lv_label_set_static_text(label_txt3, "GPP Partitionen");
 	lv_obj_set_style(label_txt3, lv_theme_get_current()->label.prim);
 	lv_obj_align(label_txt3, label_sep, LV_ALIGN_OUT_BOTTOM_LEFT, LV_DPI / 4, -LV_DPI * 4 / 21);
 

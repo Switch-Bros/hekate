@@ -282,20 +282,20 @@ static lv_res_t _create_mbox_ums(usb_ctxt_t *usbs)
 		if (usbs->type == MMC_SD)
 		{
 			lv_label_set_static_text(lbl_tip,
-				"Note: To end it, #C7EA46 safely eject# from inside the OS.\n"
+				"Hinweis: To end it, #C7EA46 safely eject# from inside the OS.\n"
 				"       #FFDD00 DO NOT remove the cable!#");
 		}
 		else
 		{
 			lv_label_set_static_text(lbl_tip,
-				"Note: To end it, #C7EA46 safely eject# from inside the OS.\n"
+				"Hinweis: To end it, #C7EA46 safely eject# from inside the OS.\n"
 				"       #FFDD00 If it's not mounted, you might need to remove the cable!#");
 		}
 	}
 	else
 	{
 		lv_label_set_static_text(lbl_tip,
-			"Note: To end it, #C7EA46 safely eject# from inside the OS\n"
+			"Hinweis: To end it, #C7EA46 safely eject# from inside the OS\n"
 			"       or by removing the cable!#");
 	}
 	lv_obj_set_style(lbl_tip, &hint_small_style);
@@ -333,13 +333,13 @@ static lv_res_t _create_mbox_ums_error(int error)
 	switch (error)
 	{
 	case 1:
-		lv_mbox_set_text(mbox, "#FF8000 USB Mass Storage#\n\n#FFFF00 Error mounting SD Card!#");
+		lv_mbox_set_text(mbox, "#FF8000 USB Massenspeicher#\n\n#FFFF00 Error mounting SD Card!#");
 		break;
 	case 2:
-		lv_mbox_set_text(mbox, "#FF8000 USB Mass Storage#\n\n#FFFF00 No emuMMC found active!#");
+		lv_mbox_set_text(mbox, "#FF8000 USB Massenspeicher#\n\n#FFFF00 No emuMMC found active!#");
 		break;
 	case 3:
-		lv_mbox_set_text(mbox, "#FF8000 USB Mass Storage#\n\n#FFFF00 Active emuMMC is not partition based!#");
+		lv_mbox_set_text(mbox, "#FF8000 USB Massenspeicher#\n\n#FFFF00 Active emuMMC is not partition based!#");
 		break;
 	}
 
@@ -696,7 +696,7 @@ static lv_res_t _create_window_usb_tools(lv_obj_t *parent)
 	lv_label_set_static_text(label_sep, "");
 
 	lv_obj_t *label_txt = lv_label_create(h1, NULL);
-	lv_label_set_static_text(label_txt, "USB Mass Storage");
+	lv_label_set_static_text(label_txt, "USB Massenspeicher");
 	lv_obj_set_style(label_txt, lv_theme_get_current()->label.prim);
 	lv_obj_align(label_txt, label_sep, LV_ALIGN_OUT_BOTTOM_LEFT, LV_DPI / 4, -LV_DPI * 3 / 10);
 
