@@ -406,15 +406,15 @@ lv_res_t create_window_backup_restore_tool(lv_obj_t *btn)
 	if (!emmc_btn_ctxt.restore)
 	{
 		lv_label_set_static_text(label_txt4,
-			"Allows you to backup the partitions from RAW GPP except\n"
-			"USER. It contains, CAL0, various package2, SYSTEM, etc.\n"
-			"#FF8000 This is an incomplete backup.#");
+			"Erstellt eine Sicherung der RAW GPP Partition ausser USER.\n"
+			"Enthaelt CAL0, verschiedene package2, SYSTEM, etc.\n"
+			"#FF8000 Diese Sicherung ist unvollstaendig.#");
 	}
 	else
 	{
 		lv_label_set_static_text(label_txt4,
-			"Allows you to restore ALL partitions from RAW GPP\n"
-			"It contains, CAL0, various package2, SYSTEM, USER, etc.\n");
+			"Stellt ALLE Partitionen der RAW GPP Partition wieder her.\n"
+			"Enthaelt CAL0, verschiedene package2, SYSTEM, USER, etc.\n");
 	}
 
 	lv_obj_set_style(label_txt4, &hint_small_style);
@@ -433,8 +433,8 @@ lv_res_t create_window_backup_restore_tool(lv_obj_t *btn)
 		label_txt4 = lv_label_create(h2, NULL);
 		lv_label_set_recolor(label_txt4, true);
 		lv_label_set_static_text(label_txt4,
-			"Allows you to backup the USER partition from RAW GPP.\n"
-			"#FF8000 This is an incomplete backup.#\n");
+			"Erstellt eine Sicherung der USER Partition vom RAW GPP.\n"
+			"#FF8000 Diese Sicherung ist unvollstaendig.#\n");
 		lv_obj_set_style(label_txt4, &hint_small_style);
 		lv_obj_align(label_txt4, btn4, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3);
 	}
@@ -454,7 +454,7 @@ lv_res_t create_window_backup_restore_tool(lv_obj_t *btn)
 
 	lv_obj_t *sd_emummc_raw = lv_btn_create(h3, NULL);
 	nyx_create_onoff_button(lv_theme_get_current(), h3,
-		sd_emummc_raw, SYMBOL_SD" SD emuMMC Raw Partition", _emmc_backup_buttons_raw_toggle, false);
+		sd_emummc_raw, SYMBOL_SD" SD emuMMC RAW Partition", _emmc_backup_buttons_raw_toggle, false);
 	emmc_btn_ctxt.raw_emummc = false;
 
 	return LV_RES_OK;
