@@ -1477,10 +1477,10 @@ static void _create_tab_tools_emmc_pkg12(lv_theme_t *th, lv_obj_t *parent)
 	lv_obj_t *label_txt2 = lv_label_create(h1, NULL);
 	lv_label_set_recolor(label_txt2, true);
 	lv_label_set_static_text(label_txt2,
-		"Allows you to backup the eMMC partitions individually or as\n"
-		"a whole raw image to the SD card.\n"
-		"#C7EA46 Supports SD cards from# #FF8000 4GB# #C7EA46 and up. #"
-		"#FF8000 FAT32# #C7EA46 and ##FF8000 exFAT##C7EA46 .#");
+		"Ermoeglicht es, die eMMC-Partitionen einzeln oder als ganzes\n"
+		"RAW Image auf der SD-Karte zu sichern.\n"
+		"#C7EA46 Unterstuetzt SD-Karten von# #FF8000 4GB# #C7EA46 und mehr. #"
+		"#FF8000 FAT32# #C7EA46 und ##FF8000 exFAT##C7EA46 .#");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, btn, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3);
 
@@ -1494,10 +1494,10 @@ static void _create_tab_tools_emmc_pkg12(lv_theme_t *th, lv_obj_t *parent)
 	label_txt2 = lv_label_create(h1, NULL);
 	lv_label_set_recolor(label_txt2, true);
 	lv_label_set_static_text(label_txt2,
-		"Allows you to restore the eMMC/emuMMC partitions individually\n"
-		"or as a whole raw image from the SD card.\n"
-		"#C7EA46 Supports SD cards from# #FF8000 4GB# #C7EA46 and up. #"
-		"#FF8000 FAT32# #C7EA46 and ##FF8000 exFAT##C7EA46 .#");
+		"Ermoeglicht es, die eMMC/emuMMC Partitionen einzeln oder als ganzes\n"
+		"von der SD-Karte wiederherzustellen.\n"
+		"#C7EA46 Unterstuetzt SD-Karten von# #FF8000 4GB# #C7EA46 und mehr. #"
+		"#FF8000 FAT32# #C7EA46 und ##FF8000 exFAT##C7EA46 .#");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, btn2, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3);
 
@@ -1532,8 +1532,8 @@ static void _create_tab_tools_emmc_pkg12(lv_theme_t *th, lv_obj_t *parent)
 	lv_obj_t *label_txt4 = lv_label_create(h2, NULL);
 	lv_label_set_recolor(label_txt4, true);
 	lv_label_set_static_text(label_txt4,
-		"Allows you to partition the SD Card for using it with #C7EA46 emuMMC#,\n"
-		"#C7EA46 Android# and #C7EA46 Linux#. You can also flash Linux and Android.\n");
+		"Ermoeglicht das Partitionieren der SD-Karte fuer #C7EA46 emuMMC#,\n"
+		"#C7EA46 Android# und #C7EA46 Linux#. Linux und Android koennen auch geflasht werden.\n");
 	lv_obj_set_style(label_txt4, &hint_small_style);
 	lv_obj_align(label_txt4, btn3, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3);
 
@@ -1551,9 +1551,9 @@ static void _create_tab_tools_emmc_pkg12(lv_theme_t *th, lv_obj_t *parent)
 	label_txt4 = lv_label_create(h2, NULL);
 	lv_label_set_recolor(label_txt4, true);
 	lv_label_set_static_text(label_txt4,
-		"#C7EA46 USB mass storage#, #C7EA46 gamepad# and other USB tools.\n"
-		"Mass storage can mount SD, eMMC and emuMMC. The\n"
-		"gamepad transforms the Switch into an input device.#");
+		"#C7EA46 USB Massenspeicher#, #C7EA46 Gamepad# und andere USB Werkzeuge.\n"
+		"Massenspeicher kann SD-Karte, eMMC and emuMMC einbinden.\n"
+		"Das Gamepad transformiert die Switch in ein Eingabegeraet.#");
 	lv_obj_set_style(label_txt4, &hint_small_style);
 	lv_obj_align(label_txt4, btn4, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3);
 }
@@ -1595,10 +1595,10 @@ static void _create_tab_tools_arc_autorcm(lv_theme_t *th, lv_obj_t *parent)
 	lv_obj_t *label_txt2 = lv_label_create(h1, NULL);
 	lv_label_set_recolor(label_txt2, true);
 	lv_label_set_static_text(label_txt2,
-		"Allows you to fix the archive bit for all folders including\n"
-		"the root and emuMMC \'Nintendo\' folders.\n"
-		"#C7EA46 It sets the archive bit to folders named with ##FF8000 .[ext]#\n"
-		"#FF8000 Use that option when you have corruption messages.#");
+		"Erlaubt dir das entfernen des archive bit fuer alle Ordner inklusive\n"
+		"root und emuMMC \'Nintendo\' Ordner.\n"
+		"#C7EA46 Es setzt das archive bit bei Ordnern mit ##FF8000 Dateierweiterung#\n"
+		"#FF8000 Benutze es wenn du Fehlermeldungen mit korrupten Dateien bekommst.#");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, btn, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3);
 
@@ -1612,8 +1612,8 @@ static void _create_tab_tools_arc_autorcm(lv_theme_t *th, lv_obj_t *parent)
 	label_txt2 = lv_label_create(h1, NULL);
 	lv_label_set_recolor(label_txt2, true);
 	lv_label_set_static_text(label_txt2,
-		"Allows you to calibrate the touchscreen module.\n"
-		"#FF8000 This fixes any issues with touchscreen in Nyx and HOS.#");
+		"Ermoeglicht das kalibrieren der Touchscreen-Einheit.\n"
+		"#FF8000 Dies behebt alle Touchscreen Fehler in Nyx und HOS.#");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, btn2, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3);
 
@@ -1665,13 +1665,13 @@ static void _create_tab_tools_arc_autorcm(lv_theme_t *th, lv_obj_t *parent)
 	char *txt_buf = (char *)malloc(SZ_4K);
 
 	s_printf(txt_buf,
-		"Allows you to enter RCM without using #C7EA46 VOL+# & #C7EA46 HOME# (jig).\n"
-		"#FF8000 It can restore all versions of AutoRCM whenever requested.#\n"
-		"#FF3C28 This corrupts the BCT and you can't boot without a custom#\n"
-		"#FF3C28 bootloader.#");
+		"Erlaubt es dir in den RCM Modus zu gehen ohne #C7EA46 VOL+# & #C7EA46 HOME# (Jig).\n"
+		"#FF8000 Kann jederzeit auf alle Versionen von AutoRCM zurueckgesetzt werden.#\n"
+		"#FF3C28 Das beschaedigt den BCT und die Konsole kann nicht starten ohne#\n"
+		"#FF3C28 benutzerdefinierten Bootloader.#");
 
 	if (h_cfg.rcm_patched)
-		strcat(txt_buf, " #FF8000 This is disabled because this unit is patched!#");
+		strcat(txt_buf, " #FF8000 Deaktiviert weil Konsole gepatcht ist!#");
 
 	lv_obj_t *label_txt4 = lv_label_create(h2, NULL);
 	lv_label_set_recolor(label_txt4, true);
@@ -1688,15 +1688,15 @@ static void _create_tab_tools_arc_autorcm(lv_theme_t *th, lv_obj_t *parent)
 	// Create Dump Package1/2 button.
 	lv_obj_t *btn4 = lv_btn_create(h2, btn);
 	label_btn = lv_label_create(btn4, NULL);
-	lv_label_set_static_text(label_btn, SYMBOL_MODULES"  Dump Package1/2");
+	lv_label_set_static_text(label_btn, SYMBOL_MODULES"  Dumpen von Package1/2");
 	lv_obj_align(btn4, label_txt4, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 2);
 	lv_btn_set_action(btn4, LV_BTN_ACTION_CLICK, _create_window_dump_pk12_tool);
 
 	label_txt2 = lv_label_create(h2, NULL);
 	lv_label_set_recolor(label_txt2, true);
 	lv_label_set_static_text(label_txt2,
-		"Allows you to dump and decrypt pkg1 and pkg2 and further\n"
-		"split it up into their individual parts. It also dumps the kip1.");
+		"Erlaubt dir das dumpen und entschluesseln von pkg1 und pkg2 und\n"
+		"darueberhinaus das splitten in individuelle Teile. Dumpt auch kip1.");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, btn4, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3);
 }
