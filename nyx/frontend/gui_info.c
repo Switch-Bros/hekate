@@ -2480,7 +2480,7 @@ void create_tab_info(lv_theme_t *th, lv_obj_t *parent)
 	// Create TSEC Keys button.
 	lv_obj_t *btn2 = lv_btn_create(h1, btn);
 	label_btn = lv_label_create(btn2, NULL);
-	lv_label_set_static_text(label_btn, SYMBOL_KEY"  Lockpick");
+	lv_label_set_static_text(label_btn, SYMBOL_KEY"  Enigma");
 	lv_obj_align(btn2, btn, LV_ALIGN_OUT_RIGHT_TOP, LV_DPI * 11 / 15, 0);
 	lv_btn_set_action(btn2, LV_BTN_ACTION_CLICK, _create_mbox_lockpick);
 
@@ -2494,14 +2494,14 @@ void create_tab_info(lv_theme_t *th, lv_obj_t *parent)
 	if (lockpick_found)
 	{
 		lv_label_set_static_text(label_txt2,
-			"View Ipatches and dump the unpatched and patched versions\nof BootROM.\n"
-			"Or dump every single key via #C7EA46 Lockpick RCM#.\n");
+			"Zeige Ipatches und Dumpe die (un-)gepatchten Versions\nvom BootROM.\n"
+			"Oder Dumpe die einzelnen Keys mit #C7EA46 Enigma_RCM#.\n");
 	}
 	else
 	{
 		lv_label_set_static_text(label_txt2,
-			"View Ipatches and dump the unpatched and patched versions\nof BootROM. Or dump every single key via #C7EA46 Lockpick RCM#.\n"
-			"#FFDD00 bootloader/payloads/Lockpick_RCM.bin is missing or old!#\n");
+			"Zeige Ipatches und Dumpe die (un-)gepatchten Versions\nvom BootROM. Oder Dumpe die einzelnen Keys mit #C7EA46 Enigma_RCM#.\n"
+			"#FFDD00 bootloader/payloads/Enigma_RCM.bin fehlt oder ist alt!#\n");
 	}
 
 	lv_obj_set_style(label_txt2, &hint_small_style);
@@ -2533,9 +2533,9 @@ void create_tab_info(lv_theme_t *th, lv_obj_t *parent)
 	lv_obj_t *label_txt4 = lv_label_create(h1, NULL);
 	lv_label_set_recolor(label_txt4, true);
 	lv_label_set_static_text(label_txt4,
-		"View and dump the cached #C7EA46 Fuses# and #C7EA46 KFuses#.\n"
-		"Fuses contain info about the SoC/SKU and KFuses HDCP keys.\n"
-		"You can also see info about #C7EA46 DRAM#, #C7EA46 Screen# and #C7EA46 Touch panel#.");
+		"Zeige und Dumpe die gecachten #C7EA46 Fuses# und #C7EA46 KFuses#.\n"
+		"Fuses enthalten Infos ueber SoC/SKU und KFuses ueber HDCP Keys.\n"
+		"Du siehst ebenfalls Infos ueber #C7EA46 DRAM#, #C7EA46 Bildschirm# und #C7EA46 Touch panel#.");
 	lv_obj_set_style(label_txt4, &hint_small_style);
 	lv_obj_align(label_txt4, btn3, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3);
 
@@ -2552,7 +2552,7 @@ void create_tab_info(lv_theme_t *th, lv_obj_t *parent)
 	lv_label_set_static_text(label_sep, "");
 
 	lv_obj_t *label_txt3 = lv_label_create(h2, NULL);
-	lv_label_set_static_text(label_txt3, "Storage & Battery Info");
+	lv_label_set_static_text(label_txt3, "Speicher & Akku Info");
 	lv_obj_set_style(label_txt3, th->label.prim);
 	lv_obj_align(label_txt3, label_sep, LV_ALIGN_OUT_BOTTOM_LEFT, LV_DPI / 4, 0);
 
@@ -2576,15 +2576,15 @@ void create_tab_info(lv_theme_t *th, lv_obj_t *parent)
 	// Create microSD button.
 	lv_obj_t *btn6 = lv_btn_create(h2, btn);
 	label_btn = lv_label_create(btn6, NULL);
-	lv_label_set_static_text(label_btn, SYMBOL_SD"  microSD ");
+	lv_label_set_static_text(label_btn, SYMBOL_SD"  SD-Karte ");
 	lv_obj_align(btn6, btn5, LV_ALIGN_OUT_RIGHT_TOP, LV_DPI * 3 / 4, 0);
 	lv_btn_set_action(btn6, LV_BTN_ACTION_CLICK, _create_window_sdcard_info_status);
 
 	lv_obj_t *label_txt5 = lv_label_create(h2, NULL);
 	lv_label_set_recolor(label_txt5, true);
 	lv_label_set_static_text(label_txt5,
-		"View info about the eMMC or microSD and their partition list.\n"
-		"Additionally you can benchmark read speeds.");
+		"Zeige Infos ueber eMMC oder SD-Karte und deren Partitionstabelle.\n"
+		"Zusaetzlich kannst du Benchmark von Lesegschwindigkeit machen.");
 	lv_obj_set_style(label_txt5, &hint_small_style);
 	lv_obj_align(label_txt5, btn5, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3);
 
@@ -2601,15 +2601,15 @@ void create_tab_info(lv_theme_t *th, lv_obj_t *parent)
 	}
 	label_btn = lv_label_create(btn7, NULL);
 	lv_btn_set_fit(btn7, true, true);
-	lv_label_set_static_text(label_btn, SYMBOL_BATTERY_FULL"  Battery");
+	lv_label_set_static_text(label_btn, SYMBOL_BATTERY_FULL"  Akku");
 	lv_obj_align(btn7, line_sep, LV_ALIGN_OUT_BOTTOM_LEFT, LV_DPI / 4, LV_DPI / 2);
 	lv_btn_set_action(btn7, LV_BTN_ACTION_CLICK, _create_window_battery_status);
 
 	lv_obj_t *label_txt6 = lv_label_create(h2, NULL);
 	lv_label_set_recolor(label_txt6, true);
 	lv_label_set_static_text(label_txt6,
-		"View battery and battery charger related info.\n"
-		"Additionally you can dump battery charger's registers.\n");
+		"Zeige Akku und Ladegeraet Infos an.\n"
+		"Zusaetzlich kannst du die Register des Ladegeraets Dumpen.\n");
 	lv_obj_set_style(label_txt6, &hint_small_style);
 	lv_obj_align(label_txt6, btn7, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3);
 }
