@@ -383,7 +383,7 @@ int hos_keygen(void *keyblob, u32 kb, tsec_ctxt_t *tsec_ctxt)
 		tsec_ctxt->fw = sd_file_read("bootloader/sys/thk.bin", NULL);
 		if (!tsec_ctxt->fw)
 		{
-			EPRINTF("\nFailed to load thk.bin");
+			EPRINTF("\nthk.bin konnte nicht geladen werden");
 			return 0;
 		}
 
@@ -407,7 +407,7 @@ int hos_keygen(void *keyblob, u32 kb, tsec_ctxt_t *tsec_ctxt)
 		// We rely on racing conditions, make sure we cover even the unluckiest cases.
 		if (retries > 15)
 		{
-			EPRINTF("\nFailed to get TSEC keys. Please try again.");
+			EPRINTF("\nTSEC Keys konnten nicht gelesen werden. Bitte nochmal versuchen.");
 			return 0;
 		}
 	}
@@ -578,7 +578,7 @@ int hos_bis_keygen()
 	// We check unconditionally in order to support downgrades.
 	keygen_rev = fuse_read_odm_keygen_rev();
 
-	gfx_printf("Keygen rev: %d\n", keygen_rev);
+	gfx_printf("Keygen Rev: %d\n", keygen_rev);
 
 	if (keygen_rev)
 	{
