@@ -160,7 +160,7 @@ int parse_fss(launch_ctxt_t *ctxt, const char *path)
 	{
 		gfx_printf("Atmosphere %d.%d.%d-%08x via FSS0/PKG3\n"
 			"Max HOS: %d.%d.%d\n"
-			"Unpacking..  ",
+			"Entpacke..  ",
 			fss_meta->version >> 24, (fss_meta->version >> 16) & 0xFF, (fss_meta->version >> 8) & 0xFF, fss_meta->git_rev,
 			fss_meta->hos_ver >> 24, (fss_meta->hos_ver >> 16) & 0xFF, (fss_meta->hos_ver >> 8) & 0xFF);
 
@@ -191,7 +191,7 @@ int parse_fss(launch_ctxt_t *ctxt, const char *path)
 				merge_kip_t *mkip1 = (merge_kip_t *)malloc(sizeof(merge_kip_t));
 				mkip1->kip1 = content;
 				list_append(&ctxt->kip1_list, &mkip1->link);
-				DPRINTF("Loaded %s.kip1 from FSS0 (size %08X)\n", curr_fss_cnt[i].name, curr_fss_cnt[i].size);
+				DPRINTF("%s.kip1 von FSS0 geladen (Groesse %08X)\n", curr_fss_cnt[i].name, curr_fss_cnt[i].size);
 				break;
 
 			case CNT_TYPE_KRN:
@@ -227,7 +227,7 @@ int parse_fss(launch_ctxt_t *ctxt, const char *path)
 			f_read(&fp, content, curr_fss_cnt[i].size, NULL);
 		}
 
-		gfx_printf("Done!\n");
+		gfx_printf("Fertig!\n");
 		f_close(&fp);
 
 		// Set FSS0 path and update r2p if needed.
