@@ -182,7 +182,7 @@ void heap_monitor(heap_monitor_t *mon, bool print_node_stats)
 			mon->total += node->size + sizeof(hnode_t);
 
 		if (print_node_stats)
-			gfx_printf("%3d - %d, addr: 0x%08X, size: 0x%X\n",
+			gfx_printf("%3d - %d, Adresse: 0x%08X, Groesse: 0x%X\n",
 				count, node->used, (u32)node + sizeof(hnode_t), node->size);
 
 		count++;
