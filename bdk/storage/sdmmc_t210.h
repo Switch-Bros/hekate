@@ -124,6 +124,6 @@ typedef struct _t210_sdmmc_t
 /* 0x1F8 */ vu32 timeoutwcoal;
 } t210_sdmmc_t;
 
-static_assert(sizeof(t210_sdmmc_t) == 0x1FC, "T210 SDMMC REG size is wrong!");
+static_assert(sizeof(t210_sdmmc_t) == 0x1FC, "T210 SDMMC REG Groesse ist falsch!");
 
 #endif

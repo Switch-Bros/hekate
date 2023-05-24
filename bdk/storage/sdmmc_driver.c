@@ -217,9 +217,9 @@ static void _sdmmc_autocal_execute(sdmmc_t *sdmmc, u32 power)
 	u8 code_mask = (sdmmc->t210b01 || sdmmc->id != SDMMC_1) ? 0x1F : 0x7F;
 	u8 autocal_pu_status = sdmmc->regs->autocalsts & code_mask;
 	if (!autocal_pu_status)
-		EPRINTFARGS("SDMMC%d: Comp Pad short to gnd!", sdmmc->id + 1);
+		EPRINTFARGS("SDMMC%d: Vergleichspad kurzgeschlossen mit GND!", sdmmc->id + 1);
 	else if (autocal_pu_status == code_mask)
-		EPRINTFARGS("SDMMC%d: Comp Pad open!", sdmmc->id + 1);
+		EPRINTFARGS("SDMMC%d: Vergleichspad offen!", sdmmc->id + 1);
 #endif
 
 	// In case auto calibration fails, we load suggested standard values.
@@ -1101,7 +1101,7 @@ static int _sdmmc_update_sdma(sdmmc_t *sdmmc)
 			if (result != SDMMC_MASKINT_NOERROR)
 			{
 #ifdef ERROR_EXTRA_PRINTING
-				EPRINTFARGS("SDMMC%d: int error!", sdmmc->id + 1);
+				EPRINTFARGS("SDMMC%d: Interruptfehler!", sdmmc->id + 1);
 #endif
 				_sdmmc_reset_cmd_data(sdmmc);
 
@@ -1128,7 +1128,7 @@ static int _sdmmc_execute_cmd_inner(sdmmc_t *sdmmc, sdmmc_cmd_t *cmd, sdmmc_req_
 		if (!_sdmmc_config_sdma(sdmmc, &blkcnt, req))
 		{
 #ifdef ERROR_EXTRA_PRINTING
-			EPRINTFARGS("SDMMC%d: DMA Wrong cfg!", sdmmc->id + 1);
+			EPRINTFARGS("SDMMC%d: Falsche DMA-Konfiguration!", sdmmc->id + 1);
 #endif
 			return 0;
 		}
@@ -1144,7 +1144,7 @@ static int _sdmmc_execute_cmd_inner(sdmmc_t *sdmmc, sdmmc_cmd_t *cmd, sdmmc_req_
 	if (!_sdmmc_send_cmd(sdmmc, cmd, is_data_present))
 	{
 #ifdef ERROR_EXTRA_PRINTING
-		EPRINTFARGS("SDMMC%d: Wrong Response type %08X!", sdmmc->id + 1, cmd->rsp_type);
+		EPRINTFARGS("SDMMC%d: Falscher Antworttyp %08X!", sdmmc->id + 1, cmd->rsp_type);
 #endif
 		return 0;
 	}
@@ -1152,7 +1152,7 @@ static int _sdmmc_execute_cmd_inner(sdmmc_t *sdmmc, sdmmc_cmd_t *cmd, sdmmc_req_
 	int result = _sdmmc_wait_response(sdmmc);
 #ifdef ERROR_EXTRA_PRINTING
 	if (!result)
-		EPRINTFARGS("SDMMC%d: Transfer timeout!", sdmmc->id + 1);
+		EPRINTFARGS("SDMMC%d: Transferzeitueberschreitung!", sdmmc->id + 1);
 #endif
 	DPRINTF("rsp(%d): %08X, %08X, %08X, %08X\n", result,
 		sdmmc->regs->rspreg0, sdmmc->regs->rspreg1, sdmmc->regs->rspreg2, sdmmc->regs->rspreg3);
@@ -1164,7 +1164,7 @@ static int _sdmmc_execute_cmd_inner(sdmmc_t *sdmmc, sdmmc_cmd_t *cmd, sdmmc_req_
 			result = _sdmmc_cache_rsp(sdmmc, sdmmc->rsp, 0x10, cmd->rsp_type);
 #ifdef ERROR_EXTRA_PRINTING
 			if (!result)
-				EPRINTFARGS("SDMMC%d: Unknown response type!", sdmmc->id + 1);
+				EPRINTFARGS("SDMMC%d: unbekannter Antworttyp!", sdmmc->id + 1);
 #endif
 		}
 		if (req && result)
@@ -1172,7 +1172,7 @@ static int _sdmmc_execute_cmd_inner(sdmmc_t *sdmmc, sdmmc_cmd_t *cmd, sdmmc_req_
 			result = _sdmmc_update_sdma(sdmmc);
 #ifdef ERROR_EXTRA_PRINTING
 			if (!result)
-				EPRINTFARGS("SDMMC%d: DMA Update failed!", sdmmc->id + 1);
+				EPRINTFARGS("SDMMC%d: DMA Update fehlgeschlagen!", sdmmc->id + 1);
 #endif
 		}
 	}
@@ -1198,7 +1198,7 @@ static int _sdmmc_execute_cmd_inner(sdmmc_t *sdmmc, sdmmc_cmd_t *cmd, sdmmc_req_
 			result = _sdmmc_wait_card_busy(sdmmc);
 #ifdef ERROR_EXTRA_PRINTING
 			if (!result)
-				EPRINTFARGS("SDMMC%d: Busy timeout!", sdmmc->id + 1);
+				EPRINTFARGS("SDMMC%d: Beschaeftigungszeitueberschreitung!", sdmmc->id + 1);
 #endif
 			return result;
 		}

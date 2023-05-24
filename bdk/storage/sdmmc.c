@@ -579,7 +579,7 @@ static int _mmc_storage_enable_HS(sdmmc_storage_t *storage, bool check_sts_befor
 	if (!sdmmc_setup_clock(storage->sdmmc, SDHCI_TIMING_MMC_HS52))
 		return 0;
 
-	DPRINTF("[MMC] switched to HS52\n");
+	DPRINTF("[MMC] auf HS52 umgeschaltet\n");
 	storage->csd.busspeed = 52;
 
 	if (check_sts_before_clk_setup || _sdmmc_storage_check_status(storage))
@@ -599,7 +599,7 @@ static int _mmc_storage_enable_HS200(sdmmc_storage_t *storage)
 	if (!sdmmc_tuning_execute(storage->sdmmc, SDHCI_TIMING_MMC_HS200, MMC_SEND_TUNING_BLOCK_HS200))
 		return 0;
 
-	DPRINTF("[MMC] switched to HS200\n");
+	DPRINTF("[MMC] auf HS200 umgeschaltet\n");
 	storage->csd.busspeed = 200;
 
 	return _sdmmc_storage_check_status(storage);
@@ -624,7 +624,7 @@ static int _mmc_storage_enable_HS400(sdmmc_storage_t *storage)
 	if (!sdmmc_setup_clock(storage->sdmmc, SDHCI_TIMING_MMC_HS400))
 		return 0;
 
-	DPRINTF("[MMC] switched to HS400\n");
+	DPRINTF("[MMC] auf HS400 umgeschaltet\n");
 	storage->csd.busspeed = 400;
 
 	return _sdmmc_storage_check_status(storage);
@@ -670,7 +670,7 @@ int sdmmc_storage_init_mmc(sdmmc_storage_t *storage, sdmmc_t *sdmmc, u32 bus_wid
 	storage->sdmmc = sdmmc;
 	storage->rca = 2; // Set default device address. This could be a config item.
 
-	DPRINTF("[MMC]-[init: bus: %d, type: %d]\n", bus_width, type);
+	DPRINTF("[MMC]-[Init: Bus: %d, Typ: %d]\n", bus_width, type);
 
 	if (!sdmmc_init(sdmmc, SDMMC_4, SDMMC_POWER_1_8, SDMMC_BUS_WIDTH_1, SDHCI_TIMING_MMC_ID))
 		return 0;
@@ -718,7 +718,7 @@ int sdmmc_storage_init_mmc(sdmmc_storage_t *storage, sdmmc_t *sdmmc, u32 bus_wid
 
 	if (!_mmc_storage_switch_buswidth(storage, bus_width))
 		return 0;
-	DPRINTF("[MMC] switched buswidth\n");
+	DPRINTF("[MMC] Busbreite geaendert\n");
 
 	if (!mmc_storage_get_ext_csd(storage, (u8 *)SDMMC_UPPER_BUFFER))
 		return 0;
@@ -736,7 +736,7 @@ int sdmmc_storage_init_mmc(sdmmc_storage_t *storage, sdmmc_t *sdmmc, u32 bus_wid
 
 	if (!_mmc_storage_enable_highspeed(storage, storage->ext_csd.card_type, type))
 		return 0;
-	DPRINTF("[MMC] successfully switched to HS mode\n");
+	DPRINTF("[MMC] erfolgreich zum HS-Modus umgeschaltet\n");
 
 	sdmmc_card_clock_powersave(storage->sdmmc, SDMMC_POWER_SAVE_ENABLE);
 
@@ -783,7 +783,7 @@ static int _sd_storage_execute_app_cmd_type1(sdmmc_storage_t *storage, u32 *resp
 #ifdef SDMMC_DEBUG_PRINT_SD_REGS
 void _sd_storage_debug_print_cid(u32 *raw_cid)
 {
-	gfx_printf("Card Identification\n");
+	gfx_printf("Kartenidentifikation\n");
 
 	gfx_printf("MID:                   %02X\n", unstuff_bits(raw_cid, 120, 8));
 	gfx_printf("OID                    %04X\n", unstuff_bits(raw_cid, 104, 16));
@@ -866,7 +866,7 @@ void _sd_storage_debug_print_ssr(u8 *raw_ssr)
 	memcpy(raw_ssr2, &raw_ssr[32], 16);
 	memcpy(raw_ssr3, &raw_ssr[48], 16);
 
-	gfx_printf("\nSD Status:\n");
+	gfx_printf("\nSD-Karte Status:\n");
 
 	gfx_printf("DAT_BUS_WIDTH:         %X\n",   unstuff_bits(raw_ssr0, 510 - 384, 2));
 	gfx_printf("SECURED_MODE:          %X\n",   unstuff_bits(raw_ssr0, 509 - 384, 1));
@@ -982,12 +982,12 @@ static int _sd_storage_get_op_cond(sdmmc_storage_t *storage, bool is_sdsc, int b
 
 					storage->is_low_voltage = 1;
 
-					DPRINTF("-> switched to low voltage\n");
+					DPRINTF("-> Auf Niederspannung umgeschaltet\n");
 				}
 			}
 			else
 			{
-				DPRINTF("[SD] no low voltage support\n");
+				DPRINTF("[SD] Keine Unterstuetzung fuer Niederspannung\n");
 			}
 
 			return 1;
@@ -1144,20 +1144,20 @@ static void _sd_storage_set_power_limit(sdmmc_storage_t *storage, u16 power_limi
 	switch ((buf[15] >> 4) & 0x0F)
 	{
 	case SD_SET_POWER_LIMIT_2_88:
-		DPRINTF("[SD] power limit raised to 2880 mW\n");
+		DPRINTF("[SD] Spannungslimit auf 2880 mW erhoeht\n");
 		break;
 
 	case SD_SET_POWER_LIMIT_2_16:
-		DPRINTF("[SD] power limit raised to 2160 mW\n");
+		DPRINTF("[SD] Spannungslimit auf 2160 mW erhoeht\n");
 		break;
 
 	case SD_SET_POWER_LIMIT_1_44:
-		DPRINTF("[SD] power limit raised to 1440 mW\n");
+		DPRINTF("[SD] Spannungslimit auf 1440 mW erhoeht\n");
 		break;
 
 	default:
 	case SD_SET_POWER_LIMIT_0_72:
-		DPRINTF("[SD] power limit defaulted to 720 mW\n");
+		DPRINTF("[SD] Spannungslimit auf 720 mW Standard gesetzt\n");
 		break;
 	}
 }
