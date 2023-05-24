@@ -46,7 +46,7 @@ void tui_sbar(bool force_update)
 	max17050_get_property(MAX17050_VCELL, &battVoltCurr);
 
 	gfx_clear_partial_grey(0x30, 1256, 24);
-	gfx_printf("%K%k Akku: %d.%d%% (%d mV) - Laedt:", TXT_CLR_GREY_D, TXT_CLR_GREY,
+	gfx_printf("%K%k Akku: %d.%d%% (%d mV) - Ladezustand:", TXT_CLR_GREY_D, TXT_CLR_GREY,
 		(battPercent >> 8) & 0xFF, (battPercent & 0xFF) / 26, battVoltCurr);
 
 	max17050_get_property(MAX17050_Current, &battVoltCurr);
