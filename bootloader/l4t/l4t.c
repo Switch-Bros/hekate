@@ -325,7 +325,7 @@ enum {
 static void _l4t_crit_error(const char *text)
 {
 	gfx_con.mute = false;
-	gfx_printf("%kL4T Error: %s!\nFailed to launch L4T!\n%k", TXT_CLR_ERROR, text, TXT_CLR_DEFAULT);
+	gfx_printf("%kL4T Fehler: %s!\nFehler beim Start von L4T!\n%k", TXT_CLR_ERROR, text, TXT_CLR_DEFAULT);
 }
 
 char *sd_path;
@@ -854,7 +854,7 @@ static void _l4t_bpmpfw_config(l4t_ctxt_t *ctxt)
 		// Enable table.
 		BPMPFW_DTB_EMC_TBL_ENABLE(tbl_idx);
 
-		UPRINTF("RAM Frequency set to: %d KHz. Voltage: %d mV\n", ram_oc_freq, ram_oc_volt);
+		UPRINTF("Gesetzte RAM Frequenz: %d KHz. Spannung: %d mV\n", ram_oc_freq, ram_oc_volt);
 	}
 
 	// Save BPMP-FW entrypoint for TZ.
@@ -883,9 +883,9 @@ static int _l4t_sc7_exit_config(bool t210b01)
 		if (!pkg1_warmboot_config(&hos_ctxt, 0, fw_fuses, 0))
 		{
 			gfx_con.mute = false;
-			gfx_wputs("\nFailed to match warmboot with fuses!\nIf you continue, sleep wont work!");
+			gfx_wputs("\nFehler beim Abgleich von warmboot mit Fuses!\nWenn du fortfaehrst, geht Ruhezustand nicht!");
 
-			gfx_puts("\nPress POWER to continue.\nPress VOL to go to the menu.\n");
+			gfx_puts("\nDruecke POWER zum fortfahren.\nDruecke VOL um ins Menue zu gehen.\n");
 
 			if (!(btn_wait() & BTN_POWER))
 				return 0;
@@ -981,7 +981,7 @@ void launch_l4t(const ini_sec_t *ini_sec, int entry_idx, int is_list, bool t210b
 
 	if (!ctxt.path)
 	{
-		_l4t_crit_error("Path missing");
+		_l4t_crit_error("Pfad wird vermisst");
 		return;
 	}
 
@@ -989,28 +989,28 @@ void launch_l4t(const ini_sec_t *ini_sec, int entry_idx, int is_list, bool t210b
 	ctxt.mtc_table = minerva_get_mtc_table();
 	if (!t210b01 && !ctxt.mtc_table)
 	{
-		_l4t_crit_error("Minerva missing");
+		_l4t_crit_error("Minerva wird vermisst");
 		return;
 	}
 
 	// U-BOOT does not support exfat.
 	if (sd_fs.fs_type == FS_EXFAT)
 	{
-		_l4t_crit_error("exFAT not supported");
+		_l4t_crit_error("exFAT nicht unterstuetzt");
 		return;
 	}
 
 	// Load BL31 (ATF/TrustZone fw).
 	if (!_l4t_sd_load(BL31_FW))
 	{
-		_l4t_crit_error("BL31 missing");
+		_l4t_crit_error("BL31 wird vermisst");
 		return;
 	}
 
 	// Load BL33 (U-BOOT/CBOOT).
 	if (!_l4t_sd_load(BL33_FW))
 	{
-		_l4t_crit_error("BL33 missing");
+		_l4t_crit_error("BL33 wird vermisst");
 		return;
 	}
 
@@ -1024,7 +1024,7 @@ void launch_l4t(const ini_sec_t *ini_sec, int entry_idx, int is_list, bool t210b
 		ctxt.sc7entry_size = _l4t_sd_load(SC7ENTRY_FW);
 		if (!ctxt.sc7entry_size)
 		{
-			_l4t_crit_error("SC7-Entry missing");
+			_l4t_crit_error("SC7-Eintrag wird vermisst");
 			return;
 		}
 	}
@@ -1033,14 +1033,14 @@ void launch_l4t(const ini_sec_t *ini_sec, int entry_idx, int is_list, bool t210b
 		// Load BPMP-FW. Manages SC7-Entry also.
 		if (!_l4t_sd_load(BPMPFW_FW))
 		{
-			_l4t_crit_error("BPMP-FW missing");
+			_l4t_crit_error("BPMP-FW wird vermisst");
 			return;
 		}
 
 		// Load BPMP-FW MTC table.
 		if (!_l4t_sd_load(BPMPFW_MTC_TBL))
 		{
-			_l4t_crit_error("BPMP-FW MTC missing");
+			_l4t_crit_error("BPMP-FW MTC wird vermisst");
 			return;
 		}
 	}
@@ -1048,7 +1048,7 @@ void launch_l4t(const ini_sec_t *ini_sec, int entry_idx, int is_list, bool t210b
 	// Load SC7-Exit firmware.
 	if (!_l4t_sd_load(!t210b01 ? SC7EXIT_FW : SC7EXIT_B01_FW))
 	{
-		_l4t_crit_error("SC7-Exit missing");
+		_l4t_crit_error("SC7-Exit wird vermisst");
 		return;
 	}
 
