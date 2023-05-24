@@ -166,7 +166,7 @@ void irq_handler()
 
 	if (err == IRQ_NONE)
 	{
-		DPRINTF("Unhandled IRQ got disabled: %d!\n", irq);
+		DPRINTF("Unbehandelte IRQ wurde deaktiviert: %d!\n", irq);
 	}
 }
 
