@@ -599,7 +599,7 @@ static const BYTE DbcTbl[] = MKCVTBL(TBL_DC, FF_CODE_PAGE);
 
 void print_error()
 {
-	gfx_printf("\n\n\n%k[FatFS] Error: %k", 0xFFFFFF00, 0xFFFFFFFF);
+	gfx_printf("\n\n\n%k[FatFS] Fehler: %k", 0xFFFFFF00, 0xFFFFFFFF);
 }
 
 
