@@ -159,7 +159,7 @@ lv_res_t launch_payload(lv_obj_t *list)
 		{
 			f_close(&fp);
 
-			EPRINTF("Coreboot ist bei Mariko nicht erlaubt!");
+			EPRINTF("coreboot.rom bei Mariko nicht erlaubt!");
 
 			goto out;
 		}
