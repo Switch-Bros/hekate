@@ -1404,7 +1404,7 @@ void restore_emmc_selected(emmcPartType_t restoreType, emmc_tool_gui_t *gui)
 		failsafe_wait--;
 	}
 
-	s_printf(txt_buf + orig_msg_len, "\n\Druecke #FF8000 POWER# um fortzufahren.\nDruecke #FF8000 VOL# um abzubrechen.");
+	s_printf(txt_buf + orig_msg_len, "\n\nDruecke #FF8000 POWER# um fortzufahren.\nDruecke #FF8000 VOL# um abzubrechen.");
 	lv_mbox_set_text(warn_mbox, txt_buf);
 	manual_system_maintenance(true);
 
@@ -1549,7 +1549,7 @@ void restore_emmc_selected(emmcPartType_t restoreType, emmc_tool_gui_t *gui)
 	if (res && n_cfg.verification && !gui->raw_emummc)
 		s_printf(txt_buf, "Benoetigte Zeit: %dm %ds.\n#96FF00 Abgeschlossen und verifiziert!#", timer / 60, timer % 60);
 	else if (res)
-		s_printf(txt_buf, "Benoetigte Zeit: %dm %ds.\Abgeschlossen!", timer / 60, timer % 60);
+		s_printf(txt_buf, "Benoetigte Zeit: %dm %ds.\nAbgeschlossen!", timer / 60, timer % 60);
 	else
 		s_printf(txt_buf, "Benoetigte Zeit: %dm %ds.", timer / 60, timer % 60);
 

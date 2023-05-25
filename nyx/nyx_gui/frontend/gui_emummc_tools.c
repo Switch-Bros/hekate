@@ -254,7 +254,7 @@ static void _create_mbox_emummc_raw()
 	if (mbr_ctx.available)
 	{
 		s_printf(txt_buf,
-			"#C7EA46 Gültige Partition(en) gefunden!#\n"
+			"#C7EA46 Gueltige Partition(en) gefunden!#\n"
 			"#FF8000 Waehle eine Partition um fortzufahren:#\n\n");
 	}
 	else
@@ -690,7 +690,7 @@ static lv_res_t _create_emummc_migrate_action(lv_obj_t * btns, const char * txt)
 	if (backup)
 	{
 		s_printf(txt_buf,
-			"#C7EA46 Geeignete Datensicherung für emuMMC gefunden!#\n\n"
+			"#C7EA46 Geeignete Datensicherung fuer emuMMC gefunden!#\n\n"
 			"#FF8000 Willst du es migrieren?#\n");
 		lv_mbox_add_btns(mbox, mbox_btn_map, _create_emummc_mig4_action);
 	}
@@ -762,7 +762,7 @@ static lv_res_t _create_mbox_emummc_migrate(lv_obj_t *btn)
 
 	lv_mbox_set_text(mbox,
 		"Willkommen beim #C7EA46 emuMMC# Migrationswerkzeug!\n\n"
-		"Bitte wähle aus, welche Art der Migration du durchführen möchtest.\n"
+		"Bitte waehle aus, welche Art der Migration du durchfuehren moechtest.\n"
 		"Alles was nicht vorhanden ist, ist ausgegraut.");
 
 	char *path_buf = (char *)malloc(0x512);
@@ -1254,7 +1254,7 @@ lv_res_t create_win_emummc_tools(lv_obj_t *btn)
 	label_txt2 = lv_label_create(h1, NULL);
 	lv_label_set_recolor(label_txt2, true);
 	lv_label_set_static_text(label_txt2,
-		"Wählen zwischen Images, die im emuMMC-Ordner sind, oder als\n"
+		"Waehlen zwischen Images, die im emuMMC-Ordner sind, oder als\n"
 		"SD-Karten-Partitionen vorhanden sind, aus. Du kannst maximal\n"
 		"3 Partitionsbasierte haben und zahlreiche Dateibasierte.");
 

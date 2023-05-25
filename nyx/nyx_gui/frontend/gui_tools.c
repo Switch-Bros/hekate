@@ -149,14 +149,14 @@ static lv_res_t _create_mbox_autorcm_status(lv_obj_t *btn)
 	{
 		lv_mbox_set_text(mbox,
 			"AutoRCM ist jetzt #C7EA46 AKTIVIERT!#\n\n"
-			"You can now automatically enter RCM by only pressing #FF8000 POWER#.\n"
-			"Use the AutoRCM button here again if you want to remove it later on.");
+			"Du kommst automatisch in den RCM-Modus mit #FF8000 POWER#-Taste.\n"
+			"Benutze den AutoRCM Button nochmal um es zu entfernen.");
 	}
 	else
 	{
 		lv_mbox_set_text(mbox,
 			"AutoRCM ist jetzt #FF8000 DEAKTIVIERT!#\n\n"
-			"The boot process is now normal and you need the #FF8000 VOL+# + #FF8000 HOME# (jig) combo to enter RCM.\n");
+			"Systemstart ist normal und es muss #FF8000 VOL+# + #FF8000 HOME# (Jig) fuer RCM-Modus genutzt werden.\n");
 	}
 
 	lv_mbox_add_btns(mbox, mbox_btn_map, mbox_action);
@@ -203,7 +203,7 @@ static lv_res_t _create_mbox_hid(usb_ctxt_t *usbs)
 
 	lv_obj_t *lbl_tip = lv_label_create(mbox, NULL);
 	lv_label_set_recolor(lbl_tip, true);
-	lv_label_set_static_text(lbl_tip, "Hinweis: To end it, press #C7EA46 L3# + #C7EA46 HOME# or remove the cable.");
+	lv_label_set_static_text(lbl_tip, "Hinweis: Zum beenden, Druecke #C7EA46 L3# + #C7EA46 HOME# oder netferne das Kabel.");
 	lv_obj_set_style(lbl_tip, &hint_small_style);
 
 	lv_mbox_add_btns(mbox, mbox_btn_map, mbox_action);
@@ -718,7 +718,7 @@ static lv_res_t _create_window_usb_tools(lv_obj_t *parent)
 	lv_obj_t *label_txt2 = lv_label_create(h1, NULL);
 	lv_label_set_recolor(label_txt2, true);
 	lv_label_set_static_text(label_txt2,
-		"Ermoeglicht es dir die SD-Karte in einem PC/Handy einzubinden.\n"
+		"Ermoeglicht es, die SD-Karte in einem PC/Handy einzubinden.\n"
 		"#C7EA46 Alle Betriebssysteme werden unterstuetzt. Zugriff ist# #FF8000 Lesen/Schreiben.#");
 
 	lv_obj_set_style(label_txt2, &hint_small_style);
@@ -1235,10 +1235,10 @@ static lv_res_t _create_window_dump_pk12_tool(lv_obj_t *btn)
 		// Display info.
 		s_printf(txt_buf + strlen(txt_buf),
 			"#C7EA46 NX Bootloader Groesse:  #0x%05X\n"
-			"#C7EA46 Secure monitor Addr: #0x%05X\n"
+			"#C7EA46 Secure monitor Addr:    #0x%05X\n"
 			"#C7EA46 Secure monitor Groesse: #0x%05X\n"
-			"#C7EA46 Warmboot Addr:       #0x%05X\n"
-			"#C7EA46 Warmboot Groesse:       #0x%05X\n\n",
+			"#C7EA46 Warmboot Addr:			 #0x%05X\n"
+			"#C7EA46 Warmboot Groesse:		 #0x%05X\n\n",
 			hdr_pk11->ldr_size, pkg1_id->secmon_base, hdr_pk11->sm_size, pkg1_id->warmboot_base, hdr_pk11->wb_size);
 
 		lv_label_set_text(lb_desc, txt_buf);
@@ -1477,9 +1477,9 @@ static void _create_tab_tools_emmc_pkg12(lv_theme_t *th, lv_obj_t *parent)
 	lv_obj_t *label_txt2 = lv_label_create(h1, NULL);
 	lv_label_set_recolor(label_txt2, true);
 	lv_label_set_static_text(label_txt2,
-		"Ermoeglicht es, die eMMC-Partitionen einzeln oder als ganzes\n"
-		"RAW Image auf der SD-Karte zu sichern.\n"
-		"#C7EA46 Unterstuetzt SD-Karten von# #FF8000 4GB# #C7EA46 und mehr. #"
+		"Ermoeglicht es, die eMMC-Partitionen einzeln oder als\n"
+		"ganzes RAW Image auf der SD-Karte zu sichern.\n"
+		"#C7EA46 Unterstuetzt SD-Karten mit# #FF8000 4GB# #C7EA46 und mehr. #"
 		"#FF8000 FAT32# #C7EA46 und ##FF8000 exFAT##C7EA46 .#");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, btn, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3);
@@ -1494,9 +1494,9 @@ static void _create_tab_tools_emmc_pkg12(lv_theme_t *th, lv_obj_t *parent)
 	label_txt2 = lv_label_create(h1, NULL);
 	lv_label_set_recolor(label_txt2, true);
 	lv_label_set_static_text(label_txt2,
-		"Ermoeglicht es, die eMMC/emuMMC Partitionen einzeln oder als ganzes\n"
-		"von der SD-Karte wiederherzustellen.\n"
-		"#C7EA46 Unterstuetzt SD-Karten von# #FF8000 4GB# #C7EA46 und mehr. #"
+		"Ermoeglicht es, die eMMC/emuMMC Partitionen einzeln oder als\n"
+		"ganzes von der SD-Karte wiederherzustellen.\n"
+		"#C7EA46 Unterstuetzt SD-Karten mit# #FF8000 4GB# #C7EA46 und mehr. #"
 		"#FF8000 FAT32# #C7EA46 und ##FF8000 exFAT##C7EA46 .#");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, btn2, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3);
@@ -1612,7 +1612,7 @@ static void _create_tab_tools_arc_autorcm(lv_theme_t *th, lv_obj_t *parent)
 	label_txt2 = lv_label_create(h1, NULL);
 	lv_label_set_recolor(label_txt2, true);
 	lv_label_set_static_text(label_txt2,
-		"Ermoeglicht das kalibrieren der Touchscreen-Einheit.\n"
+		"Ermoeglicht das kalibrieren des Touchscreens.\n"
 		"#FF8000 Dies behebt alle Touchscreen Fehler in Nyx und HOS.#");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, btn2, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3);
