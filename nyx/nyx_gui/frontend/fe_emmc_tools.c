@@ -177,7 +177,7 @@ static int _dump_emmc_verify(emmc_tool_gui_t *gui, sdmmc_storage_t *storage, u32
 			itoa(NUM_SECTORS_PER_ITER * EMMC_BLOCKSIZE, chunkSizeAscii, 10);
 			chunkSizeAscii[9] = '\0';
 
-			f_puts("# chunksize: ", &hashFp);
+			f_puts("# Blockgroesse: ", &hashFp);
 			f_puts(chunkSizeAscii, &hashFp);
 			f_puts("\n", &hashFp);
 		}
@@ -210,8 +210,8 @@ static int _dump_emmc_verify(emmc_tool_gui_t *gui, sdmmc_storage_t *storage, u32
 				if (!sdmmc_storage_read(storage, lba_curr, num, bufEm))
 				{
 					s_printf(gui->txt_buf,
-						"\n#FF0000 Lesen von %d Bloecken (@LBA %08X),#\n"
-						"#FF0000 des eMMC fehlgeschlagen! Verifizierung fehlgeschlagen..#\n",
+						"\n#FF0000 Lesen von %d eMMC Bloecken (@LBA %08X),#\n"
+						"#FF0000 fehlgeschlagen! Verifizierung fehlgeschlagen..#\n",
 						num, lba_curr);
 					lv_label_ins_text(gui->label_log, LV_LABEL_POS_LAST, gui->txt_buf);
 					manual_system_maintenance(true);
@@ -230,8 +230,8 @@ static int _dump_emmc_verify(emmc_tool_gui_t *gui, sdmmc_storage_t *storage, u32
 				if (f_read_fast(&fp, bufSd, num << 9))
 				{
 					s_printf(gui->txt_buf,
-						"\n#FF0000 Lesen von %d Bloecken (@LBA %08X),#\n"
-						"#FF0000 der SD-Karte fehlgeschlagen! Verifizierung fehlgeschlagen..#\n",
+						"\n#FF0000 Lesen von %d SD-Karten Bloecken (@LBA %08X),#\n"
+						"#FF0000 fehlgeschlagen! Verifizierung fehlgeschlagen..#\n",
 						num, lba_curr);
 					lv_label_ins_text(gui->label_log, LV_LABEL_POS_LAST, gui->txt_buf);
 					manual_system_maintenance(true);
@@ -385,7 +385,7 @@ static int _dump_emmc_part(emmc_tool_gui_t *gui, char *sd_path, int active_part,
 		}
 	}
 
-	s_printf(gui->txt_buf, "#96FF00 Freier Speicher auf SD-Karte:# %d MB\n#96FF00 Gesamtgroesse der Sicherung:# %d MiB\n\n",
+	s_printf(gui->txt_buf, "#96FF00 Freier Speicher auf SD-Karte:# %d MB\n#96FF00 Gesamtgroesse der Sicherung:# %d MB\n\n",
 		(u32)(sd_fs.free_clst * sd_fs.csize >> SECTORS_TO_MIB_COEFF),
 		totalSectors >> SECTORS_TO_MIB_COEFF);
 	lv_label_ins_text(gui->label_info, LV_LABEL_POS_LAST, gui->txt_buf);
@@ -408,7 +408,7 @@ static int _dump_emmc_part(emmc_tool_gui_t *gui, char *sd_path, int active_part,
 	{
 		isSmallSdCard = true;
 
-		s_printf(gui->txt_buf, "\n#FFBA00 Freier Speicher ist kleiner als zu Sichernde Daten.#\n");
+		s_printf(gui->txt_buf, "\n#FFBA00 Freier Speicher ist kleiner als die zu sichernden Daten.#\n");
 		lv_label_ins_text(gui->label_log, LV_LABEL_POS_LAST, gui->txt_buf);
 		manual_system_maintenance(true);
 
@@ -449,7 +449,7 @@ static int _dump_emmc_part(emmc_tool_gui_t *gui, char *sd_path, int active_part,
 	}
 	else if (isSmallSdCard)
 	{
-		s_printf(gui->txt_buf, "\n#FFBA00 Voruebergehende Sicherung aktiviert (%d MiB Teile)...#\n", multipartSplitSize >> 20);
+		s_printf(gui->txt_buf, "\n#FFBA00 Voruebergehende Sicherung aktiviert (%d MB Teile)...#\n", multipartSplitSize >> 20);
 		lv_label_ins_text(gui->label_log, LV_LABEL_POS_LAST, gui->txt_buf);
 		manual_system_maintenance(true);
 	}
@@ -1186,7 +1186,7 @@ multipart_not_allowed:
 		_get_valid_partition(&sector_start, &sector_size, &part_idx, false);
 		if (!part_idx || !sector_size)
 		{
-			s_printf(gui->txt_buf, "\n#FFDD00 Es wurde keine PArtition gefunden...#\n");
+			s_printf(gui->txt_buf, "\n#FFDD00 Es wurde keine Partition gefunden...#\n");
 			lv_label_ins_text(gui->label_log, LV_LABEL_POS_LAST, gui->txt_buf);
 			manual_system_maintenance(true);
 
