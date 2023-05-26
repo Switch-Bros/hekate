@@ -1802,7 +1802,7 @@ static lv_res_t _create_window_emmc_info_status(lv_obj_t *btn)
 			"#00DDFF Busgeschw.:# %d MB/s\n\n"
 			"#00DDFF SDMMC4 Fehler:#\n"
 			"Init Fehler: %d\n"
-			"Lese-/Schreibversuche: %d\n"
+			"Lese-/Schreibvers.: %d\n"
 			"Lese/Schreibfehler: %d",
 			emmc_storage.csd.busspeed,
 			emmc_errors[EMMC_ERROR_INIT_FAIL],
@@ -2087,7 +2087,7 @@ static lv_res_t _create_window_sdcard_info_status(lv_obj_t *btn)
 	f_getfree("", &sd_fs.free_clst, NULL);
 
 	lv_label_set_text(lb_desc3,
-		"#00DDFF FAT-Datentraeger gefunden:#\n"
+		"#00DDFF FAT-Datentraeger:#\n"
 		"Dateisystem:\n"
 		"Cluster:\n"
 		"Groesse frei/total:"
@@ -2123,8 +2123,8 @@ static lv_res_t _create_window_sdcard_info_status(lv_obj_t *btn)
 	lv_label_set_text(lb_desc4,
 		"#00DDFF SDMMC1 Fehler:#\n"
 		"Initialisierungsfehler:\n"
-		"Lese-/Schreibversuche:\n"
-		"Lese/Schreibfehler:"
+		"Lese-/Schreibvers.:\n"
+		"Lese-/Schreibfehler:"
 	);
 	lv_obj_set_size(desc4, LV_HOR_RES / 2 / 5 * 2, LV_VER_RES - (LV_DPI * 11 / 8) * 4);
 	lv_obj_set_width(lb_desc4, lv_obj_get_width(desc4));
@@ -2282,7 +2282,7 @@ static lv_res_t _create_window_battery_status(lv_obj_t *btn)
 		"Temperaturstatus:\n\n"
 		"#00DDFF USB-PD IC Info:#\n"
 		"Verbindungsstatus:\n"
-		"Eingangsleistungsbeschraenkung:\n"
+		"Eingangsleistungsbeschr.:\n"
 		"USB-PD Profile:"
 	);
 	lv_obj_set_width(lb_desc2, lv_obj_get_width(desc2));
@@ -2534,8 +2534,8 @@ void create_tab_info(lv_theme_t *th, lv_obj_t *parent)
 	lv_label_set_recolor(label_txt4, true);
 	lv_label_set_static_text(label_txt4,
 		"Zeige und Dumpe die gecachten #C7EA46 Fuses# und #C7EA46 KFuses#.\n"
-		"Fuses enthalten Infos ueber SoC/SKU und KFuses ueber HDCP Keys.\n"
-		"Du siehst ebenfalls Infos ueber #C7EA46 DRAM#, #C7EA46 Bildschirm# und #C7EA46 Digitizer (Touchscreen)#.");
+		"Fuses enthalten Infos ueber SoC/SKU, KFuses ueber HDCP Keys.\n"
+		"Du siehst ebenfalls Infos ueber\n#C7EA46 DRAM#, #C7EA46 Bildschirm# und #C7EA46 Digitizer (Touchscreen)#.");
 	lv_obj_set_style(label_txt4, &hint_small_style);
 	lv_obj_align(label_txt4, btn3, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3);
 
@@ -2583,8 +2583,8 @@ void create_tab_info(lv_theme_t *th, lv_obj_t *parent)
 	lv_obj_t *label_txt5 = lv_label_create(h2, NULL);
 	lv_label_set_recolor(label_txt5, true);
 	lv_label_set_static_text(label_txt5,
-		"Zeige Infos ueber eMMC oder SD-Karte und deren Partitionstabelle.\n"
-		"Zusaetzlich kannst du Benchmark von Lesegschwindigkeit machen.");
+		"Zeige Infos ueber das eMMC oder die SD-Karte\nund deren Partitionstabelle.\n"
+		"Zusaetzlich kannst du Benchmarks machen.");
 	lv_obj_set_style(label_txt5, &hint_small_style);
 	lv_obj_align(label_txt5, btn5, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3);
 

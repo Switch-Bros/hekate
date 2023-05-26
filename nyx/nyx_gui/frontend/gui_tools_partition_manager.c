@@ -2643,7 +2643,7 @@ lv_res_t create_window_partition_manager(lv_obj_t *btn)
 	lv_label_set_recolor(lbl_notes, true);
 	lv_label_set_static_text(lbl_notes,
 		"Hinweis 1: Es kann nur bis zu #C7EA46 1GB# gesichert werden. Ist es mehr, kannst du es im naechsten Schritt manuell sichern.\n"
-		"Hinweis 2: Groessenaenderung des emuMMC formatiert die USER-Partition. Ein Speicherdatenmanager kann verwendet werden, um sie zu verschieben.\n"
+		"Hinweis 2: Groessenaenderung des emuMMC formatiert die USER-Partition.\nEin Speicherdatenmanager kann verwendet werden, um sie zu verschieben.\n"
 		"Hinweis 3: #C7EA46 Linux flashen# und #C7EA46 Android flashen# flasht die Dateien wenn eine passende Partition und Installation gefunden wurden.\n");
 	lv_label_set_style(lbl_notes, &hint_small_style);
 	lv_obj_align(lbl_notes, lbl_and, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 5);

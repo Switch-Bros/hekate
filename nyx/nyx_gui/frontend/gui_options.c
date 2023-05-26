@@ -1133,8 +1133,8 @@ lv_res_t create_win_nyx_options(lv_obj_t *parrent_btn)
 	lv_label_set_recolor(label_txt2, true);
 	lv_label_set_static_text(label_txt2,
 		"Startbildschirm von Nyx auswaehlen.\n"
-		"#FF8000 Alle Konfigs.:# #C7EA46 Kombiniert weitere Konfigs. in leeren Plaetzen in Starten.#\n"
-		"#FF8000 Starten / Weitere Konfigs.:# #C7EA46 Verwendet die klassische geteilte Ansicht.#");
+		"#FF8000 Alle Konfigs.:# #C7EA46 Kombiniert weitere Konfigs.\nin leeren Plaetzen im Starten Bildschirm.#\n"
+		"#FF8000 Starten/Weitere Konfigs.:# #C7EA46 Verwendet klassisch geteilte Ansicht.#");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, label_txt, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 4);
 
@@ -1200,8 +1200,8 @@ lv_res_t create_win_nyx_options(lv_obj_t *parrent_btn)
 	lv_ddlist_set_action(ddlist2, _data_verification_action);
 
 	label_txt2 = lv_label_create(sw_h3, NULL);
-	lv_label_set_static_text(label_txt2, "Legt die Art der Datenueberpruefung fuer Backup und Wiederherstellung fest.\n"
-		"Kann abgebrochen werden, ohne Backup/Wiederherstellung zu verlieren.\n");
+	lv_label_set_static_text(label_txt2, "Legt die Art der Datenueberpruefung\nfuer Backup und Wiederherstellung fest.\n"
+		"Kann abgebrochen werden, ohne Backup/Wiederherstellung\nzu verlieren.\n");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, label_txt, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 4);
 
@@ -1294,7 +1294,7 @@ void create_tab_options(lv_theme_t *th, lv_obj_t *parent)
 	autoboot_btn = btn;
 
 	lv_obj_t *label_txt2 = lv_label_create(sw_h2, NULL);
-	lv_label_set_static_text(label_txt2, "Waehle, welcher Booteintrag oder welche Payload automatisch gebootet werden soll.");
+	lv_label_set_static_text(label_txt2, "Waehle den Booteintrag/Payload der bei Systemstart\nautomatisch gebootet werden soll.");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, btn, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3 - 4);
 
@@ -1306,7 +1306,7 @@ void create_tab_options(lv_theme_t *th, lv_obj_t *parent)
 
 	// Create Boot time delay list.
 	lv_obj_t *label_txt = lv_label_create(l_cont, NULL);
-	lv_label_set_static_text(label_txt, SYMBOL_CLOCK" Startverzoegerung  ");
+	lv_label_set_static_text(label_txt, SYMBOL_CLOCK" Startverzoegerung ");
 	lv_obj_set_style(label_txt, th->label.prim);
 	lv_obj_align(label_txt, line_sep, LV_ALIGN_OUT_BOTTOM_LEFT, LV_DPI / 4, LV_DPI / 4);
 
@@ -1337,7 +1337,7 @@ void create_tab_options(lv_theme_t *th, lv_obj_t *parent)
 	label_txt2 = lv_label_create(l_cont, NULL);
 	lv_label_set_recolor(label_txt2, true);
 	lv_label_set_static_text(label_txt2,
-		"Legt fest wie lange das Bootlogo beim Systemstart angezeigt wird.\n"
+		"Legt fest wie lange das Bootlogo beim Systemstart\nangezeigt wird.\n"
 		"#C7EA46 Druecke waehrendessen# #FF8000 VOL-# #C7EA46 um in hekate zu kommen.#\n");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, label_txt, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 4);
@@ -1353,9 +1353,9 @@ void create_tab_options(lv_theme_t *th, lv_obj_t *parent)
 	label_txt2 = lv_label_create(sw_h2, NULL);
 	lv_label_set_recolor(label_txt2, true);
 	lv_label_set_static_text(label_txt2,
-		"It checks fuses and applies the patch automatically\n"
-		"if higher firmware. It is now a global config and set\n"
-		"at auto by default. (AN: Auto)\n\n\n");
+		"Ueberprueft die Fuses und fuegt automatisch den Patch hinzu\n"
+		"wenn die Firmware hoeher ist.\n"
+		"Es ist jetzt eine globale Konfiguration und standardmaessig\nauf Auto gesetzt. (AN: Auto)\n\n\n");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, btn2, LV_ALIGN_OUT_BOTTOM_LEFT, LV_DPI / 4, LV_DPI / 12);
 
@@ -1369,8 +1369,8 @@ void create_tab_options(lv_theme_t *th, lv_obj_t *parent)
 
 	label_txt2 = lv_label_create(sw_h3, NULL);
 	lv_label_set_static_text(label_txt2,
-		"Wenn das Herunterfahren vom HOS aus verwendet wird, wacht\ndas Geraet nach 15s wieder auf."
-		"Aktivieren um das Geraet bei der naechsten\nInjektion\nautomatisch auszuschalten.");
+		"Wenn das Herunterfahren vom HOS aus verwendet wird,\nwacht das Geraet nach 15s wieder auf.\n"
+		"Aktivieren um das Geraet bei der naechsten Injektion\nautomatisch auszuschalten.");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, btn3, LV_ALIGN_OUT_BOTTOM_LEFT, LV_DPI / 4, LV_DPI / 12);
 
@@ -1407,8 +1407,8 @@ void create_tab_options(lv_theme_t *th, lv_obj_t *parent)
 	label_txt2 = lv_label_create(sw_h3, NULL);
 	lv_label_set_recolor(label_txt2, true);
 	lv_label_set_static_text(label_txt2,
-		"Wenn #FF8000 FSS0# im gewaehlten Starteintrag genutzt wird,\nwird die Reboot2Payload Binaerdatei ueberprueft und gezwungen,\n"
-		"zu hekate zu wechseln.\n\n\n\n");
+		"Wenn #FF8000 FSS0# im gewaehlten Starteintrag genutzt wird,\nwird die Reboot2Payload Binaerdatei ueberprueft\n"
+		"und gezwungen, zu hekate zu wechseln.\n\n\n\n");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, btn4, LV_ALIGN_OUT_BOTTOM_LEFT, LV_DPI / 4, LV_DPI / 12);
 
