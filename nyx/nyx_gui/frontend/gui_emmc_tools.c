@@ -271,7 +271,7 @@ lv_res_t create_window_backup_restore_tool(lv_obj_t *btn)
 	lv_obj_t *win;
 
 	emmc_btn_ctxt.restore = false;
-	if (strcmp(lv_label_get_text(lv_obj_get_child(btn, NULL)), SYMBOL_UPLOAD"  Backup eMMC"))
+	if (strcmp(lv_label_get_text(lv_obj_get_child(btn, NULL)), SYMBOL_UPLOAD"  eMMC Backup"))
 		emmc_btn_ctxt.restore = true;
 
 	if (!emmc_btn_ctxt.restore)
@@ -327,14 +327,14 @@ lv_res_t create_window_backup_restore_tool(lv_obj_t *btn)
 		lv_label_set_static_text(label_txt2,
 			"Erstellt ein Backup der physischen BOOT Partitionen.\n"
 			"Enthaelt das BCT, Keys und verschiedene package1.\n"
-			"#FF8000 Diese sind mit dem RAW GPP Backup gepaart.#");
+			"#FF8000 Diese sind mit der RAW GPP Sicherung gepaart.#");
 	}
 	else
 	{
 		lv_label_set_static_text(label_txt2,
 			"Stellt die physischen BOOT Partitionen wieder her.\n"
 			"Enthaelt das BCT, Keys und verschiedene package1.\n"
-			"#FF8000 Diese sind mit dem RAW GPP Backup gepaart.#");
+			"#FF8000 Diese sind mit der RAW GPP Sicherung gepaart.#");
 	}
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, btn1, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3);
@@ -357,14 +357,14 @@ lv_res_t create_window_backup_restore_tool(lv_obj_t *btn)
 		lv_label_set_static_text(label_txt2,
 			"Erstellt ein Backup der physischen GPP Partition.\n"
 			"Enthaelt CAL0, verschiedene package2, SYSTEM, USER, etc.\n"
-			"#FF8000 Diese sind mit dem BOOT0/1 Backup gepaart.#");
+			"#FF8000 Diese sind mit der BOOT0/1 Sicherung gepaart.#");
 	}
 	else
 	{
 		lv_label_set_static_text(label_txt2,
-			"Stellt die physischen GPP Partition wieder her.\n"
+			"Stellt die physische GPP Partition wieder her.\n"
 			"Enthaelt CAL0, verschiedene package2, SYSTEM, USER, etc.\n"
-			"#FF8000 Diese sind mit dem BOOT0/1 Backup gepaart.#");
+			"#FF8000 Diese sind mit der BOOT0/1 Sicherung gepaart.#");
 	}
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, btn2, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3);

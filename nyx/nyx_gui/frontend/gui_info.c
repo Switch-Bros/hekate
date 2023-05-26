@@ -313,7 +313,7 @@ static lv_res_t _create_mbox_cal0(lv_obj_t *btn)
 		"#FF8000 WLAN MAC:#          %02X:%02X:%02X:%02X:%02X:%02X\n"
 		"#FF8000 Bluetooth MAC:#     %02X:%02X:%02X:%02X:%02X:%02X\n"
 		"#FF8000 Akku LOT:#          %s (%d)\n"
-		"#FF8000 LCD Vendor:#        ",
+		"#FF8000 LCD Hersteller:#    ",
 		cal0->version, cal0->update_cnt, cal0->serial_number,
 		cal0->wlan_mac[0], cal0->wlan_mac[1], cal0->wlan_mac[2], cal0->wlan_mac[3], cal0->wlan_mac[4], cal0->wlan_mac[5],
 		cal0->bd_mac[0], cal0->bd_mac[1], cal0->bd_mac[2], cal0->bd_mac[3], cal0->bd_mac[4], cal0->bd_mac[5],
@@ -404,19 +404,19 @@ static lv_res_t _create_window_fuses_info_status(lv_obj_t *btn)
 		"SKU:\n"
 		"DRAM ID:\n"
 		"#FF8000 Verbrauchte Fuses (ODM 7/6):#\n"
-		"ODM Fields (4, 6, 7):\n"
-		"Secure Boot Key (SBK):\n"
+		"ODM Felder (4, 6, 7):\n"
+		"Sicherer Boot Key (SBK):\n"
 		"Geraete Key (DK):\n"
 		"Keygen Revision:\n"
 		"USB Stapel:\n"
 		"Finale Test Revision:\n"
 		"Chip Probing Revision:\n"
-		"CPU Speedo 0 (CPU Val):\n"
-		"CPU Speedo 1:\n"
-		"CPU Speedo 2 (GPU Val):\n"
-		"SoC Speedo 0 (SoC Val):\n"
-		"SoC Speedo 1 (BROM rev):\n"
-		"SoC Speedo 2:\n"
+		"CPU Geschw. 0 (CPU Val):\n"
+		"CPU Geschw. 1:\n"
+		"CPU Geschw. 2 (GPU Val):\n"
+		"SoC Geschw. 0 (SoC Val):\n"
+		"SoC Geschw. 1 (BROM rev):\n"
+		"SoC Geschw. 2:\n"
 		"CPU IDDQ Val:\n"
 		"SoC IDDQ Val:\n"
 		"Gpu IDDQ Val:\n"
@@ -538,17 +538,17 @@ static lv_res_t _create_window_fuses_info_status(lv_obj_t *btn)
 		case LPDDR4X_UNK0_4GB_HYNIX_1A:
 		case LPDDR4X_UNK1_4GB_HYNIX_1A:
 		case LPDDR4X_UNK2_4GB_HYNIX_1A:
-			strcpy(dram_man, "Hynix 1a 4GB #FF8000 Kontaktiere mich!#");
+			strcpy(dram_man, "Hynix 1a 4GB #FF8000 Kontaktiere CTCaer!#");
 			break;
 
 		case LPDDR4X_UNK0_4GB_MICRON_1A:
 		case LPDDR4X_UNK1_4GB_MICRON_1A:
 		case LPDDR4X_UNK2_4GB_MICRON_1A:
-			strcpy(dram_man, "Micron 1a 4GB #FF8000 Kontaktiere mich!#");
+			strcpy(dram_man, "Micron 1a 4GB #FF8000 Kontaktiere CTCaer!#");
 			break;
 
 		default:
-			strcpy(dram_man, "#FF8000 Kontaktiere mich!#");
+			strcpy(dram_man, "#FF8000 Kontaktiere CTCaer!#");
 			break;
 		}
 	}
@@ -823,7 +823,7 @@ static lv_res_t _create_window_fuses_info_status(lv_obj_t *btn)
 			strcat(txt_buf, "-???");
 			break;
 		default:
-			strcat(txt_buf, " #FFDD00 Kontaktiere mich!#");
+			strcat(txt_buf, " #FFDD00 Kontaktiere CTCaer!#");
 			break;
 		}
 		break;
@@ -850,7 +850,7 @@ static lv_res_t _create_window_fuses_info_status(lv_obj_t *btn)
 			strcat(txt_buf, "XX");
 			break;
 		default:
-			strcat(txt_buf, " #FFDD00 Kontaktiere mich!#");
+			strcat(txt_buf, " #FFDD00 Kontaktiere CTCaer!#");
 			break;
 		}
 		break;
@@ -886,7 +886,7 @@ static lv_res_t _create_window_fuses_info_status(lv_obj_t *btn)
 			strcat(txt_buf, "Samsung ");
 			break;
 		}
-		strcat(txt_buf, "Unbekannt #FFDD00 Kontaktiere mich!#");
+		strcat(txt_buf, "Unbekannt #FFDD00 Kontaktiere CTCaer!#");
 		break;
 	}
 
@@ -907,7 +907,7 @@ static lv_res_t _create_window_fuses_info_status(lv_obj_t *btn)
 		{
 			if ((u8)touch_panel->idx == (u8)-2) // Touch panel not found, print gpios.
 			{
-				s_printf(txt_buf + strlen(txt_buf), "%2X%2X%2X #FFDD00 Kontaktiere mich!#",
+				s_printf(txt_buf + strlen(txt_buf), "%2X%2X%2X #FFDD00 Kontaktiere CTCaer!#",
 					touch_panel->gpio0, touch_panel->gpio1, touch_panel->gpio2);
 				touch_panel = NULL;
 			}
@@ -1081,7 +1081,7 @@ static lv_res_t _create_mbox_lockpick(lv_obj_t *btn)
 	lv_mbox_set_recolor_text(mbox, true);
 
 	lv_mbox_set_text(mbox, "#FF8000 Enigma RCM#\n\nDas startet Enigma RCM.\nMoechtest du fortfahren?\n\n"
-		"Um von Enigma zurueckzukehren waehle\n#96FF00 Neustart in hekate#.");
+		"Um von Enigma zurueckzukehren waehle\n#96FF00 Neustart (HEKATE)#.");
 
 	lv_mbox_add_btns(mbox, mbox_btn_map, _launch_lockpick_action);
 	lv_obj_set_width(mbox, LV_HOR_RES / 9 * 5);
@@ -1108,7 +1108,7 @@ static lv_res_t _create_mbox_emmc_sandisk_report(lv_obj_t * btn)
 	lv_mbox_set_recolor_text(mbox, true);
 	lv_obj_set_width(mbox, LV_HOR_RES / 9 * 8);
 
-	lv_mbox_set_text(mbox, "#C7EA46 Sandisk Geraet Report#");
+	lv_mbox_set_text(mbox, "#C7EA46 Sandisk Geraete Report#");
 
 	u8 *buf = calloc(512, 1);
 	char *txt_buf = (char *)malloc(SZ_32K);
@@ -1150,7 +1150,7 @@ static lv_res_t _create_mbox_emmc_sandisk_report(lv_obj_t * btn)
 
 	if (!res)
 	{
-		lv_label_set_text(lb_desc, "#FFDD00 Geraet Report nicht unterstuetzt!#");
+		lv_label_set_text(lb_desc, "#FFDD00 Geraete Report nicht unterstuetzt!#");
 		lv_label_set_text(lb_desc2, " ");
 
 		goto out;
@@ -1398,7 +1398,7 @@ static lv_res_t _create_mbox_benchmark(bool sd_bench)
 
 		u32 rate_1k = ((u64)1024 * 1000 * 1000 * 1000) / timer;
 		s_printf(txt_buf + strlen(txt_buf),
-			" Sequentiell 16MiB - Rate: #C7EA46 %3d.%02d MiB/s#\n",
+			" Sequentiell 16MB - Rate: #C7EA46 %3d.%02d MB/s#\n",
 			rate_1k / 1000, (rate_1k % 1000) / 10);
 		lv_label_set_text(lbl_status, txt_buf);
 		lv_obj_align(lbl_status, NULL, LV_ALIGN_CENTER, 0, 0);
@@ -1445,7 +1445,7 @@ static lv_res_t _create_mbox_benchmark(bool sd_bench)
 		rate_1k = ((u64)512 * 1000 * 1000 * 1000) / timer;
 		u32 iops_1k = ((u64)512 * 1024 * 1000 * 1000 * 1000) / (4096 / 1024) / timer / 1000;
 		s_printf(txt_buf + strlen(txt_buf),
-			" Sequentiell  4KiB - Rate: #C7EA46 %3d.%02d MiB/s#, IOPS: #C7EA46 %4d#\n",
+			" Sequentiell  4KB - Rate: #C7EA46 %3d.%02d MB/s#, IOPS: #C7EA46 %4d#\n",
 			rate_1k / 1000, (rate_1k % 1000) / 10, iops_1k);
 		lv_label_set_text(lbl_status, txt_buf);
 		lv_obj_align(lbl_status, NULL, LV_ALIGN_CENTER, 0, 0);
@@ -1509,7 +1509,7 @@ static lv_res_t _create_mbox_benchmark(bool sd_bench)
 		rate_1k = ((u64)512 * 1000 * 1000 * 1000) / timer;
 		iops_1k = ((u64)512 * 1024 * 1000 * 1000 * 1000) / (4096 / 1024) / timer / 1000;
 		s_printf(txt_buf + strlen(txt_buf),
-			" Zufaellig    4KiB - Rate: #C7EA46 %3d.%02d MiB/s#, IOPS: #C7EA46 %4d#\n",
+			" Zufaellig    4KB - Rate: #C7EA46 %3d.%02d MB/s#, IOPS: #C7EA46 %4d#\n",
 			rate_1k / 1000, (rate_1k % 1000) / 10, iops_1k);
 		if (iter_curr == iters - 1)
 			txt_buf[strlen(txt_buf) - 1] = 0; // Cut off last line change.
@@ -1615,7 +1615,7 @@ static lv_res_t _create_window_emmc_info_status(lv_obj_t *btn)
 		break;
 	case 0x45: // Unofficial.
 		strcat(txt_buf, "SanDisk ");
-		lv_win_add_btn(win, NULL, SYMBOL_FILE_ALT" Geraet Report", _create_mbox_emmc_sandisk_report);
+		lv_win_add_btn(win, NULL, SYMBOL_FILE_ALT" Geraete Report", _create_mbox_emmc_sandisk_report);
 		break;
 	case 0x90:
 		strcat(txt_buf, "SK Hynix ");
@@ -1736,10 +1736,10 @@ static lv_res_t _create_window_emmc_info_status(lv_obj_t *btn)
 	u32 boot_size = emmc_storage.ext_csd.boot_mult << 17;
 	u32 rpmb_size = emmc_storage.ext_csd.rpmb_mult << 17;
 	strcpy(txt_buf, "#00DDFF eMMC Physische Partitionen:#\n");
-	s_printf(txt_buf + strlen(txt_buf), "1: #96FF00 BOOT0# Groesse: %6d KiB (Sektor: 0x%08X)\n", boot_size / 1024, boot_size / 512);
-	s_printf(txt_buf + strlen(txt_buf), "2: #96FF00 BOOT1# Groesse: %6d KiB (Sektor: 0x%08X)\n", boot_size / 1024, boot_size / 512);
-	s_printf(txt_buf + strlen(txt_buf), "3: #96FF00 RPMB#  Groesse: %6d KiB (Sektor: 0x%08X)\n", rpmb_size / 1024, rpmb_size / 512);
-	s_printf(txt_buf + strlen(txt_buf), "0: #96FF00 GPP#   Groesse: %6d MiB (Sektor: 0x%08X)\n", emmc_storage.sec_cnt >> SECTORS_TO_MIB_COEFF, emmc_storage.sec_cnt);
+	s_printf(txt_buf + strlen(txt_buf), "1: #96FF00 BOOT0# Groesse: %6d KB (Sektor: 0x%08X)\n", boot_size / 1024, boot_size / 512);
+	s_printf(txt_buf + strlen(txt_buf), "2: #96FF00 BOOT1# Groesse: %6d KB (Sektor: 0x%08X)\n", boot_size / 1024, boot_size / 512);
+	s_printf(txt_buf + strlen(txt_buf), "3: #96FF00 RPMB#  Groesse: %6d KB (Sektor: 0x%08X)\n", rpmb_size / 1024, rpmb_size / 512);
+	s_printf(txt_buf + strlen(txt_buf), "0: #96FF00 GPP#   Groesse: %6d MB (Sektor: 0x%08X)\n", emmc_storage.sec_cnt >> SECTORS_TO_MIB_COEFF, emmc_storage.sec_cnt);
 	strcat(txt_buf, "\n#00DDFF GPP (eMMC USER) Partitionstabelle:#\n");
 
 	emmc_set_partition(EMMC_GPP);
@@ -1757,14 +1757,14 @@ static lv_res_t _create_window_emmc_info_status(lv_obj_t *btn)
 
 		if (part->index < 2)
 		{
-			s_printf(txt_buf + strlen(txt_buf), "%02d: #96FF00 %s#%s Groesse: %d MiB (Sektor: 0x%X), Start: %06X\n",
+			s_printf(txt_buf + strlen(txt_buf), "%02d: #96FF00 %s#%s Groesse: %d MB (Sektor: 0x%X), Start: %06X\n",
 				part->index, part->name, !part->name[8] ? " " : "",
 				(part->lba_end - part->lba_start + 1) >> SECTORS_TO_MIB_COEFF,
 				part->lba_end - part->lba_start + 1, part->lba_start);
 		}
 		else
 		{
-			s_printf(txt_buf + strlen(txt_buf), "%02d: #96FF00 %s#\n    Groesse: %7d MiB (Sektor: 0x%07X), Start: %07X\n",
+			s_printf(txt_buf + strlen(txt_buf), "%02d: #96FF00 %s#\n    Groesse: %7d MB (Sektor: 0x%07X), Start: %07X\n",
 				part->index, part->name, (part->lba_end - part->lba_start + 1) >> SECTORS_TO_MIB_COEFF,
 				part->lba_end - part->lba_start + 1, part->lba_start);
 		}
@@ -1799,9 +1799,9 @@ static lv_res_t _create_window_emmc_info_status(lv_obj_t *btn)
 			"#FFDD00 eMMC wird im langsameren Modus initialisiert,#\n"
 			"#FFDD00 oder Init/Lese/Schreib Fehler aufgetreten!#\n"
 			"#FFDD00 Koennte auf Hardwareprobleme hindeuten!#\n\n"
-			"#00DDFF Bus Speed:# %d MB/s\n\n"
+			"#00DDFF Busgeschw.:# %d MB/s\n\n"
 			"#00DDFF SDMMC4 Fehler:#\n"
-			"Init fails: %d\n"
+			"Init Fehler: %d\n"
 			"Lese-/Schreibversuche: %d\n"
 			"Lese/Schreibfehler: %d",
 			emmc_storage.csd.busspeed,
@@ -1875,7 +1875,7 @@ static lv_res_t _create_window_sdcard_info_status(lv_obj_t *btn)
 	switch (sd_storage.cid.manfid)
 	{
 	case 0x00:
-		strcat(txt_buf, "Fake ");
+		strcat(txt_buf, "FAKE ");
 		break;
 	case 0x01:
 		strcat(txt_buf, "Panasonic ");
@@ -2010,16 +2010,16 @@ static lv_res_t _create_window_sdcard_info_status(lv_obj_t *btn)
 	lv_obj_t * lb_desc2 = lv_label_create(desc2, lb_desc);
 
 	lv_label_set_static_text(lb_desc2,
-		"#00DDFF Card-Specific Data#\n"
+		"#00DDFF SD-Karten spezifische Daten#\n"
 		"Cmd Klassen:\n"
 		"Kapazitaet:\n"
 		"Kapazitaet (LBA):\n"
 		"Busbreite:\n"
 		"Aktuelle Rate:\n"
-		"Speed Class:\n"
+		"Geschw. Klasse:\n"
 		"UHS Grade:\n"
-		"Video Class:\n"
-		"App perf class:\n"
+		"Video Klasse:\n"
+		"App perf Klasse:\n"
 		"Schreibschutz:"
 	);
 	lv_obj_set_width(lb_desc2, lv_obj_get_width(desc2));
@@ -2054,12 +2054,12 @@ static lv_res_t _create_window_sdcard_info_status(lv_obj_t *btn)
 	}
 
 	s_printf(txt_buf,
-		"#00DDFF v%d.0#\n%02X\n%d MiB\n%X (CP %X)\n%d\n%d MB/s (%d MHz)\n%d (AU: %d %s\nU%d\nV%d\nA%d\n%s",
+		"#00DDFF v%d.0#\n%02X\n%d MB\n%X (CP %X)\n%d\n%d MB/s (%d MHz)\n%d (AU: %d %s\nU%d\nV%d\nA%d\n%s",
 		sd_storage.csd.structure + 1, sd_storage.csd.cmdclass,
 		sd_storage.sec_cnt >> 11, sd_storage.sec_cnt, sd_storage.ssr.protected_size >> 9,
 		sd_storage.ssr.bus_width, sd_storage.csd.busspeed,
 		(sd_storage.csd.busspeed > 10) ? (sd_storage.csd.busspeed * 2) : 50,
-		sd_storage.ssr.speed_class, uhs_au_size, uhs_au_mb ? "MiB)" : "KiB)", sd_storage.ssr.uhs_grade,
+		sd_storage.ssr.speed_class, uhs_au_size, uhs_au_mb ? "MB)" : "KB)", sd_storage.ssr.uhs_grade,
 		sd_storage.ssr.video_class, sd_storage.ssr.app_class, wp_info);
 
 	lv_label_set_text(lb_val2, txt_buf);
@@ -2101,10 +2101,10 @@ static lv_res_t _create_window_sdcard_info_status(lv_obj_t *btn)
 
 	lv_obj_t * lb_val3 = lv_label_create(val3, lb_desc);
 
-	s_printf(txt_buf, "\n%s\n%d %s\n%d/%d MiB",
+	s_printf(txt_buf, "\n%s\n%d %s\n%d/%d MB",
 		sd_fs.fs_type == FS_EXFAT ? ("exFAT  "SYMBOL_SHRK) : ("FAT32"),
 		(sd_fs.csize > 1) ? (sd_fs.csize >> 1) : 512,
-		(sd_fs.csize > 1) ? "KiB" : "B",
+		(sd_fs.csize > 1) ? "KB" : "B",
 		(u32)(sd_fs.free_clst * sd_fs.csize >> SECTORS_TO_MIB_COEFF),
 		(u32)(sd_fs.n_fatent  * sd_fs.csize >> SECTORS_TO_MIB_COEFF));
 
@@ -2273,16 +2273,16 @@ static lv_res_t _create_window_battery_status(lv_obj_t *btn)
 
 	lv_label_set_static_text(lb_desc2,
 		"#00DDFF Akku Ladegeraet-IC Info:#\n"
-		"Input voltage limit:\n"
-		"Input current limit:\n"
-		"Min voltage limit:\n"
-		"Fast charge current limit:\n"
-		"Charge voltage limit:\n"
-		"Charge status:\n"
+		"Eingangsspannung Limit:\n"
+		"Eingangsspannung akt. Limit:\n"
+		"Min Spannung Limit:\n"
+		"Schnellladen akt. Limit:\n"
+		"Ladespannung Limit:\n"
+		"Ladestatus:\n"
 		"Temperaturstatus:\n\n"
 		"#00DDFF USB-PD IC Info:#\n"
 		"Verbindungsstatus:\n"
-		"Input Wattage Limit:\n"
+		"Eingangsleistungsbeschraenkung:\n"
 		"USB-PD Profile:"
 	);
 	lv_obj_set_width(lb_desc2, lv_obj_get_width(desc2));
@@ -2494,14 +2494,14 @@ void create_tab_info(lv_theme_t *th, lv_obj_t *parent)
 	if (lockpick_found)
 	{
 		lv_label_set_static_text(label_txt2,
-			"Zeige Ipatches und Dumpe die (un-)gepatchten Versions\nvom BootROM.\n"
+			"Zeige Ipatches und Dumpe die (un-)gepatchten Versionen\nvom BootROM.\n"
 			"Oder Dumpe die einzelnen Keys mit #C7EA46 Enigma_RCM#.\n");
 	}
 	else
 	{
 		lv_label_set_static_text(label_txt2,
-			"Zeige Ipatches und Dumpe die (un-)gepatchten Versions\nvom BootROM. Oder Dumpe die einzelnen Keys mit #C7EA46 Enigma_RCM#.\n"
-			"#FFDD00 bootloader/payloads/Enigma_RCM.bin fehlt oder ist alt!#\n");
+			"Zeige Ipatches und Dumpe die (un-)gepatchten Versionen\nvom BootROM. Oder Dumpe die einzelnen Keys mit #C7EA46 Enigma_RCM#.\n"
+			"#FFDD00 bootloader/payloads/Enigma_RCM.bin fehlt oder ist zu alt!#\n");
 	}
 
 	lv_obj_set_style(label_txt2, &hint_small_style);
@@ -2535,7 +2535,7 @@ void create_tab_info(lv_theme_t *th, lv_obj_t *parent)
 	lv_label_set_static_text(label_txt4,
 		"Zeige und Dumpe die gecachten #C7EA46 Fuses# und #C7EA46 KFuses#.\n"
 		"Fuses enthalten Infos ueber SoC/SKU und KFuses ueber HDCP Keys.\n"
-		"Du siehst ebenfalls Infos ueber #C7EA46 DRAM#, #C7EA46 Bildschirm# und #C7EA46 Touch panel#.");
+		"Du siehst ebenfalls Infos ueber #C7EA46 DRAM#, #C7EA46 Bildschirm# und #C7EA46 Digitizer (Touchscreen)#.");
 	lv_obj_set_style(label_txt4, &hint_small_style);
 	lv_obj_align(label_txt4, btn3, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3);
 

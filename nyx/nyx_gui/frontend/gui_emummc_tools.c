@@ -690,7 +690,7 @@ static lv_res_t _create_emummc_migrate_action(lv_obj_t * btns, const char * txt)
 	if (backup)
 	{
 		s_printf(txt_buf,
-			"#C7EA46 Geeignetes Backup vom emuMMC gefunden!#\n\n"
+			"#C7EA46 Geeignete Datensicherung fuer emuMMC gefunden!#\n\n"
 			"#FF8000 Willst du es migrieren?#\n");
 		lv_mbox_add_btns(mbox, mbox_btn_map, _create_emummc_mig4_action);
 	}
@@ -704,7 +704,7 @@ static lv_res_t _create_emummc_migrate_action(lv_obj_t * btns, const char * txt)
 	else if (em_raw && em_file)
 	{
 		s_printf(txt_buf,
-			"#C7EA46 Fremdes, Partitionsbasiertes und Dateibasiertes emuNAND gefunden!#\n\n"
+			"#C7EA46 Fremdes Dateibasiertes, und Partitionsbasiertes emuNAND gefunden!#\n\n"
 			"#FF8000 Waehle aus was du migrieren willst:#\n");
 		lv_mbox_add_btns(mbox, mbox_btn_map1, _create_emummc_mig1_action);
 	}
@@ -762,8 +762,8 @@ static lv_res_t _create_mbox_emummc_migrate(lv_obj_t *btn)
 
 	lv_mbox_set_text(mbox,
 		"Willkommen beim #C7EA46 emuMMC# Migrationswerkzeug!\n\n"
-		"Bitte waehle aus, welche Art der Migration\ndu durchfuehren moechtest.\n"
-		"Nicht vorhandene Punkte sind ausgegraut.");
+		"Bitte waehle aus, welche Art der Migration du durchfuehren moechtest.\n"
+		"Alles was nicht vorhanden ist, ist ausgegraut.");
 
 	char *path_buf = (char *)malloc(0x512);
 	mbr_t *mbr = (mbr_t *)malloc(sizeof(mbr_t));
@@ -947,7 +947,7 @@ static lv_res_t _save_file_emummc_cfg_action(lv_obj_t *btn)
 static lv_res_t _create_change_emummc_window(lv_obj_t *btn_caller)
 {
 	lv_obj_t *win = nyx_create_standard_window(SYMBOL_SETTINGS"  emuMMC wechseln");
-	lv_win_add_btn(win, NULL, SYMBOL_POWER"  Deaktiviert", _save_disable_emummc_cfg_action);
+	lv_win_add_btn(win, NULL, SYMBOL_POWER"  Deaktivieren", _save_disable_emummc_cfg_action);
 
 	sd_mount();
 
@@ -1167,7 +1167,7 @@ out1:
 
 lv_res_t create_win_emummc_tools(lv_obj_t *btn)
 {
-	lv_obj_t *win = nyx_create_standard_window(SYMBOL_EDIT"  emuMMC Verwalten");
+	lv_obj_t *win = nyx_create_standard_window(SYMBOL_EDIT"  Verwalte emuMMC");
 
 	// Set resources to be managed by other windows.
 	emummc_manage_window = win;
@@ -1231,7 +1231,7 @@ lv_res_t create_win_emummc_tools(lv_obj_t *btn)
 	}
 	else
 	{
-		lv_label_set_static_text(label_txt2, "emuMMC is disabled and eMMC will be used for boot.\n\n");
+		lv_label_set_static_text(label_txt2, "emuMMC ist deaktiviert und eMMC wird fuer Start benutzt.\n\n");
 	}
 
 	if (emu_info.path)
@@ -1293,7 +1293,7 @@ lv_res_t create_win_emummc_tools(lv_obj_t *btn)
 	lv_label_set_recolor(label_txt4, true);
 	lv_label_set_static_text(label_txt4,
 		"Erlaubt das erstellen eines neuen emuMMC als #C7EA46 SD-Datei# oder\n"
-		"#C7EA46 SD RAW Partition#. Du kannst es vom eMMC oder einem eMMC-Backup erstellen.");
+		"#C7EA46 SD RAW Partition#. Du kannst es vom eMMC oder einer eMMC-Sicherung erstellen.");
 
 	lv_obj_set_style(label_txt4, &hint_small_style);
 	lv_obj_align(label_txt4, btn3, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3);
@@ -1309,7 +1309,7 @@ lv_res_t create_win_emummc_tools(lv_obj_t *btn)
 	label_txt4 = lv_label_create(h2, NULL);
 	lv_label_set_recolor(label_txt4, true);
 	lv_label_set_static_text(label_txt4,
-		"Migriere ein Backup zu einer #C7EA46 SD-Datei# oder repariere eine\n"
+		"Migriere eine Sicherung zu einer #C7EA46 SD-Datei# oder repariere eine\n"
 		"#C7EA46 SD RAW Partition#. Zusaetzlich erlaubt es das migrieren von einer\nanderen emuNAND Loesung.");
 	lv_obj_set_style(label_txt4, &hint_small_style);
 	lv_obj_align(label_txt4, btn4, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3);

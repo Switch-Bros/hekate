@@ -186,7 +186,7 @@ static lv_res_t _autoboot_enable_more_action(lv_obj_t *btn)
 
 static void _create_autoboot_window()
 {
-	lv_obj_t *win = create_window_autoboot(SYMBOL_GPS" Auto-Start");
+	lv_obj_t *win = create_window_autoboot(SYMBOL_GPS" Autostart");
 	lv_win_add_btn(win, NULL, SYMBOL_POWER" Deaktivieren", _autoboot_disable_action);
 
 	static lv_style_t h_style;
@@ -255,7 +255,7 @@ static void _create_autoboot_window()
 	lv_label_set_static_text(label_sep, "");
 
 	lv_obj_t *label_txt3 = lv_label_create(h2, NULL);
-	lv_label_set_static_text(label_txt3, "INI Ordner konfigurationen");
+	lv_label_set_static_text(label_txt3, "INI Ordner Konfigurationen");
 	lv_obj_set_style(label_txt3, lv_theme_get_current()->label.prim);
 	lv_obj_align(label_txt3, label_sep, LV_ALIGN_OUT_BOTTOM_LEFT, LV_DPI / 4, -LV_DPI / 11);
 
@@ -616,10 +616,10 @@ static lv_res_t _create_window_nyx_colors(lv_obj_t *btn)
 	lv_obj_t *lbl_test = lv_label_create(h2, NULL);
 	lv_label_set_long_mode(lbl_test, LV_LABEL_LONG_BREAK);
 	lv_label_set_static_text(lbl_test,
-		"Lorem ipsum dolor sit amet, consectetur adipisicing elit, "
-		"sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
-		"Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris "
-		"nisi ut aliquip ex ea commodo consequat.");
+		"Lorem ipsum... - Ihh, baehhh geh mal weg mit dem Scheiss. "
+		"ABC de scheiss Katzenviehchers lief den Schnee und so lang "
+		"bis so Knuschperhaeusle... Texttest wurde praesentiert von:."
+		"SwitchBros. - The Switch Hacking, Modding and Theme Community");
 	lv_obj_set_width(lbl_test, lv_obj_get_width(h2) - LV_DPI * 6 / 10);
 	lv_obj_align(lbl_test, lbl_sample, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 5);
 	color_test.label = lbl_test;
@@ -929,7 +929,7 @@ disabled:;
 	if (!error)
 	{
 		s_printf(txt_buf,
-			"Dumping auf SD-Karte abgeschlossen!\n"
+			"Dumpen auf SD-Karte abgeschlossen!\n"
 			"Gespeichert in: #C7EA46 switchroot/joycon_mac.[bin/ini]#\n\n");
 
 		bool success = true;
@@ -1133,7 +1133,7 @@ lv_res_t create_win_nyx_options(lv_obj_t *parrent_btn)
 	lv_label_set_recolor(label_txt2, true);
 	lv_label_set_static_text(label_txt2,
 		"Startbildschirm von Nyx auswaehlen.\n"
-		"#FF8000 Alle Konfigs.:# #C7EA46 Kombiniert Weitere Konfigs. in leeren Plaetzen von Starten.#\n"
+		"#FF8000 Alle Konfigs.:# #C7EA46 Kombiniert weitere Konfigs. in leeren Plaetzen in Starten.#\n"
 		"#FF8000 Starten / Weitere Konfigs.:# #C7EA46 Verwendet die klassische geteilte Ansicht.#");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, label_txt, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 4);
@@ -1152,9 +1152,9 @@ lv_res_t create_win_nyx_options(lv_obj_t *parrent_btn)
 	label_txt2 = lv_label_create(sw_h2, NULL);
 	lv_label_set_recolor(label_txt2, true);
 	lv_label_set_static_text(label_txt2,
-		"Setzt die Starteintraege pro Linie auf 5. (Standard ist 4)\n"
-		"#C7EA46 Das erlaubt insgesamt 10 Starteintraege in Starten#\n"
-		"#C7EA46 und dem Weitere Konfigs. Bildschirm.#\n\n\n");
+		"Setzt die Starteintraege pro Zeile auf 5. (Standard ist 4)\n"
+		"#C7EA46 Das erlaubt insgesamt 10 Starteintraege im Starten,#\n"
+		"#C7EA46 und dem Weitere Konfigs., Bildschirm.#\n\n\n");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, btn2, LV_ALIGN_OUT_BOTTOM_LEFT, LV_DPI / 4, LV_DPI / 12);
 
@@ -1193,8 +1193,8 @@ lv_res_t create_win_nyx_options(lv_obj_t *parrent_btn)
 	lv_ddlist_set_options(ddlist2,
 		"Aus (Schnellste)\n"
 		"Wenig (Schnell)    \n"
-		"Voll (Langsam)\n"
-		"Voll (Hashes)");
+		"Komplett (Langsam)\n"
+		"Komplett (Hashes)");
 	lv_ddlist_set_selected(ddlist2, n_cfg.verification);
 	lv_obj_align(ddlist2, label_txt, LV_ALIGN_OUT_RIGHT_MID, LV_DPI * 3 / 8, 0);
 	lv_ddlist_set_action(ddlist2, _data_verification_action);
@@ -1212,7 +1212,7 @@ lv_res_t create_win_nyx_options(lv_obj_t *parrent_btn)
 	lv_obj_t *btn5 = lv_btn_create(sw_h3, NULL);
 	lv_obj_t *label_btn5 = lv_label_create(btn5, NULL);
 	lv_btn_set_fit(btn5, true, true);
-	lv_label_set_static_text(label_btn5, SYMBOL_CLOCK" Uhr (Versatz)");
+	lv_label_set_static_text(label_btn5, SYMBOL_CLOCK" Uhr (Zeitverschiebung)");
 	lv_obj_align(btn5, line_sep, LV_ALIGN_OUT_BOTTOM_LEFT, LV_DPI / 4, LV_DPI / 4);
 	lv_btn_set_action(btn5, LV_BTN_ACTION_CLICK, _create_mbox_clock_edit);
 
@@ -1220,8 +1220,8 @@ lv_res_t create_win_nyx_options(lv_obj_t *parrent_btn)
 	lv_label_set_recolor(label_txt2, true);
 	lv_label_set_static_text(label_txt2,
 		"Zeitverschiebung manuell setzen.\n"
-		"#C7EA46 Eingegebene Datum und Uhrzeit werden auotmatisch in einen#\n"
-		"#C7EA46 Versatz umgewandelt. Wird auch fuer FatFS Vorgaenge verwendet.#");
+		"#C7EA46 Datum und Uhrzeit werden auotmatisch in eine Verschiebung#\n"
+		"#C7EA46 umgewandelt. Wird auch fuer FatFS Vorgaenge verwendet.#");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, btn5, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 4);
 
@@ -1364,13 +1364,13 @@ void create_tab_options(lv_theme_t *th, lv_obj_t *parent)
 
 	// Create Auto HOS Power Off button.
 	lv_obj_t *btn3 = lv_btn_create(sw_h3, NULL);
-	nyx_create_onoff_button(th, sw_h3, btn3, SYMBOL_POWER" Auto HOS Auschalten", auto_hos_poweroff_toggle, true);
+	nyx_create_onoff_button(th, sw_h3, btn3, SYMBOL_POWER" Auto HOS auschalten", auto_hos_poweroff_toggle, true);
 	lv_obj_align(btn3, label_sep, LV_ALIGN_OUT_BOTTOM_LEFT, 0, 0);
 
 	label_txt2 = lv_label_create(sw_h3, NULL);
 	lv_label_set_static_text(label_txt2,
-		"Wenn das Herunterfahren vom HOS aus verwendet wird, wacht das Geraet nach\n"
-		"15s wieder auf. Aktivieren um das Geraet bei der naechsten Injektion\nautomatisch auszuschalten.");
+		"Wenn das Herunterfahren vom HOS aus verwendet wird, wacht\ndas Geraet nach 15s wieder auf."
+		"Aktivieren um das Geraet bei der naechsten\nInjektion\nautomatisch auszuschalten.");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, btn3, LV_ALIGN_OUT_BOTTOM_LEFT, LV_DPI / 4, LV_DPI / 12);
 
@@ -1407,8 +1407,8 @@ void create_tab_options(lv_theme_t *th, lv_obj_t *parent)
 	label_txt2 = lv_label_create(sw_h3, NULL);
 	lv_label_set_recolor(label_txt2, true);
 	lv_label_set_static_text(label_txt2,
-		"Wenn #FF8000 FSS0# im gewaehlten Starteintrag genutzt wird, wird die Reboot2Payload\n"
-		"Binaerdatei ueberprueft und gezwungen, zu hekate zu wechseln.\n\n\n\n");
+		"Wenn #FF8000 FSS0# im gewaehlten Starteintrag genutzt wird,\nwird die Reboot2Payload Binaerdatei ueberprueft und gezwungen,\n"
+		"zu hekate zu wechseln.\n\n\n\n");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, btn4, LV_ALIGN_OUT_BOTTOM_LEFT, LV_DPI / 4, LV_DPI / 12);
 

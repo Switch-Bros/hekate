@@ -283,7 +283,7 @@ static lv_res_t _create_mbox_ums(usb_ctxt_t *usbs)
 		{
 			lv_label_set_static_text(lbl_tip,
 				"Hinweis: Zum Beenden, #C7EA46 sicher entfernen# im OS nutzen.\n"
-				"       #FFDD00 NICHT das Kabel ABZIEHEN!#");
+				"       #FFDD00 NICHT einfach das Kabel ABZIEHEN!#");
 		}
 		else
 		{
@@ -929,7 +929,7 @@ out:
 
 static lv_res_t _create_window_unset_abit_tool(lv_obj_t *btn)
 {
-	lv_obj_t *win = nyx_create_standard_window(SYMBOL_COPY" Behebe Archive Bit (Alle Ordner)");
+	lv_obj_t *win = nyx_create_standard_window(SYMBOL_COPY" Behebe Archiv Bit (Alle Ordner)");
 
 	// Disable buttons.
 	nyx_window_toggle_buttons(win, true);
@@ -977,12 +977,12 @@ static lv_res_t _create_window_unset_abit_tool(lv_obj_t *btn)
 		if (!total[0] && !total[1])
 			s_printf(txt_buf, "#96FF00 Abgeschlossen! Es war keine Aenderung noetig.#");
 		else
-			s_printf(txt_buf, "#96FF00 Abgeschlossen! Archive bits behoben:# #FF8000 %d nicht gesetzt und %d gesetzt!#", total[1], total[0]);
+			s_printf(txt_buf, "#96FF00 Abgeschlossen! Archiv bits behoben:# #FF8000 %d nicht gesetzt und %d gesetzt!#", total[1], total[0]);
 
 		// Check errors.
 		if (total[2] || total[3])
 		{
-			s_printf(txt_buf, "\n\n#FFDD00 Fehler: Ordnerzugriffe: %d, arc bit behoben: %d!#\n"
+			s_printf(txt_buf, "\n\n#FFDD00 Fehler: Ordnerzugriffe: %d, Archiv bit behoben: %d!#\n"
 					          "#FFDD00 Dateisystem sollte auf Fehler ueberprueft werden.#",
 					          total[2], total[3]);
 		}
@@ -1097,7 +1097,7 @@ static lv_res_t _create_mbox_fix_touchscreen(lv_obj_t *btn)
 
 		}
 		s_printf(txt_buf + strlen(txt_buf), " (%d), Kanal: %d#\n\n", err[0], err[1]);
-		strcat(txt_buf, "#FFFF00 Kalibrierung des Touchscreen fehlgeschlagen!");
+		strcat(txt_buf, "#FFFF00 Kalibrierung des Touchscreens fehlgeschlagen!");
 		lv_mbox_set_text(mbox, txt_buf);
 		goto out2;
 	}
@@ -1107,9 +1107,9 @@ ito_failed:
 
 out:
 	if (res)
-		lv_mbox_set_text(mbox, "#C7EA46 Kalibrierung des Touchscreen abgeschlossen!");
+		lv_mbox_set_text(mbox, "#C7EA46 Kalibrierung des Touchscreens abgeschlossen!");
 	else
-		lv_mbox_set_text(mbox, "#FFFF00 Kalibrierung des Touchscreen fehlgeschlagen!");
+		lv_mbox_set_text(mbox, "#FFFF00 Kalibrierung des Touchscreens fehlgeschlagen!");
 
 out2:
 	lv_mbox_add_btns(mbox, mbox_btn_map, mbox_action);
@@ -1121,7 +1121,7 @@ out2:
 
 static lv_res_t _create_window_dump_pk12_tool(lv_obj_t *btn)
 {
-	lv_obj_t *win = nyx_create_standard_window(SYMBOL_MODULES" Dump package1/2");
+	lv_obj_t *win = nyx_create_standard_window(SYMBOL_MODULES" Dumpe package1/2");
 
 	// Disable buttons.
 	nyx_window_toggle_buttons(win, true);
@@ -1234,11 +1234,11 @@ static lv_res_t _create_window_dump_pk12_tool(lv_obj_t *btn)
 
 		// Display info.
 		s_printf(txt_buf + strlen(txt_buf),
-			"#C7EA46 NX Bootloader Groesse:  #0x%05X\n"
-			"#C7EA46 Secure monitor Addr:    #0x%05X\n"
-			"#C7EA46 Secure monitor Groesse: #0x%05X\n"
-			"#C7EA46 Warmboot Addr:			 #0x%05X\n"
-			"#C7EA46 Warmboot Groesse:		 #0x%05X\n\n",
+			"#C7EA46 NX Bootloader Groesse:   #0x%05X\n"
+			"#C7EA46 Sicherheitsmon. Addr:    #0x%05X\n"
+			"#C7EA46 Sicherheitsmon. Groesse: #0x%05X\n"
+			"#C7EA46 Warmboot Addr:			  #0x%05X\n"
+			"#C7EA46 Warmboot Groesse:		  #0x%05X\n\n",
 			hdr_pk11->ldr_size, pkg1_id->secmon_base, hdr_pk11->sm_size, pkg1_id->warmboot_base, hdr_pk11->wb_size);
 
 		lv_label_set_text(lb_desc, txt_buf);
@@ -1264,7 +1264,7 @@ static lv_res_t _create_window_dump_pk12_tool(lv_obj_t *btn)
 		emmcsn_path_impl(path, "/pkg1", "secmon.bin", &emmc_storage);
 		if (sd_save_to_file(secmon, hdr_pk11->sm_size, path))
 			goto out_free;
-		strcat(txt_buf, "Secure Monitor gedumped als secmon.bin\n");
+		strcat(txt_buf, "Sicherheitsmonitor gedumped als secmon.bin\n");
 		lv_label_set_text(lb_desc, txt_buf);
 		manual_system_maintenance(true);
 
@@ -1477,8 +1477,8 @@ static void _create_tab_tools_emmc_pkg12(lv_theme_t *th, lv_obj_t *parent)
 	lv_obj_t *label_txt2 = lv_label_create(h1, NULL);
 	lv_label_set_recolor(label_txt2, true);
 	lv_label_set_static_text(label_txt2,
-		"Ermoeglicht es, die eMMC-Partitionen einzeln oder als\n"
-		"ganzes RAW Image auf der SD-Karte zu sichern.\n"
+		"Erstellt ein Backup der eMMC-Partitionen einzeln oder als\n"
+		"ganzes RAW Image auf der SD-Karte.\n"
 		"#C7EA46 Unterstuetzt SD-Karten mit# #FF8000 4GB# #C7EA46 und mehr. #"
 		"#FF8000 FAT32# #C7EA46 und ##FF8000 exFAT##C7EA46 .#");
 	lv_obj_set_style(label_txt2, &hint_small_style);
@@ -1487,15 +1487,15 @@ static void _create_tab_tools_emmc_pkg12(lv_theme_t *th, lv_obj_t *parent)
 	// Create Restore eMMC button.
 	lv_obj_t *btn2 = lv_btn_create(h1, btn);
 	label_btn = lv_label_create(btn2, NULL);
-	lv_label_set_static_text(label_btn, SYMBOL_DOWNLOAD"  eMMC wiederherstellen");
+	lv_label_set_static_text(label_btn, SYMBOL_DOWNLOAD"  eMMC Wiederherstellen");
 	lv_obj_align(btn2, label_txt2, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 2);
 	lv_btn_set_action(btn2, LV_BTN_ACTION_CLICK, create_window_backup_restore_tool);
 
 	label_txt2 = lv_label_create(h1, NULL);
 	lv_label_set_recolor(label_txt2, true);
 	lv_label_set_static_text(label_txt2,
-		"Ermoeglicht es, die eMMC/emuMMC Partitionen einzeln oder als\n"
-		"ganzes von der SD-Karte wiederherzustellen.\n"
+		"Stellt die eMMC/emuMMC Partitionen einzeln oder als\n"
+		"ganzes von der SD-Karte wieder her.\n"
 		"#C7EA46 Unterstuetzt SD-Karten mit# #FF8000 4GB# #C7EA46 und mehr. #"
 		"#FF8000 FAT32# #C7EA46 und ##FF8000 exFAT##C7EA46 .#");
 	lv_obj_set_style(label_txt2, &hint_small_style);
@@ -1588,16 +1588,16 @@ static void _create_tab_tools_arc_autorcm(lv_theme_t *th, lv_obj_t *parent)
 	}
 	lv_obj_t *label_btn = lv_label_create(btn, NULL);
 	lv_btn_set_fit(btn, true, true);
-	lv_label_set_static_text(label_btn, SYMBOL_DIRECTORY"  Behebe Archive Bit");
+	lv_label_set_static_text(label_btn, SYMBOL_DIRECTORY"  Behebe Archiv bit");
 	lv_obj_align(btn, line_sep, LV_ALIGN_OUT_BOTTOM_LEFT, LV_DPI / 4, LV_DPI / 4);
 	lv_btn_set_action(btn, LV_BTN_ACTION_CLICK, _create_window_unset_abit_tool);
 
 	lv_obj_t *label_txt2 = lv_label_create(h1, NULL);
 	lv_label_set_recolor(label_txt2, true);
 	lv_label_set_static_text(label_txt2,
-		"Erlaubt dir das entfernen des archive bit fuer alle Ordner inklusive\n"
-		"root und emuMMC \'Nintendo\' Ordner.\n"
-		"#C7EA46 Es setzt das archive bit bei Ordnern mit ##FF8000 Dateierweiterung#\n"
+		"Erlaubt dir das entfernen des Archiv bit fuer alle Ordner\n"
+		"inklusive root und emuMMC \'Nintendo\' Ordner.\n"
+		"#C7EA46 Es setzt das Archiv bit bei Ordnern mit ##FF8000 Dateierweiterung#\n"
 		"#FF8000 Benutze es wenn du Fehlermeldungen mit korrupten Dateien bekommst.#");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, btn, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3);
@@ -1722,7 +1722,7 @@ void create_tab_tools(lv_theme_t *th, lv_obj_t *parent)
 	lv_tabview_set_btns_pos(tv, LV_TABVIEW_BTNS_POS_BOTTOM);
 
 	lv_obj_t *tab1= lv_tabview_add_tab(tv, "eMMC "SYMBOL_DOT" SD Partitionen "SYMBOL_DOT" USB");
-	lv_obj_t *tab2 = lv_tabview_add_tab(tv, "Arch bit "SYMBOL_DOT" RCM "SYMBOL_DOT" Touch "SYMBOL_DOT" Pkg1/2");
+	lv_obj_t *tab2 = lv_tabview_add_tab(tv, "Archiv bit "SYMBOL_DOT" RCM "SYMBOL_DOT" Touch "SYMBOL_DOT" Pkg1/2");
 
 	lv_obj_t *line_sep = lv_line_create(tv, NULL);
 	static const lv_point_t line_pp[] = { {0, 0}, { 0, LV_DPI / 4} };
