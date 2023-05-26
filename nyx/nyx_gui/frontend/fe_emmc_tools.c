@@ -385,7 +385,7 @@ static int _dump_emmc_part(emmc_tool_gui_t *gui, char *sd_path, int active_part,
 		}
 	}
 
-	s_printf(gui->txt_buf, "#96FF00 Freier Speicher auf SD-Karte:# %d MB\n#96FF00 Gesamtgroesse der Sicherung:# %d MB\n\n",
+	s_printf(gui->txt_buf, "#96FF00 Freier Speicher auf SD-Karte:# %d MB\n#96FF00 Gesamtgroesse des Backups:# %d MB\n\n",
 		(u32)(sd_fs.free_clst * sd_fs.csize >> SECTORS_TO_MIB_COEFF),
 		totalSectors >> SECTORS_TO_MIB_COEFF);
 	lv_label_ins_text(gui->label_info, LV_LABEL_POS_LAST, gui->txt_buf);
@@ -414,7 +414,7 @@ static int _dump_emmc_part(emmc_tool_gui_t *gui, char *sd_path, int active_part,
 
 		if (!maxSplitParts)
 		{
-			s_printf(gui->txt_buf, "#FFDD00 Nicht genuegend freier Speicher fuer voruebergehende Sicherung!#\n");
+			s_printf(gui->txt_buf, "#FFDD00 Nicht genuegend freier Speicher fuer voruebergehendes Backup!#\n");
 			lv_label_ins_text(gui->label_log, LV_LABEL_POS_LAST, gui->txt_buf);
 			manual_system_maintenance(true);
 
@@ -424,7 +424,7 @@ static int _dump_emmc_part(emmc_tool_gui_t *gui, char *sd_path, int active_part,
 	// Check if we are continuing a previous raw eMMC or USER partition backup in progress.
 	if (f_open(&partialIdxFp, partialIdxFilename, FA_READ) == FR_OK && totalSectors > (FAT32_FILESIZE_LIMIT / EMMC_BLOCKSIZE))
 	{
-		s_printf(gui->txt_buf, "\n#AEFD14 Voruebergehende Sicherung in Arbeit. Fortsetzen...#\n");
+		s_printf(gui->txt_buf, "\n#AEFD14 Voruebergehendes Backup in Arbeit. Fortsetzen...#\n");
 		lv_label_ins_text(gui->label_log, LV_LABEL_POS_LAST, gui->txt_buf);
 		manual_system_maintenance(true);
 
@@ -437,7 +437,7 @@ static int _dump_emmc_part(emmc_tool_gui_t *gui, char *sd_path, int active_part,
 
 		if (!maxSplitParts)
 		{
-			s_printf(gui->txt_buf, "\n#FFDD00 Nicht genuegend freier Speicher fuer voruebergehende Sicherung!#\n");
+			s_printf(gui->txt_buf, "\n#FFDD00 Nicht genuegend freier Speicher fuer voruebergehendes Backup!#\n");
 			lv_label_ins_text(gui->label_log, LV_LABEL_POS_LAST, gui->txt_buf);
 			manual_system_maintenance(true);
 
@@ -449,7 +449,7 @@ static int _dump_emmc_part(emmc_tool_gui_t *gui, char *sd_path, int active_part,
 	}
 	else if (isSmallSdCard)
 	{
-		s_printf(gui->txt_buf, "\n#FFBA00 Voruebergehende Sicherung aktiviert (%d MB Teile)...#\n", multipartSplitSize >> 20);
+		s_printf(gui->txt_buf, "\n#FFBA00 Voruebergehendes Backup aktiviert (%d MB Teile)...#\n", multipartSplitSize >> 20);
 		lv_label_ins_text(gui->label_log, LV_LABEL_POS_LAST, gui->txt_buf);
 		manual_system_maintenance(true);
 	}
@@ -472,7 +472,7 @@ static int _dump_emmc_part(emmc_tool_gui_t *gui, char *sd_path, int active_part,
 		f_close(&fp);
 
 		lv_obj_t *warn_mbox_bg = create_mbox_text(
-			"#FFDD00 Eine vorhandene Sicherung wurde entdeckt!#\n\n"
+			"#FFDD00 Eine vorhandenes Backup wurde entdeckt!#\n\n"
 			"Druecke #FF8000 POWER# um fortzufahren.\nDruecke #FF8000 VOL# um abzubrechen.", false);
 		manual_system_maintenance(true);
 
@@ -693,7 +693,7 @@ static int _dump_emmc_part(emmc_tool_gui_t *gui, char *sd_path, int active_part,
 		// Check for cancellation combo.
 		if (btn_read_vol() == (BTN_VOL_UP | BTN_VOL_DOWN))
 		{
-			s_printf(gui->txt_buf, "\n#FFDD00 Die Sicherung wurde abgebrochen!#\n");
+			s_printf(gui->txt_buf, "\n#FFDD00 Das Backup wurde abgebrochen!#\n");
 			lv_label_ins_text(gui->label_log, LV_LABEL_POS_LAST, gui->txt_buf);
 			manual_system_maintenance(true);
 
@@ -736,8 +736,8 @@ static int _dump_emmc_part(emmc_tool_gui_t *gui, char *sd_path, int active_part,
 		f_unlink(partialIdxFilename);
 
 		create_mbox_text(
-			"#96FF00 Teilweise Sicherung abgeschlossen!#\n\n"
-			"Du kannst die Dateien bei Bedarf zusammenfuehren\num eine komplette eMMC RAW GPP Sicherungsdatei zu erhalten.", true);
+			"#96FF00 Teilweises Backup abgeschlossen!#\n\n"
+			"Du kannst die Dateien bei Bedarf zusammenfuehren\num eine komplette eMMC RAW GPP Backupdatei zu erhalten.", true);
 
 		partial_sd_full_unmount = true;
 	}
@@ -777,8 +777,8 @@ void dump_emmc_selected(emmcPartType_t dumpType, emmc_tool_gui_t *gui)
 	int i = 0;
 	char sdPath[OUT_FILENAME_SZ];
 	// Create Restore folders, if they do not exist.
-	emmcsn_path_impl(sdPath, "/sicherung", "", &emmc_storage);
-	emmcsn_path_impl(sdPath, "/sicherung/partitionen", "", &emmc_storage);
+	emmcsn_path_impl(sdPath, "/restore", "", &emmc_storage);
+	emmcsn_path_impl(sdPath, "/restore/partitions", "", &emmc_storage);
 
 	// Set folder to backup/{emmc_sn}.
 	emmcsn_path_impl(sdPath, "", "", &emmc_storage);
@@ -837,7 +837,7 @@ void dump_emmc_selected(emmcPartType_t dumpType, emmc_tool_gui_t *gui)
 
 		if ((dumpType & PART_SYSTEM) || (dumpType & PART_USER))
 		{
-			emmcsn_path_impl(sdPath, "/partitionen", "", &emmc_storage);
+			emmcsn_path_impl(sdPath, "/partitions", "", &emmc_storage);
 			gui->base_path = (char *)malloc(strlen(sdPath) + 1);
 			strcpy(gui->base_path, sdPath);
 
@@ -858,7 +858,7 @@ void dump_emmc_selected(emmcPartType_t dumpType, emmc_tool_gui_t *gui)
 				manual_system_maintenance(true);
 				i++;
 
-				emmcsn_path_impl(sdPath, "/partitionen", part->name, &emmc_storage);
+				emmcsn_path_impl(sdPath, "/partitions", part->name, &emmc_storage);
 				res = _dump_emmc_part(gui, sdPath, 0, &emmc_storage, part);
 				// If a part failed, don't continue.
 				if (!res)
@@ -1123,7 +1123,7 @@ multipart_not_allowed:
 	{
 		if (((u32)((u64)f_size(&fp) >> (u64)9)) > totalSectors)
 		{
-			s_printf(gui->txt_buf, "#FF8000 Groesse der Sicherungdateien auf SD-Karte, ist#\n#FF8000 groesser als die gewaehlte vom eMMC!#\n#FFDD00 Abbruch...#");
+			s_printf(gui->txt_buf, "#FF8000 Groesse des Backups auf SD-Karte, ist#\n#FF8000 groesser als die gewaehlte vom eMMC!#\n#FFDD00 Abbruch...#");
 			lv_label_ins_text(gui->label_log, LV_LABEL_POS_LAST, gui->txt_buf);
 			manual_system_maintenance(true);
 
@@ -1134,15 +1134,15 @@ multipart_not_allowed:
 		else if (!gui->raw_emummc)
 		{
 			lv_obj_t *warn_mbox_bg = create_mbox_text(
-				"#FF8000 Groesse der Sicherungsdateien auf SD-Karte, ist#\n#FF8000 groesser als die gewaehlte vom eMMC!#\n\n"
-				"#FFDD00 Die Sicherung koennte fehlerhaft sein!#\n#FFDD00 Abbruch empfohlen!#\n\n"
+				"#FF8000 Groesse des Backups auf SD-Karte, ist#\n#FF8000 groesser als die gewaehlte vom eMMC!#\n\n"
+				"#FFDD00 Das Backup koennte fehlerhaft sein!#\n#FFDD00 Abbruch empfohlen!#\n\n"
 				"Druecke #FF8000 POWER# um fortzufahren.\nDruecke #FF8000 VOL# um abzubrechen.", false);
 			manual_system_maintenance(true);
 
 			if (!(btn_wait() & BTN_POWER))
 			{
 				lv_obj_del(warn_mbox_bg);
-				s_printf(gui->txt_buf, "\n#FF0000 Groesse der Sicherungs-Dateien auf SD-Karte, ist#\n#FF0000 groesser als die gewaehlte vom eMMC.#\n");
+				s_printf(gui->txt_buf, "\n#FF0000 Groesse des Backups auf SD-Karte, ist#\n#FF0000 groesser als die gewaehlte vom eMMC.#\n");
 				lv_label_ins_text(gui->label_log, LV_LABEL_POS_LAST, gui->txt_buf);
 				manual_system_maintenance(true);
 
@@ -1159,7 +1159,7 @@ multipart_not_allowed:
 	else
 	{
 		fileSize = (u64)f_size(&fp);
-		s_printf(gui->txt_buf, "\nGroesse der Sicherungsdatei: %d MB.\n",
+		s_printf(gui->txt_buf, "\nGroesse des Backups: %d MB.\n",
 			(u32)((use_multipart ? (u64)totalCheckFileSize : fileSize) >> (u64)9) >> SECTORS_TO_MIB_COEFF);
 		lv_label_ins_text(gui->label_log, LV_LABEL_POS_LAST, gui->txt_buf);
 		manual_system_maintenance(true);
