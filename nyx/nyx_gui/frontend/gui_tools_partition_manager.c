@@ -1471,7 +1471,7 @@ static lv_res_t _create_mbox_start_partitioning(lv_obj_t *btn)
 		goto error;
 	}
 
-	lv_label_set_text(lbl_status, "#00DDFF Status:# Sichern der Dateien...");
+	lv_label_set_text(lbl_status, "#00DDFF Status:# Backup der Dateien...");
 	manual_system_maintenance(true);
 
 	// Do full or hekate/Nyx backup.
@@ -1993,7 +1993,7 @@ static void _create_mbox_check_files_total_size()
 	lv_obj_set_size(dark_bg, LV_HOR_RES, LV_VER_RES);
 
 	static const char *mbox_btn_map[] = { "\251", "\222OK", "\251", "" };
-	static const char *mbox_btn_map2[] = { "\222Nicht sichern", "\222OK", "" };
+	static const char *mbox_btn_map2[] = { "\222Kein Backup", "\222OK", "" };
 	lv_obj_t *mbox = lv_mbox_create(dark_bg, NULL);
 	lv_mbox_set_recolor_text(mbox, true);
 	lv_obj_set_width(mbox, LV_HOR_RES / 9 * 6);

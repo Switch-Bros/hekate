@@ -821,8 +821,8 @@ static lv_res_t _create_window_usb_tools(lv_obj_t *parent)
 	lv_obj_t *label_txt4 = lv_label_create(h2, NULL);
 	lv_label_set_recolor(label_txt4, true);
 	lv_label_set_static_text(label_txt4,
-		"Stecke die JoyCons dran und benutze die Konsole\n"
-		"als Gamepad fuer PC oder Handy.\n"
+		"Stecke die JoyCons dran und benutze die\n"
+		"Konsole als Gamepad fuer PC oder Handy.\n"
 		"#C7EA46 Benoetigt beide JoyCons zum funktionieren.#");
 
 	lv_obj_set_style(label_txt4, &hint_small_style);
@@ -1451,7 +1451,7 @@ static void _create_tab_tools_emmc_pkg12(lv_theme_t *th, lv_obj_t *parent)
 	lv_label_set_static_text(label_sep, "");
 
 	lv_obj_t *label_txt = lv_label_create(h1, NULL);
-	lv_label_set_static_text(label_txt, "Sicherung & Wiederherstellung");
+	lv_label_set_static_text(label_txt, "Backup & Wiederherstellung");
 	lv_obj_set_style(label_txt, th->label.prim);
 	lv_obj_align(label_txt, label_sep, LV_ALIGN_OUT_BOTTOM_LEFT, LV_DPI / 4, -LV_DPI * 3 / 10);
 
@@ -1470,7 +1470,7 @@ static void _create_tab_tools_emmc_pkg12(lv_theme_t *th, lv_obj_t *parent)
 	}
 	lv_obj_t *label_btn = lv_label_create(btn, NULL);
 	lv_btn_set_fit(btn, true, true);
-	lv_label_set_static_text(label_btn, SYMBOL_UPLOAD"  eMMC sichern");
+	lv_label_set_static_text(label_btn, SYMBOL_UPLOAD"  eMMC Backup");
 	lv_obj_align(btn, line_sep, LV_ALIGN_OUT_BOTTOM_LEFT, LV_DPI / 4, LV_DPI / 4);
 	lv_btn_set_action(btn, LV_BTN_ACTION_CLICK, create_window_backup_restore_tool);
 

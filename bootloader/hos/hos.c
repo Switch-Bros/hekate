@@ -632,7 +632,7 @@ try_load:
 		// Try backup bootloader.
 		if (bootloader_offset != PKG1_BOOTLOADER_BACKUP_OFFSET)
 		{
-			EPRINTF("\nVersuche Sicherung vom Bootloader...");
+			EPRINTF("\nVersuche Backup vom Bootloader...");
 			bootloader_offset = PKG1_BOOTLOADER_BACKUP_OFFSET;
 			goto try_load;
 		}

@@ -1200,8 +1200,8 @@ lv_res_t create_win_nyx_options(lv_obj_t *parrent_btn)
 	lv_ddlist_set_action(ddlist2, _data_verification_action);
 
 	label_txt2 = lv_label_create(sw_h3, NULL);
-	lv_label_set_static_text(label_txt2, "Legt die Art der Datenueberpruefung fuer die Sicherung und Wiederherstellung fest.\n"
-		"Kann abgebrochen werden, ohne die Sicherung/Wiederherstellung zu verlieren.\n");
+	lv_label_set_static_text(label_txt2, "Legt die Art der Datenueberpruefung fuer Backup und Wiederherstellung fest.\n"
+		"Kann abgebrochen werden, ohne Backup/Wiederherstellung zu verlieren.\n");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, label_txt, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 4);
 
