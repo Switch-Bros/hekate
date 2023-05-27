@@ -1254,7 +1254,7 @@ lv_res_t create_win_emummc_tools(lv_obj_t *btn)
 	label_txt2 = lv_label_create(h1, NULL);
 	lv_label_set_recolor(label_txt2, true);
 	lv_label_set_static_text(label_txt2,
-		"Waehlen zwischen Images, die im emuMMC-Ordner sind, oder als\n"
+		"Waehle zwischen Images, die im emuMMC-Ordner sind, oder als\n"
 		"SD-Karten-Partitionen vorhanden sind, aus. Du kannst maximal\n"
 		"3 Partitionsbasierte haben und zahlreiche Dateibasierte.");
 
@@ -1292,8 +1292,8 @@ lv_res_t create_win_emummc_tools(lv_obj_t *btn)
 	lv_obj_t *label_txt4 = lv_label_create(h2, NULL);
 	lv_label_set_recolor(label_txt4, true);
 	lv_label_set_static_text(label_txt4,
-		"Erlaubt das erstellen eines neuen emuMMC als #C7EA46 SD-Datei# oder\n"
-		"#C7EA46 SD RAW Partition#. Du kannst es vom eMMC oder einer eMMC-Sicherung erstellen.");
+		"Erlaubt das erstellen eines neuen emuMMC als #C7EA46 SD-Datei#\n"
+		"oder #C7EA46 SD RAW Partition#.\nDu kannst es vom eMMC oder einer eMMC-Sicherung erstellen.");
 
 	lv_obj_set_style(label_txt4, &hint_small_style);
 	lv_obj_align(label_txt4, btn3, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3);

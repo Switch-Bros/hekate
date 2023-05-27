@@ -396,7 +396,7 @@ lv_res_t create_window_backup_restore_tool(lv_obj_t *btn)
 	if (!emmc_btn_ctxt.restore)
 		lv_label_set_static_text(label_btn, SYMBOL_MODULES"  eMMC SYS");
 	else
-		lv_label_set_static_text(label_btn, SYMBOL_MODULES"  eMMC ALL");
+		lv_label_set_static_text(label_btn, SYMBOL_MODULES"  eMMC ALLE");
 	lv_obj_align(btn3, line_sep, LV_ALIGN_OUT_BOTTOM_LEFT, LV_DPI / 4, LV_DPI / 4);
 	lv_btn_set_action(btn3, LV_BTN_ACTION_CLICK, _emmc_backup_buttons_decider);
 	emmc_btn_ctxt.emmc_sys = btn3;
