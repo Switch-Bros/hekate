@@ -616,10 +616,9 @@ static lv_res_t _create_window_nyx_colors(lv_obj_t *btn)
 	lv_obj_t *lbl_test = lv_label_create(h2, NULL);
 	lv_label_set_long_mode(lbl_test, LV_LABEL_LONG_BREAK);
 	lv_label_set_static_text(lbl_test,
-		"Lorem ipsum... - Ihh, baehhh geh mal weg mit dem Scheiss. "
-		"ABC de scheiss Katzenviehchers lief den Schnee und so lang "
-		"bis so Knuschperhaeusle... Texttest wurde praesentiert von:."
-		"SwitchBros. - The Switch Hacking, Modding and Theme Community");
+        "Lorem ipsum blablabla... geh mal weg mit dem Scheiss Lorem Ipsum undeutsch Kram. \n"
+		"ABC de scheiss Katzenviehch lief den Schnee und so lang bis so Knuschperhaeusle... \n"
+		"Texttest wurde praesentiert von:     SwitchBros. - Best Community EVER!!! ");
 	lv_obj_set_width(lbl_test, lv_obj_get_width(h2) - LV_DPI * 6 / 10);
 	lv_obj_align(lbl_test, lbl_sample, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 5);
 	color_test.label = lbl_test;
@@ -1222,8 +1221,8 @@ lv_res_t create_win_nyx_options(lv_obj_t *parrent_btn)
 	lv_label_set_recolor(label_txt2, true);
 	lv_label_set_static_text(label_txt2,
 		"Zeitverschiebung manuell setzen.\n"
-		"#C7EA46 Datum und Uhrzeit werden auotmatisch in eine Verschiebung#\n"
-		"#C7EA46 umgewandelt. Wird auch fuer FatFS Vorgaenge verwendet.#");
+		"#C7EA46 Datum und Uhrzeit werden auotmatisch Zeitversetzt.#\n"
+		"#C7EA46 Wird auch fuer FatFS Vorgaenge verwendet.#");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, btn5, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 4);
 

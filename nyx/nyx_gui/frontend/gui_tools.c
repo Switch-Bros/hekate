@@ -719,7 +719,8 @@ static lv_res_t _create_window_usb_tools(lv_obj_t *parent)
 	lv_label_set_recolor(label_txt2, true);
 	lv_label_set_static_text(label_txt2,
 		"Ermoeglicht es, die SD-Karte in einem PC/Handy einzubinden.\n"
-		"#C7EA46 Alle Betriebssysteme werden unterstuetzt.\nZugriff ist# #FF8000 Lesen/Schreiben.#");
+		"#C7EA46 Alle Betriebssysteme werden unterstuetzt.#\n"
+        "#FF8000 Zugriff ist Lesen/Schreiben.#");
 
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, btn1, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3);
@@ -1666,7 +1667,7 @@ static void _create_tab_tools_arc_autorcm(lv_theme_t *th, lv_obj_t *parent)
 
 	s_printf(txt_buf,
 		"Ermoeglicht es in den RCM Modus zu gehen\nohne #C7EA46 VOL+# & #C7EA46 HOME# (Jig).\n"
-		"#FF8000 Kann jederzeit auf alle Versionen von AutoRCM\nzurueckgesetzt werden.#\n"
+		"#FF8000 Kann jederzeit auf alle Versionen von AutoRCM\nzurueckgesetzt werden.# \n"
 		"#FF3C28 Das beschaedigt den BCT und die Konsole kann nicht ohne#\n"
 		"#FF3C28 benutzerdefinierten Bootloader starten.#");
 

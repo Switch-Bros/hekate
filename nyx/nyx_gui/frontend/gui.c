@@ -1131,7 +1131,7 @@ static lv_res_t _create_mbox_poweroff(lv_obj_t *btn)
 	lv_mbox_set_recolor_text(mbox, true);
 	lv_obj_set_width(mbox, LV_HOR_RES * 4 / 10);
 
-	lv_mbox_set_text(mbox, "#FF8000 Moechtest du die Konsole wirklich#\n#FF8000 Ausschalten?#");
+	lv_mbox_set_text(mbox, "#FF8000 Moechtest du die Konsole wirklich# #FF8000 Ausschalten?#");
 
 	lv_mbox_add_btns(mbox, mbox_btn_map, _poweroff_action);
 
@@ -1299,7 +1299,7 @@ static void _create_tab_about(lv_theme_t * th, lv_obj_t * parent)
 	lv_obj_align(ctcaer_img, lbl_octopus, LV_ALIGN_OUT_BOTTOM_RIGHT, 0, LV_DPI * 2 / 3);
 
 	char version[32];
-	s_printf(version, "Nyx %d.%d.%d_SB", NYX_VER_MJ, NYX_VER_MN, NYX_VER_HF);
+	s_printf(version, "   Nyx %d.%d.%d_SB", NYX_VER_MJ, NYX_VER_MN, NYX_VER_HF);
 	lv_obj_t * lbl_ver = lv_label_create(parent, NULL);
 	lv_obj_align(lbl_ver, ctcaer_img, LV_ALIGN_OUT_BOTTOM_RIGHT, -LV_DPI / 20, LV_DPI / 4);
 	lv_label_set_style(lbl_ver, &monospace_text);
@@ -1960,7 +1960,7 @@ static void _create_tab_home(lv_theme_t *th, lv_obj_t *parent)
 	// Set tagline label.
 	lv_obj_t *label_tagline = lv_label_create(parent, NULL);
 	lv_obj_set_style(label_tagline, &hint_small_style_white);
-	lv_label_set_static_text(label_tagline, "DER BESTE BOOTLOADER FUER ALLE DEINE BEDUERFNISSE");
+	lv_label_set_static_text(label_tagline, "BESTESTER BOOTLOADER ALLER ZEITEN BOOF");
 	lv_obj_set_pos(label_tagline, 50, 82);
 
 	static lv_style_t icons;
@@ -2329,7 +2329,7 @@ static void _nyx_main_menu(lv_theme_t * th)
 
 	// Add all tabs content.
 	char version[32];
-	s_printf(version, "hekate %d.%d.%d_SB", nyx_str->version & 0xFF, (nyx_str->version >> 8) & 0xFF, (nyx_str->version >> 16) & 0xFF);
+	s_printf(version, "   hekate %d.%d.%d_SB", nyx_str->version & 0xFF, (nyx_str->version >> 8) & 0xFF, (nyx_str->version >> 16) & 0xFF);
 	lv_obj_t *tab_about = lv_tabview_add_tab(tv, version);
 
 	lv_obj_t *tab_home = lv_tabview_add_tab(tv, SYMBOL_HOME" Startseite");
