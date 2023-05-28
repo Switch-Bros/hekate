@@ -1133,8 +1133,10 @@ lv_res_t create_win_nyx_options(lv_obj_t *parrent_btn)
 	lv_label_set_recolor(label_txt2, true);
 	lv_label_set_static_text(label_txt2,
 		"Startbildschirm von Nyx auswaehlen.\n"
-		"#FF8000 Alle Konfigs.:# #C7EA46 Kombiniert weitere Konfigs.\nin leeren Plaetzen im Starten Bildschirm.#\n"
-		"#FF8000 Starten/Weitere Konfigs.:# #C7EA46 Verwendet klassisch geteilte Ansicht.#");
+		"#FF8000 Alle Konfigs.:#\n"
+        "#C7EA46 Kombination mit weitere Konfigs im Starten Bildschirm.#\n"
+		"#FF8000 Starten/Weitere Konfigs:#\n"
+        "#C7EA46 Nutzt die klassische, geteilte Ansicht.#");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, label_txt, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 4);
 
