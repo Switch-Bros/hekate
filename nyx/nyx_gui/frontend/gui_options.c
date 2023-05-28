@@ -935,29 +935,29 @@ disabled:;
 
 		// Check if pairing info was found.
 		if (joycon_found == 2)
-			strcat(txt_buf, "#C7EA46 Erfolg!#\n#C7EA46 2 von 2 JoyCon Synchronisierungsdaten gefunden!#\n");
+			strcat(txt_buf, "#C7EA46 Erfolg!#\n#C7EA46 2 von 2 JoyCon Sync-Daten da!#\n");
 		else
 		{
-			s_printf(txt_buf + strlen(txt_buf), "#FF8000 Gescheitert!#\n#FF8000 Warnung:# Nur #FFDD00 %d von 2# Synchronisierungsdaten gefunden!\n", joycon_found);
+			s_printf(txt_buf + strlen(txt_buf), "#FF8000 Gescheitert!#\n#FF8000 Warnung:# Nur #FFDD00 %d von 2# Sync-Daten gefunden!\n", joycon_found);
 			success = false;
 		}
 
 		// Check if pairing was done in HOS.
 		if (is_l_hos && is_r_hos)
-			strcat(txt_buf, "#C7EA46 Beide Synchronisierungsdaten sind HOS basiert!#");
+			strcat(txt_buf, "#C7EA46 Beide JoyCons Syncs sind HOS basiert!#");
 		else if (!is_l_hos && is_r_hos)
 		{
-			strcat(txt_buf, "#FF8000 Warnung:# #FFDD00 Linke# Synchronisierungsdaten sind nicht HOS basiert!");
+			strcat(txt_buf, "#FF8000 Warnung:# #FFDD00 Linke# JoyCon Sync nicht HOS basiert!");
 			success = false;
 		}
 		else if (is_l_hos && !is_r_hos)
 		{
-			strcat(txt_buf, "#FF8000 Warnung:# #FFDD00 Rechte# Synchronisierungsdaten sind nicht HOS basiert!");
+			strcat(txt_buf, "#FF8000 Warnung:# #FFDD00 Rechte# JoyCon Sync nicht HOS basiert!");
 			success = false;
 		}
 		else
 		{
-			strcat(txt_buf, "#FF8000 Warnung:# #FFDD00 Beide# Synchronisierungsdaten sind nicht HOS basiert!");
+			strcat(txt_buf, "#FF8000 Warnung:# #FFDD00 Beide# JoyCon Syncs nicht HOS basiert!");
 			success = false;
 		}
 
@@ -969,7 +969,7 @@ disabled:;
 	else
 	{
 		if (!nx_hoag)
-			s_printf(txt_buf, "#FFDD00 Dumpen der JoyCon Synchronisierungsdaten fehlgeschlagen!#\n#FFDD00 Fehler: %d#", error);
+			s_printf(txt_buf, "#FFDD00 Dumpen der JoyCon Sync-Daten fehlgeschlagen!#\n#FFDD00 Fehler: %d#", error);
 		else
 			s_printf(txt_buf, "#FFDD00 Switch Lite wird nicht unterstuetzt!#\n");
 	}
