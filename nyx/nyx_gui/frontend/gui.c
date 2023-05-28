@@ -1131,7 +1131,7 @@ static lv_res_t _create_mbox_poweroff(lv_obj_t *btn)
 	lv_mbox_set_recolor_text(mbox, true);
 	lv_obj_set_width(mbox, LV_HOR_RES * 4 / 10);
 
-	lv_mbox_set_text(mbox, "#FF8000 Moechtest du die Konsole wirklich# #FF8000 Ausschalten?#");
+	lv_mbox_set_text(mbox, "#FF8000 Moechtest du die Konsole#\n#FF8000 wirklich Ausschalten?#");
 
 	lv_mbox_add_btns(mbox, mbox_btn_map, _poweroff_action);
 
