@@ -762,8 +762,8 @@ static lv_res_t _create_mbox_emummc_migrate(lv_obj_t *btn)
 
 	lv_mbox_set_text(mbox,
 		"Willkommen beim #C7EA46 emuMMC# Migrationswerkzeug!\n\n"
-		"Bitte waehle aus, welche Art der Migration du durchfuehren moechtest.\n"
-		"Alles was nicht vorhanden ist, ist ausgegraut.");
+		"Bitte waehle aus, welche Art der Migration\ndu Nutzen moechtest.\n"
+		"Nicht vorhandenes ist ausgegraut.");
 
 	char *path_buf = (char *)malloc(0x512);
 	mbr_t *mbr = (mbr_t *)malloc(sizeof(mbr_t));

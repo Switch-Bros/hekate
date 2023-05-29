@@ -550,8 +550,8 @@ const u16 theme_colors[17] = {
 static lv_res_t _create_window_nyx_colors(lv_obj_t *btn)
 {
 	lv_obj_t *win = nyx_create_standard_window(SYMBOL_COPY" Nyx Farbeinstellung");
-	lv_win_add_btn(win, NULL, SYMBOL_HINT" Hintergrund umschalten", _preset_bg_action);
-	lv_win_add_btn(win, NULL, SYMBOL_SAVE" Speichern & Wiederherstellen", _save_theme_color_action);
+	lv_win_add_btn(win, NULL, SYMBOL_HINT" HG umschalten", _preset_bg_action);
+	lv_win_add_btn(win, NULL, SYMBOL_SAVE" Sichern & Wiederher.", _save_theme_color_action);
 	color_test.window = win;
 
 	// Set current theme colors.
@@ -1167,7 +1167,7 @@ lv_res_t create_win_nyx_options(lv_obj_t *parrent_btn)
 	lv_obj_t *btn3 = lv_btn_create(sw_h3, NULL);
 	lv_obj_t *label_btn3 = lv_label_create(btn3, NULL);
 	lv_btn_set_fit(btn3, true, true);
-	lv_label_set_static_text(label_btn3, SYMBOL_DOWNLOAD" Dumpen der JoyCon BT");
+	lv_label_set_static_text(label_btn3, SYMBOL_DOWNLOAD" Dumpe JoyCon BT");
 	lv_obj_align(btn3, label_sep, LV_ALIGN_OUT_BOTTOM_LEFT, LV_DPI / 4, -LV_DPI / 3);
 	lv_btn_set_action(btn3, LV_BTN_ACTION_CLICK, _joycon_info_dump_action);
 
@@ -1184,7 +1184,7 @@ lv_res_t create_win_nyx_options(lv_obj_t *parrent_btn)
 
 	// Create Backup/Restore Verification list.
 	label_txt = lv_label_create(sw_h3, NULL);
-	lv_label_set_static_text(label_txt, SYMBOL_MODULES_ALT" Datenverifizierung");
+	lv_label_set_static_text(label_txt, SYMBOL_MODULES_ALT" Datenpruefung");
 	lv_obj_set_style(label_txt, th->label.prim);
 	lv_obj_align(label_txt, line_sep, LV_ALIGN_OUT_BOTTOM_LEFT, LV_DPI / 4, LV_DPI / 4);
 
@@ -1380,7 +1380,7 @@ void create_tab_options(lv_theme_t *th, lv_obj_t *parent)
 
 	// Create Backlight slider.
 	label_txt = lv_label_create(sw_h3, NULL);
-	lv_label_set_static_text(label_txt, SYMBOL_BRIGHTNESS" Hintergrundbeleuchtung");
+	lv_label_set_static_text(label_txt, SYMBOL_BRIGHTNESS" HGL");
 	lv_obj_set_style(label_txt, th->label.prim);
 	lv_obj_align(label_txt, line_sep, LV_ALIGN_OUT_BOTTOM_LEFT, LV_DPI / 4, LV_DPI / 4);
 
@@ -1393,7 +1393,7 @@ void create_tab_options(lv_theme_t *th, lv_obj_t *parent)
 	lv_obj_align(slider, label_txt, LV_ALIGN_OUT_RIGHT_MID, LV_DPI * 20 / 15, 0);
 
 	label_txt2 = lv_label_create(sw_h3, NULL);
-	lv_label_set_static_text(label_txt2, "Helligkeit der Hintergrundbeleuchtung einstellen.\n\n");
+	lv_label_set_static_text(label_txt2, "Helligkeit der (H)inter(G)rundbe(L)euchtung einstellen.\n\n");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, label_txt, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 4);
 

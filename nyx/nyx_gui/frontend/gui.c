@@ -2139,7 +2139,7 @@ static void _create_status_bar(lv_theme_t * th)
 	//! TODO: Utilize it for more.
 	lv_obj_t *btn_mid = lv_btn_create(status_bar_bg, NULL);
 	lv_obj_t *lbl_mid = lv_label_create(btn_mid, NULL);
-	lv_label_set_static_text(lbl_mid, "Speicheroptionen");
+	lv_label_set_static_text(lbl_mid, "Speichern");
 	lv_obj_set_size(btn_mid, LV_DPI * 5 / 2, LV_DPI / 2);
 	lv_obj_align(btn_mid, NULL, LV_ALIGN_CENTER, 0, 0);
 	status_bar.mid = btn_mid;
