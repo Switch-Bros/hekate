@@ -333,8 +333,8 @@ enum {
 static void _l4t_crit_error(const char *text, bool needs_update)
 {
 	gfx_con.mute = false;
-	gfx_printf("%kL4T Error: %s!%sFailed to launch L4T!\n%k",
-		TXT_CLR_ERROR, text, needs_update ? "\nUpdate bootloader folder!\n\n" : "\n\n", TXT_CLR_DEFAULT);
+	gfx_printf("%kL4T Fehler: %s!%sL4T konnte nicht gestartet werden!\n%k",
+		TXT_CLR_ERROR, text, needs_update ? "\nAktualisiere bootloader Ordner!\n\n" : "\n\n", TXT_CLR_DEFAULT);
 }
 
 char *sd_path;
@@ -869,7 +869,7 @@ static void _l4t_bpmpfw_b01_config(l4t_ctxt_t *ctxt)
 		// Enable table.
 		BPMPFW_B01_DTB_EMC_TBL_ENABLE(tbl_idx);
 
-		UPRINTF("RAM Frequency set to: %d KHz. Voltage: %d mV\n", ram_oc_freq, ram_oc_volt);
+		UPRINTF("RAM Frequenz gesetzt auf: %d KHz. Spannung: %d mV\n", ram_oc_freq, ram_oc_volt);
 	}
 
 	// Save BPMP-FW entrypoint for TZ.
@@ -1012,7 +1012,7 @@ void launch_l4t(const ini_sec_t *ini_sec, int entry_idx, int is_list, bool t210b
 
 	if (!ctxt.path)
 	{
-		_l4t_crit_error("Pfad wird vermisst");
+		_l4t_crit_error("Pfad wird vermisst", false);
 		return;
 	}
 
@@ -1020,28 +1020,28 @@ void launch_l4t(const ini_sec_t *ini_sec, int entry_idx, int is_list, bool t210b
 	ctxt.mtc_table = minerva_get_mtc_table();
 	if (!t210b01 && !ctxt.mtc_table)
 	{
-		_l4t_crit_error("Minerva wird vermisst");
+		_l4t_crit_error("Minerva wird vermisst", true);
 		return;
 	}
 
 	// U-BOOT does not support exfat.
 	if (sd_fs.fs_type == FS_EXFAT)
 	{
-		_l4t_crit_error("exFAT nicht unterstuetzt");
+		_l4t_crit_error("exFAT nicht unterstuetzt", false);
 		return;
 	}
 
 	// Load BL31 (ATF/TrustZone fw).
 	if (!_l4t_sd_load(BL31_FW))
 	{
-		_l4t_crit_error("BL31 wird vermisst");
+		_l4t_crit_error("BL31 wird vermisst", false);
 		return;
 	}
 
 	// Load BL33 (U-BOOT/CBOOT).
 	if (!_l4t_sd_load(BL33_FW))
 	{
-		_l4t_crit_error("BL33 wird vermisst");
+		_l4t_crit_error("BL33 wird vermisst", false);
 		return;
 	}
 
@@ -1055,7 +1055,7 @@ void launch_l4t(const ini_sec_t *ini_sec, int entry_idx, int is_list, bool t210b
 		ctxt.sc7entry_size = _l4t_sd_load(SC7ENTRY_FW);
 		if (!ctxt.sc7entry_size)
 		{
-			_l4t_crit_error("SC7-Eintrag wird vermisst");
+			_l4t_crit_error("SC7-Eintrag wird vermisst", true);
 			return;
 		}
 
@@ -1086,7 +1086,7 @@ void launch_l4t(const ini_sec_t *ini_sec, int entry_idx, int is_list, bool t210b
 	// Load SC7-Exit firmware.
 	if (!_l4t_sd_load(!t210b01 ? SC7EXIT_FW : SC7EXIT_B01_FW))
 	{
-		_l4t_crit_error("SC7-Exit wird vermisst");
+		_l4t_crit_error("SC7-Exit wird vermisst", true);
 		return;
 	}
 
