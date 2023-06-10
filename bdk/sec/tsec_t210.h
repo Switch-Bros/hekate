@@ -17,8 +17,8 @@
 #ifndef _TSEC_T210_H_
 #define _TSEC_T210_H_
 
-#define TSEC_BOOTKEYVER    0x1040
-#define TSEC_STATUS        0x1044
+#define TSEC_MAILBOX0    0x1040
+#define TSEC_MAILBOX1        0x1044
 #define TSEC_ITFEN         0x1048
 #define  TSEC_ITFEN_CTXEN         BIT(0)
 #define  TSEC_ITFEN_MTHDEN        BIT(1)

@@ -563,7 +563,7 @@ static int _dump_emmc_part(emmc_tool_gui_t *gui, char *sd_path, int active_part,
 				}
 				else
 				{
-					s_printf(gui->txt_buf, "#FF0000 Fehler beim erstellen der partial.idx Datei!#\n");
+					s_printf(gui->txt_buf, "\n#FF0000 Fehler beim erstellen der partial.idx Datei!#\n");
 					lv_label_ins_text(gui->label_log, LV_LABEL_POS_LAST, gui->txt_buf);
 					manual_system_maintenance(true);
 
@@ -574,7 +574,7 @@ static int _dump_emmc_part(emmc_tool_gui_t *gui, char *sd_path, int active_part,
 				if (currPartIdx >= maxSplitParts)
 				{
 					create_mbox_text(
-						"#96FF00 Voruebergehende Sicherung in Arbeit!#\n\n"
+						"#96FF00 Teil-Sicherung in Arbeit!#\n\n"
 						"#96FF00 1.# Druecke OK um SD-Karte auszuwerfen.\n"
 						"#96FF00 2.# SD-Karte entfernen und Dateien in freien Speicher verschieben.\n"
 						"#FFDD00 partial.idx Datei NICHT verschieben!#\n"
@@ -999,7 +999,7 @@ static int _restore_emmc_part(emmc_tool_gui_t *gui, char *sd_path, int active_pa
 
 			if ((u32)((u64)totalCheckFileSize >> (u64)9) > totalSectors)
 			{
-				s_printf(gui->txt_buf, "#FF8000 Groesse der Teil-Dateien auf SD-Karte ist#\n#FF8000 groesser als die gewaehlte vom eMMC!#\n#FFDD00 Abbruch...#");
+				s_printf(gui->txt_buf, "\n#FF8000 Groesse der Teil-Dateien auf SD-Karte ist#\n#FF8000 groesser als die gewaehlte vom eMMC!#\n#FFDD00 Abbruch...#");
 				lv_label_ins_text(gui->label_log, LV_LABEL_POS_LAST, gui->txt_buf);
 				manual_system_maintenance(true);
 
@@ -1009,7 +1009,7 @@ static int _restore_emmc_part(emmc_tool_gui_t *gui, char *sd_path, int active_pa
 			{
 				if (!gui->raw_emummc)
 				{
-					s_printf(gui->txt_buf, "#FFDD00 Fehler (%d) Datei nicht gefunden#\n#FFDD00 %s.#\n\n", res, outFilename);
+					s_printf(gui->txt_buf, "\n#FFDD00 Fehler (%d) Datei nicht gefunden#\n#FFDD00 %s.#\n\n", res, outFilename);
 					lv_label_ins_text(gui->label_log, LV_LABEL_POS_LAST, gui->txt_buf);
 					manual_system_maintenance(true);
 
@@ -1027,7 +1027,7 @@ static int _restore_emmc_part(emmc_tool_gui_t *gui, char *sd_path, int active_pa
 				// Restore folder is empty.
 				if (!numSplitParts)
 				{
-					s_printf(gui->txt_buf, "#FFDD00 Der Restore Ordner ist leer.#\n\n");
+					s_printf(gui->txt_buf, "\n#FFDD00 Der Restore Ordner ist leer.#\n\n");
 					lv_label_ins_text(gui->label_log, LV_LABEL_POS_LAST, gui->txt_buf);
 					manual_system_maintenance(true);
 
@@ -1040,7 +1040,7 @@ static int _restore_emmc_part(emmc_tool_gui_t *gui, char *sd_path, int active_pa
 
 				if (check_4MB_aligned && (((u64)fno.fsize) % SZ_4M))
 				{
-					s_printf(gui->txt_buf, "#FFDD00 Die Teil-Datei muss ein#\n#FFDD00 vielfaches von 4 MB sein.#\n#FFDD00 Abbruch...#");
+					s_printf(gui->txt_buf, "\n#FFDD00 Die Teil-Datei muss ein#\n#FFDD00 vielfaches von 4 MB sein.#\n#FFDD00 Abbruch...#");
 					lv_label_ins_text(gui->label_log, LV_LABEL_POS_LAST, gui->txt_buf);
 					manual_system_maintenance(true);
 
@@ -1068,7 +1068,7 @@ static int _restore_emmc_part(emmc_tool_gui_t *gui, char *sd_path, int active_pa
 			if (!(btn_wait() & BTN_POWER))
 			{
 				lv_obj_del(warn_mbox_bg);
-				s_printf(gui->txt_buf, "#FF0000 Groesse der Teil-Dateien auf SD-Karte ist#\n#FF0000 groesser als die gewaehlte vom eMMC!#\n");
+				s_printf(gui->txt_buf, "\n#FF0000 Groesse der Teil-Dateien auf SD-Karte ist#\n#FF0000 groesser als die gewaehlte vom eMMC!#\n");
 				lv_label_ins_text(gui->label_log, LV_LABEL_POS_LAST, gui->txt_buf);
 				manual_system_maintenance(true);
 
@@ -1123,7 +1123,7 @@ multipart_not_allowed:
 	{
 		if (((u32)((u64)f_size(&fp) >> (u64)9)) > totalSectors)
 		{
-			s_printf(gui->txt_buf, "#FF8000 Groesse des Backups auf SD-Karte, ist#\n#FF8000 groesser als die gewaehlte vom eMMC!#\n#FFDD00 Abbruch...#");
+			s_printf(gui->txt_buf, "\n#FF8000 Groesse des Backups auf SD-Karte, ist#\n#FF8000 groesser als die gewaehlte vom eMMC!#\n#FFDD00 Abbruch...#");
 			lv_label_ins_text(gui->label_log, LV_LABEL_POS_LAST, gui->txt_buf);
 			manual_system_maintenance(true);
 
