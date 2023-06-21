@@ -2691,7 +2691,7 @@ lv_res_t create_window_partition_manager(lv_obj_t *btn)
 	btn1 = lv_btn_create(h1, NULL);
 	label_btn = lv_label_create(btn1, NULL);
 	lv_btn_set_fit(btn1, true, true);
-	lv_label_set_static_text(label_btn, SYMBOL_SD"  Naechster Schritt");
+	lv_label_set_static_text(label_btn, SYMBOL_SD"  Weiter");
 	lv_obj_align(btn1, h1, LV_ALIGN_IN_TOP_RIGHT, 0, LV_DPI * 5);
 	lv_btn_set_action(btn1, LV_BTN_ACTION_CLICK, _create_mbox_partitioning_next);
 
