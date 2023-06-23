@@ -1702,7 +1702,7 @@ static lv_res_t _create_mbox_partitioning_next(lv_obj_t *btn)
 	if (part_info.backup_possible)
 	{
 		strcat(txt_buf, "#C7EA46 Deine Daten werden gesichert und wiederhergestellt!#\n"
-			"#FFDD00 Any other partition will be wiped!#");
+			"#FFDD00 JEDE andere Partition wird geloescht!#");
 	}
 	else
 	{
@@ -1809,7 +1809,7 @@ static lv_res_t _action_slider_emu(lv_obj_t *slider)
 			if (slide_val != 10)
 				s_printf(lbl_text, "#FF3C28 %d GB#", size >> 10);
 			else
-				s_printf(lbl_text, "#FF3C28 %d KOMPLETT#", size >> 10);
+				s_printf(lbl_text, "#FF3C28 %d GB#", size >> 10);
 		}
 		else
 			s_printf(lbl_text, "#FFDD00 2x##FF3C28 %d#", size >> 11);

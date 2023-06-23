@@ -366,7 +366,7 @@ static lv_res_t _save_nyx_options_action(lv_obj_t *btn)
 	nyx_changes_made = false;
 
 	if (res)
-		lv_mbox_set_text(mbox, "#FF8000 Nyx Konfiguration#\n\n#96FF00 Die Konfiguration wurde erfolgreich#\n#96FF00auf SD-Karte gespeichert!#");
+		lv_mbox_set_text(mbox, "#FF8000 Nyx Konfiguration#\n\n#96FF00 Die Konfiguration wurde erfolgreich#\n#96FF00 auf SD-Karte gespeichert!#");
 	else
 		lv_mbox_set_text(mbox, "#FF8000 Nyx Konfiguration#\n\n#FFDD00 Speichern der Konfiguration#\n#FFDD00 auf SD-Karte fehlgeschlagen!#");
 	lv_mbox_add_btns(mbox, mbox_btn_map, NULL);
