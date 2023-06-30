@@ -108,6 +108,9 @@ all: $(TARGET).bin $(LDRDIR)
 	@if [ ${BIN_SIZE} -gt 140288 ]; then echo "\e[1;33mUncompr size exceeds limit!\e[0m"; fi
 	@echo -n "Payload size: "
 	$(eval BIN_SIZE = $(shell wc -c < $(OUTPUTDIR)/$(TARGET).bin))
+	cp -r $(OUTPUTDIR)/$(TARGET).bin $(OUTPUTDIR)/update.bin
+	cp -r $(OUTPUTDIR)/$(TARGET).bin $(OUTPUTDIR)/reboot_payload.bin
+	cp -r $(OUTPUTDIR)/$(TARGET).bin $(OUTPUTDIR)/payload.bin
 	@echo $(BIN_SIZE)" Bytes"
 	@echo "Payload Max:  126296 Bytes"
 	@if [ ${BIN_SIZE} -gt 126296 ]; then echo "\e[1;33mPayload size exceeds limit!\e[0m"; fi
