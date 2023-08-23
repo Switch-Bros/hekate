@@ -1432,8 +1432,10 @@ void restore_emmc_selected(emmcPartType_t restoreType, emmc_tool_gui_t *gui)
 
 	int i = 0;
 	char sdPath[OUT_FILENAME_SZ];
-
-	emmcsn_path_impl(sdPath, "/restore", "", &emmc_storage);
+	if (!gui->raw_emummc)
+		emmcsn_path_impl(sdPath, "/restore", "", &emmc_storage);
+	else
+		emmcsn_path_impl(sdPath, "/restore/emummc", "", &emmc_storage);
 	gui->base_path = (char *)malloc(strlen(sdPath) + 1);
 	strcpy(gui->base_path, sdPath);
 
@@ -1465,7 +1467,10 @@ void restore_emmc_selected(emmcPartType_t restoreType, emmc_tool_gui_t *gui)
 
 			emmc_set_partition(i + 1);
 
-			emmcsn_path_impl(sdPath, "/restore", bootPart.name, &emmc_storage);
+			if (!gui->raw_emummc)
+				emmcsn_path_impl(sdPath, "/restore", bootPart.name, &emmc_storage);
+			else
+				emmcsn_path_impl(sdPath, "/restore/emummc", bootPart.name, &emmc_storage);
 			res = _restore_emmc_part(gui, sdPath, i, &emmc_storage, &bootPart, false);
 
 			if (!res)
@@ -1531,7 +1536,10 @@ void restore_emmc_selected(emmcPartType_t restoreType, emmc_tool_gui_t *gui)
 			manual_system_maintenance(true);
 			i++;
 
-			emmcsn_path_impl(sdPath, "/restore", rawPart.name, &emmc_storage);
+			if (!gui->raw_emummc)
+				emmcsn_path_impl(sdPath, "/restore", rawPart.name, &emmc_storage);
+			else
+				emmcsn_path_impl(sdPath, "/restore/emummc", rawPart.name, &emmc_storage);
 			res = _restore_emmc_part(gui, sdPath, 2, &emmc_storage, &rawPart, true);
 
 			if (!res)

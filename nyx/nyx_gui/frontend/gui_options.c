@@ -26,10 +26,10 @@
 
 #define CLOCK_MIN_YEAR 2023
 #define CLOCK_MAX_YEAR (CLOCK_MIN_YEAR + 10)
+#define CLOCK_YEARLIST "2023\n2024\n2025\n2026\n2027\n2028\n2029\n2030\n2031\n2032\n2033"
 
 extern hekate_config h_cfg;
 extern nyx_config n_cfg;
-extern u8 *cal0_buf;
 
 static lv_obj_t *autoboot_btn;
 static bool autoboot_first_time = true;
@@ -619,7 +619,8 @@ static lv_res_t _create_window_nyx_colors(lv_obj_t *btn)
 	lv_label_set_long_mode(lbl_test, LV_LABEL_LONG_BREAK);
 	lv_label_set_static_text(lbl_test,
         "Lorem ipsum blablabla... geh mal weg mit dem Scheiss Lorem Ipsum undeutsch Kram. \n"
-		"ABC de scheiss Katzenviehch lief den Schnee und so lang bis so Knuschperhaeusle... \n"
+		"ABC de scheiss Katzenviehch lief den Schnee und so lang bis so Knuschperhaeusle, \n"
+		"mit Kinderfressender Haexle drin, Gell!\n"
 		"Texttest wurde praesentiert von:     SwitchBros. - Best Community EVER!!! ");
 	lv_obj_set_width(lbl_test, lv_obj_get_width(h2) - LV_DPI * 6 / 10);
 	lv_obj_align(lbl_test, lbl_sample, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 5);
@@ -763,18 +764,7 @@ static lv_res_t _create_mbox_clock_edit(lv_obj_t *btn)
 
 	// Create year roller.
 	lv_obj_t *roller_year = lv_roller_create(h1, NULL);
-	lv_roller_set_options(roller_year,
-		"2022\n"
-		"2023\n"
-		"2024\n"
-		"2025\n"
-		"2026\n"
-		"2027\n"
-		"2028\n"
-		"2029\n"
-		"2030\n"
-		"2031\n"
-		"2032");
+	lv_roller_set_options(roller_year, CLOCK_YEARLIST);
 	lv_roller_set_selected(roller_year, time.year, false);
 	lv_roller_set_visible_row_count(roller_year, 3);
 	clock_ctxt.year = roller_year;
@@ -862,7 +852,7 @@ static lv_res_t _joycon_info_dump_action(lv_obj_t * btn)
 
 	if (nx_hoag)
 	{
-		error = dump_cal0();
+		error = hos_dump_cal0();
 		if (!error)
 			goto save_data;
 	}
@@ -1043,7 +1033,7 @@ disabled:;
 		{
 			s_printf(txt_buf,
 				"Dumpen auf SD-Karte abgeschlossen!\n"
-				"Gespeichert in: #C7EA46 switchroot/lite_gamepad.cal#\n\n");
+				"Gespeichert in: #C7EA46 switchroot/switch.cal#\n\n");
 			strcat(txt_buf, "#C7EA46 Erfolg!#\n#C7EA46 Lite Gamepad Daten gefunden!#");
 		}
 	}
@@ -1429,7 +1419,7 @@ void create_tab_options(lv_theme_t *th, lv_obj_t *parent)
 
 	// Create Auto NoGC button.
 	lv_obj_t *btn2 = lv_btn_create(sw_h2, NULL);
-	nyx_create_onoff_button(th, sw_h2, btn2, SYMBOL_SHRK" Auto NoGC", auto_nogc_toggle, true);
+	nyx_create_onoff_button(th, sw_h2, btn2, SYMBOL_CHIP" Auto NoGC", auto_nogc_toggle, true);
 	lv_obj_align(btn2, line_sep, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 10);
 
 	label_txt2 = lv_label_create(sw_h2, NULL);
