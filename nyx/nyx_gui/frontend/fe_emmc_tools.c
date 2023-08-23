@@ -778,6 +778,7 @@ void dump_emmc_selected(emmcPartType_t dumpType, emmc_tool_gui_t *gui)
 	char sdPath[OUT_FILENAME_SZ];
 	// Create Restore folders, if they do not exist.
 	emmcsn_path_impl(sdPath, "/restore", "", &emmc_storage);
+	emmcsn_path_impl(sdPath, "/restore/emummc", "", &emmc_storage);
 	emmcsn_path_impl(sdPath, "/restore/partitions", "", &emmc_storage);
 
 	// Set folder to backup/{emmc_sn}.
