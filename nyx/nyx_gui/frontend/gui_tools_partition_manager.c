@@ -828,7 +828,7 @@ static lv_res_t _action_check_flash_linux(lv_obj_t *btn)
 	lv_mbox_set_recolor_text(mbox, true);
 	lv_obj_set_width(mbox, LV_HOR_RES / 9 * 6);
 
-	lv_mbox_set_text(mbox, "#FF8000 Linux Flasher#");
+	lv_mbox_set_text(mbox, "#FF8000 Linux Flashen#");
 
 	lv_obj_t *lbl_status = lv_label_create(mbox, NULL);
 	lv_label_set_recolor(lbl_status, true);
@@ -915,7 +915,7 @@ static lv_res_t _action_check_flash_linux(lv_obj_t *btn)
 	s_printf(txt_buf,
 		"#C7EA46 Status:# Installationsdaten und Partition gefunden.\n"
 		"#00DDFF Offset:# %08x, #00DDFF Groesse:# %X, #00DDFF Image-Groesse:# %d MiB\n"
-		"\nDo you want to continue?", l4t_flash_ctxt.offset_sct, size_sct, l4t_flash_ctxt.image_size_sct >> 11);
+		"\nMoechtest du fortfahren?", l4t_flash_ctxt.offset_sct, size_sct, l4t_flash_ctxt.image_size_sct >> 11);
 	lv_label_set_text(lbl_status, txt_buf);
 	free(txt_buf);
 	lv_mbox_add_btns(mbox, mbox_btn_map2, _action_flash_linux_data);
@@ -989,7 +989,7 @@ static lv_res_t _action_flash_android_data(lv_obj_t * btns, const char * txt)
 	lv_mbox_set_recolor_text(mbox, true);
 	lv_obj_set_width(mbox, LV_HOR_RES / 9 * 6);
 
-	lv_mbox_set_text(mbox, "#FF8000 Android Flasher#");
+	lv_mbox_set_text(mbox, "#FF8000 Android Flashen#");
 
 	lv_obj_t *lbl_status = lv_label_create(mbox, NULL);
 	lv_label_set_recolor(lbl_status, true);
