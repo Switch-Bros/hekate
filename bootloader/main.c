@@ -847,7 +847,7 @@ static void _auto_launch()
 				// Override autoboot.
 				if (b_cfg.boot_cfg & BOOT_CFG_AUTOBOOT_EN)
 				{
-					h_cfg.autoboot = b_cfg.autoboot;
+					h_cfg.autoboot      = b_cfg.autoboot;
 					h_cfg.autoboot_list = b_cfg.autoboot_list;
 				}
 
