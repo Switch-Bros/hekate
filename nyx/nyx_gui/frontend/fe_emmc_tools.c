@@ -408,13 +408,13 @@ static int _dump_emmc_part(emmc_tool_gui_t *gui, char *sd_path, int active_part,
 	{
 		isSmallSdCard = true;
 
-		s_printf(gui->txt_buf, "\n#FFBA00 Freier Speicher ist kleiner als die zu sichernden Daten.#\n");
+		s_printf(gui->txt_buf, "\n#FFBA00 Freier Speicher ist kleiner als#\n#FFBA00 die zu sichernden Daten.#\n");
 		lv_label_ins_text(gui->label_log, LV_LABEL_POS_LAST, gui->txt_buf);
 		manual_system_maintenance(true);
 
 		if (!maxSplitParts)
 		{
-			s_printf(gui->txt_buf, "#FFDD00 Nicht genuegend freier Speicher fuer voruebergehendes Backup!#\n");
+			s_printf(gui->txt_buf, "\n#FFDD00 Nicht genuegend freier Speicher fuer voruebergehendes Backup!#\n");
 			lv_label_ins_text(gui->label_log, LV_LABEL_POS_LAST, gui->txt_buf);
 			manual_system_maintenance(true);
 
@@ -424,7 +424,7 @@ static int _dump_emmc_part(emmc_tool_gui_t *gui, char *sd_path, int active_part,
 	// Check if we are continuing a previous raw eMMC or USER partition backup in progress.
 	if (f_open(&partialIdxFp, partialIdxFilename, FA_READ) == FR_OK && totalSectors > (FAT32_FILESIZE_LIMIT / EMMC_BLOCKSIZE))
 	{
-		s_printf(gui->txt_buf, "\n#AEFD14 Voruebergehendes Backup in Arbeit. Fortsetzen...#\n");
+		s_printf(gui->txt_buf, "\n#AEFD14 Voruebergehendes Backup in Arbeit.#\n#AEFD14 Fortsetzen...#\n");
 		lv_label_ins_text(gui->label_log, LV_LABEL_POS_LAST, gui->txt_buf);
 		manual_system_maintenance(true);
 
@@ -472,7 +472,7 @@ static int _dump_emmc_part(emmc_tool_gui_t *gui, char *sd_path, int active_part,
 		f_close(&fp);
 
 		lv_obj_t *warn_mbox_bg = create_mbox_text(
-			"#FFDD00 Eine vorhandenes Backup wurde entdeckt!#\n\n"
+			"#FFDD00 Ein vorhandenes Backup wurde entdeckt!#\n\n"
 			"Druecke #FF8000 POWER# um fortzufahren.\nDruecke #FF8000 VOL# um abzubrechen.", false);
 		manual_system_maintenance(true);
 
