@@ -1362,7 +1362,7 @@ static lv_res_t _create_window_dump_pk12_tool(lv_obj_t *btn)
 	manual_system_maintenance(true);
 
 	// Dump INI1.
-	u32 ini1_off = pkg2_hdr->sec_size[PKG2_SEC_KERNEL];
+	u32 ini1_off  = pkg2_hdr->sec_size[PKG2_SEC_KERNEL];
 	u32 ini1_size = pkg2_hdr->sec_size[PKG2_SEC_INI1];
 	if (!ini1_size)
 	{
