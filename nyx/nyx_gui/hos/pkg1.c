@@ -1,8 +1,6 @@
 /*
  * Copyright (c) 2018 naehrwert
- * Copyright (c) 2018 st4rk
- * Copyright (c) 2018-2023 CTCaer
- * Copyright (c) 2018 balika011
+ * Copyright (c) 2022-2023 CTCaer
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms and conditions of the GNU General Public License,
@@ -17,135 +15,65 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <string.h>
+#ifndef _PKG1_H_
+#define _PKG1_H_
 
 #include <bdk.h>
 
-#include "hos.h"
-#include "pkg1.h"
-#include "../config.h"
+#define PKG1_MAGIC 0x31314B50
 
-extern hekate_config h_cfg;
+#define PK11_SECTION_WB 0
+#define PK11_SECTION_LD 1
+#define PK11_SECTION_SM 2
 
-/*
- * package1.1 header: <wb, ldr, sm>
- * package1.1 layout:
- * 1.0:  {sm, ldr, wb} { 2, 1, 0 }
- * 2.0+: {wb, ldr, sm} { 0, 1, 2 }
- * 4.0+: {ldr, sm, wb} { 1, 2, 0 }
- */
-
-static const u8 sec_map_100[3] = { PK11_SECTION_SM, PK11_SECTION_LD, PK11_SECTION_WB };
-static const u8 sec_map_2xx[3] = { PK11_SECTION_WB, PK11_SECTION_LD, PK11_SECTION_SM };
-static const u8 sec_map_4xx[3] = { PK11_SECTION_LD, PK11_SECTION_SM, PK11_SECTION_WB };
-
-	// ID (Timestamp),  KB, TSEC,   PK11,   SECMON,     Warmboot.
-static const pkg1_id_t _pkg1_ids[] = {
-	{ "20161121183008",  0, 0x1900, 0x3FE0, 0x40014020, 0x8000D000 }, //  1.0.0.
-	{ "20170210155124",  0, 0x1900, 0x3FE0, 0x4002D000, 0x8000D000 }, //  2.0.0 - 2.3.0.
-	{ "20170519101410",  1, 0x1A00, 0x3FE0, 0x4002D000, 0x8000D000 }, //  3.0.0.
-	{ "20170710161758",  2, 0x1A00, 0x3FE0, 0x4002D000, 0x8000D000 }, //  3.0.1 - 3.0.2.
-	{ "20170921172629",  3, 0x1800, 0x3FE0, 0x4002B000, 0x4003B000 }, //  4.0.0 - 4.1.0.
-	{ "20180220163747",  4, 0x1900, 0x3FE0, 0x4002B000, 0x4003B000 }, //  5.0.0 - 5.1.0.
-	{ "20180802162753",  5, 0x1900, 0x3FE0, 0x4002B000, 0x4003D800 }, //  6.0.0 - 6.1.0.
-	{ "20181107105733",  6, 0x0E00, 0x6FE0, 0x4002B000, 0x4003D800 }, //  6.2.0.
-	{ "20181218175730",  7, 0x0F00, 0x6FE0, 0x40030000, 0x4003E000 }, //  7.0.0.
-	{ "20190208150037",  7, 0x0F00, 0x6FE0, 0x40030000, 0x4003E000 }, //  7.0.1.
-	{ "20190314172056",  7, 0x0E00, 0x6FE0, 0x40030000, 0x4003E000 }, //  8.0.0 - 8.0.1.
-	{ "20190531152432",  8, 0x0E00, 0x6FE0, 0x40030000, 0x4003E000 }, //  8.1.0 - 8.1.1.
-	{ "20190809135709",  9, 0x0E00, 0x6FE0, 0x40030000, 0x4003E000 }, //  9.0.0 - 9.0.1.
-	{ "20191021113848", 10, 0x0E00, 0x6FE0, 0x40030000, 0x4003E000 }, //  9.1.0 - 9.2.0.
-	{ "20200303104606", 10, 0x0E00, 0x6FE0, 0x40030000, 0x4003E000 }, // 10.0.0 - 10.2.0.
-	{ "20201030110855", 10, 0x0E00, 0x6FE0, 0x40030000, 0x4003E000 }, // 11.0.0 - 11.0.1.
-	{ "20210129111626", 10, 0x0E00, 0x6FE0, 0x40030000, 0x4003E000 }, // 12.0.0 - 12.0.1.
-	{ "20210422145837", 10, 0x0E00, 0x6FE0, 0x40030000, 0x4003E000 }, // 12.0.2 - 12.0.3.
-	{ "20210607122020", 11, 0x0E00, 0x6FE0, 0x40030000, 0x4003E000 }, // 12.1.0.
-	{ "20210805123730", 12, 0x0E00, 0x6FE0, 0x40030000, 0x4003E000 }, // 13.0.0 - 13.2.0
-	{ "20220105094454", 12, 0x0E00, 0x6FE0, 0x40030000, 0x4003E000 }, // 13.2.1.
-	{ "20220209100018", 13, 0x0E00, 0x6FE0, 0x40030000, 0x4003E000 }, // 14.0.0 - 14.1.2.
-	{ "20220801142548", 14, 0x0E00, 0x6FE0, 0x40030000, 0x4003E000 }, // 15.0.0 - 15.0.1.
-	{ "20230111100014", 15, 0x0E00, 0x6FE0, 0x40030000, 0x4003E000 }, // 16.0.0+
-};
-
-const pkg1_id_t *pkg1_identify(u8 *pkg1, char *build_date)
+typedef struct _bl_hdr_t210b01_t
 {
-	if (build_date)
-	{
-		memcpy(build_date, (char *)(pkg1 + 0x10), 14);
-		build_date[14] = 0;
-	}
+/* 0x000 */	u8  aes_mac[0x10];
+/* 0x010 */	u8  rsa_sig[0x100];
+/* 0x110 */	u8  salt[0x20];
+/* 0x130 */	u8  sha256[0x20];
+/* 0x150 */	u32 version;
+/* 0x154 */	u32 size;
+/* 0x158 */	u32 load_addr;
+/* 0x15C */	u32 entrypoint;
+/* 0x160 */	u8  rsvd[0x10];
+} bl_hdr_t210b01_t;
 
-	for (u32 i = 0; i < ARRAY_SIZE(_pkg1_ids); i++)
-		if (!memcmp(pkg1 + 0x10, _pkg1_ids[i].id, 8))
-			return &_pkg1_ids[i];
-	return NULL;
-}
-
-int pkg1_decrypt(const pkg1_id_t *id, u8 *pkg1)
+typedef struct _pk1_hdr_t
 {
-	pk11_hdr_t *hdr;
+/* 0x00 */	u32 si_sha256; // Secure Init.
+/* 0x04 */	u32 sm_sha256; // Secure Monitor.
+/* 0x08 */	u32 sl_sha256; // Secure Loader.
+/* 0x0C */	u32 unk;       // what's this? It's not warmboot.
+/* 0x10 */	char timestamp[14];
+/* 0x1E */	u8 keygen;
+/* 0x1F */	u8 version;
+} pk1_hdr_t;
 
-	// Decrypt package1.
-	if (!h_cfg.t210b01)
-	{
-		u8 *pkg11 = pkg1 + id->pkg11_off;
-		u32 pkg11_size = *(u32 *)pkg11;
-		hdr = (pk11_hdr_t *)(pkg11 + 0x20);
-		se_aes_crypt_ctr(11, hdr, pkg11_size, hdr, pkg11_size, pkg11 + 0x10);
-	}
-	else
-	{
-		bl_hdr_t210b01_t *oem_hdr = (bl_hdr_t210b01_t *)pkg1;
-		pkg1 += sizeof(bl_hdr_t210b01_t);
-		hdr = (pk11_hdr_t *)(pkg1 + id->pkg11_off + 0x20);
-
-		// Use BEK for T210B01.
-		// Additionally, skip 0x20 bytes from decryption to maintain the header.
-		se_aes_iv_clear(13);
-		se_aes_crypt_cbc(13, DECRYPT, pkg1 + 0x20, oem_hdr->size - 0x20, pkg1 + 0x20, oem_hdr->size - 0x20);
-	}
-
-	// Return if header is valid.
-	return (hdr->magic == PKG1_MAGIC);
-}
-
-const u8 *pkg1_unpack(void *wm_dst, void *sm_dst, void *ldr_dst, const pkg1_id_t *id, u8 *pkg1)
+typedef struct _pkg1_id_t
 {
-	const u8 *sec_map;
-	const pk11_hdr_t *hdr = (pk11_hdr_t *)(pkg1 + id->pkg11_off + 0x20);
+	const char *id;
+	u32 kb;
+	u32 tsec_off;
+	u32 pkg11_off;
+	u32 secmon_base;
+	u32 warmboot_base;
+} pkg1_id_t;
 
-	u32 sec_size[3] = { hdr->wb_size, hdr->ldr_size, hdr->sm_size };
+typedef struct _pk11_hdr_t
+{
+	u32 magic;
+	u32 wb_size;
+	u32 wb_off;
+	u32 pad;
+	u32 ldr_size;
+	u32 ldr_off;
+	u32 sm_size;
+	u32 sm_off;
+} pk11_hdr_t;
 
-	// Get correct header mapping.
-	if (id->kb == KB_FIRMWARE_VERSION_100 && !strcmp(id->id, "20161121183008"))
-		sec_map = sec_map_100;
-	else if (id->kb >= KB_FIRMWARE_VERSION_100 && id->kb <= KB_FIRMWARE_VERSION_301)
-		sec_map = sec_map_2xx;
-	else
-		sec_map = sec_map_4xx;
+const pkg1_id_t *pkg1_identify(u8 *pkg1, char *build_date);
+int pkg1_decrypt(const pkg1_id_t *id, u8 *pkg1);
+const u8 *pkg1_unpack(void *wm_dst, void *sm_dst, void *ldr_dst, const pkg1_id_t *id, u8 *pkg1);
 
-	// Copy secmon, warmboot and nx bootloader payloads.
-	u8 *pdata = (u8 *)hdr + sizeof(pk11_hdr_t);
-	for (u32 i = 0; i < 3; i++)
-	{
-		u32 ssize = sec_size[sec_map[i]];
-		switch (sec_map[i])
-		{
-		case PK11_SECTION_WB:
-			if (wm_dst)
-				memcpy(wm_dst,  pdata, ssize);
-			break;
-		case PK11_SECTION_LD:
-			if (ldr_dst)
-				memcpy(ldr_dst, pdata, ssize);
-			break;
-		case PK11_SECTION_SM:
-			if (sm_dst)
-				memcpy(sm_dst,  pdata, ssize);
-			break;
-		}
-		pdata += ssize;
-	}
-
-	return sec_map;
-}
+#endif
