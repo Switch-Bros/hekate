@@ -163,7 +163,7 @@ void config_exosphere(launch_ctxt_t *ctxt, u32 warmboot_base)
 		exo_fw_no = ctxt->pkg1_id->fuses - 1;                    // 3.0.1 - 7.0.1, 8.0.x.
 
 	// Set 12.1.0 specific revision.
-	if (ctxt->pkg1_id->kb == KB_FIRMWARE_VERSION_1210)
+	if (ctxt->pkg1_id->kb == HOS_KB_VERSION_1210)
 		ctxt->exo_ctx.hos_revision = 1;
 
 	// Handle 15.0.0+.
@@ -171,10 +171,10 @@ void config_exosphere(launch_ctxt_t *ctxt, u32 warmboot_base)
 		exo_fw_no++;
 
 	// Handle versions that change API and do not burn new fuse.
-	if (!memcmp(ctxt->pkg1_id->id, "20190314172056", 8) || //  8.0.x, same fuses with  7.0.1.
-		!memcmp(ctxt->pkg1_id->id, "20210129111626", 8) || // 12.0.0, same fuses with 11.0.0.
-		!memcmp(ctxt->pkg1_id->id, "20210805123730", 8) || // 13.0.0, same fuses with 12.1.0.
-		!memcmp(ctxt->pkg1_id->id, "20220209100018", 8)    // 14.0.0, same fuses with 13.2.1.
+	if (!memcmp(ctxt->pkg1_id->id, "20190314", 8) || //  8.0.x, same fuses with  7.0.1.
+		!memcmp(ctxt->pkg1_id->id, "20210129", 8) || // 12.0.0, same fuses with 11.0.0.
+		!memcmp(ctxt->pkg1_id->id, "20210805", 8) || // 13.0.0, same fuses with 12.1.0.
+		!memcmp(ctxt->pkg1_id->id, "20220209", 8)    // 14.0.0, same fuses with 13.2.1.
 	   )
 		exo_fw_no++;
 
@@ -203,7 +203,7 @@ void config_exosphere(launch_ctxt_t *ctxt, u32 warmboot_base)
 	case 12:
 		exo_fw_no = EXO_FW_VER(9, 1);
 		break;
-	case 13 ... 19: //!TODO: Update on API changes. 19: 16.0.0.
+	case 13 ... 20: //!TODO: Update on API changes. 20: 17.0.0.
 		exo_fw_no = EXO_FW_VER(exo_fw_no - 3, ctxt->exo_ctx.hos_revision);
 		break;
 	}
@@ -405,13 +405,13 @@ void secmon_exo_check_panic()
 	gfx_clear_grey(0x1B);
 	gfx_con_setpos(0, 0);
 
-	WPRINTF("Fataler Fehler beim ausfuehren von atmosphere.\n\n");
-	WPRINTFARGS("TitleID:   %08X%08X", (u32)((u64)rpt->title_id >> 32), (u32)rpt->title_id);
-	WPRINTFARGS("Fehler:    %s (0x%x)\n", get_error_desc(rpt->error_desc), rpt->error_desc);
+	WPRINTF("Panic occurred while running Atmosphere.\n\n");
+	WPRINTFARGS("Title ID: %08X%08X", (u32)((u64)rpt->title_id >> 32), (u32)rpt->title_id);
+	WPRINTFARGS("Error:    %s (0x%x)\n", get_error_desc(rpt->error_desc), rpt->error_desc);
 
 	// Check if mixed atmosphere sysmodules.
 	if ((u32)rpt->title_id == HOS_PID_BOOT2)
-		WPRINTF("Atmosphere Dateien stimmen nicht ueberein?\n");
+		WPRINTF("Mismatched Atmosphere files?\n");
 
 	// Save context to the SD card.
 	char filepath[0x40];
@@ -424,14 +424,14 @@ void secmon_exo_check_panic()
 	if (!sd_save_to_file((void *)rpt, sizeof(atm_fatal_error_ctx), filepath))
 	{
 		gfx_con.fntsz = 8;
-		WPRINTFARGS("Report gespeichert nach %s\n", filepath);
+		WPRINTFARGS("Report saved to %s\n", filepath);
 		gfx_con.fntsz = 16;
 	}
 
 	// Change magic to invalid, to prevent double-display of error/bootlooping.
 	rpt->magic = 0;
 
-	gfx_printf("\n\nDruecke POWER um fortzufahren.\n");
+	gfx_printf("\n\nPress POWER to continue.\n");
 
 	display_backlight_brightness(100, 1000);
 	msleep(1000);
