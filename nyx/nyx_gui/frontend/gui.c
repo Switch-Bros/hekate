@@ -833,7 +833,7 @@ static void _nyx_sd_card_issues(void *param)
 	lv_mbox_set_text(mbox,
 		"#FF8000 Ueberpruefe SD-Karte#\n\n"
 		"#FFDD00 Die SD-Karte wird im 1-Bit-Modus initialisiert!#\n"
-		"#FFDD00 Kann sein das sich der Konnektor geloest hat oder gebrochen ist.!#\n\n"
+		"#FFDD00 Vielleicht Konnektor geloest oder gebrochen.!#\n\n"
 		"Schau mal in\n#C7EA46 Konsoleninfo# -> #C7EA46 SD-Karte#");
 
 	lv_mbox_add_btns(mbox, mbox_btn_map, mbox_action);

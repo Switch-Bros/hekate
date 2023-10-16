@@ -52,6 +52,7 @@ enum {
 #define HOS_PKG11_MAGIC  0x31314B50
 #define HOS_EKS_MAGIC    0x31534B45 // EKS1.
 #define HOS_EKS_TSEC_VER (HOS_KB_VERSION_700 + HOS_TSEC_VERSION)
+
 // Use official Mariko secmon when in stock. Needs access to TZRAM.
 //#define HOS_MARIKO_STOCK_SECMON
 

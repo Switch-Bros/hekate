@@ -1478,7 +1478,7 @@ static void _create_tab_tools_emmc_pkg12(lv_theme_t *th, lv_obj_t *parent)
 	lv_obj_t *label_txt2 = lv_label_create(h1, NULL);
 	lv_label_set_recolor(label_txt2, true);
 	lv_label_set_static_text(label_txt2,
-		"Erstellt ein Backup der eMMC-Partitionen einzeln oder als\n"
+		"Erstellt Backup der eMMC-Partitionen einzeln oder als\n"
 		"ganzes RAW Image auf der SD-Karte.\n"
 		"#C7EA46 Unterstuetzt SD-Karten mit# #FF8000 4GB# #C7EA46 und mehr. #"
 		"#FF8000 FAT32# #C7EA46 und ##FF8000 exFAT##C7EA46 .#");
@@ -1495,7 +1495,7 @@ static void _create_tab_tools_emmc_pkg12(lv_theme_t *th, lv_obj_t *parent)
 	label_txt2 = lv_label_create(h1, NULL);
 	lv_label_set_recolor(label_txt2, true);
 	lv_label_set_static_text(label_txt2,
-		"Stellt die eMMC/emuMMC Partitionen einzeln oder als\n"
+		"Stellt eMMC/emuMMC Partitionen einzeln oder als\n"
 		"ganzes von der SD-Karte wieder her.\n"
 		"#C7EA46 Unterstuetzt SD-Karten mit# #FF8000 4GB# #C7EA46 und mehr. #"
 		"#FF8000 FAT32# #C7EA46 und ##FF8000 exFAT##C7EA46 .#");
@@ -1696,8 +1696,8 @@ static void _create_tab_tools_arc_autorcm(lv_theme_t *th, lv_obj_t *parent)
 	label_txt2 = lv_label_create(h2, NULL);
 	lv_label_set_recolor(label_txt2, true);
 	lv_label_set_static_text(label_txt2,
-		"Erlaubt dir das dumpen und entschluesseln von pkg1 und pkg2\n"
-		"und darueberhinaus das splitten in individuelle Teile.\nDumpt auch kip1.");
+		"Erlaubt dir das dumpen und entschluesseln von pkg1 und pkg2,\n"
+		"darueberhinaus das splitten in individuelle Teile.\nDumpt auch kip1.");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, btn4, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3);
 }
