@@ -48,13 +48,13 @@ void print_fuseinfo()
 		gfx_printf("Dev\n");
 		break;
 	}
-	gfx_printf("Sdram ID:    %d\n", fuse_read_dramid(true));
-	gfx_printf("Burnt fuses: %d / 64\n", bit_count(fuse_read_odm(7)));
-	gfx_printf("Secure key:  %08X%08X%08X%08X\n\n\n",
+	gfx_printf("SD-Karten ID:    %d\n", fuse_read_dramid(true));
+	gfx_printf("Verbrauchte fuses: %d / 64\n", bit_count(fuse_read_odm(7)));
+	gfx_printf("Sicherheitsschluessel:  %08X%08X%08X%08X\n\n\n",
 		byte_swap_32(FUSE(FUSE_PRIVATE_KEY0)), byte_swap_32(FUSE(FUSE_PRIVATE_KEY1)),
 		byte_swap_32(FUSE(FUSE_PRIVATE_KEY2)), byte_swap_32(FUSE(FUSE_PRIVATE_KEY3)));
 
-	gfx_printf("%kFuse cache:\n\n%k", TXT_CLR_CYAN_L, TXT_CLR_DEFAULT);
+	gfx_printf("%kFuse speicher:\n\n%k", TXT_CLR_CYAN_L, TXT_CLR_DEFAULT);
 	gfx_hexdump(fuse_address, (u8 *)fuse_address, fuse_size);
 
 	btn_wait();
@@ -69,7 +69,7 @@ void print_mmc_info()
 
 	if (!emmc_initialize(false))
 	{
-		EPRINTF("Failed to init eMMC.");
+		EPRINTF("eMMC konnte nicht initialisiert werden.");
 		goto out;
 	}
 	else
@@ -84,12 +84,12 @@ void print_mmc_info()
 		case 3: /* MMC v3.1 - v3.3 */
 		case 4: /* MMC v4 */
 			gfx_printf(
-				" Vendor ID:  %X\n"
+				" Hersteller:  %X\n"
 				" OEM ID:     %02X\n"
-				" Model:      %c%c%c%c%c%c\n"
+				" Modell:      %c%c%c%c%c%c\n"
 				" Prd Rev:    %X\n"
 				" S/N:        %04X\n"
-				" Month/Year: %02d/%04d\n\n",
+				" Monat/Jahr: %02d/%04d\n\n",
 				emmc_storage.cid.manfid, emmc_storage.cid.oemid,
 				emmc_storage.cid.prod_name[0], emmc_storage.cid.prod_name[1], emmc_storage.cid.prod_name[2],
 				emmc_storage.cid.prod_name[3], emmc_storage.cid.prod_name[4],	emmc_storage.cid.prod_name[5],
@@ -100,10 +100,10 @@ void print_mmc_info()
 		}
 
 		if (emmc_storage.csd.structure == 0)
-			EPRINTF("Unknown CSD structure.");
+			EPRINTF("Unbekannte CSD Struktur.");
 		else
 		{
-			gfx_printf("%kExtended CSD V1.%d:%k\n",
+			gfx_printf("%kErweiterte CSD V1.%d:%k\n",
 				TXT_CLR_CYAN_L, emmc_storage.ext_csd.ext_struct, TXT_CLR_DEFAULT);
 			card_type = emmc_storage.ext_csd.card_type;
 			char card_type_support[96];
@@ -138,13 +138,13 @@ void print_mmc_info()
 				" Spec Version:  %02X\n"
 				" Extended Rev:  1.%d\n"
 				" Dev Version:   %d\n"
-				" Cmd Classes:   %02X\n"
-				" Capacity:      %s\n"
+				" Cmd Klassen:   %02X\n"
+				" Kapazitaet:      %s\n"
 				" Max Rate:      %d MB/s (%d MHz)\n"
-				" Current Rate:  %d MB/s\n"
+				" Aktuelle Rate:  %d MB/s\n"
 				" Type Support:  ",
 				emmc_storage.csd.mmca_vsn, emmc_storage.ext_csd.rev, emmc_storage.ext_csd.dev_version, emmc_storage.csd.cmdclass,
-				emmc_storage.csd.capacity == (4096 * EMMC_BLOCKSIZE) ? "High" : "Low", speed & 0xFFFF, (speed >> 16) & 0xFFFF,
+				emmc_storage.csd.capacity == (4096 * EMMC_BLOCKSIZE) ? "Hoch" : "Niedrig", speed & 0xFFFF, (speed >> 16) & 0xFFFF,
 				emmc_storage.csd.busspeed);
 			gfx_con.fntsz = 8;
 			gfx_printf("%s", card_type_support);
@@ -153,20 +153,20 @@ void print_mmc_info()
 
 			u32 boot_size = emmc_storage.ext_csd.boot_mult << 17;
 			u32 rpmb_size = emmc_storage.ext_csd.rpmb_mult << 17;
-			gfx_printf("%keMMC Partitions:%k\n", TXT_CLR_CYAN_L, TXT_CLR_DEFAULT);
-			gfx_printf(" 1: %kBOOT0      %k\n    Size: %5d KiB (LBA Sectors: 0x%07X)\n", TXT_CLR_GREENISH, TXT_CLR_DEFAULT,
+			gfx_printf("%keMMC Partitionen:%k\n", TXT_CLR_CYAN_L, TXT_CLR_DEFAULT);
+			gfx_printf(" 1: %kBOOT0      %k\n    Groesse: %5d KiB (LBA Sektoren: 0x%07X)\n", TXT_CLR_GREENISH, TXT_CLR_DEFAULT,
 				boot_size / 1024, boot_size / EMMC_BLOCKSIZE);
 			gfx_put_small_sep();
-			gfx_printf(" 2: %kBOOT1      %k\n    Size: %5d KiB (LBA Sectors: 0x%07X)\n", TXT_CLR_GREENISH, TXT_CLR_DEFAULT,
+			gfx_printf(" 2: %kBOOT1      %k\n    Groesse: %5d KiB (LBA Sektoren: 0x%07X)\n", TXT_CLR_GREENISH, TXT_CLR_DEFAULT,
 				boot_size / 1024, boot_size / EMMC_BLOCKSIZE);
 			gfx_put_small_sep();
-			gfx_printf(" 3: %kRPMB       %k\n    Size: %5d KiB (LBA Sectors: 0x%07X)\n", TXT_CLR_GREENISH, TXT_CLR_DEFAULT,
+			gfx_printf(" 3: %kRPMB       %k\n    Groesse: %5d KiB (LBA Sektoren: 0x%07X)\n", TXT_CLR_GREENISH, TXT_CLR_DEFAULT,
 				rpmb_size / 1024, rpmb_size / EMMC_BLOCKSIZE);
 			gfx_put_small_sep();
-			gfx_printf(" 0: %kGPP (USER) %k\n    Size: %5d MiB (LBA Sectors: 0x%07X)\n\n", TXT_CLR_GREENISH, TXT_CLR_DEFAULT,
+			gfx_printf(" 0: %kGPP (USER) %k\n    Groesse: %5d MiB (LBA Sektoren: 0x%07X)\n\n", TXT_CLR_GREENISH, TXT_CLR_DEFAULT,
 				emmc_storage.sec_cnt >> SECTORS_TO_MIB_COEFF, emmc_storage.sec_cnt);
 			gfx_put_small_sep();
-			gfx_printf("%kGPP (eMMC USER) partition table:%k\n", TXT_CLR_CYAN_L, TXT_CLR_DEFAULT);
+			gfx_printf("%kGPP (eMMC USER) Partitionstabelle:%k\n", TXT_CLR_CYAN_L, TXT_CLR_DEFAULT);
 
 			emmc_set_partition(EMMC_GPP);
 			LIST_INIT(gpt);
@@ -174,7 +174,7 @@ void print_mmc_info()
 			int gpp_idx = 0;
 			LIST_FOREACH_ENTRY(emmc_part_t, part, &gpt, link)
 			{
-				gfx_printf(" %02d: %k%s%k\n     Size: % 5d MiB (LBA Sectors 0x%07X)\n     LBA Range: %08X-%08X\n",
+				gfx_printf(" %02d: %k%s%k\n     Groesse: % 5d MiB (LBA Sektoren 0x%07X)\n     LBA Bereich: %08X-%08X\n",
 					gpp_idx++, TXT_CLR_GREENISH, part->name, TXT_CLR_DEFAULT, (part->lba_end - part->lba_start + 1) >> SECTORS_TO_MIB_COEFF,
 					part->lba_end - part->lba_start + 1, part->lba_start, part->lba_end);
 				gfx_put_small_sep();
@@ -198,15 +198,15 @@ void print_sdcard_info()
 
 	if (sd_initialize(false))
 	{
-		gfx_printf("%kCard IDentification:%k\n", TXT_CLR_CYAN_L, TXT_CLR_DEFAULT);
+		gfx_printf("%kSD-Karte IDentifikation:%k\n", TXT_CLR_CYAN_L, TXT_CLR_DEFAULT);
 		gfx_printf(
-			" Vendor ID:  %02x\n"
+			" Hersteller ID:  %02x\n"
 			" OEM ID:     %c%c\n"
-			" Model:      %c%c%c%c%c\n"
+			" Modell:      %c%c%c%c%c\n"
 			" HW rev:     %X\n"
 			" FW rev:     %X\n"
 			" S/N:        %08x\n"
-			" Month/Year: %02d/%04d\n\n",
+			" Monat/Jahr: %02d/%04d\n\n",
 			sd_storage.cid.manfid, (sd_storage.cid.oemid >> 8) & 0xFF, sd_storage.cid.oemid & 0xFF,
 			sd_storage.cid.prod_name[0], sd_storage.cid.prod_name[1], sd_storage.cid.prod_name[2],
 			sd_storage.cid.prod_name[3], sd_storage.cid.prod_name[4],
@@ -214,18 +214,18 @@ void print_sdcard_info()
 			sd_storage.cid.month, sd_storage.cid.year);
 
 		u16 *sd_errors = sd_get_error_count();
-		gfx_printf("%kCard-Specific Data V%d.0:%k\n", TXT_CLR_CYAN_L, sd_storage.csd.structure + 1, TXT_CLR_DEFAULT);
+		gfx_printf("%kSD-Karte Spezifische Daten V%d.0:%k\n", TXT_CLR_CYAN_L, sd_storage.csd.structure + 1, TXT_CLR_DEFAULT);
 		gfx_printf(
-			" Cmd Classes:    %02X\n"
-			" Capacity:       %d MiB\n"
-			" Bus Width:      %d\n"
-			" Current Rate:   %d MB/s (%d MHz)\n"
-			" Speed Class:    %d\n"
-			" UHS Grade:      U%d\n"
-			" Video Class:    V%d\n"
-			" App perf class: A%d\n"
-			" Write Protect:  %d\n"
-			" SDMMC Errors:   %d %d %d\n\n",
+			" Cmd Klassen:     %02X\n"
+			" Kapazitaet:      %d MiB\n"
+			" Busbreite:       %d\n"
+			" Aktuelle Rate:   %d MB/s (%d MHz)\n"
+			" Speed Klasse:    %d\n"
+			" UHS Grad:        U%d\n"
+			" Video Klasse:    V%d\n"
+			" App perf Klasse: A%d\n"
+			" Schreibschutz:   %d\n"
+			" SDMMC Fehler:    %d %d %d\n\n",
 			sd_storage.csd.cmdclass, sd_storage.sec_cnt >> 11,
 			sd_storage.ssr.bus_width, sd_storage.csd.busspeed, sd_storage.csd.busspeed * 2,
 			sd_storage.ssr.speed_class, sd_storage.ssr.uhs_grade, sd_storage.ssr.video_class,
@@ -235,28 +235,28 @@ void print_sdcard_info()
 		int res = f_mount(&sd_fs, "", 1);
 		if (!res)
 		{
-			gfx_puts("Acquiring FAT volume info...\n\n");
+			gfx_puts("FAT-Volume-Informationen werden abgerufen...\n\n");
 			f_getfree("", &sd_fs.free_clst, NULL);
-			gfx_printf("%kFound %s volume:%k\n Free:    %d MiB\n Cluster: %d KiB\n",
+			gfx_printf("%kVolume %s gefunden: %k\n Frei:    %d MiB\n Cluster: %d KiB\n",
 					TXT_CLR_CYAN_L, sd_fs.fs_type == FS_EXFAT ? "exFAT" : "FAT32", TXT_CLR_DEFAULT,
 					sd_fs.free_clst * sd_fs.csize >> SECTORS_TO_MIB_COEFF, (sd_fs.csize > 1) ? (sd_fs.csize >> 1) : 512);
 			f_mount(NULL, "", 1);
 		}
 		else
 		{
-			EPRINTFARGS("Failed to mount SD card (FatFS Error %d).\n"
-				"Make sure that a FAT partition exists..", res);
+			EPRINTFARGS("Einbinden der SD-Karte fehlgeschlagen (FatFS Fehler %d).\n"
+				"Stelle sicher, dass eine FAT-Partition vorhanden ist..", res);
 		}
 
 		sd_end();
 	}
 	else
 	{
-		EPRINTF("Failed to init SD card.");
+		EPRINTF("Initialisierung der SD-Karte fehlgeschlagen.");
 		if (!sdmmc_get_sd_inserted())
-			EPRINTF("Make sure that it is inserted.");
+			EPRINTF("Stelle sicher dass sie richtig sitzt.");
 		else
-			EPRINTF("SD Card Reader is not properly seated!");
+			EPRINTF("SD-Kartenleser sitzt nicht richtig!");
 		sd_end();
 	}
 
@@ -267,43 +267,43 @@ void print_fuel_gauge_info()
 {
 	int value = 0;
 
-	gfx_printf("%kFuel Gauge Info:\n%k", TXT_CLR_CYAN_L, TXT_CLR_DEFAULT);
+	gfx_printf("%kAkkustand-Informationen:\n%k", TXT_CLR_CYAN_L, TXT_CLR_DEFAULT);
 
 	max17050_get_property(MAX17050_RepSOC, &value);
-	gfx_printf("Capacity now:           %3d%\n", value >> 8);
+	gfx_printf("Aktuelle Kapazitaet:    %3d%\n", value >> 8);
 
 	max17050_get_property(MAX17050_RepCap, &value);
-	gfx_printf("Capacity now:           %4d mAh\n", value);
+	gfx_printf("Aktuelle Kapazitaet:    %4d mAh\n", value);
 
 	max17050_get_property(MAX17050_FullCAP, &value);
-	gfx_printf("Capacity full:          %4d mAh\n", value);
+	gfx_printf("Kapazitaet Voll:        %4d mAh\n", value);
 
 	max17050_get_property(MAX17050_DesignCap, &value);
-	gfx_printf("Capacity (design):      %4d mAh\n", value);
+	gfx_printf("Kapazitaet (Design):    %4d mAh\n", value);
 
 	max17050_get_property(MAX17050_Current, &value);
-	gfx_printf("Current now:            %d mA\n", value / 1000);
+	gfx_printf("Aktueller Akkuverbr.:   %d mA\n", value / 1000);
 
 	max17050_get_property(MAX17050_AvgCurrent, &value);
-	gfx_printf("Current average:        %d mA\n", value / 1000);
+	gfx_printf("Durschnitt Akkuverbr.:  %d mA\n", value / 1000);
 
 	max17050_get_property(MAX17050_VCELL, &value);
-	gfx_printf("Voltage now:            %4d mV\n", value);
+	gfx_printf("Aktuelle Spannung:      %4d mV\n", value);
 
 	max17050_get_property(MAX17050_OCVInternal, &value);
-	gfx_printf("Voltage open-circuit:   %4d mV\n", value);
+	gfx_printf("Spannung im Leerlauf:   %4d mV\n", value);
 
 	max17050_get_property(MAX17050_MinVolt, &value);
-	gfx_printf("Min voltage reached:    %4d mV\n", value);
+	gfx_printf("Min Spannung errei.:    %4d mV\n", value);
 
 	max17050_get_property(MAX17050_MaxVolt, &value);
-	gfx_printf("Max voltage reached:    %4d mV\n", value);
+	gfx_printf("Max Spannung errei.:    %4d mV\n", value);
 
 	max17050_get_property(MAX17050_V_empty, &value);
-	gfx_printf("Empty voltage (design): %4d mV\n", value);
+	gfx_printf("Leerspannung (Design):  %4d mV\n", value);
 
 	max17050_get_property(MAX17050_TEMP, &value);
-	gfx_printf("Battery temperature:    %d.%d oC\n", value / 10,
+	gfx_printf("Akku Temperatur:        %d.%d oC\n", value / 10,
 			   (value >= 0 ? value : (~value)) % 10);
 }
 
@@ -311,42 +311,42 @@ void print_battery_charger_info()
 {
 	int value = 0;
 
-	gfx_printf("%k\n\nBattery Charger Info:\n%k", TXT_CLR_CYAN_L, TXT_CLR_DEFAULT);
+	gfx_printf("%k\n\nAkkuladegeraet-Informationen:\n%k", TXT_CLR_CYAN_L, TXT_CLR_DEFAULT);
 
 	bq24193_get_property(BQ24193_InputCurrentLimit, &value);
-	gfx_printf("Input current limit:  %4d mA\n", value);
+	gfx_printf("Eingangsstrombegrenzung:  %4d mA\n", value);
 
 	bq24193_get_property(BQ24193_SystemMinimumVoltage, &value);
-	gfx_printf("System voltage limit: %4d mV\n", value);
+	gfx_printf("Systemspannungsgrenze:    %4d mV\n", value);
 
 	bq24193_get_property(BQ24193_FastChargeCurrentLimit, &value);
-	gfx_printf("Charge current limit: %4d mA\n", value);
+	gfx_printf("Ladestrombegrenzung:      %4d mA\n", value);
 
 	bq24193_get_property(BQ24193_ChargeVoltageLimit, &value);
-	gfx_printf("Charge voltage limit: %4d mV\n", value);
+	gfx_printf("Ladespannungsgrenze:      %4d mV\n", value);
 
 	bq24193_get_property(BQ24193_ChargeStatus, &value);
-	gfx_printf("Charge status:        ");
+	gfx_printf("Ladestatus:        ");
 	switch (value)
 	{
 	case 0:
-		gfx_printf("Not charging\n");
+		gfx_printf("Wird nicht geladen\n");
 		break;
 	case 1:
-		gfx_printf("Pre-charging\n");
+		gfx_printf("Laden vorbereiten\n");
 		break;
 	case 2:
-		gfx_printf("Fast charging\n");
+		gfx_printf("Schnellladen\n");
 		break;
 	case 3:
-		gfx_printf("Charge terminated\n");
+		gfx_printf("Ladevorgang abgebrochen\n");
 		break;
 	default:
-		gfx_printf("Unknown (%d)\n", value);
+		gfx_printf("Unbekannt (%d)\n", value);
 		break;
 	}
 	bq24193_get_property(BQ24193_TempStatus, &value);
-	gfx_printf("Temperature status:   ");
+	gfx_printf("Temperaturstatus:   ");
 	switch (value)
 	{
 	case 0:
@@ -356,16 +356,16 @@ void print_battery_charger_info()
 		gfx_printf("Warm\n");
 		break;
 	case 3:
-		gfx_printf("Cool\n");
+		gfx_printf("Kuehl\n");
 		break;
 	case 5:
-		gfx_printf("Cold\n");
+		gfx_printf("Kalt\n");
 		break;
 	case 6:
-		gfx_printf("Hot\n");
+		gfx_printf("Heiss\n");
 		break;
 	default:
-		gfx_printf("Unknown (%d)\n", value);
+		gfx_printf("Unbekannt (%d)\n", value);
 		break;
 	}
 }
@@ -381,7 +381,7 @@ void print_battery_info()
 
 	u8 *buf = (u8 *)malloc(0x100 * 2);
 
-	gfx_printf("%k\n\nBattery Fuel Gauge Registers:\n%k", TXT_CLR_CYAN_L, TXT_CLR_DEFAULT);
+	gfx_printf("%k\n\nRegister der Akkuanzeige:\n%k", TXT_CLR_CYAN_L, TXT_CLR_DEFAULT);
 
 	for (int i = 0; i < 0x200; i += 2)
 	{

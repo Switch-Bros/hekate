@@ -137,9 +137,9 @@ int parse_fss(launch_ctxt_t *ctxt, const char *path)
 	// Check if valid FSS0 and parse it.
 	if (fss_meta->magic == FSS0_MAGIC)
 	{
-		gfx_printf("Atmosphere %d.%d.%d-%08x via FSS0/PKG3\n"
+		gfx_printf("SwitchBros-O-Sphere %d.%d.%d-%08x ueber FSS0/PKG3\n"
 			"Max HOS: %d.%d.%d\n"
-			"Unpacking..  ",
+			"Entpacke..  ",
 			fss_meta->version >> 24, (fss_meta->version >> 16) & 0xFF, (fss_meta->version >> 8) & 0xFF, fss_meta->git_rev,
 			fss_meta->hos_ver >> 24, (fss_meta->hos_ver >> 16) & 0xFF, (fss_meta->hos_ver >> 8) & 0xFF);
 
@@ -170,7 +170,7 @@ int parse_fss(launch_ctxt_t *ctxt, const char *path)
 				merge_kip_t *mkip1 = (merge_kip_t *)malloc(sizeof(merge_kip_t));
 				mkip1->kip1 = content;
 				list_append(&ctxt->kip1_list, &mkip1->link);
-				DPRINTF("Loaded %s.kip1 from FSS0 (size %08X)\n", curr_fss_cnt[i].name, curr_fss_cnt[i].size);
+				DPRINTF("Lade %s.kip1 von FSS0 (Groesse %08X)\n", curr_fss_cnt[i].name, curr_fss_cnt[i].size);
 				break;
 
 			case CNT_TYPE_KRN:
@@ -206,7 +206,7 @@ int parse_fss(launch_ctxt_t *ctxt, const char *path)
 			f_read(&fp, content, curr_fss_cnt[i].size, NULL);
 		}
 
-		gfx_printf("Done!\n");
+		gfx_printf("Abgeschlossen!\n");
 		f_close(&fp);
 
 		ctxt->fss0 = fss;
