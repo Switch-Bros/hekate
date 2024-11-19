@@ -123,7 +123,7 @@ lv_obj_t *create_window_autoboot(const char *win_title)
 	lv_win_set_style(win, LV_WIN_STYLE_BG, &win_bg_style);
 	lv_obj_set_size(win, LV_HOR_RES, LV_VER_RES);
 
-	close_btn = lv_win_add_btn(win, NULL, SYMBOL_CLOSE" Close", _win_autoboot_close_action);
+	close_btn = lv_win_add_btn(win, NULL, SYMBOL_CLOSE" Schliessen", _win_autoboot_close_action);
 
 	return win;
 }
@@ -189,7 +189,7 @@ static lv_res_t _autoboot_enable_more_action(lv_obj_t *btn)
 static void _create_autoboot_window()
 {
 	lv_obj_t *win = create_window_autoboot(SYMBOL_GPS" Auto Boot");
-	lv_win_add_btn(win, NULL, SYMBOL_POWER" Disable", _autoboot_disable_action);
+	lv_win_add_btn(win, NULL, SYMBOL_POWER" Deaktivieren", _autoboot_disable_action);
 
 	static lv_style_t h_style;
 	lv_style_copy(&h_style, &lv_style_transp);
@@ -209,7 +209,7 @@ static void _create_autoboot_window()
 	lv_label_set_static_text(label_sep, "");
 
 	lv_obj_t *label_txt = lv_label_create(h1, NULL);
-	lv_label_set_static_text(label_txt, "Main configurations");
+	lv_label_set_static_text(label_txt, "Haupt Konfiguration");
 	lv_obj_set_style(label_txt, lv_theme_get_current()->label.prim);
 	lv_obj_align(label_txt, label_sep, LV_ALIGN_OUT_BOTTOM_LEFT, LV_DPI / 4, -(LV_DPI / 4));
 
