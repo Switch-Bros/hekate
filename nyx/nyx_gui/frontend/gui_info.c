@@ -1055,7 +1055,7 @@ static lv_res_t _create_window_bootrom_info_status(lv_obj_t *btn)
 	return LV_RES_OK;
 }
 
-static lv_res_t _launch_lockpick_action(lv_obj_t *btns, const char * txt)
+static lv_res_t _launch_enigma_action(lv_obj_t *btns, const char * txt)
 {
 	int btn_idx = lv_btnm_get_pressed(btns);
 
@@ -1076,7 +1076,7 @@ static lv_res_t _launch_lockpick_action(lv_obj_t *btns, const char * txt)
 	return LV_RES_INV;
 }
 
-static lv_res_t _create_mbox_lockpick(lv_obj_t *btn)
+static lv_res_t _create_mbox_enigma(lv_obj_t *btn)
 {
 	lv_obj_t *dark_bg = lv_obj_create(lv_scr_act(), NULL);
 	lv_obj_set_style(dark_bg, &mbox_darken);
@@ -1089,7 +1089,7 @@ static lv_res_t _create_mbox_lockpick(lv_obj_t *btn)
 	lv_mbox_set_text(mbox, "#FF8000 Enigma_RCM#\n\nDamit wird Enigma_RCM gestartet.\nMoechtest du fortfahren?\n\n"
 		"Um von Enigma_RCM zurueckzukommen nutze\n#96FF00 Neustart in hekate#.");
 
-	lv_mbox_add_btns(mbox, mbox_btn_map, _launch_lockpick_action);
+	lv_mbox_add_btns(mbox, mbox_btn_map, _launch_enigma_action);
 	lv_obj_set_width(mbox, LV_HOR_RES / 9 * 5);
 	lv_obj_align(mbox, NULL, LV_ALIGN_CENTER, 0, 0);
 	lv_obj_set_top(mbox, true);
@@ -2423,12 +2423,12 @@ static lv_res_t _create_window_battery_status(lv_obj_t *btn)
 	return LV_RES_OK;
 }
 
-static bool _lockpick_exists_check()
+static bool _enigma_exists_check()
 {
-	#define LOCKPICK_MAGIC_OFFSET   0x118
-	#define LOCKPICK_VERSION_OFFSET 0x11C
-	#define LOCKPICK_MAGIC          0x4B434F4C // LOCK.
-	#define LOCKPICK_MIN_VERSION    0x1090500  // 1.9.5.
+	#define ENIGMA_MAGIC_OFFSET   0x118
+	#define ENIGMA_VERSION_OFFSET 0x11C
+	#define ENIGMA_MAGIC          0x4B434F4C // LOCK.
+	#define ENIGMA_MIN_VERSION    0x1090500  // 1.9.5.
 
 	bool found = false;
 	void *buf = malloc(0x200);
@@ -2438,7 +2438,7 @@ static bool _lockpick_exists_check()
 		if (f_open(&fp, "bootloader/payloads/Enigma_RCM.bin", FA_READ))
 			goto out;
 
-		// Read Lockpick payload and check versioning.
+		// Read Enigma payload and check versioning.
 		if (f_read(&fp, buf, 0x200, NULL))
 		{
 			f_close(&fp);
@@ -2446,10 +2446,10 @@ static bool _lockpick_exists_check()
 			goto out;
 		}
 
-		u32 magic = *(u32 *)(buf + LOCKPICK_MAGIC_OFFSET);
-		u32 version = byte_swap_32(*(u32 *)(buf + LOCKPICK_VERSION_OFFSET) - 0x303030);
+		u32 magic = *(u32 *)(buf + ENIGMA_MAGIC_OFFSET);
+		u32 version = byte_swap_32(*(u32 *)(buf + ENIGMA_VERSION_OFFSET) - 0x303030);
 
-		if (magic == LOCKPICK_MAGIC && version >= LOCKPICK_MIN_VERSION)
+		if (magic == ENIGMA_MAGIC && version >= ENIGMA_MIN_VERSION)
 			found = true;
 
 		f_close(&fp);
@@ -2512,16 +2512,16 @@ void create_tab_info(lv_theme_t *th, lv_obj_t *parent)
 	label_btn = lv_label_create(btn2, NULL);
 	lv_label_set_static_text(label_btn, SYMBOL_KEY"  Enigma");
 	lv_obj_align(btn2, btn, LV_ALIGN_OUT_RIGHT_TOP, LV_DPI * 11 / 15, 0);
-	lv_btn_set_action(btn2, LV_BTN_ACTION_CLICK, _create_mbox_lockpick);
+	lv_btn_set_action(btn2, LV_BTN_ACTION_CLICK, _create_mbox_enigma);
 
-	bool lockpick_found = _lockpick_exists_check();
-	if (!lockpick_found)
+	bool enigma_found = _enigma_exists_check();
+	if (!enigma_found)
 		lv_btn_set_state(btn2, LV_BTN_STATE_INA);
 
 	lv_obj_t *label_txt2 = lv_label_create(h1, NULL);
 	lv_label_set_recolor(label_txt2, true);
 
-	if (lockpick_found)
+	if (enigma_found)
 	{
 		lv_label_set_static_text(label_txt2,
 			"Zeige Ipatches an und Dumpe gepatchte und ungepatchte\nVersionen vom BootROM.\n"
