@@ -1909,7 +1909,7 @@ failed_sd_mount:
 			lv_label_set_static_text(label_error,
 				"#FFDD00 Keine Haupt-Boot-Eintraege gefunden...#\n"
 				"Ueberpruefe, ob #96FF00 bootloader/hekate_ipl.ini# Boot-Eintraege enthaelt\n"
-				"oder benutze die #C7EA46 Mehr Konfigurationen#-Schaltflaeche für weitere Boot-Eintraege.");
+				"oder benutze die #C7EA46 Mehr Konfigurationen#-Schaltflaeche fuer weitere Boot-Eintraege.");
 		}
 		else
 		{
@@ -2322,7 +2322,7 @@ static void _nyx_main_menu(lv_theme_t * th)
 			 rel ? "v" : "", nyx_str->version & 0xFF, (nyx_str->version >> 8) & 0xFF, (nyx_str->version >> 16) & 0xFF, rel > 'A' ? rel : 0);
 	lv_obj_t *tab_about = lv_tabview_add_tab(tv, version);
 
-	lv_obj_t *tab_home = lv_tabview_add_tab(tv, SYMBOL_HOME" Haupt");
+	lv_obj_t *tab_home = lv_tabview_add_tab(tv, SYMBOL_HOME" Hauptmenue");
 
 	lv_obj_t *tab_tools = lv_tabview_add_tab(tv, SYMBOL_TOOLS" Werkzeuge");
 	lv_page_set_style(tab_tools, LV_PAGE_STYLE_BG, &no_padding);

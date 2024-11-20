@@ -2563,9 +2563,9 @@ void create_tab_info(lv_theme_t *th, lv_obj_t *parent)
 	lv_obj_t *label_txt4 = lv_label_create(h1, NULL);
 	lv_label_set_recolor(label_txt4, true);
 	lv_label_set_static_text(label_txt4,
-		"Zeige an und Dumpe die zwischengespeicherten #C7EA46 Fuses# und #C7EA46 KFuses#.\n"
-		"Fuses enthalten Informationen ueber den SoC/SKU und KFuses HDCP-Key.\n"
-		"Du kannst auch Infos ueber #C7EA46 DRAM#, #C7EA46 Bildschirm# und #C7EA46 Touchpanel# sehen.");
+		"Zeige und Dumpe zwischengespeicherte #C7EA46 Fuses# und #C7EA46 KFuses#.\n"
+		"Fuses enthalten Infos ueber den SoC/SKU und KFuses HDCP-Key.\n"
+		"Du kannst auch Infos sehen von:\n#C7EA46 DRAM#, #C7EA46 Bildschirm# und #C7EA46 Touchpanel#.");
 	lv_obj_set_style(label_txt4, &hint_small_style);
 	lv_obj_align(label_txt4, btn3, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3);
 
@@ -2613,7 +2613,7 @@ void create_tab_info(lv_theme_t *th, lv_obj_t *parent)
 	lv_obj_t *label_txt5 = lv_label_create(h2, NULL);
 	lv_label_set_recolor(label_txt5, true);
 	lv_label_set_static_text(label_txt5,
-		"Zeige Infos ueber den eMMC oder SD-Karte und ihre Partitionen an.\n"
+		"Zeige Infos ueber eMMC oder SD-Karte und ihre Partitionen.\n"
 		"Zusaetzlich kannst du die Lesegeschwindigkeiten benchmarken.");
 	lv_obj_set_style(label_txt5, &hint_small_style);
 	lv_obj_align(label_txt5, btn5, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3);

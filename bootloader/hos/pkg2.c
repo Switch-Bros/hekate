@@ -295,7 +295,7 @@ void pkg2_add_kip(link_t *info, pkg2_kip1_t *kip1)
 	pkg2_kip1_info_t *ki = (pkg2_kip1_info_t *)malloc(sizeof(pkg2_kip1_info_t));
 	ki->kip1 = kip1;
 	ki->size = _pkg2_calc_kip1_size(kip1);
-DPRINTF("Kip %s hinzugefügt (Groesse %08X)\n", kip1->name, ki->size);
+DPRINTF("Kip %s hinzugefuegt (Groesse %08X)\n", kip1->name, ki->size);
 	list_append(info, &ki->link);
 }
 

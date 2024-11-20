@@ -366,7 +366,7 @@ static lv_res_t _save_nyx_options_action(lv_obj_t *btn)
 	nyx_changes_made = false;
 
 	if (res)
-		lv_mbox_set_text(mbox, "#FF8000 Nyx Konfiguration#\n\n#96FF00 Die Konfiguration wurde auf SD-Karte gespeichert!#");
+		lv_mbox_set_text(mbox, "#FF8000 Nyx Konfiguration#\n\n#96FF00 Die Konfiguration wurde auf SD-Karte#\n#96FF00 gespeichert!#");
 	else
 		lv_mbox_set_text(mbox, "#FF8000 Nyx Konfiguration#\n\n#FFDD00 Speichern der Konfiguration#\n#FFDD00 auf SD-Karte fehlgeschlagen!#");
 	lv_mbox_add_btns(mbox, mbox_btn_map, NULL);
@@ -1256,9 +1256,9 @@ lv_res_t create_win_nyx_options(lv_obj_t *parrent_btn)
 	label_txt2 = lv_label_create(l_cont, NULL);
 	lv_label_set_recolor(label_txt2, true);
 	lv_label_set_static_text(label_txt2,
-		"Waehle welcher Bildschirm beim Nyx-Start angezeigt werden soll.\n"
-		"#FF8000 Alle Konfigs:# #C7EA46 Kombiniert Mehr Konfigs in leere Plaetze von Starten.#\n"
-		"#FF8000 Starten / Mehr Konfigs:# #C7EA46 Verwendet die klassische, geteilte Ansicht.#");
+		"Waehle Bildschirm der beim Nyx-Start angezeigt werden soll.\n"
+		"#FF8000 Alle Konfigs:# #C7EA46 Kombiniert Mehr Konfigs in Starten.#\n"
+		"#FF8000 Starten / Mehr Konfigs:# #C7EA46 Verwendet klassische, geteilte Ansicht.#");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, label_txt, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 4);
 
@@ -1297,8 +1297,8 @@ lv_res_t create_win_nyx_options(lv_obj_t *parrent_btn)
 	label_txt2 = lv_label_create(sw_h3, NULL);
 	lv_label_set_recolor(label_txt2, true);
 	lv_label_set_static_text(label_txt2,
-		"Ermoeglicht das Speichern der MAC-Adressen der Switch und JoyCons\n"
-		"und der zugehoerigen LTKs. Fuer #C7EA46 Android# und #C7EA46 Linux#.");
+		"Speichert die MAC-Adressen der Switch und JoyCons\n"
+		"und der zugehoeriger LTKs. Fuer #C7EA46 Android# und #C7EA46 Linux#.");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, btn3, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 4);
 
@@ -1324,8 +1324,8 @@ lv_res_t create_win_nyx_options(lv_obj_t *parrent_btn)
 	lv_ddlist_set_action(ddlist2, _data_verification_action);
 
 	label_txt2 = lv_label_create(sw_h3, NULL);
-	lv_label_set_static_text(label_txt2, "Legt den Typ der Datenverifikation fuer Sicherung und Wiederherstellung fest.\n"
-		"Kann abgebrochen werden, ohne dass die Sicherung/Wiederherstellung verloren geht.\n");
+	lv_label_set_static_text(label_txt2, "Legt Datenverifikation fuer Sicherung und Wiederherstellung fest.\n"
+		"Kann abgebrochen werden, ohne dass die\nSicherung/Wiederherstellung verloren geht.\n");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, label_txt, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 4);
 
@@ -1344,8 +1344,8 @@ lv_res_t create_win_nyx_options(lv_obj_t *parrent_btn)
 	lv_label_set_recolor(label_txt2, true);
 	lv_label_set_static_text(label_txt2,
 		"Aendere den Uhrzeit-Offset manuell.\n"
-		"#C7EA46 Eingegebene Datum und Uhrzeit werden automatisch in Offset umgerechnet#\n"
-		"#C7EA46 Dieser wird auch für FatFS-Operationen verwendet.#");
+		"#C7EA46 Datum und Uhrzeit werden automatisch in Offset umgerechnet#\n"
+		"#C7EA46 Dieser wird auch fuer FatFS-Operationen verwendet.#");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, btn5, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 4);
 
@@ -1418,7 +1418,7 @@ void create_tab_options(lv_theme_t *th, lv_obj_t *parent)
 	autoboot_btn = btn;
 
 	lv_obj_t *label_txt2 = lv_label_create(sw_h2, NULL);
-	lv_label_set_static_text(label_txt2, "Waehle welcher Boot-Eintrag oder Payload automatisch beim Injizieren gebootet werden soll.");
+	lv_label_set_static_text(label_txt2, "Waehle welcher Boot-Eintrag oder Payload automatisch beim\nInjizieren gebootet werden soll.");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, btn, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3 - 4);
 
@@ -1461,8 +1461,8 @@ void create_tab_options(lv_theme_t *th, lv_obj_t *parent)
 	label_txt2 = lv_label_create(l_cont, NULL);
 	lv_label_set_recolor(label_txt2, true);
 	lv_label_set_static_text(label_txt2,
-		"Stell ein, wie lange das Bootlogo angezeigt wird, wenn Autoboot aktiviert ist.\n"
-		"#C7EA46 Du kannst waehrend dieser Zeit# #FF8000 VOL-# #C7EA46 druecken um in hekate zu gelangen.#\n");
+		"Stell ein, wie lange das Bootlogo angezeigt wird, wenn\nAutoboot aktiviert ist.\n"
+		"#C7EA46 Du kannst in der Zeit# #FF8000 VOL-# #C7EA46 druecken um hekate zu starten.#\n");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, label_txt, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 4);
 
@@ -1478,7 +1478,7 @@ void create_tab_options(lv_theme_t *th, lv_obj_t *parent)
 	lv_label_set_recolor(label_txt2, true);
 	lv_label_set_static_text(label_txt2,
 		"Es prueft die Fuses und wendet den Patch automatisch an,\n"
-		"wenn eine hoehere Firmware vorhanden ist. Es ist eine globale Konfiguration\n"
+		"wenn hoehere Firmware vorhanden. Es ist eine globale Konfiguration\n"
 		"die standardmaessig auf Auto gesetzt ist. (EIN: Auto)\n\n\n");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, btn2, LV_ALIGN_OUT_BOTTOM_LEFT, LV_DPI / 4, LV_DPI / 12);
@@ -1531,8 +1531,9 @@ void create_tab_options(lv_theme_t *th, lv_obj_t *parent)
 	label_txt2 = lv_label_create(sw_h3, NULL);
 	lv_label_set_recolor(label_txt2, true);
 	lv_label_set_static_text(label_txt2,
-		"Wenn #FF8000 FSS0# im ausgewaehlten Boot-Eintrag verwendet wird, wird die\n"
-		"Reboot2Payload Binaerdatei ueberprueft und auf hekate aktualisiert..\n\n\n\n");
+		"Wenn #FF8000 FSS0# im ausgewaehlten Boot-Eintrag verwendet wird,\n"
+		"wird die Reboot2Payload Binaerdatei ueberprueft\n"
+		"und auf hekate aktualisiert..\n\n\n");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, btn4, LV_ALIGN_OUT_BOTTOM_LEFT, LV_DPI / 4, LV_DPI / 12);
 

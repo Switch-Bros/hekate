@@ -785,7 +785,7 @@ static lv_res_t _create_window_usb_tools(lv_obj_t *parent)
 	// Create read/write access button.
 	lv_obj_t *btn_write_access = lv_btn_create(h_write, NULL);
 	nyx_create_onoff_button(lv_theme_get_current(), h_write,
-		btn_write_access, SYMBOL_EDIT" Nur-Lesezugriff", _emmc_read_only_toggle, false);
+		btn_write_access, SYMBOL_EDIT" Nur-Lesen", _emmc_read_only_toggle, false);
 	if (!n_cfg.ums_emmc_rw)
 		lv_btn_set_state(btn_write_access, LV_BTN_STATE_TGL_REL);
 	_emmc_read_only_toggle(btn_write_access);
@@ -821,9 +821,9 @@ static lv_res_t _create_window_usb_tools(lv_obj_t *parent)
 	lv_obj_t *label_txt4 = lv_label_create(h2, NULL);
 	lv_label_set_recolor(label_txt4, true);
 	lv_label_set_static_text(label_txt4,
-		"Schliesse den JoyCon an und verwandle das Geraet\n"
-		"in ein Gamepad fuer PC oder Handy.\n"
-		"#C7EA46 Beide JoyCons werden benoetigt, damit es funktioniert.#");
+		"Schliesse den JoyCon an und verwandle das\n"
+		"Geraet in ein Gamepad fuer PC oder Handy.\n"
+		"#C7EA46 Beide JoyCons werden benoetigt,\ndamit es funktioniert.#");
 
 	lv_obj_set_style(label_txt4, &hint_small_style);
 	lv_obj_align(label_txt4, btn3, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3);
@@ -1478,7 +1478,7 @@ static void _create_tab_tools_emmc_pkg12(lv_theme_t *th, lv_obj_t *parent)
 	lv_label_set_static_text(label_txt2,
 		"Ermoeglicht die eMMC-Partitionen einzeln oder als\n"
 		"ganzes RAW-Abbild auf die SD-Karte zu sichern.\n"
-		"#C7EA46 Unterstuetzt SD-Karten ab# #FF8000 4GB# #C7EA46 und groesser. #"
+		"#C7EA46 Unterstuetzt SD-Karten ab# #FF8000 4GB# #C7EA46 und mehr. #"
 		"#FF8000 FAT32# #C7EA46 und ##FF8000 exFAT##C7EA46 .#");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, btn, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3);
@@ -1495,7 +1495,7 @@ static void _create_tab_tools_emmc_pkg12(lv_theme_t *th, lv_obj_t *parent)
 	lv_label_set_static_text(label_txt2,
 		"Ermoeglicht die eMMC-Partitionen einzeln oder als\n"
 		"ganzes RAW-Abbild von SD-Karte wiederherzustellen.\n"
-		"#C7EA46 Unterstuetzt SD-Karten ab# #FF8000 4GB# #C7EA46 und groesser. #"
+		"#C7EA46 Unterstuetzt SD-Karten ab# #FF8000 4GB# #C7EA46 und mehr. #"
 		"#FF8000 FAT32# #C7EA46 und ##FF8000 exFAT##C7EA46 .#");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, btn2, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3);
@@ -1531,8 +1531,8 @@ static void _create_tab_tools_emmc_pkg12(lv_theme_t *th, lv_obj_t *parent)
 	lv_obj_t *label_txt4 = lv_label_create(h2, NULL);
 	lv_label_set_recolor(label_txt4, true);
 	lv_label_set_static_text(label_txt4,
-		"Ermoeglicht das Partitionieren der SD-Karte zum nutzen des #C7EA46 emuMMC#,\n"
-		"#C7EA46 Android# und #C7EA46 Linux#. Du kannst Linux und Android auch flashen.\n");
+		"Ermoeglicht das Partitionieren der SD-Karte zum nutzen des\n"
+		"#C7EA46 emuMMC#, #C7EA46 Android# und #C7EA46 Linux#.\nDu kannst Linux und Android auch flashen.\n");
 	lv_obj_set_style(label_txt4, &hint_small_style);
 	lv_obj_align(label_txt4, btn3, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3);
 
@@ -1551,8 +1551,8 @@ static void _create_tab_tools_emmc_pkg12(lv_theme_t *th, lv_obj_t *parent)
 	lv_label_set_recolor(label_txt4, true);
 	lv_label_set_static_text(label_txt4,
 		"#C7EA46 USB Massenspeicher#, #C7EA46 gamepad# und andere USB Werkzeuge.\n"
-		"Massenspeicher kann SD-Karte, eMMC und emuMMC mounten. Das\n"
-		"gamepad transformiert die Switch in ein Eingabegeraet.#");
+		"Massenspeicher kann SD-Karte, eMMC und emuMMC mounten.\n"
+		"Das gamepad transformiert die Switch in ein Eingabegeraet.#");
 	lv_obj_set_style(label_txt4, &hint_small_style);
 	lv_obj_align(label_txt4, btn4, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3);
 }
@@ -1594,8 +1594,8 @@ static void _create_tab_tools_arc_autorcm(lv_theme_t *th, lv_obj_t *parent)
 	lv_obj_t *label_txt2 = lv_label_create(h1, NULL);
 	lv_label_set_recolor(label_txt2, true);
 	lv_label_set_static_text(label_txt2,
-		"Ermoeglicht das Archiv-Bit fuer alle Ordner zu reparieren, einschliesslich\n\n"
-		"des ROOT und emuMMC \'Nintendo\' Ordners.\n"
+		"Ermoeglicht das Archiv-Bit fuer alle Ordner zu reparieren,\n"
+		"einschliesslich des ROOT und emuMMC \'Nintendo\' Ordners.\n\n"
 		"#C7EA46 Es setzt das Archiv-Bit fuer Ordner, die mit ##FF8000 .[ext]#\n"
 		"#FF8000 Benutze diese Option, wenn du Korruptionsmeldungen erhaeltst.#");
 	lv_obj_set_style(label_txt2, &hint_small_style);
@@ -1664,10 +1664,10 @@ static void _create_tab_tools_arc_autorcm(lv_theme_t *th, lv_obj_t *parent)
 	char *txt_buf = (char *)malloc(SZ_4K);
 
 	s_printf(txt_buf,
-		"Ermoeglicht es in den RCM-Modus zu gelangen, ohne #C7EA46 VOL+# & #C7EA46 HOME# (Jig) Kombo.\n"
-		"#FF8000 Kann alle Versionen von AutoRCM wiederherstellen, wann immer angefordert.#\n"
-		"#FF3C28 Dies korrumpiert das BCT, und du kannst nicht ohne einen#\n"
-		"#FF3C28 benutzerdefinierten Bootloader starten.#");
+		"Ermoeglicht es in den RCM-Modus zu gelangen, ohne\n#C7EA46 VOL+# & #C7EA46 HOME# (Jig) Kombo.\n"
+		"#FF8000 Kann alle AutoRCM wiederherstellen, wenn angefordert.#\n"
+		"#FF0020 Dies beschaedigt das BCT, und du kannst nicht ohne einen#\n"
+		"#FF0020 benutzerdefinierten Bootloader starten.#");
 
 	if (h_cfg.rcm_patched)
 		strcat(txt_buf, " #FF8000 Ist deaktiviert weil die Konsole gepatcht ist!#");
@@ -1694,8 +1694,8 @@ static void _create_tab_tools_arc_autorcm(lv_theme_t *th, lv_obj_t *parent)
 	label_txt2 = lv_label_create(h2, NULL);
 	lv_label_set_recolor(label_txt2, true);
 	lv_label_set_static_text(label_txt2,
-		"Ermoeglicht das Dumpen und Entschluesseln von pkg1 und pkg2 und ebenfalls\n"
-		"das splitten in ihre individuellen Teile. Dumpt auch kip1.");
+		"Ermoeglicht das Dumpen und Entschluesseln von pkg1 und pkg2\n"
+		"und ebenfalls das splitten in ihre individuellen Teile.\nDumpt auch kip1.");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, btn4, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3);
 }
