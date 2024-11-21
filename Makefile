@@ -66,7 +66,7 @@ FFCFG_INC := '"../$(SOURCEDIR)/libs/fatfs/ffconf.h"'
 CUSTOMDEFINES := -DIPL_LOAD_ADDR=$(IPL_LOAD_ADDR) -DBL_MAGIC=$(IPL_MAGIC)
 CUSTOMDEFINES += -DBL_VER_MJ=$(BLVERSION_MAJOR) -DBL_VER_MN=$(BLVERSION_MINOR) -DBL_VER_HF=$(BLVERSION_HOTFX) -DBL_VER_RL=$(BLVERSION_REL)
 CUSTOMDEFINES += -DNYX_VER_MJ=$(NYXVERSION_MAJOR) -DNYX_VER_MN=$(NYXVERSION_MINOR) -DNYX_VER_HF=$(NYXVERSION_HOTFX) -DNYX_VER_RL=$(NYXVERSION_REL)
-
+HEKATEVERSION := $(BLVERSION_MAJOR).$(BLVERSION_MINOR).$(BLVERSION_HOTFX)
 # BDK defines.
 CUSTOMDEFINES += -DBDK_MALLOC_NO_DEFRAG -DBDK_MC_ENABLE_AHB_REDIRECT -DBDK_EMUMMC_ENABLE
 CUSTOMDEFINES += -DBDK_WATCHDOG_FIQ_ENABLE -DBDK_RESTART_BL_ON_WDT
@@ -112,6 +112,18 @@ all: $(TARGET).bin $(LDRDIR)
 	@echo "Payload Max:  126296 Bytes"
 	@if [ ${BIN_SIZE} -gt 126296 ]; then echo "\e[1;33mPayload size exceeds limit!\e[0m"; fi
 	@echo "--------------------------------------"
+	
+	mkdir -p $(OUTPUTDIR)/atmosphere
+	mkdir -p $(OUTPUTDIR)/bootloader
+	mkdir -p $(OUTPUTDIR)/bootloader/sys
+	cp $(OUTPUTDIR)/$(TARGET).bin $(OUTPUTDIR)/$(TARGET)_$(HEKATEVERSION).bin
+	cp $(OUTPUTDIR)/$(TARGET).bin $(OUTPUTDIR)/payload.bin
+	cp $(OUTPUTDIR)/$(TARGET).bin $(OUTPUTDIR)/atmosphere/reboot_payload.bin
+	cp $(OUTPUTDIR)/$(TARGET).bin $(OUTPUTDIR)/bootloader/update.bin
+	cp $(OUTPUTDIR)/Nyx.bin $(OUTPUTDIR)/bootloader/sys/Nyx.bin
+	cp $(OUTPUTDIR)/libsys_lp0.bso $(OUTPUTDIR)/bootloader/sys/libsys_lp0.bso
+	cp $(OUTPUTDIR)/libsys_minerva.bso $(OUTPUTDIR)/bootloader/sys/libsys_minerva.bso
+	
 
 clean: $(TOOLS)
 	@rm -rf $(OBJS)
