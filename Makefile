@@ -116,7 +116,7 @@ all: $(TARGET).bin $(LDRDIR)
 	mkdir -p $(OUTPUTDIR)/atmosphere
 	mkdir -p $(OUTPUTDIR)/bootloader
 	mkdir -p $(OUTPUTDIR)/bootloader/sys
-	cp $(OUTPUTDIR)/$(TARGET).bin $(OUTPUTDIR)/$(TARGET)_$(HEKATEVERSION).bin
+	cp $(OUTPUTDIR)/$(TARGET).bin $(OUTPUTDIR)/$(TARGET)_ctcaer_$(HEKATEVERSION).bin
 	cp $(OUTPUTDIR)/$(TARGET).bin $(OUTPUTDIR)/payload.bin
 	cp $(OUTPUTDIR)/$(TARGET).bin $(OUTPUTDIR)/atmosphere/reboot_payload.bin
 	cp $(OUTPUTDIR)/$(TARGET).bin $(OUTPUTDIR)/bootloader/update.bin
