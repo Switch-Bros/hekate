@@ -271,7 +271,7 @@ static lv_res_t _create_mbox_cal0(lv_obj_t *btn)
 		"#FF8000 WLAN MAC:#          %02X:%02X:%02X:%02X:%02X:%02X\n"
 		"#FF8000 Bluetooth MAC:#     %02X:%02X:%02X:%02X:%02X:%02X\n"
 		"#FF8000 Akku LOT:#          %s (%d)\n"
-		"#FF8000 LCD Hersteller:#    ",
+		"#FF8000 Display Hersteller:#  ",
 		cal0->version, cal0->update_cnt, cal0->serial_number,
 		cal0->wlan_mac[0], cal0->wlan_mac[1], cal0->wlan_mac[2], cal0->wlan_mac[3], cal0->wlan_mac[4], cal0->wlan_mac[5],
 		cal0->bd_mac[0], cal0->bd_mac[1], cal0->bd_mac[2], cal0->bd_mac[3], cal0->bd_mac[4], cal0->bd_mac[5],
@@ -369,30 +369,30 @@ static lv_res_t _create_window_fuses_info_status(lv_obj_t *btn)
 		"#FF8000 SoC:#\n"
 		"#FF8000 SKU:#\n"
 		"#FF8000 DRAM ID:#\n"
-		"#FF8000 Burnt Fuses (ODM 7/6):#\n"
-		"ODM Fields (4, 6, 7):\n"
+		"#FF8000 Verbrauchte Fuses (ODM 7/6):#\n"
+		"ODM Felder (4, 6, 7):\n"
 		"Secure Boot Key (SBK):\n"
 		"Device Key (DK):\n"
 		"Public Key (PK SHA256):\n\n"
 		"HOS Keygen Revision:\n"
-		"USB Stack:\n"
+		"USB Stapel:\n"
 		"Final Test Revision:\n"
 		"Chip Probing Revision:\n"
-		"CPU Speedo 0 (CPU Val):\n"
+		"CPU Speedo 0 (CPU Wert):\n"
 		"CPU Speedo 1:\n"
-		"CPU Speedo 2 (GPU Val):\n"
-		"SoC Speedo 0 (SoC Val):\n"
-		"SoC Speedo 1 (BROM rev):\n"
+		"CPU Speedo 2 (GPU Wert):\n"
+		"SoC Speedo 0 (SoC Wert):\n"
+		"SoC Speedo 1 (BROM Wert):\n"
 		"SoC Speedo 2:\n"
-		"CPU IDDQ Val:\n"
-		"SoC IDDQ Val:\n"
-		"Gpu IDDQ Val:\n"
-		"Vendor Code:\n"
+		"CPU IDDQ Wert:\n"
+		"SoC IDDQ Wert:\n"
+		"Gpu IDDQ Wert:\n"
+		"Hersteller Code:\n"
 		"FAB Code:\n"
-		"LOT Code 0:\n"
+		"LOT Code:\n"
 		"Wafer ID:\n"
-		"X Coordinate:\n"
-		"Y Coordinate:"
+		"X Koordinate:\n"
+		"Y Koordinate:"
 	);
 	lv_obj_set_width(lb_desc, lv_obj_get_width(desc));
 
@@ -438,7 +438,7 @@ static lv_res_t _create_window_fuses_info_status(lv_obj_t *btn)
 			strcpy(dram_man, "Samsung K4F6E304HB-MGCH 4GB");
 			break;
 		case LPDDR4_ICOSA_4GB_HYNIX_H9HCNNNBPUMLHR_NLE:
-			strcpy(dram_man, "Hynix H9HCNNNBPUMLHR-NLE 4GB");
+			strcpy(dram_man, "SK Hynix H9HCNNNBPUMLHR-NLE 4GB");
 			break;
 		case LPDDR4_ICOSA_4GB_MICRON_MT53B512M32D2NP_062_WTC:
 			strcpy(dram_man, "Micron MT53B512M32D2NP-062 WT:C");
@@ -469,7 +469,7 @@ static lv_res_t _create_window_fuses_info_status(lv_obj_t *btn)
 			break;
 		case LPDDR4X_IOWA_4GB_HYNIX_H9HCNNNBKMMLHR_NME:
 		case LPDDR4X_HOAG_4GB_HYNIX_H9HCNNNBKMMLHR_NME:
-			strcpy(dram_man, "Hynix H9HCNNNBKMMLHR-NME 4GB");
+			strcpy(dram_man, "SK Hynix H9HCNNNBKMMLHR-NME 4GB");
 			break;
 		case LPDDR4X_IOWA_4GB_MICRON_MT53E512M32D2NP_046_WTE: // 4266Mbps.
 		case LPDDR4X_HOAG_4GB_MICRON_MT53E512M32D2NP_046_WTE: // 4266Mbps.
@@ -500,12 +500,12 @@ static lv_res_t _create_window_fuses_info_status(lv_obj_t *btn)
 		case LPDDR4X_HOAG_4GB_HYNIX_H9HCNNNBKMMLXR_NEE: // Replaced from Copper.
 		case LPDDR4X_AULA_4GB_HYNIX_H9HCNNNBKMMLXR_NEE: // Replaced from Copper.
 		case LPDDR4X_IOWA_4GB_HYNIX_H9HCNNNBKMMLXR_NEE: // Replaced from Copper.
-			strcpy(dram_man, "Hynix H9HCNNNBKMMLXR-NEE 4GB");
+			strcpy(dram_man, "SK Hynix H9HCNNNBKMMLXR-NEE 4GB");
 			break;
 		case LPDDR4X_IOWA_4GB_HYNIX_H54G46CYRBX267:
 		case LPDDR4X_HOAG_4GB_HYNIX_H54G46CYRBX267:
 		case LPDDR4X_AULA_4GB_HYNIX_H54G46CYRBX267:
-			strcpy(dram_man, "Hynix H54G46CYRBX267 4GB");
+			strcpy(dram_man, "SK Hynix H54G46CYRBX267 4GB");
 			break;
 		case LPDDR4X_IOWA_4GB_MICRON_MT53E512M32D1NP_046_WTB:
 		case LPDDR4X_HOAG_4GB_MICRON_MT53E512M32D1NP_046_WTB:
@@ -530,7 +530,7 @@ static lv_res_t _create_window_fuses_info_status(lv_obj_t *btn)
 	switch (burnt_fuses_hos)
 	{
 	case 0:
-		strcpy(fuses_hos_version, "#96FF00 Goldenes Beispiel#");
+		strcpy(fuses_hos_version, "#96FF00 Seltene Beispielfirmware#");
 		break;
 	case 1:
 		strcpy(fuses_hos_version, "1.0.0");
@@ -593,7 +593,7 @@ static lv_res_t _create_window_fuses_info_status(lv_obj_t *btn)
 		strcpy(fuses_hos_version, "19.0.0+");
 		break;
 	case 255:
-		strcpy(fuses_hos_version, "#FFD000 Overburnt#");
+		strcpy(fuses_hos_version, "#FFD000 Fuses verbrannt#");
 		break;
 	default:
 		strcpy(fuses_hos_version, "#FF8000 Unbekannt#");
@@ -675,7 +675,7 @@ static lv_res_t _create_window_fuses_info_status(lv_obj_t *btn)
 		break;
 */
 	case 6:
-		strcat(txt_buf, "Hynix");
+		strcat(txt_buf, "SK Hynix");
 		break;
 /*
 	case 8:
@@ -726,7 +726,7 @@ static lv_res_t _create_window_fuses_info_status(lv_obj_t *btn)
 		strcat(txt_buf, "Samsung");
 		break;
 	case 6:
-		strcat(txt_buf, "Hynix");
+		strcat(txt_buf, "SK Hynix");
 		break;
 	case 255:
 		strcat(txt_buf, "Micron");
@@ -819,7 +819,7 @@ static lv_res_t _create_window_fuses_info_status(lv_obj_t *btn)
 			strcat(txt_buf, "-???");
 			break;
 		default:
-			strcat(txt_buf, " #FFDD00 Contact me!#");
+			strcat(txt_buf, " #FFDD00 Kontaktiere mich!#");
 			break;
 		}
 		break;
@@ -988,9 +988,9 @@ static lv_res_t _create_window_fuses_info_status(lv_obj_t *btn)
 
 	// Check if patched unit.
 	if (!fuse_check_patched_rcm())
-		strcat(txt_buf, "\n\n#96FF00 Die Konsole ist ungepatcht#\n#96FF00 RCM-Fehler nutzbar!#");
+		strcat(txt_buf, "\n\n#96FF00 Die Konsole ist ungepatcht#\n#96FF00 RCM-Fehler ausnutzbar!#");
 	else
-		strcat(txt_buf, "\n\n#FF8000 Die Konsole ist gepatcht#\n#FF8000 RCM-Fehler nicht nutzbar!#");
+		strcat(txt_buf, "\n\n#FF8000 Die Konsole ist gepatcht#\n#FF8000 RCM-Fehler nicht ausnutzbar!#");
 
 	lv_label_set_text(lb_desc2, txt_buf);
 
@@ -1171,27 +1171,27 @@ static lv_res_t _create_mbox_emmc_sandisk_report(lv_obj_t * btn)
 
 	s_printf(txt_buf,
 		"#00DDFF Geraete-Report#\n"
-		//"#FF8000 Average Erases SYS:#    %d\n"
-		"#FF8000 Average Erases SLC:#    %d\n"
-		"#FF8000 Average Erases MLC:#    %d\n"
-		//"#FF8000 Read Reclaims SYS:#     %d\n"
-		"#FF8000 Read Reclaims SLC:#     %d\n"
-		"#FF8000 Read Reclaims MLC:#     %d\n"
-		"#FF8000 Bad Blocks Factory:#    %d\n"
-		"#FF8000 Bad Blocks SYS:#        %d\n"
-		"#FF8000 Bad Blocks SLC:#        %d\n"
-		"#FF8000 Bad Blocks MLC:#        %d\n"
-		"#FF8000 FW Updates:#            %d\n"
-		"#FF8000 FW Buildtime:#          %s %s\n"
-		"#FF8000 Total Writes:#          %d MB\n"
-		//"#FF8000 Voltage Drops:#         %d\n"
-		//"#FF8000 Voltage Droops:#        %d\n"
-		//"#FF8000 VD Failed Recovers:#    %d\n"
-		//"#FF8000 VD Recover Operations:# %d\n"
-		"#FF8000 Total Writes SLC:#      %d MB\n"
-		"#FF8000 Total Writes MLC:#      %d MB\n"
-		"#FF8000 BigFile limit status:#  %d\n"
-		"#FF8000 Average Erases Hybrid:# %d",
+		//"#FF8000 Durchschnittliche Loeschungen SYS:#    %d\n"
+		"#FF8000 Durchschnittliche Loeschungen SLC:#    %d\n"
+		"#FF8000 Durchschnittliche Loeschungen MLC:#    %d\n"
+		//"#FF8000 Lese-Wiederherstellungen SYS:#        %d\n"
+		"#FF8000 Lese-Wiederherstellungen SLC:#         %d\n"
+		"#FF8000 Lese-Wiederherstellungen MLC:#         %d\n"
+		"#FF8000 Fehlerhafte Bloecke ab Werk:#          %d\n"
+		"#FF8000 Fehlerhafte Bloecke SYS:#              %d\n"
+		"#FF8000 Fehlerhafte Bloecke SLC:#              %d\n"
+		"#FF8000 Fehlerhafte Bloecke MLC:#              %d\n"
+		"#FF8000 Firmware-Updates:#                     %d\n"
+		"#FF8000 Firmware-Erstellungszeit:#             %s %s\n"
+		"#FF8000 Gesamtschreibvorgaenge:#               %d MB\n"
+		//"#FF8000 Spannungsabfaelle:#                    %d\n"
+		//"#FF8000 Spannungseinbrueche:#                  %d\n"
+		//"#FF8000 Fehlgeschlagene Spannungswiederherstellungen:#    %d\n"
+		//"#FF8000 Spannungswiederherstellungsoperationen:# %d\n"
+		"#FF8000 Gesamtschreibvorgaenge SLC:#           %d MB\n"
+		"#FF8000 Gesamtschreibvorgaenge MLC:#           %d MB\n"
+		"#FF8000 Status der großen Dateigroessee:#      %d\n"
+		"#FF8000 Durchschnittliche Loeschungen Hybrid:# %d",
 
 		//rpt->avg_erase_cycles_sys,
 		rpt->avg_erase_cycles_slc,
@@ -1224,28 +1224,28 @@ static lv_res_t _create_mbox_emmc_sandisk_report(lv_obj_t * btn)
 	{
 		s_printf(txt_buf2,
 			"#00DDFF Erweiterte Statusanzeige#\n"
-			"#FF8000 Power ups:#             %d\n"
-			//"#FF8000 Maximum Erases SYS:#    %d\n"
-			"#FF8000 Maximum Erases SLC:#    %d\n"
-			"#FF8000 Maximum Erases MLC:#    %d\n"
-			//"#FF8000 Minimum Erases SYS:#    %d\n"
-			"#FF8000 Minimum Erases SLC:#    %d\n"
-			"#FF8000 Minimum Erases MLC:#    %d\n"
-			"#FF8000 Maximum Erases EUDA:#   %d\n"
-			"#FF8000 Minimum Erases EUDA:#   %d\n"
-			"#FF8000 Average Erases EUDA:#   %d\n"
-			"#FF8000 Read Reclaims EUDA:#    %d\n"
-			"#FF8000 Bad Blocks EUDA:#       %d\n"
-			//"#FF8000 Pre EOL State EUDA:#    %d\n"
-			//"#FF8000 Pre EOL State SYS:#     %d\n"
-			//"#FF8000 Pre EOL State MLC:#     %d\n"
-			"#FF8000 Uncorrectable ECC:#     %d\n"
-			"#FF8000 Temperatur aktuell:#    %d oC\n"
-			//"#FF8000 Temperature Min:#       %d oC\n"
-			"#FF8000 Temperatur Max:#        %d oC\n"
-			"#FF8000 Health Level EUDA:#     %d%%\n"
-			//"#FF8000 Health Level SYS:#      %d%%\n"
-			"#FF8000 Health Level MLC:#      %d%%",
+			"#FF8000 Einschaltungen:#                      %d\n"
+			//"#FF8000 Maximale Loeschungen SYS:#            %d\n"
+			"#FF8000 Maximale Loeschungen SLC:#            %d\n"
+			"#FF8000 Maximale Loeschungen MLC:#            %d\n"
+			//"#FF8000 Minimale Loeschungen SYS:#            %d\n"
+			"#FF8000 Minimale Loeschungen SLC:#            %d\n"
+			"#FF8000 Minimale Loeschungen MLC:#            %d\n"
+			"#FF8000 Maximale Loeschungen EUDA:#           %d\n"
+			"#FF8000 Minimale Loeschungen EUDA:#           %d\n"
+			"#FF8000 Durchschnittliche Loeschungen EUDA:#  %d\n"
+			"#FF8000 Lese-Wiederherstellungen EUDA:#       %d\n"
+			"#FF8000 Fehlerhafte Bloecke EUDA:#            %d\n"
+			//"#FF8000 Vor-EOL-Zustand EUDA:#               %d\n"
+			//"#FF8000 Vor-EOL-Zustand SYS:#                %d\n"
+			//"#FF8000 Vor-EOL-Zustand MLC:#                %d\n"
+			"#FF8000 Nicht korrigierbarer ECC:#            %d\n"
+			"#FF8000 Aktuelle Temperatur:#                 %d °C\n"
+			//"#FF8000 Minimale Temperatur:#                 %d °C\n"
+			"#FF8000 Maximale Temperatur:#                 %d °C\n"
+			"#FF8000 Gesundheitszustand EUDA:#             %d%%\n"
+			//"#FF8000 Gesundheitszustand SYS:#              %d%%\n"
+			"#FF8000 Gesundheitszustand MLC:#              %d%%",
 
 			rpt->advanced.power_inits,
 			//rpt->advanced.max_erase_cycles_sys,
@@ -1349,7 +1349,7 @@ static lv_res_t _create_mbox_benchmark(bool sd_bench)
 
 	if (res)
 	{
-		lv_mbox_set_text(mbox, "#FFDD00 Fehler beim initialisieren des Speichers!#");
+		lv_mbox_set_text(mbox, "#FFDD00 Fehler beim initialisieren des Speichers!\nMoeglicherweise Hardware Fehler#");
 		goto out;
 	}
 
@@ -1594,7 +1594,7 @@ static lv_res_t _create_window_emmc_info_status(lv_obj_t *btn)
 
 	if (!emmc_initialize(false))
 	{
-		lv_label_set_text(lb_desc, "#FFDD00 eMMC konnte nicht initialisiert werden!#");
+		lv_label_set_text(lb_desc, "#FFDD00 eMMC Chip konnte nicht initialisiert werden!#");
 		lv_obj_set_width(lb_desc, lv_obj_get_width(desc));
 		emmc_errors = emmc_get_error_count();
 
@@ -1622,8 +1622,11 @@ static lv_res_t _create_window_emmc_info_status(lv_obj_t *btn)
 		strcat(txt_buf, "Samsung ");
 		break;
 	case 0x45: // Unofficial.
-		strcat(txt_buf, "SanDisk ");
+		strcat(txt_buf, "SanDisk (inoffiziell) ");
 		lv_win_add_btn(win, NULL, SYMBOL_FILE_ALT" Geraete Report", _create_mbox_emmc_sandisk_report);
+		break;
+	case 0x89:
+		strcat(txt_buf, "Silicon Motion (inoffiziell) ");
 		break;
 	case 0x90:
 		strcat(txt_buf, "SK Hynix ");
@@ -1719,7 +1722,7 @@ static lv_res_t _create_window_emmc_info_status(lv_obj_t *btn)
 		"Monat/Jahr:\n\n"
 		"#00DDFF Ext CSD:#\n"
 		"Cmd Klassen:\n"
-		"Max Rate:\n"
+		"Max. Rate:\n"
 		"Akt. Rate:\n"
 		"Typ Support:\n\n"
 		"Write Cache:\n"
@@ -1787,7 +1790,7 @@ static lv_res_t _create_window_emmc_info_status(lv_obj_t *btn)
 		idx++;
 	}
 	if (!idx)
-		strcat(txt_buf, "#FFDD00 Partitionstabelle ist leer!#");
+		strcat(txt_buf, "#FFDD00 GPP Partitionstabelle ist leer!#");
 
 	emmc_gpt_free(&gpt);
 
@@ -1811,10 +1814,10 @@ out_error:
 		lv_mbox_set_recolor_text(mbox, true);
 
 		s_printf(txt_buf,
-			"#FF8000 eMMC Fehlerpruefung#\n\n"
+			"#FF8000 eMMC Fehler entdeckt#\n\n"
 			"#FFDD00 Dein eMMC ist im langsameren Modus initialisiert,#\n"
 			"#FFDD00 oder es traten Initialisierungs-/Lese-/Schreibfehler auf!#\n"
-			"#FFDD00 Dies koennte auf Hardwareprobleme hinweisen!#\n\n"
+			"#FFDD00 Koennte ein Hardwareproblem sein!#\n\n"
 			"#00DDFF Bus-Geschwindigkeit:# %d MB/s\n\n"
 			"#00DDFF SDMMC4 Fehler:#\n"
 			"Initialisierungsfehler: %d\n"
@@ -1890,7 +1893,7 @@ static lv_res_t _create_window_sdcard_info_status(lv_obj_t *btn)
 	switch (sd_storage.cid.manfid)
 	{
 	case 0x00:
-		strcat(txt_buf, "Faelschung ");
+		strcat(txt_buf, "Fake SD-Karte ");
 		break;
 	case 0x01:
 		strcat(txt_buf, "Panasonic ");
@@ -2033,7 +2036,7 @@ static lv_res_t _create_window_sdcard_info_status(lv_obj_t *btn)
 		"Akt. Rate:\n"
 		"Speed Klasse:\n"
 		"UHS Klasse:\n"
-		"Max Busgeschw.:\n\n"
+		"Max. Busgeschw.:\n\n"
 		"Schreibschutz:"
 	);
 	lv_obj_set_width(lb_desc2, lv_obj_get_width(desc2));
@@ -2154,7 +2157,7 @@ static lv_res_t _create_window_sdcard_info_status(lv_obj_t *btn)
 
 	lv_label_set_text(lb_desc4,
 		"#00DDFF SDMMC1 Fehler:#\n"
-		"Initial.-fehler:\n"
+		"Initialisierungsfehler:\n"
 		"Lese-/Schreibfehler:\n"
 		"Lese-/Schreibfehler:"
 	);
@@ -2208,8 +2211,8 @@ static lv_res_t _create_window_battery_status(lv_obj_t *btn)
 		"Durchsch. Strom:\n"
 		"Akt. Spannung:\n"
 		"Spannung im Leerlauf:\n"
-		"Min Spannung erreicht:\n"
-		"Max Spannung erreicht:\n"
+		"Min. Spannung erreicht:\n"
+		"Max. Spannung erreicht:\n"
 		"Leerspannung:\n"
 		"Akku-Temperatur:\n\n"
 		"#00DDFF PMIC IC Info:#\n"
@@ -2353,7 +2356,7 @@ static lv_res_t _create_window_battery_status(lv_obj_t *btn)
 		strcat(txt_buf, "Schnellladung\n");
 		break;
 	case 3:
-		strcat(txt_buf, "Ladevorgang beendet\n");
+		strcat(txt_buf, "Ladevorgang abgebrochen\n");
 		break;
 	default:
 		s_printf(txt_buf + strlen(txt_buf), "Unbekannt (%d)\n", value);

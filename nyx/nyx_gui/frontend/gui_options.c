@@ -25,7 +25,7 @@
 #include <libs/lvgl/lvgl.h>
 
 #define CLOCK_MIN_YEAR 2024
-#define CLOCK_MAX_YEAR (CLOCK_MIN_YEAR + 10)
+#define CLOCK_MAX_YEAR (CLOCK_MIN_YEAR + 50)
 #define CLOCK_YEARLIST "2024\n2025\n2026\n2027\n2028\n2029\n2030\n2031\n2032\n2033\n2034"
 
 extern hekate_config h_cfg;
@@ -209,7 +209,7 @@ static void _create_autoboot_window()
 	lv_label_set_static_text(label_sep, "");
 
 	lv_obj_t *label_txt = lv_label_create(h1, NULL);
-	lv_label_set_static_text(label_txt, "Haupt Konfiguration");
+	lv_label_set_static_text(label_txt, "Hauptkonfiguration");
 	lv_obj_set_style(label_txt, lv_theme_get_current()->label.prim);
 	lv_obj_align(label_txt, label_sep, LV_ALIGN_OUT_BOTTOM_LEFT, LV_DPI / 4, -(LV_DPI / 4));
 
@@ -366,7 +366,7 @@ static lv_res_t _save_nyx_options_action(lv_obj_t *btn)
 	nyx_changes_made = false;
 
 	if (res)
-		lv_mbox_set_text(mbox, "#FF8000 Nyx Konfiguration#\n\n#96FF00 Die Konfiguration wurde auf SD-Karte#\n#96FF00 gespeichert!#");
+		lv_mbox_set_text(mbox, "#FF8000 Nyx Konfiguration#\n\n#96FF00 Die aktualisierte Konfiguration wurde auf SD-Karte#\n#96FF00 gespeichert!#");
 	else
 		lv_mbox_set_text(mbox, "#FF8000 Nyx Konfiguration#\n\n#FFDD00 Speichern der Konfiguration#\n#FFDD00 auf SD-Karte fehlgeschlagen!#");
 	lv_mbox_add_btns(mbox, mbox_btn_map, NULL);
@@ -619,9 +619,8 @@ static lv_res_t _create_window_nyx_colors(lv_obj_t *btn)
 	lv_label_set_long_mode(lbl_test, LV_LABEL_LONG_BREAK);
 	lv_label_set_static_text(lbl_test,
 		"Dies ist ein Beispieltext, um Schrift und Schriftfarbe zu testen. "
-		"Er enthaelt keinen spezifischen Inhalt, sondern dient ausschliesslich "
-		"dem Zweck der Darstellung. "
-		"Bitte ueberpruefe, ob der Text und die Farbe korrekt angezeigt wird.");
+		"Er enthaelt keinen spezifischen Inhalt. "
+		"123456789 !@#$%^&*()-_=+[]\;'./,{}|:"<>? ");
 	lv_obj_set_width(lbl_test, lv_obj_get_width(h2) - LV_DPI * 6 / 10);
 	lv_obj_align(lbl_test, lbl_sample, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 5);
 	color_test.label = lbl_test;
@@ -745,7 +744,7 @@ static lv_res_t _create_mbox_clock_edit(lv_obj_t *btn)
 	lv_mbox_set_recolor_text(mbox, true);
 	lv_obj_set_width(mbox, LV_HOR_RES / 9 * 6);
 
-	lv_mbox_set_text(mbox, "Setze #C7EA46 Datum# und #C7EA46 Zeit# fuer Nyx\nDie tatsaechliche Hardware-Uhr aendert es nicht!");
+	lv_mbox_set_text(mbox, "Setze #C7EA46 Datum# und #C7EA46 Zeit# fuer Nyx\nDie Uhr ausserhalb von Nyx aendert es nicht!");
 
 	// Get current time.
 	rtc_time_t time;
@@ -1058,27 +1057,27 @@ disabled_or_cal0_issue:;
 
 			// Check if pairing was done in HOS.
 			if (is_l_hos && is_r_hos)
-				strcat(txt_buf, "#C7EA46 Beide Kopplungsdaten basieren auf HOS!#");
+				strcat(txt_buf, "#C7EA46 Beide Kopplungsdaten basieren auf Horizon OS!#");
 			else if (!is_l_hos && is_r_hos)
 			{
-				strcat(txt_buf, "#FF8000 Warnung:# Kopplungsdaten #FFDD00 JoyCon Links# basieren nicht auf HOS!");
+				strcat(txt_buf, "#FF8000 Warnung:# Kopplungsdaten #FFDD00 JoyCon Links# basieren nicht auf Horizon OS!");
 				success = false;
 			}
 			else if (is_l_hos && !is_r_hos)
 			{
-				strcat(txt_buf, "#FF8000 Warnung:# Kopplungsdaten #FFDD00 JoyCon Rechts# basieren nicht auf HOS!");
+				strcat(txt_buf, "#FF8000 Warnung:# Kopplungsdaten #FFDD00 JoyCon Rechts# basieren nicht auf Horizon OS!");
 				success = false;
 			}
 			else
 			{
-				strcat(txt_buf, "#FF8000 Warnung:# #FFDD00 Keine# Kopplungsdaten basieren auf HOS!");
+				strcat(txt_buf, "#FF8000 Warnung:# #FFDD00 Keine# Kopplungsdaten basieren auf Horizon OS!");
 				success = false;
 			}
 
 			if (!success)
 				strcat(txt_buf,
 					"\n\n#FFDD00 Stelle sicher das beide JoyCons verbunden sind,#\n"
-					"#FFDD00 und dass sie im HOS gekoppelt sind!#");
+					"#FFDD00 und dass sie im Horizon OS gekoppelt sind!#");
 
 			if (cal_error)
 				s_printf(txt_buf + strlen(txt_buf), "\n\n#FF8000 Warnung: Fehler (%d) beim Abrufen der IMU-Kalibrierung!#", cal_error);
