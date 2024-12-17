@@ -599,7 +599,7 @@ static const BYTE DbcTbl[] = MKCVTBL(TBL_DC, FF_CODE_PAGE);
 
 void print_error()
 {
-	gfx_printf("\n\n\n%k[FatFS] Error: %k", 0xFFFFFF00, 0xFFFFFFFF);
+	gfx_printf("\n\n\n%k[FatFS] Fehler: %k", 0xFFFFFF00, 0xFFFFFFFF);
 }
 
 
@@ -3225,7 +3225,7 @@ static BYTE check_fs (	/* 0:FAT, 1:exFAT, 2:Valid BS but not FAT, 3:Not a BS, 4:
 	if (ld_word(fs->win + BS_55AA) != 0xAA55) return 3;	/* Check boot record signature (always here regardless of the sector size) */
 
 #if FF_FS_EXFAT
-	if (!mem_cmp(fs->win + BS_JmpBoot, "\xEB\x76\x90" "EXFAT   ", 11)) return 1;	/* Check if exFAT VBR */
+	if (!mem_cmp(fs->win + BS_JmpBoot, "\xEB\x76\x90" "ExFAT   ", 11)) return 1;	/* Check if exFAT VBR */
 #endif
 	if (fs->win[BS_JmpBoot] == 0xE9 || fs->win[BS_JmpBoot] == 0xEB || fs->win[BS_JmpBoot] == 0xE8) {	/* Valid JumpBoot code? */
 		if (!mem_cmp(fs->win + BS_FilSysType, "FAT", 3)) return 0;		/* Is it an FAT VBR? */
@@ -3322,7 +3322,7 @@ static FRESULT find_volume (	/* FR_OK(0): successful, !=0: an error occurred */
 		/* If GPT Check the first partition */
 		gpt_header_t *gpt_header = (gpt_header_t *)fs->win;
 		if (move_window(fs, 1) != FR_OK) return FR_DISK_ERR;
-		if (!mem_cmp(&gpt_header->signature, "EFI PART", 8)) {
+		if (!mem_cmp(&gpt_header->signature, "EFI PARTITION", 8)) {
 			if (move_window(fs, gpt_header->part_ent_lba) != FR_OK) return FR_DISK_ERR;
 			gpt_entry_t *gpt_entry = (gpt_entry_t *)fs->win;
 			fs->part_type = 1;
@@ -3332,7 +3332,7 @@ static FRESULT find_volume (	/* FR_OK(0): successful, !=0: an error occurred */
 	}
 #endif
 	if (fmt >= 2) {
-		EFSPRINTF("NOFAT");
+		EFSPRINTF("KEINFAT");
 		return FR_NO_FILESYSTEM;	/* No FAT volume is found */
 	}
 
@@ -4060,7 +4060,7 @@ FRESULT f_write (
 					}
 				}
 				if (clst == 0) {
-					EFSPRINTF("DSKFULL");
+					EFSPRINTF("DSKVOLL");
 					break;		/* Could not allocate a new cluster (disk full) */
 				}
 				if (clst == 1) {
@@ -4068,7 +4068,7 @@ FRESULT f_write (
 					ABORT(fs, FR_INT_ERR);
 				}
 				if (clst == 0xFFFFFFFF) {
-					EFSPRINTF("DERR");
+					EFSPRINTF("DFEHLER");
 					ABORT(fs, FR_DISK_ERR);
 				}
 				fp->clust = clst;			/* Update current cluster */
@@ -4188,7 +4188,7 @@ FRESULT f_write_fast (
 	}
 
 	if (clst < 2) { EFSPRINTF("CCHK"); ABORT(fs, FR_INT_ERR); }
-	else if (clst == 0xFFFFFFFF) { EFSPRINTF("DERR"); ABORT(fs, FR_DISK_ERR); }
+	else if (clst == 0xFFFFFFFF) { EFSPRINTF("DFEHLER"); ABORT(fs, FR_DISK_ERR); }
 
 	fp->clust = clst;	/* Set working cluster */
 
@@ -4201,7 +4201,7 @@ FRESULT f_write_fast (
 		clst = clmt_clust(fp, fp->fptr);	/* Get cluster# from the CLMT */
 
 		if (clst < 2) { EFSPRINTF("CCHK2"); ABORT(fs, FR_INT_ERR); }
-		else if (clst == 0xFFFFFFFF) { EFSPRINTF("DERR"); ABORT(fs, FR_DISK_ERR); }
+		else if (clst == 0xFFFFFFFF) { EFSPRINTF("DFEHLER"); ABORT(fs, FR_DISK_ERR); }
 
 		fp->clust = clst;
 
@@ -6061,7 +6061,7 @@ FRESULT f_mkfs (
 		for (n = 0; n < 2; n++) {
 			/* Main record (+0) */
 			mem_set(buf, 0, ss);
-			mem_cpy(buf + BS_JmpBoot, "\xEB\x76\x90" "EXFAT   ", 11);	/* Boot jump code (x86), OEM name */
+			mem_cpy(buf + BS_JmpBoot, "\xEB\x76\x90" "ExFAT   ", 11);	/* Boot jump code (x86), OEM name */
 			st_dword(buf + BPB_VolOfsEx, b_vol);					/* Volume offset in the physical drive [sector] */
 			st_dword(buf + BPB_TotSecEx, sz_vol);					/* Volume size [sector] */
 			st_dword(buf + BPB_FatOfsEx, b_fat - b_vol);			/* FAT offset [sector] */
@@ -6209,7 +6209,7 @@ FRESULT f_mkfs (
 			buf[BS_BootSig32] = 0x29;					/* Extended boot signature */
 			/* Volume label, FAT signature */
 			if (!(opt & FM_PRF2)) mem_cpy(buf + BS_VolLab32, FF_MKFS_LABEL "FAT32   ", 19);
-			else mem_cpy(buf + BS_VolLab32, "NO NAME    " "FAT32   ", 19);
+			else mem_cpy(buf + BS_VolLab32, "KEIN NAME  " "FAT32   ", 19);
 		} else {
 			st_dword(buf + BS_VolID, GET_FATTIME());	/* VSN */
 			st_word(buf + BPB_FATSz16, (WORD)sz_fat);	/* FAT size [sector] */
@@ -6217,7 +6217,7 @@ FRESULT f_mkfs (
 			buf[BS_BootSig] = 0x29;						/* Extended boot signature */
 			/* Volume label, FAT signature */
 			if (!(opt & FM_PRF2)) mem_cpy(buf + BS_VolLab, FF_MKFS_LABEL "FAT     ", 19);
-			else mem_cpy(buf + BS_VolLab, "NO NAME    " "FAT     ", 19);
+			else mem_cpy(buf + BS_VolLab, "KEIN NAME  " "FAT     ", 19);
 		}
 		st_word(buf + BS_55AA, 0xAA55);					/* Signature (offset is fixed here regardless of sector size) */
 		if (disk_write(pdrv, buf, b_vol, 1) != RES_OK) LEAVE_MKFS(FR_DISK_ERR);	/* Write it to the VBR sector */
