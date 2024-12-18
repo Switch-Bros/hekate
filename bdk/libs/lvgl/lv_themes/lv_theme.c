@@ -65,7 +65,7 @@ void lv_theme_set_current(lv_theme_t * th)
     if(!inited) {
         /*It's not sure `th_styles` is big enough. Check it now!*/
         if(style_num > sizeof(th_styles) / sizeof(lv_style_t)) {
-            LV_LOG_ERROR("Themes: th_styles array is too small. Increase it's size!");
+            LV_LOG_ERROR("Themes: th_styles Array ist zu klein. Erhoehe seine Groesse!");
             while(1);
         }
 
