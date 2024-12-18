@@ -74,7 +74,7 @@ void lv_vpx(lv_coord_t x, lv_coord_t y, const lv_area_t * mask_p, lv_color_t col
 
     lv_vdb_t * vdb_p = lv_vdb_get();
     if(!vdb_p) {
-        LV_LOG_WARN("Invalid VDB pointer");
+        LV_LOG_WARN("Ungueltiger VDB-Zeiger");
         return;
     }
 
@@ -125,7 +125,7 @@ void lv_vfill(const lv_area_t * cords_p, const lv_area_t * mask_p,
     bool union_ok;
     lv_vdb_t * vdb_p = lv_vdb_get();
     if(!vdb_p) {
-        LV_LOG_WARN("Invalid VDB pointer");
+        LV_LOG_WARN("Ungueltiger VDB-Zeiger");
         return;
     }
 
@@ -248,7 +248,7 @@ void lv_vletter(const lv_point_t * pos_p, const lv_area_t * mask_p,
     if(opa > LV_OPA_MAX) opa = LV_OPA_COVER;
 
     if(font_p == NULL) {
-        LV_LOG_WARN("Font: character's bitmap not found");
+        LV_LOG_WARN("Schriftart: Bitmap des Zeichens nicht gefunden");
         return;
     }
 
@@ -297,7 +297,7 @@ void lv_vletter(const lv_point_t * pos_p, const lv_area_t * mask_p,
 
     lv_vdb_t * vdb_p = lv_vdb_get();
     if(!vdb_p) {
-        LV_LOG_WARN("Invalid VDB pointer");
+        LV_LOG_WARN("Ungueltiger VDB-Zeiger");
         return;
     }
 
@@ -400,7 +400,7 @@ void lv_vmap(const lv_area_t * cords_p, const lv_area_t * mask_p,
     bool union_ok;
     lv_vdb_t * vdb_p = lv_vdb_get();
     if(!vdb_p) {
-        LV_LOG_WARN("Invalid VDB pointer");
+        LV_LOG_WARN("Ungueltiger VDB-Zeiger");
         return;
     }
 

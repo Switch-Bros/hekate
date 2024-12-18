@@ -69,7 +69,7 @@ void lv_draw_img(const lv_area_t * coords, const lv_area_t * mask,
                  const void * src, const lv_style_t * style, lv_opa_t opa_scale)
 {
     if(src == NULL) {
-        LV_LOG_WARN("Image draw: src is NULL");
+        LV_LOG_WARN("Bildzeichnung: Quelle ist NULL");
         lv_draw_rect(coords, mask, &lv_style_plain, LV_OPA_COVER);
         lv_draw_label(coords, mask, &lv_style_plain, LV_OPA_COVER, "No\ndata", LV_TXT_FLAG_NONE, NULL);
         return;
@@ -79,7 +79,7 @@ void lv_draw_img(const lv_area_t * coords, const lv_area_t * mask,
     res = lv_img_draw_core(coords, mask, src, style, opa_scale);
 
     if(res ==  LV_RES_INV) {
-        LV_LOG_WARN("Image draw error");
+        LV_LOG_WARN("Fehler bei der Bildzeichnung");
         lv_draw_rect(coords, mask, &lv_style_plain, LV_OPA_COVER);
         lv_draw_label(coords, mask, &lv_style_plain, LV_OPA_COVER, "No\ndata", LV_TXT_FLAG_NONE, NULL);
         return;
@@ -138,7 +138,7 @@ lv_res_t lv_img_dsc_get_info(const char * src, lv_img_header_t * header)
          * The actual value doesn't matter because lv_draw_label will draw it*/
         header->cf  = LV_IMG_CF_ALPHA_1BIT;
     } else {
-        LV_LOG_WARN("Image get info found unknown src type");
+        LV_LOG_WARN("Bildinfo abrufen: Unbekannter Quelltyp gefunden");
         return false;
     }
     return true;
@@ -253,7 +253,7 @@ lv_img_src_t lv_img_src_get_type(const void * src)
     }
 
     if (LV_IMG_SRC_UNKNOWN == img_src_type) {
-        LV_LOG_WARN("lv_img_src_get_type: unknown image type");
+        LV_LOG_WARN("lv_img_src_get_type: Unbekannter Bildtyp");
     }
 
     return img_src_type;
@@ -298,7 +298,7 @@ static lv_res_t lv_img_draw_core(const lv_area_t * coords, const lv_area_t * mas
     lv_res_t header_res;
     header_res = lv_img_dsc_get_info(src, &header);
     if(header_res != LV_RES_OK) {
-        LV_LOG_WARN("Image draw can't get image info");
+        LV_LOG_WARN("Bildzeichnung: Bildinfo kann nicht abgerufen werden");
         lv_img_decoder_close();
         return LV_RES_INV;
     }
@@ -308,7 +308,7 @@ static lv_res_t lv_img_draw_core(const lv_area_t * coords, const lv_area_t * mas
 
     const uint8_t * img_data = lv_img_decoder_open(src, style);
     if(img_data == LV_IMG_DECODER_OPEN_FAIL) {
-        LV_LOG_WARN("Image draw cannot open the image resource");
+        LV_LOG_WARN("Bildzeichnung: Bildquelle kann nicht geoeffnet werden");
         lv_img_decoder_close();
         return LV_RES_INV;
     }
@@ -338,7 +338,7 @@ static lv_res_t lv_img_draw_core(const lv_area_t * coords, const lv_area_t * mas
             read_res = lv_img_decoder_read_line(x, y, width, buf);
             if(read_res != LV_RES_OK) {
                 lv_img_decoder_close();
-                LV_LOG_WARN("Image draw can't read the line");
+                LV_LOG_WARN("Bildzeichnung: Zeile kann nicht gelesen werden");
                 return LV_RES_INV;
             }
             map_fp(&line, mask, buf, opa, chroma_keyed, alpha_byte, style->image.color, style->image.intense);
@@ -377,7 +377,7 @@ static const uint8_t * lv_img_decoder_open(const void * src, const lv_style_t * 
     if(header_res == LV_RES_INV) {
         decoder_src = NULL;
         decoder_src_type = LV_IMG_SRC_UNKNOWN;
-        LV_LOG_WARN("Built-in image decoder can't get the header info");
+        LV_LOG_WARN("Integrierter Bilddecoder kann die Header-Informationen nicht abrufen");
         return LV_IMG_DECODER_OPEN_FAIL;
     }
 
@@ -386,11 +386,11 @@ static const uint8_t * lv_img_decoder_open(const void * src, const lv_style_t * 
 #if USE_LV_FILESYSTEM
         lv_fs_res_t res = lv_fs_open(&decoder_file, src, LV_FS_MODE_RD);
         if(res != LV_FS_RES_OK) {
-            LV_LOG_WARN("Built-in image decoder can't open the file");
+            LV_LOG_WARN("Integrierter Bilddecoder kann die Datei nicht oeffnen");
             return LV_IMG_DECODER_OPEN_FAIL;
         }
 #else
-        LV_LOG_WARN("Image built-in decoder can read file because USE_LV_FILESYSTEM = 0");
+        LV_LOG_WARN("Integrierter Bilddecoder kann die Datei lesen, weil USE_LV_FILESYSTEM = 0");
         return LV_IMG_DECODER_OPEN_FAIL;
 #endif
     }
@@ -429,7 +429,7 @@ static const uint8_t * lv_img_decoder_open(const void * src, const lv_style_t * 
             lv_fs_read(&decoder_file, palette_file, palette_size * sizeof(lv_color32_t), NULL);
             palette_p = palette_file;
 #else
-            LV_LOG_WARN("Image built-in decoder can read the palette because USE_LV_FILESYSTEM = 0");
+            LV_LOG_WARN("Integrierter Bilddecoder kann die Palette lesen, weil USE_LV_FILESYSTEM = 0");
             return LV_IMG_DECODER_OPEN_FAIL;
 #endif
         } else {
@@ -443,7 +443,7 @@ static const uint8_t * lv_img_decoder_open(const void * src, const lv_style_t * 
         }
         return NULL;
 #else
-        LV_LOG_WARN("Indexed (palette) images are not enabled in lv_conf.h. See LV_IMG_CF_INDEXED");
+        LV_LOG_WARN("Indexierte (Palette) Bilder sind in lv_conf.h nicht aktiviert. Siehe LV_IMG_CF_INDEXED");
         return LV_IMG_DECODER_OPEN_FAIL;
 #endif
     } else if(cf == LV_IMG_CF_ALPHA_1BIT ||
@@ -453,11 +453,11 @@ static const uint8_t * lv_img_decoder_open(const void * src, const lv_style_t * 
 #if LV_IMG_CF_ALPHA
         return NULL;   /*Nothing to process*/
 #else
-        LV_LOG_WARN("Alpha indexed images are not enabled in lv_conf.h. See LV_IMG_CF_ALPHA");
+        LV_LOG_WARN("Alpha-indexierte Bilder sind in lv_conf.h nicht aktiviert. Siehe LV_IMG_CF_ALPHA");
         return LV_IMG_DECODER_OPEN_FAIL;
 #endif
     } else {
-        LV_LOG_WARN("Image decoder open: unknown color format")
+        LV_LOG_WARN("Bilddecoder oeffnen: unbekanntes Farbformat")
         return LV_IMG_DECODER_OPEN_FAIL;
     }
 }
@@ -472,7 +472,7 @@ static lv_res_t lv_img_decoder_read_line(lv_coord_t x, lv_coord_t y, lv_coord_t 
             custom_res = lv_img_decoder_read_line_custom(x, y, len, buf);
             return custom_res;
         } else {
-            LV_LOG_WARN("Image open with custom decoder but read not supported")
+            LV_LOG_WARN("Bild oeffnen mit benutzerdefiniertem Decoder, aber Lesen nicht unterstuetzt")
         }
         return LV_RES_INV;  /*It"s an error if not returned earlier*/
     }
@@ -490,14 +490,14 @@ static lv_res_t lv_img_decoder_read_line(lv_coord_t x, lv_coord_t y, lv_coord_t 
             pos += 4;    /*Skip the header*/
             res = lv_fs_seek(&decoder_file, pos);
             if(res != LV_FS_RES_OK) {
-                LV_LOG_WARN("Built-in image decoder seek failed");
+                LV_LOG_WARN("Eingebauter Bilddecoder - Suchen fehlgeschlagen");
                 return false;
             }
             uint32_t btr = len * (px_size >> 3);
             uint32_t br = 0;
             lv_fs_read(&decoder_file, buf, btr, &br);
             if(res != LV_FS_RES_OK || btr != br) {
-                LV_LOG_WARN("Built-in image decoder read failed");
+                LV_LOG_WARN("Eingebauter Bilddecoder - Lesen fehlgeschlagen");
                 return false;
             }
         } else if(decoder_header.cf == LV_IMG_CF_ALPHA_1BIT ||
@@ -512,11 +512,11 @@ static lv_res_t lv_img_decoder_read_line(lv_coord_t x, lv_coord_t y, lv_coord_t 
                   decoder_header.cf == LV_IMG_CF_INDEXED_8BIT) {
             lv_img_built_in_decoder_line_indexed(x, y, len, buf);
         } else {
-            LV_LOG_WARN("Built-in image decoder read not supports the color format");
+            LV_LOG_WARN("Eingebauter Bilddecoder - Lesen unterstuetzt das Farbformat nicht");
             return false;
         }
 #else
-        LV_LOG_WARN("Image built-in decoder can't read file because USE_LV_FILESYSTEM = 0");
+        LV_LOG_WARN("Eingebauter Bilddecoder kann die Datei nicht lesen, weil USE_LV_FILESYSTEM = 0");
         return false;
 #endif
     } else if(decoder_src_type == LV_IMG_SRC_VARIABLE) {
@@ -533,7 +533,7 @@ static lv_res_t lv_img_decoder_read_line(lv_coord_t x, lv_coord_t y, lv_coord_t 
                   img_dsc->header.cf == LV_IMG_CF_INDEXED_8BIT) {
             lv_img_built_in_decoder_line_indexed(x, y, len, buf);
         } else {
-            LV_LOG_WARN("Built-in image decoder not supports the color format");
+            LV_LOG_WARN("Eingebauter Bilddecoder unterstuetzt das Farbformat nicht");
             return false;
         }
     }
@@ -643,7 +643,7 @@ static lv_res_t lv_img_built_in_decoder_line_alpha(lv_coord_t x, lv_coord_t y, l
         lv_fs_read(&decoder_file, fs_buf, w, NULL);
         data_tmp = fs_buf;
 #else
-        LV_LOG_WARN("Image built-in alpha line reader can't read file because USE_LV_FILESYSTEM = 0");
+        LV_LOG_WARN("Eingebauter Alpha-Zeilenleser des Bildes kann die Datei nicht lesen, weil USE_LV_FILESYSTEM = 0");
         data_tmp = NULL;        /*To avoid warnings*/
         return LV_RES_INV;
 #endif
@@ -668,7 +668,7 @@ static lv_res_t lv_img_built_in_decoder_line_alpha(lv_coord_t x, lv_coord_t y, l
     return LV_RES_OK;
 
 #else
-    LV_LOG_WARN("Image built-in alpha line reader failed because LV_IMG_CF_ALPHA is 0 in lv_conf.h");
+    LV_LOG_WARN("Eingebauter Alpha-Zeilenleser des Bildes fehlgeschlagen, weil LV_IMG_CF_ALPHA in lv_conf.h auf 0 gesetzt ist");
     return LV_RES_INV;
 #endif
 }
@@ -730,7 +730,7 @@ static lv_res_t lv_img_built_in_decoder_line_indexed(lv_coord_t x, lv_coord_t y,
         lv_fs_read(&decoder_file, fs_buf, w, NULL);
         data_tmp = fs_buf;
 #else
-        LV_LOG_WARN("Image built-in indexed line reader can't read file because USE_LV_FILESYSTEM = 0");
+        LV_LOG_WARN("Eingebauter Index-Zeilenleser des Bildes kann die Datei nicht lesen, weil USE_LV_FILESYSTEM auf 0 gesetzt ist");
         data_tmp = NULL;        /*To avoid warnings*/
         return LV_RES_INV;
 #endif
@@ -753,7 +753,7 @@ static lv_res_t lv_img_built_in_decoder_line_indexed(lv_coord_t x, lv_coord_t y,
 
     return LV_RES_OK;
 #else
-    LV_LOG_WARN("Image built-in indexed line reader failed because LV_IMG_CF_INDEXED is 0 in lv_conf.h");
+    LV_LOG_WARN("Eingebauter Index-Zeilenleser des Bildes fehlgeschlagen, weil LV_IMG_CF_INDEXED auf 0 in lv_conf.h gesetzt ist");
     return LV_RES_INV;
 #endif
 }
