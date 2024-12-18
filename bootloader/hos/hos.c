@@ -632,7 +632,7 @@ try_load:
 		else
 		{
 			_hos_crit_error("Unbekannte pkg1 Version.");
-			EPRINTFARGS("HOS Version nicht unterstuetzt!%s",
+			EPRINTFARGS("HorizonOS Version nicht unterstuetzt!%s",
 				(emu_cfg.enabled && !h_cfg.emummc_force_disable) ? "\noder emuMMC korrupt!" : "");
 		}
 
@@ -1055,7 +1055,7 @@ int hos_launch(ini_sec_t *cfg)
 
 		if (sd_fs.fs_type == FS_EXFAT && !exfat_compat)
 		{
-			_hos_crit_error("SD-Karte ist exFAT, aber installiertes HOS \nunterstuetzt nur FAT32!");
+			_hos_crit_error("SD-Karte ist exFAT, aber installiertes HorizonOS \nunterstuetzt nur FAT32!");
 
 			goto error;
 		}
@@ -1201,7 +1201,7 @@ error:
 	sdram_src_pllc(false);
 	emmc_end();
 
-	EPRINTF("\nFehler beim Starten von HOS!");
+	EPRINTF("\nFehler beim Starten von HorizonOS!");
 
 	return 0;
 }

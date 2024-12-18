@@ -523,7 +523,7 @@ static void _launch_config()
 	if (sec_idx < 6)
 	{
 		ments[sec_idx].type    = MENT_CAPTION;
-		ments[sec_idx].caption = "Keine Standardkonfig gefunden...";
+		ments[sec_idx].caption = "Keine Standardkonfig. gefunden...";
 		ments[sec_idx].color   = TXT_CLR_WARNING;
 		sec_idx++;
 	}
@@ -1101,7 +1101,7 @@ static void _show_errors()
 		}
 
 		if (h_cfg.errors & ERR_LIBSYS_LP0)
-			WPRINTF("LP0 (Sleep)-Bibliothek fehlt!\n");
+			WPRINTF("LP0 (Ruhemodus)-Bibliothek fehlt!\n");
 		if (h_cfg.errors & ERR_LIBSYS_MTC)
 			WPRINTF("Minerva-Bibliothek fehlt!\n");
 
@@ -1164,7 +1164,7 @@ static void _show_errors()
 			b = (b << 0)  | (b << 4);
 			u32 color = r | g | b;
 
-			WPRINTF("HOS-Panik aufgetreten!\n");
+			WPRINTF("HorizonOS Panik aufgetreten!\n");
 			gfx_printf("Color: %k####%k, Code: %02X\n\n", color, TXT_CLR_DEFAULT, panic_status);
 		}
 

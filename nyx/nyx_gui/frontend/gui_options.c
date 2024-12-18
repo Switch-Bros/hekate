@@ -1057,27 +1057,27 @@ disabled_or_cal0_issue:;
 
 			// Check if pairing was done in HOS.
 			if (is_l_hos && is_r_hos)
-				strcat(txt_buf, "#C7EA46 Beide Kopplungsdaten basieren auf Horizon OS!#");
+				strcat(txt_buf, "#C7EA46 Beide Kopplungsdaten basieren auf HorizonOS!#");
 			else if (!is_l_hos && is_r_hos)
 			{
-				strcat(txt_buf, "#FF8000 Warnung:# Kopplungsdaten #FFDD00 JoyCon Links# basieren nicht auf Horizon OS!");
+				strcat(txt_buf, "#FF8000 Warnung:# Kopplungsdaten #FFDD00 JoyCon Links# basieren nicht auf HorizonOS!");
 				success = false;
 			}
 			else if (is_l_hos && !is_r_hos)
 			{
-				strcat(txt_buf, "#FF8000 Warnung:# Kopplungsdaten #FFDD00 JoyCon Rechts# basieren nicht auf Horizon OS!");
+				strcat(txt_buf, "#FF8000 Warnung:# Kopplungsdaten #FFDD00 JoyCon Rechts# basieren nicht auf HorizonOS!");
 				success = false;
 			}
 			else
 			{
-				strcat(txt_buf, "#FF8000 Warnung:# #FFDD00 Keine# Kopplungsdaten basieren auf Horizon OS!");
+				strcat(txt_buf, "#FF8000 Warnung:# #FFDD00 Keine# Kopplungsdaten basieren auf HorizonOS!");
 				success = false;
 			}
 
 			if (!success)
 				strcat(txt_buf,
 					"\n\n#FFDD00 Stelle sicher das beide JoyCons verbunden sind,#\n"
-					"#FFDD00 und dass sie im Horizon OS gekoppelt sind!#");
+					"#FFDD00 und dass sie im HorizonOS gekoppelt sind!#");
 
 			if (cal_error)
 				s_printf(txt_buf + strlen(txt_buf), "\n\n#FF8000 Warnung: Fehler (%d) beim Abrufen der IMU-Kalibrierung!#", cal_error);
@@ -1487,12 +1487,12 @@ void create_tab_options(lv_theme_t *th, lv_obj_t *parent)
 
 	// Create Auto HOS Power Off button.
 	lv_obj_t *btn3 = lv_btn_create(sw_h3, NULL);
-	nyx_create_onoff_button(th, sw_h3, btn3, SYMBOL_POWER" Auto HOS Ausschalten", auto_hos_poweroff_toggle, true);
+	nyx_create_onoff_button(th, sw_h3, btn3, SYMBOL_POWER" Auto HorizonOS Ausschalten", auto_hos_poweroff_toggle, true);
 	lv_obj_align(btn3, label_sep, LV_ALIGN_OUT_BOTTOM_LEFT, 0, 0);
 
 	label_txt2 = lv_label_create(sw_h3, NULL);
 	lv_label_set_static_text(label_txt2,
-		"Wenn Ausschalten im HOS verwendet wurde, wacht die Konsole nach\n"
+		"Wenn Ausschalten im HorizonOS verwendet wurde, wacht die Konsole nach\n"
 		"15s wieder auf. Aktivieren, um es bei der naechsten\nPayload-Injizierung autom. auszuschalten.");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, btn3, LV_ALIGN_OUT_BOTTOM_LEFT, LV_DPI / 4, LV_DPI / 12);

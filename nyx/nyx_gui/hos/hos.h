@@ -66,7 +66,7 @@ typedef struct _hos_eks_mbr_t
 	u8  troot_dev[SE_KEY_128_SIZE];
 } hos_eks_mbr_t;
 
-static_assert(sizeof(hos_eks_mbr_t) == 64, "HOS EKS Groesse ist falsch!");
+static_assert(sizeof(hos_eks_mbr_t) == 64, "HorizonOS EKS Groesse ist falsch!");
 
 typedef struct _launch_ctxt_t
 {

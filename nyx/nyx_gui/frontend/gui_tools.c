@@ -1612,7 +1612,7 @@ static void _create_tab_tools_arc_autorcm(lv_theme_t *th, lv_obj_t *parent)
 	lv_label_set_recolor(label_txt2, true);
 	lv_label_set_static_text(label_txt2,
 		"Ermoeglicht das kalibrieren des Touchscreenmoduls.\n"
-		"#FF8000 Behebt Touchscreenprobleme in Nyx und HOS.#");
+		"#FF8000 Behebt Touchscreenprobleme in Nyx und HorizonOS.#");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, btn2, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3);
 
