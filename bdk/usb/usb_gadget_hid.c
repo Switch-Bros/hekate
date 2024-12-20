@@ -471,7 +471,7 @@ int usb_device_gadget_hid(usb_ctxt_t *usbs)
 	goto exit;
 
 error:
-	usbs->set_text(usbs->label, "#FFDD00 Fehler:# Zeitüberschreitung oder abgebrochen!");
+	usbs->set_text(usbs->label, "#FFDD00 Fehler:# Zeitueberschreitung oder abgebrochen!");
 	res = 1;
 
 exit:
