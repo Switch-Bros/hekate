@@ -234,7 +234,7 @@ static int _stat_and_copy_files(const char *src, const char *dst, char *path, u3
 		}
 		else // It's a directory.
 		{
-			if (!memcmp("Systemvoluminfomationen", fno.fname, 25))
+			if (!memcmp("Systemdatentraeger-Informationen", fno.fname, 25))
 				continue;
 
 			// Create folder to destination.
@@ -355,7 +355,7 @@ static void _prepare_and_flash_mbr_gpt()
 		mbr_idx++;
 
 		// Set GPT header.
-		memcpy(&gpt->header.signature, "EFI PART", 8);
+		memcpy(&gpt->header.signature, "EFI PARTITION", 8);
 		gpt->header.revision = 0x10000;
 		gpt->header.size = 92;
 		gpt->header.my_lba = 1;
@@ -591,11 +591,11 @@ static lv_res_t _action_flash_linux_data(lv_obj_t * btns, const char * txt)
 	lv_mbox_set_recolor_text(mbox, true);
 	lv_obj_set_width(mbox, LV_HOR_RES / 10 * 5);
 
-	lv_mbox_set_text(mbox, "#FF8000 Linux Flasher#");
+	lv_mbox_set_text(mbox, "#FF8000 Linux Erstellen#");
 
 	lv_obj_t *lbl_status = lv_label_create(mbox, NULL);
 	lv_label_set_recolor(lbl_status, true);
-	lv_label_set_text(lbl_status, "#C7EA46 Status:# Flashe Linux...");
+	lv_label_set_text(lbl_status, "#C7EA46 Status:# Erstelle Linux...");
 
 	// Create container to keep content inside.
 	lv_obj_t *h1 = lv_cont_create(mbox, NULL);
@@ -780,7 +780,7 @@ static u32 _get_available_l4t_partition()
 
 	// Search for a suitable partition.
 	u32 size_sct = 0;
-	if (!memcmp(&gpt->header.signature, "EFI PART", 8) || gpt->header.num_part_ents > 128)
+	if (!memcmp(&gpt->header.signature, "EFI PARTITION", 8) || gpt->header.num_part_ents > 128)
 	{
 		for (u32 i = 0; i < gpt->header.num_part_ents; i++)
 		{
@@ -821,7 +821,7 @@ static int _get_available_android_partition()
 	sdmmc_storage_read(&sd_storage, 1, sizeof(gpt_t) >> 9, gpt);
 
 	// Check if GPT.
-	if (memcmp(&gpt->header.signature, "EFI PART", 8) || gpt->header.num_part_ents > 128)
+	if (memcmp(&gpt->header.signature, "EFI PARTITION", 8) || gpt->header.num_part_ents > 128)
 		goto out;
 
 	// Find kernel partition.
@@ -865,7 +865,7 @@ static lv_res_t _action_check_flash_linux(lv_obj_t *btn)
 	lv_mbox_set_recolor_text(mbox, true);
 	lv_obj_set_width(mbox, LV_HOR_RES / 9 * 6);
 
-	lv_mbox_set_text(mbox, "#FF8000 Linux Flasher#");
+	lv_mbox_set_text(mbox, "#FF8000 Linux Erstellen#");
 
 	lv_obj_t *lbl_status = lv_label_create(mbox, NULL);
 	lv_label_set_recolor(lbl_status, true);
@@ -1026,7 +1026,7 @@ static lv_res_t _action_flash_android_data(lv_obj_t * btns, const char * txt)
 	lv_mbox_set_recolor_text(mbox, true);
 	lv_obj_set_width(mbox, LV_HOR_RES / 9 * 6);
 
-	lv_mbox_set_text(mbox, "#FF8000 Android Flasher#");
+	lv_mbox_set_text(mbox, "#FF8000 Android Erstellen#");
 
 	lv_obj_t *lbl_status = lv_label_create(mbox, NULL);
 	lv_label_set_recolor(lbl_status, true);
@@ -1043,7 +1043,7 @@ static lv_res_t _action_flash_android_data(lv_obj_t * btns, const char * txt)
 	sdmmc_storage_read(&sd_storage, 1, sizeof(gpt_t) >> 9, gpt);
 
 	// Validate GPT header.
-	if (memcmp(&gpt->header.signature, "EFI PART", 8) || gpt->header.num_part_ents > 128)
+	if (memcmp(&gpt->header.signature, "EFI PARTITION", 8) || gpt->header.num_part_ents > 128)
 	{
 		lv_label_set_text(lbl_status, "#FFDD00 Fehler:# Android GPT wurde nicht gefunden!");
 		goto error;
@@ -1095,7 +1095,7 @@ static lv_res_t _action_flash_android_data(lv_obj_t * btns, const char * txt)
 		{
 			sdmmc_storage_write(&sd_storage, offset_sct, file_size >> 9, buf);
 
-			s_printf(txt_buf, "#C7EA46 Erfolg:# Kernel-Image geflashed!\n");
+			s_printf(txt_buf, "#C7EA46 Erfolg:# Kernel-Image geschrieben!\n");
 			f_unlink(path);
 		}
 
@@ -1158,7 +1158,7 @@ boot_img_not_found:
 		else
 		{
 			sdmmc_storage_write(&sd_storage, offset_sct, file_size >> 9, buf);
-			strcat(txt_buf, "#C7EA46 Erfolg:# Recovery-Image geflashed!\n");
+			strcat(txt_buf, "#C7EA46 Erfolg:# Recovery-Image geschrieben!\n");
 			f_unlink(path);
 		}
 
@@ -1220,7 +1220,7 @@ recovery_not_found:
 		else
 		{
 			sdmmc_storage_write(&sd_storage, offset_sct, file_size >> 9, buf);
-			strcat(txt_buf, "#C7EA46 Erfolg:# DTB-Image geflashed!");
+			strcat(txt_buf, "#C7EA46 Erfolg:# DTB-Image geschrieben!");
 			f_unlink(path);
 		}
 
@@ -1253,7 +1253,7 @@ error:
 	if (boot_recovery)
 	{
 		// If a Recovery partition was found, ask user if rebooting into it is wanted.
-		strcat(txt_buf,"\n\nMoechtest du in die Recovery starten\num die Android Installation abzuschliessen?");
+		strcat(txt_buf,"\n\nMoechtest du in die Recovery starten\num die Android-Installation abzuschliessen?");
 		lv_label_set_text(lbl_status, txt_buf);
 		lv_mbox_add_btns(mbox, mbox_btn_map2, _action_reboot_recovery);
 	}
@@ -1281,13 +1281,13 @@ static lv_res_t _action_flash_android(lv_obj_t *btn)
 	lv_mbox_set_recolor_text(mbox, true);
 	lv_obj_set_width(mbox, LV_HOR_RES / 9 * 6);
 
-	lv_mbox_set_text(mbox, "#FF8000 Android Flasher#");
+	lv_mbox_set_text(mbox, "#FF8000 Android Erstellen#");
 
 	lv_obj_t *lbl_status = lv_label_create(mbox, NULL);
 	lv_label_set_recolor(lbl_status, true);
 	lv_label_set_text(lbl_status,
-		"Dies flasht, wenn gefunden, den #C7EA46 Kernel#, #C7EA46 DTB# und #C7EA46 Recovery.#\n"
-		"Nach erfolgreichem flashen werden sie geloescht.\n"
+		"Dies erstellt, wenn gefunden, den #C7EA46 Kernel#, #C7EA46 DTB# und #C7EA46 Recovery.#\n"
+		"Nach erfolgreichem erstellen werden sie geloescht.\n"
 		"Moechtest du fortfahren?");
 
 	lv_mbox_add_btns(mbox, mbox_btn_map,  _action_flash_android_data);
@@ -1424,9 +1424,9 @@ static lv_res_t _create_mbox_start_partitioning(lv_obj_t *btn)
 	lv_obj_set_size(dark_bg, LV_HOR_RES, LV_VER_RES);
 
 	static const char *mbox_btn_map[] =  { "\251", "\222OK", "\251", "" };
-	static const char *mbox_btn_map1[] = { "\222SD UMS", "\222Linux Flashen", "\222Android Flashen", "\221OK", "" };
-	static const char *mbox_btn_map2[] = { "\222SD UMS", "\222Linux Flashen", "\221OK", "" };
-	static const char *mbox_btn_map3[] = { "\222SD UMS", "\222Android Flashen", "\221OK", "" };
+	static const char *mbox_btn_map1[] = { "\222SD UMS-Modus", "\222Linux Erstellen", "\222Android Erstellen", "\221OK", "" };
+	static const char *mbox_btn_map2[] = { "\222SD UMS-Modus", "\222Linux Erstellen", "\221OK", "" };
+	static const char *mbox_btn_map3[] = { "\222SD UMS-Modus", "\222Android Erstellen", "\221OK", "" };
 	lv_obj_t *mbox = lv_mbox_create(dark_bg, NULL);
 	lv_mbox_set_recolor_text(mbox, true);
 	lv_obj_set_width(mbox, LV_HOR_RES / 9 * 6);
@@ -1456,7 +1456,7 @@ static lv_res_t _create_mbox_start_partitioning(lv_obj_t *btn)
 	lv_mbox_set_text(mbox,
 		"#FF8000 Partitionsmanager#\n\n"
 		"#FFDD00 Warnung: Willst du wirklich fortfahren?!#\n\n"
-		"Druecke #FF8000 POWER# zum fortfahren.\nDruecke #FF8000 VOL# um abzubrechen.");
+		"Druecke #FF8000 POWER# um fortzufahren.\nDruecke #FF8000 VOL# um abzubrechen.");
 	lv_obj_align(mbox, NULL, LV_ALIGN_CENTER, 0, 0);
 	manual_system_maintenance(true);
 
@@ -1496,7 +1496,7 @@ static lv_res_t _create_mbox_start_partitioning(lv_obj_t *btn)
 	// Read current MBR.
 	sdmmc_storage_read(&sd_storage, 0, 1, &part_info.mbr_old);
 
-	lv_label_set_text(lbl_status, "#00DDFF Status:# Initialisiere Ramdisk...");
+	lv_label_set_text(lbl_status, "#00DDFF Status:# Initialisiere Speicherlaufwerk...");
 	lv_label_set_text(lbl_paths[0], "Bitte warten...");
 	lv_obj_align(mbox, NULL, LV_ALIGN_CENTER, 0, 0);
 	manual_system_maintenance(true);
@@ -1504,11 +1504,11 @@ static lv_res_t _create_mbox_start_partitioning(lv_obj_t *btn)
 	// Initialize RAM disk.
 	if (ram_disk_init(&ram_fs, RAM_DISK_SZ))
 	{
-		lv_label_set_text(lbl_status, "#FFDD00 Fehler:# Initialisieren der Ramdisk fehlgeschlagen!");
+		lv_label_set_text(lbl_status, "#FFDD00 Fehler:# Initialisieren des Speicherlaufwerks fehlgeschlagen!");
 		goto error;
 	}
 
-	lv_label_set_text(lbl_status, "#00DDFF Status:# Backing up files...");
+	lv_label_set_text(lbl_status, "#00DDFF Status:# Dateien werden gesichert...");
 	manual_system_maintenance(true);
 
 	// Do full or hekate/Nyx backup.
@@ -1615,7 +1615,7 @@ mkfs_no_error:
 	// Set Volume label.
 	f_setlabel("0:SWITCH SD");
 
-	lv_label_set_text(lbl_status, "#00DDFF Status:# Flashe Partitionstabelle...");
+	lv_label_set_text(lbl_status, "#00DDFF Status:# Erstelle Partitionstabelle...");
 	lv_label_set_text(lbl_paths[0], "Bitte warten...");
 	lv_label_set_text(lbl_paths[1], " ");
 	manual_system_maintenance(true);
@@ -1726,7 +1726,7 @@ static lv_res_t _create_mbox_partitioning_warn(lv_obj_t *btn)
 	lv_obj_set_style(dark_bg, &mbox_darken);
 	lv_obj_set_size(dark_bg, LV_HOR_RES, LV_VER_RES);
 
-	static const char *mbox_btn_map[] = { "\222SD UMS", "\222Start", "\222Abbrechen", "" };
+	static const char *mbox_btn_map[] = { "\222SD UMS-Modus", "\222Start", "\222Abbrechen", "" };
 	static const char *mbox_btn_map2[] = { "\222Start", "\222Abbrechen", "" };
 	lv_obj_t * mbox = lv_mbox_create(dark_bg, NULL);
 	lv_mbox_set_recolor_text(mbox, true);
@@ -1749,7 +1749,7 @@ static lv_res_t _create_mbox_partitioning_warn(lv_obj_t *btn)
 	{
 		strcat(txt_buf, "#FFDD00 Deine Dateien werden geloescht!#\n"
 			"#FFDD00 Jede andere Partition wird ebenfalls geloescht!#\n"
-			"#FFDD00 Benutze USB UMS um sie umzukopieren!#");
+			"#FFDD00 Benutze USB UMS-Modus um sie umzukopieren!#");
 	}
 
 	lv_label_set_text(lbl_status, txt_buf);
@@ -1897,7 +1897,7 @@ static lv_res_t _action_slider_emu(lv_obj_t *slider)
 			if (slide_val != 10)
 				s_printf(lbl_text, "#FF3C28 %d GiB#", size >> 10);
 			else
-				s_printf(lbl_text, "#FF3C28 %d FULL#", size >> 10);
+				s_printf(lbl_text, "#FF3C28 %d VOLL#", size >> 10);
 		}
 		else
 			s_printf(lbl_text, "#FFDD00 2x##FF3C28 %d#", size >> 11);
@@ -2086,7 +2086,7 @@ static void _create_mbox_check_files_total_size()
 	lv_mbox_set_recolor_text(mbox, true);
 	lv_obj_set_width(mbox, LV_HOR_RES / 9 * 6);
 
-	lv_mbox_set_text(mbox, "Analysiere SD-Kartennutzung. Das kann eine Weile dauern...");
+	lv_mbox_set_text(mbox, "Analysiere SD-Kartennutzung. Das kann eine weile dauern...");
 
 	lv_obj_align(mbox, NULL, LV_ALIGN_CENTER, 0, 0);
 	lv_obj_set_top(mbox, true);
@@ -2116,7 +2116,7 @@ static void _create_mbox_check_files_total_size()
 		lv_mbox_set_text(mbox,
 			"#FFDD00 SD-Karte kann NICHT automatisch gesichert werden!#\n"
 			"#FFDD00 Jede andere Partition wird ebenfalls geloescht!#\n\n"
-			"Du wirst spaeter gefragt ob du deine Dateien ueber UMS sichern willst.");
+			"Du wirst spaeter gefragt ob du deine Dateien ueber\nueber den UMS-Modus sichern willst.");
 	}
 
 	// Create container to keep content inside.
@@ -2248,7 +2248,7 @@ static lv_res_t _action_fix_mbr(lv_obj_t *btn)
 	// Try to init sd card. No need for valid MBR.
 	if (!sd_mount() && !sd_get_card_initialized())
 	{
-		lv_label_set_text(lbl_status, "#FFDD00 Sd-Karte konnte nicht initialisiert werden!#");
+		lv_label_set_text(lbl_status, "#FFDD00 SD-Karte konnte nicht initialisiert werden!#");
 		goto out;
 	}
 
@@ -2271,7 +2271,7 @@ static lv_res_t _action_fix_mbr(lv_obj_t *btn)
 	}
 
 	// Check if GPT is valid.
-	if (!gpt_partition_exists || memcmp(&gpt->header.signature, "EFI PART", 8) || gpt->header.num_part_ents > 128)
+	if (!gpt_partition_exists || memcmp(&gpt->header.signature, "EFI PARTITION", 8) || gpt->header.num_part_ents > 128)
 	{
 		lv_label_set_text(lbl_status, "#FFDD00 Warnung:# Keine gueltige GPT gefunden!");
 
@@ -2405,7 +2405,7 @@ check_changes:
 
 	lv_label_set_text(lbl_status,
 		"#FF8000 Warnung: Willst du wirklich fortfahren?!#\n\n"
-		"Druecke #FF8000 POWER# zum fortfahren.\nDruecke #FF8000 VOL# um abzubrechen.");
+		"Druecke #FF8000 POWER# um fortzufahren.\nDruecke #FF8000 VOL# um abzubrechen.");
 
 	lv_obj_align(mbox, NULL, LV_ALIGN_CENTER, 0, 0);
 	lv_obj_set_top(mbox, true);
@@ -2731,8 +2731,8 @@ lv_res_t create_window_partition_manager(lv_obj_t *btn)
 	lv_label_set_recolor(lbl_notes, true);
 	lv_label_set_static_text(lbl_notes,
 		"Hinweis 1: Es kann nur bis zu #C7EA46 1GB# gesichert werden. Bei mehr wirst du im naechsten Schritt aufgefordert, diese manuell zu sichern.\n"
-		"Hinweis 2: Groessenanpassung des emuMMC formatiert USER-Partition. Ein Savegame-Manager kann verwendet werden, um die Daten zu uebertragen.\n"
-		"Hinweis 3: Die Optionen #C7EA46 Flash Linux# und #C7EA46 Flash Android# flashen Dateien, wenn geeignete Partitionen und Installationsdateien gefunden werden.\n");
+		"Hinweis 2: Groessenanpassung des emuMMC formatiert die USER-Partition. Speicherstaende sollten (extern) gesichert werden.\n"
+		"Hinweis 3: #C7EA46 Erstelle Linux# und #C7EA46 Erstelle Android# schreibt Dateien, wenn Partitionen und Installationsdateien gefunden werden.\n");
 	lv_label_set_style(lbl_notes, &hint_small_style);
 	lv_obj_align(lbl_notes, lbl_and, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 5);
 
@@ -2748,7 +2748,7 @@ lv_res_t create_window_partition_manager(lv_obj_t *btn)
 	btn_flash_l4t = lv_btn_create(h1, NULL);
 	lv_obj_t *label_btn2 = lv_label_create(btn_flash_l4t, NULL);
 	lv_btn_set_fit(btn_flash_l4t, true, true);
-	lv_label_set_static_text(label_btn2, SYMBOL_DOWNLOAD"  Flashe Linux");
+	lv_label_set_static_text(label_btn2, SYMBOL_DOWNLOAD"  Erstelle Linux");
 	lv_obj_align(btn_flash_l4t, btn1, LV_ALIGN_OUT_RIGHT_MID, LV_DPI / 3, 0);
 	lv_btn_set_action(btn_flash_l4t, LV_BTN_ACTION_CLICK, _action_check_flash_linux);
 
@@ -2769,15 +2769,15 @@ lv_res_t create_window_partition_manager(lv_obj_t *btn)
 	switch (part_type_and)
 	{
 	case 0: // Disable Flash Android button if partition not found.
-		lv_label_set_static_text(label_btn, SYMBOL_DOWNLOAD"  Flashe Android");
+		lv_label_set_static_text(label_btn, SYMBOL_DOWNLOAD"  Erstelle Android");
 		lv_obj_set_click(btn_flash_android, false);
 		lv_btn_set_state(btn_flash_android, LV_BTN_STATE_INA);
 		break;
 	case 1: // Android 10/11.
-		lv_label_set_static_text(label_btn, SYMBOL_DOWNLOAD"  Flashe Android 10/11");
+		lv_label_set_static_text(label_btn, SYMBOL_DOWNLOAD"  Erstelle Android 10/11");
 		break;
 	case 2: // Android 13+
-		lv_label_set_static_text(label_btn, SYMBOL_DOWNLOAD"  Flash Android 13+");
+		lv_label_set_static_text(label_btn, SYMBOL_DOWNLOAD"  Erstelle Android 13+");
 		break;
 	}
 	lv_obj_align(btn_flash_android, btn_flash_l4t, LV_ALIGN_OUT_RIGHT_MID, LV_DPI / 3, 0);

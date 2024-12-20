@@ -1245,9 +1245,9 @@ lv_res_t create_win_nyx_options(lv_obj_t *parrent_btn)
 	lv_ddlist_set_draw_arrow(ddlist, true);
 	lv_ddlist_set_options(ddlist,
 		"Hauptmenue       \n"
-		"Alle Konfigs\n"
+		"Alle Konfigurationen\n"
 		"Starten\n"
-		"Mehr Konfigs");
+		"Weitere Konfigs");
 	lv_ddlist_set_selected(ddlist, n_cfg.home_screen);
 	lv_ddlist_set_action(ddlist, _home_screen_action);
 	lv_obj_align(ddlist, label_txt, LV_ALIGN_OUT_RIGHT_MID, LV_DPI * 2 / 3, 0);
@@ -1256,8 +1256,8 @@ lv_res_t create_win_nyx_options(lv_obj_t *parrent_btn)
 	lv_label_set_recolor(label_txt2, true);
 	lv_label_set_static_text(label_txt2,
 		"Waehle Bildschirm der beim Nyx-Start angezeigt werden soll.\n"
-		"#FF8000 Alle Konfigs:# #C7EA46 Kombiniert Mehr Konfigs in Starten.#\n"
-		"#FF8000 Starten / Mehr Konfigs:# #C7EA46 Verwendet klassische, geteilte Ansicht.#");
+		"#FF8000 Alle Konfigs.:# #C7EA46 Kombiniert Weitere Konfigs. in Starten.#\n"
+		"#FF8000 Starten / Weitere Konfigs:# #C7EA46 Verwendet klassische, geteilte Ansicht.#");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, label_txt, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 4);
 
@@ -1277,7 +1277,7 @@ lv_res_t create_win_nyx_options(lv_obj_t *parrent_btn)
 	lv_label_set_static_text(label_txt2,
 		"Setzt die Booteintraege pro Zeile auf 5. (Standard ist 4)\n"
 		"#C7EA46 Dies erlaubt 10 Booteintraege in Starten und in#\n"
-		"#C7EA46 Mehr Konfigs anzuzeigen.#\n\n\n");
+		"#C7EA46 Weitere Konfigs. anzuzeigen.#\n\n\n");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, btn2, LV_ALIGN_OUT_BOTTOM_LEFT, LV_DPI / 4, LV_DPI / 12);
 
@@ -1417,7 +1417,7 @@ void create_tab_options(lv_theme_t *th, lv_obj_t *parent)
 	autoboot_btn = btn;
 
 	lv_obj_t *label_txt2 = lv_label_create(sw_h2, NULL);
-	lv_label_set_static_text(label_txt2, "Waehle welcher Boot-Eintrag oder Payload automatisch beim\nInjizieren gebootet werden soll.");
+	lv_label_set_static_text(label_txt2, "Waehle welcher Boot-Eintrag oder payload automatisch beim\nInjizieren gebootet werden soll.");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, btn, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3 - 4);
 
@@ -1493,7 +1493,7 @@ void create_tab_options(lv_theme_t *th, lv_obj_t *parent)
 	label_txt2 = lv_label_create(sw_h3, NULL);
 	lv_label_set_static_text(label_txt2,
 		"Wenn Ausschalten im HorizonOS verwendet wurde, wacht die Konsole nach\n"
-		"15s wieder auf. Aktivieren, um es bei der naechsten\nPayload-Injizierung autom. auszuschalten.");
+		"15s wieder auf. Aktivieren, um es bei der naechsten\npayload-Injizierung autom. auszuschalten.");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, btn3, LV_ALIGN_OUT_BOTTOM_LEFT, LV_DPI / 4, LV_DPI / 12);
 

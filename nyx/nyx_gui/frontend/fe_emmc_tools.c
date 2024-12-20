@@ -59,14 +59,14 @@ static void _get_valid_partition(u32 *sector_start, u32 *sector_size, u32 *part_
 			{
 				u8 gpt_check[SD_BLOCKSIZE] = { 0 };
 				sdmmc_storage_read(&sd_storage, *sector_start + 0xC001, 1, gpt_check);
-				if (!memcmp(gpt_check, "EFI PART", 8))
+				if (!memcmp(gpt_check, "EFI PARTITION", 8))
 				{
 					*sector_size = curr_part_size;
 					*sector_start = *sector_start + 0x8000;
 					break;
 				}
 				sdmmc_storage_read(&sd_storage, *sector_start + 0x4001, 1, gpt_check);
-				if (!memcmp(gpt_check, "EFI PART", 8))
+				if (!memcmp(gpt_check, "EFI PARTITION", 8))
 				{
 					*sector_size = curr_part_size;
 					break;
@@ -1062,7 +1062,7 @@ static int _restore_emmc_part(emmc_tool_gui_t *gui, char *sd_path, int active_pa
 		{
 			lv_obj_t *warn_mbox_bg = create_mbox_text(
 				"#FF8000 Die Groesse der SD-Karten-Teilsicherung stimmt nicht ueberein#\n#FF8000 mit der ausgewaehlten Partitionsgroesse vom eMMC!#\n\n"
-				"#FFDD00 Das Backup koennte beschaedigt sein,#\n#FFDD00 oder es fehlen Dateien!#\n#FFDD00 Ein Abbruch wird empfohlen!#\n\n"
+				"#FFDD00 Die Sicherung koennte beschaedigt sein,#\n#FFDD00 oder es fehlen Dateien!#\n#FFDD00 Ein Abbruch wird empfohlen!#\n\n"
 				"Druecke #FF8000 POWER#, um fortzufahren.\nDruecke #FF8000 VOL#, um abzubrechen.", false);
 			manual_system_maintenance(true);
 
@@ -1136,7 +1136,7 @@ multipart_not_allowed:
 		{
 			lv_obj_t *warn_mbox_bg = create_mbox_text(
 				"#FF8000 Die Groesse der SD-Karten-Sicherung stimmt nicht ueberein#\n#FF8000 mit der ausgewaehlten Partitionsgroesse von eMMC!#\n\n"
-				"#FFDD00 Das Backup koennte beschaedigt sein!#\n#FFDD00 Ein Abbruch wird empfohlen!#\n\n"
+				"#FFDD00 Die Sicherung koennte beschaedigt sein!#\n#FFDD00 Ein Abbruch wird empfohlen!#\n\n"
 				"Druecke #FF8000 POWER#, um fortzufahren.\nDruecke #FF8000 VOL#, um abzubrechen.", false);
 			manual_system_maintenance(true);
 

@@ -140,7 +140,7 @@ lv_res_t launch_payload(lv_obj_t *list)
 	FIL fp;
 	if (f_open(&fp, path, FA_READ))
 	{
-		EPRINTFARGS("Payload Datei nicht gefunden!\n(%s)", path);
+		EPRINTFARGS("payload nicht gefunden!\n(%s)", path);
 
 		goto out;
 	}
@@ -159,7 +159,7 @@ lv_res_t launch_payload(lv_obj_t *list)
 		{
 			f_close(&fp);
 
-			EPRINTF("Coreboot bei Mariko nicht erlaubt!");
+			EPRINTF("coreboot wird nicht mehr unterstuetzt!");
 
 			goto out;
 		}
@@ -397,7 +397,7 @@ static void _show_errors(int sd_error)
 		*excp_enabled = 0;
 
 error_occured:
-		WPRINTF("Druecke beliebige Taste um Nyx neu zu Laden...");
+		WPRINTF("Beliebige Taste druecken, um Nyx neu zu Laden...");
 
 		msleep(1000);
 		btn_wait();

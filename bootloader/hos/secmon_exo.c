@@ -424,7 +424,7 @@ void secmon_exo_check_panic()
 	// Change magic to invalid, to prevent double-display of error/bootlooping.
 	rpt->magic = 0;
 
-	gfx_printf("\n\nDruecke POWER zum fortfahren.\n");
+	gfx_printf("\n\nDruecke POWER um fortzufahren.\n");
 
 	display_backlight_brightness(100, 1000);
 	msleep(1000);

@@ -800,7 +800,7 @@ static lv_res_t _create_mbox_emummc_migrate(lv_obj_t *btn)
 			continue;
 
 		sdmmc_storage_read(&sd_storage, mbr_ctx.sector_start + 0xC001, 1, efi_part);
-		if (!memcmp(efi_part, "EFI PART", 8))
+		if (!memcmp(efi_part, "EFI PARTITION", 8))
 		{
 			mbr_ctx.sector_start += 0x8000;
 			emummc = true;
@@ -810,7 +810,7 @@ static lv_res_t _create_mbox_emummc_migrate(lv_obj_t *btn)
 		else
 		{
 			sdmmc_storage_read(&sd_storage, mbr_ctx.sector_start + 0x4001, 1, efi_part);
-			if (!memcmp(efi_part, "EFI PART", 8))
+			if (!memcmp(efi_part, "EFI PARTITION", 8))
 			{
 				emummc = true;
 				mbr_ctx.part_idx = i;
@@ -822,7 +822,7 @@ static lv_res_t _create_mbox_emummc_migrate(lv_obj_t *btn)
 	if (!mbr_ctx.part_idx)
 	{
 		sdmmc_storage_read(&sd_storage, 0x4003, 1, efi_part);
-		if (!memcmp(efi_part, "EFI PART", 8))
+		if (!memcmp(efi_part, "EFI PARTITION", 8))
 			em_raw = true;
 	}
 
@@ -976,7 +976,7 @@ static lv_res_t _save_file_emummc_cfg_action(lv_obj_t *btn)
 
 static lv_res_t _create_change_emummc_window(lv_obj_t *btn_caller)
 {
-	lv_obj_t *win = nyx_create_standard_window(SYMBOL_SETTINGS"  Wechsle emuMMC");
+	lv_obj_t *win = nyx_create_standard_window(SYMBOL_SETTINGS"  emuMMC wechseln");
 	lv_win_add_btn(win, NULL, SYMBOL_POWER"  Deaktivieren", _save_disable_emummc_cfg_action);
 
 	sd_mount();
@@ -1277,7 +1277,7 @@ lv_res_t create_win_emummc_tools(lv_obj_t *btn)
 	lv_obj_t *btn2 = lv_btn_create(h1, NULL);
 	lv_btn_set_fit(btn2, true, true);
 	label_btn = lv_label_create(btn2, NULL);
-	lv_label_set_static_text(label_btn, SYMBOL_SETTINGS"  Wechsle emuMMC");
+	lv_label_set_static_text(label_btn, SYMBOL_SETTINGS"  emuMMC wechseln");
 	lv_obj_align(btn2, label_txt2, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI * 6 / 10);
 	lv_btn_set_action(btn2, LV_BTN_ACTION_CLICK, _create_change_emummc_window);
 
@@ -1323,7 +1323,7 @@ lv_res_t create_win_emummc_tools(lv_obj_t *btn)
 	lv_label_set_recolor(label_txt4, true);
 	lv_label_set_static_text(label_txt4,
 		"Ermoeglicht es ein neues #C7EA46 SD Datei# oder #C7EA46 SD RAW Partition#\n"
-		"emuMMC zu erstellen.\nDu kannst es vom eMMC oder einem eMMC-Backup erstellen.");
+		"emuMMC zu erstellen.\nDu kannst es vom eMMC oder einer eMMC-Sicherung erstellen.");
 
 	lv_obj_set_style(label_txt4, &hint_small_style);
 	lv_obj_align(label_txt4, btn3, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3);
@@ -1339,7 +1339,7 @@ lv_res_t create_win_emummc_tools(lv_obj_t *btn)
 	label_txt4 = lv_label_create(h2, NULL);
 	lv_label_set_recolor(label_txt4, true);
 	lv_label_set_static_text(label_txt4,
-		"Migriere ein Backup zu einer #C7EA46 SD Datei# oder repariere eine\nbestehende #C7EA46 SD RAW Partition#.\n\n"
+		"Migriere eine Sicherung zu einer #C7EA46 SD Datei# oder repariere eine\nbestehende #C7EA46 SD RAW Partition#.\n\n"
 		"Zusaetzlich ermoeglicht es dir, von anderen emuNAND\nLoesungen zu migrieren.");
 	lv_obj_set_style(label_txt4, &hint_small_style);
 	lv_obj_align(label_txt4, btn4, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3);

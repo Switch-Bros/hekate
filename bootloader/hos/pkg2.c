@@ -348,11 +348,11 @@ static int _decompress_kip(pkg2_kip1_info_t *ki, u32 sectsToDecomp)
 
 		u32 comp_size = hdr.sections[sect_idx].size_comp;
 		u32 output_size = hdr.sections[sect_idx].size_decomp;
-		gfx_printf("Decompilieren von '%s', Sektor %d, Groesse %d..\n", (char *)hdr.name, sect_idx, comp_size);
+		gfx_printf("Dekompiliere '%s', Sektor %d, Groesse %d..\n", (char *)hdr.name, sect_idx, comp_size);
 		if (blz_uncompress_srcdest(src_data, comp_size, dst_data, output_size) == 0)
 		{
 			gfx_con.mute = false;
-			gfx_printf("%kFEHLER beim Decompilieren von Sektor %d von '%s'!%k\n", TXT_CLR_ERROR, sect_idx, (char *)hdr.name, TXT_CLR_DEFAULT);
+			gfx_printf("%kFEHLER beim Dekompilieren des Sektors %d von '%s'!%k\n", TXT_CLR_ERROR, sect_idx, (char *)hdr.name, TXT_CLR_DEFAULT);
 			free(new_kip);
 
 			return 1;
@@ -635,7 +635,7 @@ const char *pkg2_patch_kips(link_t *info, char *patch_names)
 									(memcmp(&kip_sect_data[patch_offset], patch->dst_data, patch->length) != 0))
 								{
 									gfx_con.mute = false;
-									gfx_printf("%kPatch mismatch bei 0x%x!%k\n", TXT_CLR_ERROR, patch_offset, TXT_CLR_DEFAULT);
+									gfx_printf("%kPatch-Abgleich bei 0x%x fehlgeschlagen!%k\n", TXT_CLR_ERROR, patch_offset, TXT_CLR_DEFAULT);
 									return patchset->name; // MUST stop here as kip is likely corrupt.
 								}
 								else
@@ -855,7 +855,7 @@ DPRINTF("%s @ %08X (%08X)\n", is_meso ? "Mesosphere": "kernel",(u32)ctxt->kernel
 	hdr->sec_size[PKG2_SEC_KERNEL] = kernel_size;
 	se_aes_crypt_ctr(pkg2_keyslot, pdst, kernel_size, pdst, kernel_size, &hdr->sec_ctr[PKG2_SEC_KERNEL * SE_AES_IV_SIZE]);
 	pdst += kernel_size;
-DPRINTF("kernel entschluesselt\n");
+DPRINTF("Kernel entschluesselt\n");
 
 	// Build INI1 for old Package2.
 	u32 ini1_size = 0;

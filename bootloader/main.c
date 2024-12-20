@@ -167,7 +167,7 @@ static void _launch_payload(char *path, bool update, bool clear_screen)
 	if (f_open(&fp, path, FA_READ))
 	{
 		gfx_con.mute = false;
-		EPRINTFARGS("Payload nicht gefunden!\n(%s)", path);
+		EPRINTFARGS("payload nicht gefunden!\n(%s)", path);
 
 		goto out;
 	}
@@ -187,7 +187,7 @@ static void _launch_payload(char *path, bool update, bool clear_screen)
 			f_close(&fp);
 
 			gfx_con.mute = false;
-			EPRINTF("Coreboot bei Mariko nicht erlaubt!");
+			EPRINTF("coreboot wird nicht mehr unterstuetzt!");
 
 			goto out;
 		}
@@ -368,7 +368,7 @@ static void _launch_ini_list()
 	{
 		if (ini_sec->type == INI_COMMENT ||
 			ini_sec->type == INI_NEWLINE ||
-			!strcmp(ini_sec->name, "Konfig"))
+			!strcmp(ini_sec->name, "Konfigurationen"))
 			continue;
 
 		ments[sec_idx].type    = ini_sec->type;
@@ -419,7 +419,7 @@ static void _launch_ini_list()
 		}
 	}
 	else
-		EPRINTF("Keine Extra Konfigs. gefunden.");
+		EPRINTF("Keine weiteren Konfigsurationen gefunden.");
 
 parse_failed:
 	if (!cfg_sec)
@@ -491,11 +491,11 @@ static void _launch_config()
 	ments[1].type    = MENT_CHGLINE;
 
 	ments[2].type    = MENT_HANDLER;
-	ments[2].caption = "Payloads...";
+	ments[2].caption = "payloads...";
 	ments[2].handler = _launch_payloads;
 
 	ments[3].type    = MENT_HANDLER;
-	ments[3].caption = "Mehr Konfigs...";
+	ments[3].caption = "Weitere Konfigurationen...";
 	ments[3].handler = _launch_ini_list;
 
 	ments[4].type    = MENT_CHGLINE;
@@ -523,7 +523,7 @@ static void _launch_config()
 	if (sec_idx < 6)
 	{
 		ments[sec_idx].type    = MENT_CAPTION;
-		ments[sec_idx].caption = "Keine Standardkonfig. gefunden...";
+		ments[sec_idx].caption = "Keine Standardkonfigurationen gefunden...";
 		ments[sec_idx].color   = TXT_CLR_WARNING;
 		sec_idx++;
 	}
@@ -564,7 +564,7 @@ static void _launch_config()
 parse_failed:
 	if (!cfg_sec)
 	{
-		gfx_printf("\nDruecke beliebige Taste...\n");
+		gfx_printf("\nBeliebige Taste druecken...\n");
 		goto out;
 	}
 
@@ -629,8 +629,10 @@ static void _nyx_load_run()
 
 		gfx_con_setpos(0, 0);
 		WPRINTF("Alte Nyx GUI gefunden! Imagine Dragons!\n");
-		WPRINTF("\nAktualisiere bootloader Ordner!\n\n");
-		WPRINTF("Druecke beliebige Taste...");
+		WPRINTF("\nAktualisiere den bootloader Ordner mit\n");
+		WPRINTF("dem switchbros-updater im hbmenu oder am\n");
+		WPRINTF("PC mit der NERD-O-MAT.bat\n\n");
+		WPRINTF("Beliebige Taste druecken...");
 
 		msleep(1000);
 		btn_wait();
@@ -1016,7 +1018,7 @@ wrong_emupath:
 
 error:
 		gfx_con.mute = false;
-		gfx_printf("\nDreucke beliebige Taste...\n");
+		gfx_printf("\nBeliebige Taste druecken...\n");
 		display_backlight_brightness(h_cfg.backlight, 1000);
 		msleep(500);
 		btn_wait();
@@ -1106,7 +1108,9 @@ static void _show_errors()
 			WPRINTF("Minerva-Bibliothek fehlt!\n");
 
 		if (h_cfg.errors & (ERR_LIBSYS_LP0 | ERR_LIBSYS_MTC))
-			WPRINTF("\nAktualisiere bootloader Ordner!\n\n");
+			WPRINTF("\nAktualisiere den bootloader Ordner mit\n");
+			WPRINTF("dem switchbros-updater im hbmenu oder am\n");
+			WPRINTF("PC mit der NERD-O-MAT.bat\n\n");
 
 		if (h_cfg.errors & ERR_EXCEPTION)
 		{
@@ -1165,10 +1169,10 @@ static void _show_errors()
 			u32 color = r | g | b;
 
 			WPRINTF("HorizonOS Panik aufgetreten!\n");
-			gfx_printf("Color: %k####%k, Code: %02X\n\n", color, TXT_CLR_DEFAULT, panic_status);
+			gfx_printf("Farbe: %k####%k, Code: %02X\n\n", color, TXT_CLR_DEFAULT, panic_status);
 		}
 
-		WPRINTF("Druecke beliebige Taste...");
+		WPRINTF("Beliebige Taste druecken...");
 
 		msleep(1000); // Guard against injection VOL+.
 		btn_wait();
@@ -1403,24 +1407,24 @@ static void _about()
 ment_t ment_cinfo[] = {
 	MDEF_BACK(),
 	MDEF_CHGLINE(),
-	MDEF_CAPTION("---- SoC Info ----", TXT_CLR_CYAN_L),
+	MDEF_CAPTION("---- SoC Infos ----", TXT_CLR_CYAN_L),
 	MDEF_HANDLER("Fuses", print_fuseinfo),
 	MDEF_CHGLINE(),
 	MDEF_CAPTION("-- Speicherinfos --", TXT_CLR_CYAN_L),
 	MDEF_HANDLER("eMMC",    print_mmc_info),
 	MDEF_HANDLER("SD-Karte", print_sdcard_info),
 	MDEF_CHGLINE(),
-	MDEF_CAPTION("------ Verschiedenes ------", TXT_CLR_CYAN_L),
+	MDEF_CAPTION("-- Verschiedenes --", TXT_CLR_CYAN_L),
 	MDEF_HANDLER("Akku", print_battery_info),
 	MDEF_END()
 };
 
-menu_t menu_cinfo = { ment_cinfo, "Konsolen Info", 0, 0 };
+menu_t menu_cinfo = { ment_cinfo, "Konsoleninfos", 0, 0 };
 
 ment_t ment_tools[] = {
 	MDEF_BACK(),
 	MDEF_CHGLINE(),
-	MDEF_CAPTION("-------- Andere -------", TXT_CLR_WARNING),
+	MDEF_CAPTION("------ Andere -----", TXT_CLR_WARNING),
 	MDEF_HANDLER("AutoRCM", menu_autorcm),
 	MDEF_END()
 };
@@ -1433,15 +1437,15 @@ power_state_t STATE_REBOOT_BYPASS_FUSES = REBOOT_BYPASS_FUSES;
 
 ment_t ment_top[] = {
 	MDEF_HANDLER("Start", _launch_config),
-	MDEF_CAPTION("---------------", TXT_CLR_GREY_DM),
+	MDEF_CAPTION("-------------------", TXT_CLR_GREY_DM),
 	MDEF_MENU("Werkzeuge",        &menu_tools),
-	MDEF_MENU("Konsolen Info", &menu_cinfo),
-	MDEF_CAPTION("---------------", TXT_CLR_GREY_DM),
-	MDEF_HANDLER("Reload", _ipl_reload),
+	MDEF_MENU("Konsoleninfos", &menu_cinfo),
+	MDEF_CAPTION("-------------------", TXT_CLR_GREY_DM),
+	MDEF_HANDLER("Neu laden", _ipl_reload),
 	MDEF_HANDLER_EX("Neustart (OFW)", &STATE_REBOOT_BYPASS_FUSES, power_set_state_ex),
 	MDEF_HANDLER_EX("Neustart (RCM)", &STATE_REBOOT_RCM,          power_set_state_ex),
 	MDEF_HANDLER_EX("Ausschalten",    &STATE_POWER_OFF,           power_set_state_ex),
-	MDEF_CAPTION("---------------", TXT_CLR_GREY_DM),
+	MDEF_CAPTION("-------------------", TXT_CLR_GREY_DM),
 	MDEF_HANDLER("Ueber", _about),
 	MDEF_END()
 };

@@ -591,7 +591,7 @@ int hos_bis_keygen()
 	// We check unconditionally in order to support downgrades.
 	keygen_rev = fuse_read_odm_keygen_rev();
 
-	gfx_printf("Keygen Rev: %d\n", keygen_rev);
+	gfx_printf("Schluesselgenerator-Version: %d\n", keygen_rev);
 
 	if (keygen_rev)
 	{

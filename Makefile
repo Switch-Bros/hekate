@@ -101,16 +101,16 @@ TOOLS := $(TOOLSLZ) $(TOOLSB2C)
 all: $(TARGET).bin $(LDRDIR)
 	@printf ICTC49 >> $(OUTPUTDIR)/$(TARGET).bin
 	@echo "--------------------------------------"
-	@echo -n "Uncompr size: "
+	@echo -n "Unkomprimierte Groesse: "
 	$(eval BIN_SIZE = $(shell wc -c < $(OUTPUTDIR)/$(TARGET)_unc.bin))
 	@echo $(BIN_SIZE)" Bytes"
-	@echo "Uncompr Max:  140288 Bytes + 3 KiB BSS"
-	@if [ ${BIN_SIZE} -gt 140288 ]; then echo "\e[1;33mUncompr size exceeds limit!\e[0m"; fi
-	@echo -n "Payload size: "
+	@echo "Unkomprimierte maximale Groesse:  140288 Bytes + 3 KiB BSS"
+	@if [ ${BIN_SIZE} -gt 140288 ]; then echo "\e[1;33mUnkomprimierte Groesse ueberschreitet das Limit!\e[0m"; fi
+	@echo -n "payload Groesse: "
 	$(eval BIN_SIZE = $(shell wc -c < $(OUTPUTDIR)/$(TARGET).bin))
 	@echo $(BIN_SIZE)" Bytes"
-	@echo "Payload Max:  126296 Bytes"
-	@if [ ${BIN_SIZE} -gt 126296 ]; then echo "\e[1;33mPayload size exceeds limit!\e[0m"; fi
+	@echo "payload maximale Groesse:  126296 Bytes"
+	@if [ ${BIN_SIZE} -gt 126296 ]; then echo "\e[1;33mpayload Groesse ueberschreitet das Limit!\e[0m"; fi
 	@echo "--------------------------------------"
 	
 	mkdir -p $(OUTPUTDIR)/atmosphere

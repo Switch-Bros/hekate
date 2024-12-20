@@ -320,7 +320,7 @@ static void _l4t_crit_error(const char *text, bool needs_update)
 {
 	gfx_con.mute = false;
 	gfx_printf("%kL4T Fehler: %s!%sL4T konnte nicht gestartet werden!\n%k",
-		TXT_CLR_ERROR, text, needs_update ? "\nAktualisiere den bootloader Ordner!\n\n" : "\n\n", TXT_CLR_DEFAULT);
+		TXT_CLR_ERROR, text, needs_update ? "\nAktualisiere den bootloader Ordner mit\ndem switchbros-updater im hbmenu oder am\nPC mit der NERD-O-MAT.bat\n\n" : "\n\n", TXT_CLR_DEFAULT);
 }
 
 char *sd_path;

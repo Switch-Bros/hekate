@@ -222,7 +222,7 @@ static void _save_fb_to_bmp()
 	// Create notification box.
 	lv_obj_t * mbox = lv_mbox_create(lv_layer_top(), NULL);
 	lv_mbox_set_recolor_text(mbox, true);
-	lv_mbox_set_text(mbox, SYMBOL_CAMERA"  #FFDD00 Speichere screenshot...#");
+	lv_mbox_set_text(mbox, SYMBOL_CAMERA"  #FFDD00 Speichere Screenshot...#");
 	lv_obj_set_width(mbox, LV_DPI * 4);
 	lv_obj_set_top(mbox, true);
 	lv_obj_align(mbox, NULL, LV_ALIGN_IN_TOP_LEFT, 0, 0);
@@ -826,7 +826,7 @@ static void _nyx_sd_card_issues(void *param)
 	lv_mbox_set_recolor_text(mbox, true);
 
 	lv_mbox_set_text(mbox,
-		"#FF8000 SD-Karten-Ueberpruefungsfehler#\n\n"
+		"#FF8000 SD-Karte Ueberpruefungsfehler#\n\n"
 		"#FFDD00 Die SD-Karte ist im 1-Bit-Modus initialisiert!#\n"
 		"#FFDD00 Dies koennte auf einen losen oder defekten Anschluss hinweisen!#\n\n"
 		"Du solltest vielleicht die\n#C7EA46 Konsoleninfos# -> #C7EA46 SD-Karte# ueberpruefen.");
@@ -993,7 +993,7 @@ static void _check_sd_card_removed(void *params)
 		lv_mbox_set_recolor_text(mbox, true);
 		lv_obj_set_width(mbox, LV_HOR_RES * 6 / 9);
 
-		lv_mbox_set_text(mbox, "\n#FF8000 SD-Karte wurde entfernt!#\n\n#96FF00 Nyx wird nach dem Einsetzen neu geladen.#\n\nDenk dran das du UMS Modus nutzen kannst anstatt sie zu entfernen.\n");
+		lv_mbox_set_text(mbox, "\n#FF8000 SD-Karte wurde entfernt!#\n\n#96FF00 Nyx wird nach dem Einsetzen neu geladen.#\n\nDenk dran das du UMS-Modus nutzen kannst anstatt sie zu entfernen.\n");
 		lv_mbox_add_btns(mbox, h_cfg.rcm_patched ? mbox_btn_map_rcm_patched : mbox_btn_map, _removed_sd_action);
 
 		lv_obj_align(mbox, NULL, LV_ALIGN_CENTER, 0, 0);
@@ -1378,7 +1378,7 @@ static lv_res_t _create_mbox_payloads(lv_obj_t *btn)
 	lv_mbox_set_recolor_text(mbox, true);
 	lv_obj_set_width(mbox, LV_HOR_RES * 5 / 9);
 
-	lv_mbox_set_text(mbox, "Waehle Payload zum Starten:");
+	lv_mbox_set_text(mbox, "Waehle payload zum starten:");
 
 	// Create a list with all found payloads.
 	//! TODO: SHould that be tabs with buttons? + Icon support?
@@ -1635,7 +1635,7 @@ static lv_res_t _create_window_home_launch(lv_obj_t *btn)
 	else if (!more_cfg)
 		win = create_window_launch(SYMBOL_GPS" Starten");
 	else
-		win = create_window_launch(SYMBOL_GPS" Mehr Konfigurationen");
+		win = create_window_launch(SYMBOL_GPS" Weitere Konfigurationen");
 
 	launch_logs_enable = false;
 
@@ -1906,7 +1906,7 @@ failed_sd_mount:
 			lv_label_set_static_text(label_error,
 				"#FFDD00 Keine Haupt-Boot-Eintraege gefunden...#\n"
 				"Ueberpruefe, ob #96FF00 bootloader/hekate_ipl.ini# Boot-Eintraege enthaelt\n"
-				"oder benutze die #C7EA46 Mehr Konfigurationen#-Schaltflaeche fuer weitere Boot-Eintraege.");
+				"oder benutze die #C7EA46 Weitere Konfigurationen#-Schaltflaeche fuer weitere Boot-Eintraege.");
 		}
 		else
 		{
@@ -1979,7 +1979,7 @@ static void _create_tab_home(lv_theme_t *th, lv_obj_t *parent)
 	lv_btn_set_layout(btn_more_cfg, LV_LAYOUT_OFF);
 	lv_obj_align(label_btn, NULL, LV_ALIGN_CENTER, 0, -28);
 	label_btn2 = lv_label_create(btn_more_cfg, label_btn2);
-	s_printf(btn_colored_text, "%s%s", text_color, " Mehr Konfig.#");
+	s_printf(btn_colored_text, "%s%s", text_color, " Weitere Konfigurationen#");
 	lv_label_set_text(label_btn2, btn_colored_text);
 	lv_obj_set_pos(btn_more_cfg, 341, 160);
 	lv_obj_align(label_btn2, NULL, LV_ALIGN_IN_TOP_MID, 0, 174);
@@ -2007,7 +2007,7 @@ static void _create_tab_home(lv_theme_t *th, lv_obj_t *parent)
 	lv_btn_set_layout(btn_payloads, LV_LAYOUT_OFF);
 	lv_obj_align(label_btn, NULL, LV_ALIGN_CENTER, 0, -28);
 	label_btn2 = lv_label_create(btn_payloads, label_btn2);
-	s_printf(btn_colored_text, "%s%s", text_color, " Payloads#");
+	s_printf(btn_colored_text, "%s%s", text_color, " payloads#");
 	lv_label_set_text(label_btn2, btn_colored_text);
 	lv_obj_set_pos(btn_payloads, 632, 160);
 	lv_obj_align(label_btn2, NULL, LV_ALIGN_IN_TOP_MID, 0, 174);
@@ -2368,11 +2368,11 @@ static void _nyx_main_menu(lv_theme_t * th)
 	lv_obj_set_size(line, LV_HOR_RES - LV_DPI * 3 / 5, 1);
 	lv_obj_set_pos(line, LV_DPI * 3 / 10, 63);
 
-	lv_obj_set_top(line, true);
+	lv_obj_set_top(line, false); //Test um die beiden Linien Oben und unten zu entfernen
 
 	line = lv_cont_create(lv_layer_top(), line);
 	lv_obj_set_pos(line, LV_DPI * 3 / 10, 656);
-	lv_obj_set_top(line, true);
+	lv_obj_set_top(line, false); //Test um die beiden Linien Oben und unten zu entfernen
 
 	// Option save button.
 	lv_tabview_set_tab_load_action(tv, _show_hide_save_button);

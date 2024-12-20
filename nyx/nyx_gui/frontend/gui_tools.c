@@ -598,7 +598,7 @@ static lv_res_t _action_ums_emuemmc_gpp(lv_obj_t *btn)
 				u8 *gpt = malloc(SD_BLOCKSIZE);
 				if (sdmmc_storage_read(&sd_storage, usbs.offset + 1, 1, gpt))
 				{
-					if (!memcmp(gpt, "EFI PART", 8))
+					if (!memcmp(gpt, "EFI PARTITION", 8))
 					{
 						error = 0;
 						usbs.sectors = *(u32 *)(gpt + 0x20) + 1; // Backup LBA + 1.
@@ -1022,7 +1022,7 @@ static lv_res_t _create_mbox_fix_touchscreen(lv_obj_t *btn)
 
 	lv_mbox_set_text(mbox,
 		"#FFDD00 Warnung: Nur ausfuehren wenn du wirklich Probleme hast!#\n\n"
-		"Druecke #FF8000 POWER# zum fortfahren.\nDruecke #FF8000 VOL# um abzubrechen.");
+		"Druecke #FF8000 POWER# um fortzufahren.\nDruecke #FF8000 VOL# um abzubrechen.");
 	manual_system_maintenance(true);
 
 	if (!(btn_wait() & BTN_POWER))
@@ -1233,11 +1233,11 @@ static lv_res_t _create_window_dump_pk12_tool(lv_obj_t *btn)
 
 		// Display info.
 		s_printf(txt_buf + strlen(txt_buf),
-			"#C7EA46 NX Bootloader Groesse:  #0x%05X\n"
-			"#C7EA46 Secure monitor Addr:    #0x%05X\n"
-			"#C7EA46 Secure monitor Groesse: #0x%05X\n"
-			"#C7EA46 Warmboot Addr:          #0x%05X\n"
-			"#C7EA46 Warmboot Groesse:       #0x%05X\n\n",
+			"#C7EA46 NX Bootloader Groesse:    #0x%05X\n"
+			"#C7EA46 Secure monitor Addresse:  #0x%05X\n"
+			"#C7EA46 Secure monitor Groesse:   #0x%05X\n"
+			"#C7EA46 Warmboot Addresse:        #0x%05X\n"
+			"#C7EA46 Warmboot Groesse:         #0x%05X\n\n",
 			hdr_pk11->ldr_size, pkg1_id->secmon_base, hdr_pk11->sm_size, pkg1_id->warmboot_base, hdr_pk11->wb_size);
 
 		lv_label_set_text(lb_desc, txt_buf);
@@ -1532,7 +1532,7 @@ static void _create_tab_tools_emmc_pkg12(lv_theme_t *th, lv_obj_t *parent)
 	lv_label_set_recolor(label_txt4, true);
 	lv_label_set_static_text(label_txt4,
 		"Ermoeglicht das Partitionieren der SD-Karte zum nutzen des\n"
-		"#C7EA46 emuMMC#, #C7EA46 Android# und #C7EA46 Linux#.\nDu kannst Linux und Android auch flashen.\n");
+		"#C7EA46 emuMMC#, #C7EA46 Android# und #C7EA46 Linux#.\nDu kannst Linux und Android auch erstellen.\n");
 	lv_obj_set_style(label_txt4, &hint_small_style);
 	lv_obj_align(label_txt4, btn3, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3);
 

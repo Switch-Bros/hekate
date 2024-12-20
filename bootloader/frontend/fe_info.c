@@ -42,10 +42,10 @@ void print_fuseinfo()
 	switch (fuse_read_hw_state())
 	{
 	case FUSE_NX_HW_STATE_PROD:
-		gfx_printf("Retail\n");
+		gfx_printf("Handelsversion\n");
 		break;
 	case FUSE_NX_HW_STATE_DEV:
-		gfx_printf("Dev\n");
+		gfx_printf("Entwicklerversion\n");
 		break;
 	}
 	gfx_printf("SD-Karten ID:    %d\n", fuse_read_dramid(true));
@@ -84,12 +84,12 @@ void print_mmc_info()
 		case 3: /* MMC v3.1 - v3.3 */
 		case 4: /* MMC v4 */
 			gfx_printf(
-				" Hersteller:  %X\n"
-				" OEM ID:     %02X\n"
-				" Modell:      %c%c%c%c%c%c\n"
-				" Prd Rev:    %X\n"
-				" S/N:        %04X\n"
-				" Monat/Jahr: %02d/%04d\n\n",
+				" Hersteller:     %X\n"
+				" OEM ID:         %02X\n"
+				" Modell:         %c%c%c%c%c%c\n"
+				" Produktversion: %X\n"
+				" S/N:            %04X\n"
+				" Monat/Jahr:     %02d/%04d\n\n",
 				emmc_storage.cid.manfid, emmc_storage.cid.oemid,
 				emmc_storage.cid.prod_name[0], emmc_storage.cid.prod_name[1], emmc_storage.cid.prod_name[2],
 				emmc_storage.cid.prod_name[3], emmc_storage.cid.prod_name[4],	emmc_storage.cid.prod_name[5],
@@ -135,14 +135,14 @@ void print_mmc_info()
 			}
 
 			gfx_printf(
-				" Spec Version:  %02X\n"
-				" Extended Rev:  1.%d\n"
-				" Dev Version:   %d\n"
-				" Cmd Klassen:   %02X\n"
-				" Kapazitaet:      %s\n"
-				" Max Rate:      %d MB/s (%d MHz)\n"
-				" Aktuelle Rate:  %d MB/s\n"
-				" Type Support:  ",
+				" Spezifikationsver.:  %02X\n"
+				" Erweiterte Rev.:     1.%d\n"
+				" Entwicklervers.:     %d\n"
+				" Cmd Klassen:         %02X\n"
+				" Kapazitaet:          %s\n"
+				" Maximale Rate:       %d MB/s (%d MHz)\n"
+				" Aktuelle Rate:       %d MB/s\n"
+				" Typ Support:  ",
 				emmc_storage.csd.mmca_vsn, emmc_storage.ext_csd.rev, emmc_storage.ext_csd.dev_version, emmc_storage.csd.cmdclass,
 				emmc_storage.csd.capacity == (4096 * EMMC_BLOCKSIZE) ? "Hoch" : "Niedrig", speed & 0xFFFF, (speed >> 16) & 0xFFFF,
 				emmc_storage.csd.busspeed);
@@ -201,12 +201,12 @@ void print_sdcard_info()
 		gfx_printf("%kSD-Karte IDentifikation:%k\n", TXT_CLR_CYAN_L, TXT_CLR_DEFAULT);
 		gfx_printf(
 			" Hersteller ID:  %02x\n"
-			" OEM ID:     %c%c\n"
-			" Modell:      %c%c%c%c%c\n"
-			" HW rev:     %X\n"
-			" FW rev:     %X\n"
-			" S/N:        %08x\n"
-			" Monat/Jahr: %02d/%04d\n\n",
+			" OEM ID:         %c%c\n"
+			" Modell:         %c%c%c%c%c\n"
+			" Hardware-Ver.:  %X\n"
+			" Firmware-Ver.:  %X\n"
+			" S/N:            %08x\n"
+			" Monat/Jahr:     %02d/%04d\n\n",
 			sd_storage.cid.manfid, (sd_storage.cid.oemid >> 8) & 0xFF, sd_storage.cid.oemid & 0xFF,
 			sd_storage.cid.prod_name[0], sd_storage.cid.prod_name[1], sd_storage.cid.prod_name[2],
 			sd_storage.cid.prod_name[3], sd_storage.cid.prod_name[4],
@@ -235,7 +235,7 @@ void print_sdcard_info()
 		int res = f_mount(&sd_fs, "", 1);
 		if (!res)
 		{
-			gfx_puts("FAT-Volume-Informationen werden abgerufen...\n\n");
+			gfx_puts("FAT-Datentraegerinformationen werden abgerufen...\n\n");
 			f_getfree("", &sd_fs.free_clst, NULL);
 			gfx_printf("%kVolume %s gefunden: %k\n Frei:    %d MiB\n Cluster: %d KiB\n",
 					TXT_CLR_CYAN_L, sd_fs.fs_type == FS_EXFAT ? "exFAT" : "FAT32", TXT_CLR_DEFAULT,
@@ -256,7 +256,7 @@ void print_sdcard_info()
 		if (!sdmmc_get_sd_inserted())
 			EPRINTF("Stelle sicher dass sie richtig sitzt.");
 		else
-			EPRINTF("SD-Kartenleser sitzt nicht richtig!");
+			EPRINTF("SD-Kartenleser sitzt nicht richtig! Hardwarefehler");
 		sd_end();
 	}
 
@@ -267,7 +267,7 @@ void print_fuel_gauge_info()
 {
 	int value = 0;
 
-	gfx_printf("%kAkkustand-Informationen:\n%k", TXT_CLR_CYAN_L, TXT_CLR_DEFAULT);
+	gfx_printf("%kAkku-Informationen:\n%k", TXT_CLR_CYAN_L, TXT_CLR_DEFAULT);
 
 	max17050_get_property(MAX17050_RepSOC, &value);
 	gfx_printf("Aktuelle Kapazitaet:    %3d%\n", value >> 8);
@@ -311,7 +311,7 @@ void print_battery_charger_info()
 {
 	int value = 0;
 
-	gfx_printf("%k\n\nAkkuladegeraet-Informationen:\n%k", TXT_CLR_CYAN_L, TXT_CLR_DEFAULT);
+	gfx_printf("%k\n\nAkku-Ladegeraetinformationen:\n%k", TXT_CLR_CYAN_L, TXT_CLR_DEFAULT);
 
 	bq24193_get_property(BQ24193_InputCurrentLimit, &value);
 	gfx_printf("Eingangsstrombegrenzung:  %4d mA\n", value);
