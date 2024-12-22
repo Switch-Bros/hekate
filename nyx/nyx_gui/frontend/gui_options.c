@@ -620,7 +620,7 @@ static lv_res_t _create_window_nyx_colors(lv_obj_t *btn)
 	lv_label_set_static_text(lbl_test,
 		"Dies ist ein Beispieltext, um Schrift und Schriftfarbe zu testen. "
 		"Er enthaelt keinen spezifischen Inhalt. "
-		"123456789 !@#$%^&*()-_=+[]\;'./,{}|:"<>? ");
+		"ABCDEFGHIJKLMNOPQRSTUVWXYZ - 123456789");
 	lv_obj_set_width(lbl_test, lv_obj_get_width(h2) - LV_DPI * 6 / 10);
 	lv_obj_align(lbl_test, lbl_sample, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 5);
 	color_test.label = lbl_test;

@@ -629,9 +629,7 @@ static void _nyx_load_run()
 
 		gfx_con_setpos(0, 0);
 		WPRINTF("Alte Nyx GUI gefunden! Imagine Dragons!\n");
-		WPRINTF("\nAktualisiere den bootloader Ordner mit\n");
-		WPRINTF("dem switchbros-updater im hbmenu oder am\n");
-		WPRINTF("PC mit der NERD-O-MAT.bat\n\n");
+		WPRINTF("\nAktualisiere den bootloader Ordner\n\n");
 		WPRINTF("Beliebige Taste druecken...");
 
 		msleep(1000);
@@ -1108,9 +1106,7 @@ static void _show_errors()
 			WPRINTF("Minerva-Bibliothek fehlt!\n");
 
 		if (h_cfg.errors & (ERR_LIBSYS_LP0 | ERR_LIBSYS_MTC))
-			WPRINTF("\nAktualisiere den bootloader Ordner mit\n");
-			WPRINTF("dem switchbros-updater im hbmenu oder am\n");
-			WPRINTF("PC mit der NERD-O-MAT.bat\n\n");
+			WPRINTF("\nAktualisiere den bootloader Ordner\n\n");
 
 		if (h_cfg.errors & ERR_EXCEPTION)
 		{

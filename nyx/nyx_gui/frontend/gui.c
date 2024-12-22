@@ -802,7 +802,7 @@ bool nyx_emmc_check_battery_enough()
 			"#FF8000 Akku-Ueberpruefung#\n\n"
 			"#FFDD00 Der Akku reicht nicht aus, um mit dem#\n"
 			"#FFDD00 ausgewaehlten Vorgang fortzufahren!#\n\n"
-			"Lade auf mindestens #C7EA46 3650 mV# auf und versuche es erneut!");
+			"Lade auf mindestens #C7EA46 3650 mV# auf, und versuche es erneut!");
 
 		lv_mbox_add_btns(mbox, mbox_btn_map, mbox_action);
 		lv_obj_set_width(mbox, LV_HOR_RES / 9 * 5);
@@ -1508,6 +1508,8 @@ static lv_obj_t *create_window_launch(const char *win_title)
 
 	lv_win_set_style(win, LV_WIN_STYLE_BG, &win_bg_style);
 
+	close_btn = lv_win_add_btn(win, NULL, SYMBOL_CLOSE" Schliessen", _win_launch_close_action);
+
 	return win;
 }
 
@@ -1637,6 +1639,7 @@ static lv_res_t _create_window_home_launch(lv_obj_t *btn)
 	else
 		win = create_window_launch(SYMBOL_GPS" Weitere Konfigurationen");
 
+	lv_win_add_btn(win, NULL, SYMBOL_LIST" Protokollierung #D0D0D0 AUS#", logs_onoff_toggle);
 	launch_logs_enable = false;
 
 	lv_cont_set_fit(lv_page_get_scrl(lv_win_get_content(win)), false, false);
@@ -1860,7 +1863,7 @@ ini_parsing:
 		ext->idx = entry_idx;
 
 		// Set action.
-		else if (!more_cfg)
+		if (!more_cfg)
 			lv_btn_set_action(btns, LV_BTN_ACTION_CLICK, _launch_action);
 		else
 			lv_btn_set_action(btns, LV_BTN_ACTION_CLICK, _launch_more_cfg_action);
