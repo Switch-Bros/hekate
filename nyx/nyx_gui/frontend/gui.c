@@ -2436,13 +2436,13 @@ static void _nyx_main_menu(lv_theme_t * th)
 	lv_cont_set_style(line, &line_style);
 	lv_obj_set_size(line, LV_HOR_RES - LV_DPI * 3 / 5, 1);
 //	lv_obj_set_pos(line, LV_DPI * 3 / 10, 63);
-	lv_obj_set_pos(line, LV_DPI * 3 / 10, 0);
+	lv_obj_set_pos(line, LV_DPI * 3 / 10, -1);
 
 	lv_obj_set_top(line, false); //Test um die beiden Linien Oben und unten zu entfernen
 
 	line = lv_cont_create(lv_layer_top(), line);
 //	lv_obj_set_pos(line, LV_DPI * 3 / 10, 656);
-	lv_obj_set_pos(line, LV_DPI * 3 / 10, 0);
+	lv_obj_set_pos(line, LV_DPI * 3 / 10, -1);
 	lv_obj_set_top(line, false); //Test um die beiden Linien Oben und unten zu entfernen
 
 	// Option save button.
