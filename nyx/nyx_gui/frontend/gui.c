@@ -1678,7 +1678,7 @@ static lv_res_t _create_window_home_launch(lv_obj_t *btn)
 	else if (!more_cfg)
 		win = create_window_launch(SYMBOL_GPS" Starten");
 	else
-		win = create_window_launch(SYMBOL_GPS" Weitere Konfigurationen");
+		win = create_window_launch(SYMBOL_GPS" Weitere Konfigs.");
 
 	if(!n_cfg.safeui)
 		lv_win_add_btn(win, NULL, SYMBOL_LIST" Protokollierung #D0D0D0 AUS#", logs_onoff_toggle);
@@ -1957,7 +1957,7 @@ failed_sd_mount:
 			lv_label_set_static_text(label_error,
 				"#FFDD00 Keine Haupt-Boot-Eintraege gefunden...#\n"
 				"Ueberpruefe, ob #96FF00 bootloader/hekate_ipl.ini# Boot-Eintraege enthaelt\n"
-				"oder benutze die #C7EA46 Weitere Konfigurationen#-Schaltflaeche fuer weitere Boot-Eintraege.");
+				"oder benutze die #C7EA46 Weitere Konfigs.#-Schaltflaeche fuer weitere Boot-Eintraege.");
 		}
 		else
 		{
@@ -2030,7 +2030,7 @@ static void _create_tab_home(lv_theme_t *th, lv_obj_t *parent)
 	lv_btn_set_layout(btn_more_cfg, LV_LAYOUT_OFF);
 	lv_obj_align(label_btn, NULL, LV_ALIGN_CENTER, 0, -28);
 	label_btn2 = lv_label_create(btn_more_cfg, label_btn2);
-	s_printf(btn_colored_text, "%s%s", text_color, " Weitere Konfigurationen#");
+	s_printf(btn_colored_text, "%s%s", text_color, " Weitere Konfigs.#");
 	lv_label_set_text(label_btn2, btn_colored_text);
 	lv_obj_set_pos(btn_more_cfg, 341, 160);
 	lv_obj_align(label_btn2, NULL, LV_ALIGN_IN_TOP_MID, 0, 174);

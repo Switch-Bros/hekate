@@ -495,7 +495,7 @@ static void _launch_config()
 	ments[2].handler = _launch_payloads;
 
 	ments[3].type    = MENT_HANDLER;
-	ments[3].caption = "Weitere Konfigurationen...";
+	ments[3].caption = "Weitere Konfigs...";
 	ments[3].handler = _launch_ini_list;
 
 	ments[4].type    = MENT_CHGLINE;
