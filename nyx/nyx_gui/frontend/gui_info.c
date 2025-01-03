@@ -1718,17 +1718,17 @@ static lv_res_t _create_window_emmc_info_status(lv_obj_t *btn)
 		"Hersteller ID:\n"
 		"Modell:\n"
 		"Prod Rev:\n"
-		"S/N:\n"
+		"Seriennummer:\n"
 		"Monat/Jahr:\n\n"
 		"#00DDFF Ext CSD:#\n"
-		"Cmd Klassen:\n"
+		"CMD Klassen:\n"
 		"Max. Rate:\n"
 		"Akt. Rate:\n"
-		"Typ Support:\n\n"
-		"Write Cache:\n"
-		"Enhanced Area:\n"
-		"Estimated Life:\n"
-		"Reserved Used:"
+		"Typunterstuetzung:\n\n"
+		"Schreibcache:\n"
+		"Erweiterte Zone:\n"
+		"Lebensdauer:\n"
+		"Reserviert Genutzt:"
 	);
 	lv_obj_set_width(lb_desc, lv_obj_get_width(desc));
 
@@ -1843,7 +1843,7 @@ out_error:
 
 static lv_res_t _create_window_sdcard_info_status(lv_obj_t *btn)
 {
-	lv_obj_t *win = nyx_create_standard_window(SYMBOL_SD" microSD-Karte Info");
+	lv_obj_t *win = nyx_create_standard_window(SYMBOL_SD" microSD-Karteninfo");
 	lv_win_add_btn(win, NULL, SYMBOL_SD" Benchmark", _create_mbox_sd_bench);
 
 	lv_obj_t *desc = lv_cont_create(win, NULL);
@@ -1868,16 +1868,16 @@ static lv_res_t _create_window_sdcard_info_status(lv_obj_t *btn)
 	}
 
 	lv_label_set_text(lb_desc,
-		"#00DDFF SD-Karte IDentifikation:#\n"
+		"#00DDFF SD-Karten ID:#\n"
 		"Hersteller ID:\n"
 		"Modell:\n"
 		"OEM ID:\n"
 		"HW Rev:\n"
 		"FW Rev:\n"
-		"S/N:\n"
+		"Seriennummer:\n"
 		"Monat/Jahr:\n\n"
-		"Max Power:\n"
-		"Bootloader bus:"
+		"Max. Leistung:\n"
+		"Bootloader Bus:"
 	);
 
 	lv_obj_t *val = lv_cont_create(win, NULL);
@@ -2028,13 +2028,13 @@ static lv_res_t _create_window_sdcard_info_status(lv_obj_t *btn)
 	lv_obj_t * lb_desc2 = lv_label_create(desc2, lb_desc);
 
 	lv_label_set_static_text(lb_desc2,
-		"#00DDFF Card-Specific Data#\n"
-		"Cmd Klasse:\n"
+		"#00DDFF SD Spezifische Daten#\n"
+		"CMD Klasse:\n"
 		"Kapazitaet:\n"
 		"Kapazitaet (LBA):\n"
 		"Busbreite:\n"
 		"Akt. Rate:\n"
-		"Speed Klasse:\n"
+		"Geschw. Klasse:\n"
 		"UHS Klasse:\n"
 		"Max. Busgeschw.:\n\n"
 		"Schreibschutz:"
@@ -2112,7 +2112,7 @@ static lv_res_t _create_window_sdcard_info_status(lv_obj_t *btn)
 	lv_obj_set_size(desc3, LV_HOR_RES / 2 / 2 * 2, LV_VER_RES - (LV_DPI * 11 / 8) * 4);
 
 	lv_obj_t * lb_desc3 = lv_label_create(desc3, lb_desc);
-	lv_label_set_text(lb_desc3, "#D4FF00 FAT-Volumen-Informationen werden abgerufen...#");
+	lv_label_set_text(lb_desc3, "#D4FF00 FAT Datentraegerinfos werden abgerufen...#");
 	lv_obj_set_width(lb_desc3, lv_obj_get_width(desc3));
 
 	lv_obj_align(desc3, desc, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 2);
@@ -2122,7 +2122,7 @@ static lv_res_t _create_window_sdcard_info_status(lv_obj_t *btn)
 	f_getfree("", &sd_fs.free_clst, NULL);
 
 	lv_label_set_text(lb_desc3,
-		"#00DDFF FAT Volumen gefunden:#\n"
+		"#00DDFF FAT Datentraeger:#\n"
 		"Dateisystem:\n"
 		"Cluster:\n"
 		"Groesse frei/insges.:"
@@ -2152,7 +2152,7 @@ static lv_res_t _create_window_sdcard_info_status(lv_obj_t *btn)
 	lv_obj_set_size(desc4, LV_HOR_RES / 2 / 2 * 2, LV_VER_RES - (LV_DPI * 11 / 8) * 4);
 
 	lv_obj_t * lb_desc4 = lv_label_create(desc4, lb_desc);
-	lv_label_set_text(lb_desc4, "#D4FF00 FAT-Volumen-Informationen werden abgerufen...#");
+	lv_label_set_text(lb_desc4, "#D4FF00 FAT Datentraegerinfos werden abgerufen...#");
 	lv_obj_set_width(lb_desc4, lv_obj_get_width(desc4));
 
 	lv_label_set_text(lb_desc4,

@@ -88,7 +88,7 @@ void print_mmc_info()
 				" OEM ID:         %02X\n"
 				" Modell:         %c%c%c%c%c%c\n"
 				" Produktversion: %X\n"
-				" S/N:            %04X\n"
+				" Seriennummer:   %04X\n"
 				" Monat/Jahr:     %02d/%04d\n\n",
 				emmc_storage.cid.manfid, emmc_storage.cid.oemid,
 				emmc_storage.cid.prod_name[0], emmc_storage.cid.prod_name[1], emmc_storage.cid.prod_name[2],
@@ -205,7 +205,7 @@ void print_sdcard_info()
 			" Modell:         %c%c%c%c%c\n"
 			" Hardware-Ver.:  %X\n"
 			" Firmware-Ver.:  %X\n"
-			" S/N:            %08x\n"
+			" Seriennummer:   %08x\n"
 			" Monat/Jahr:     %02d/%04d\n\n",
 			sd_storage.cid.manfid, (sd_storage.cid.oemid >> 8) & 0xFF, sd_storage.cid.oemid & 0xFF,
 			sd_storage.cid.prod_name[0], sd_storage.cid.prod_name[1], sd_storage.cid.prod_name[2],
