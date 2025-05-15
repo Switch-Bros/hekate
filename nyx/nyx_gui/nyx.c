@@ -140,7 +140,7 @@ lv_res_t launch_payload(lv_obj_t *list)
 	FIL fp;
 	if (f_open(&fp, path, FA_READ))
 	{
-		EPRINTFARGS("Payload file is missing!\n(%s)", path);
+		EPRINTFARGS("payload nicht gefunden!\n(%s)", path);
 
 		goto out;
 	}
@@ -159,7 +159,7 @@ lv_res_t launch_payload(lv_obj_t *list)
 		{
 			f_close(&fp);
 
-			EPRINTF("Coreboot not allowed on Mariko!");
+			EPRINTF("coreboot wird nicht mehr unterstuetzt!");
 
 			goto out;
 		}
@@ -286,6 +286,8 @@ skip_main_cfg_parse:
 					n_cfg.jc_force_right = atoi(kv->val) == 1;
 				else if (!strcmp("bpmpclock",    kv->key))
 					n_cfg.bpmp_clock     = atoi(kv->val);
+				else if (!strcmp("safeui",       kv->key))
+					n_cfg.safeui         = atoi(kv->val) == 1;
 			}
 
 			break;
@@ -361,10 +363,10 @@ static void _show_errors(int sd_error)
 	switch (sd_error)
 	{
 	case SD_MOUNT_ERROR:
-		WPRINTF("Failed to init or mount SD!\n");
+		WPRINTF("SD-Karte konnte nicht initialisiert werden!\n");
 		goto error_occured;
 	case SD_FILE_ERROR:
-		WPRINTF("Failed to load GUI resources!\nres.pak not found or corrupted.\n");
+		WPRINTF("Fehler beim Laden der GUI-Ressourcen!\nres.pak nicht gefunden oder beschaedigt.\n");
 		goto error_occured;
 	case SD_NO_ERROR:
 	default:
@@ -373,7 +375,7 @@ static void _show_errors(int sd_error)
 
 	if (*excp_enabled == EXCP_MAGIC)
 	{
-		WPRINTFARGS("Nyx exception occurred (LR %08X):\n", *excp_lr);
+		WPRINTFARGS("Nyx Ausnahmefehler aufgetreten (LR %08X):\n", *excp_lr);
 		switch (*excp_type)
 		{
 		case EXCP_TYPE_RESET:
@@ -397,7 +399,7 @@ static void _show_errors(int sd_error)
 		*excp_enabled = 0;
 
 error_occured:
-		WPRINTF("Press any key to reload Nyx...");
+		WPRINTF("Beliebige Taste druecken, um Nyx neu zu Laden...");
 
 		msleep(1000);
 		btn_wait();
@@ -518,7 +520,7 @@ void ipl_main()
 	uart_init(DEBUG_UART_PORT, DEBUG_UART_BAUDRATE, UART_AO_TX_AO_RX);
 	uart_invert(DEBUG_UART_PORT, DEBUG_UART_INVERT, UART_INVERT_TXD);
 
-	uart_send(DEBUG_UART_PORT, (u8 *)"hekate-NYX: Hello!\r\n", 20);
+	uart_send(DEBUG_UART_PORT, (u8 *)"hekate-NYX: Hallo!\r\n", 20);
 	uart_wait_xfer(DEBUG_UART_PORT, UART_TX_IDLE);
 #endif
 

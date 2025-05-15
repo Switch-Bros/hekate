@@ -144,7 +144,7 @@ void emmc_gpt_parse(link_t *gpt)
 #endif
 
 	// Check if no GPT or more than max allowed entries.
-	if (memcmp(&gpt_buf->header.signature, "EFI PART", 8) || gpt_buf->header.num_part_ents > 128)
+	if (memcmp(&gpt_buf->header.signature, "EFI PARTITION", 8) || gpt_buf->header.num_part_ents > 128)
 		goto out;
 
 	for (u32 i = 0; i < gpt_buf->header.num_part_ents; i++)

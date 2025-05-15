@@ -101,16 +101,28 @@ TOOLS := $(TOOLSLZ) $(TOOLSB2C)
 all: $(TARGET).bin $(LDRDIR)
 	@printf ICTC49 >> $(OUTPUTDIR)/$(TARGET).bin
 	@echo "--------------------------------------"
-	@echo "$(TARGET) size:"
-	@echo -n "Uncompr:  "
+	@echo "$(TARGET) Groesse:"
+	@echo -n "Unkomprimierte Groesse:  "
 	$(eval BIN_SIZE = $(shell wc -c < $(OUTPUTDIR)/$(TARGET)_unc.bin))
 	@echo $(BIN_SIZE)" Bytes"
-	@if [ ${BIN_SIZE} -gt 140288 ]; then echo "\e[1;33mUncompr size exceeds limit!\e[0m"; fi
-	@echo -n "Payload:  "
+	@if [ ${BIN_SIZE} -gt 140288 ]; then echo "\e[1;33mUnkomprimierte Groesse ueberschreitet das Limit!\e[0m"; fi
+	@echo -n "payload Groesse:  "
 	$(eval BIN_SIZE = $(shell wc -c < $(OUTPUTDIR)/$(TARGET).bin))
 	@echo $(BIN_SIZE)" Bytes"
-	@if [ ${BIN_SIZE} -gt 126296 ]; then echo "\e[1;33mPayload size exceeds limit!\e[0m"; fi
+	@if [ ${BIN_SIZE} -gt 126296 ]; then echo "\e[1;33mpayload Groesse ueberschreitet das Limit!\e[0m"; fi
 	@echo "--------------------------------------"
+	
+	mkdir -p $(OUTPUTDIR)/atmosphere
+	mkdir -p $(OUTPUTDIR)/bootloader
+	mkdir -p $(OUTPUTDIR)/bootloader/sys
+	cp $(OUTPUTDIR)/$(TARGET).bin $(OUTPUTDIR)/$(TARGET)_$(HEKATEVERSION).bin
+	cp $(OUTPUTDIR)/$(TARGET).bin $(OUTPUTDIR)/payload.bin
+	cp $(OUTPUTDIR)/$(TARGET).bin $(OUTPUTDIR)/atmosphere/reboot_payload.bin
+	cp $(OUTPUTDIR)/$(TARGET).bin $(OUTPUTDIR)/bootloader/update.bin
+	cp $(OUTPUTDIR)/Nyx.bin $(OUTPUTDIR)/bootloader/sys/Nyx.bin
+	cp $(OUTPUTDIR)/libsys_lp0.bso $(OUTPUTDIR)/bootloader/sys/libsys_lp0.bso
+	cp $(OUTPUTDIR)/libsys_minerva.bso $(OUTPUTDIR)/bootloader/sys/libsys_minerva.bso
+	
 
 clean: $(TOOLS)
 	@rm -rf $(OBJS)

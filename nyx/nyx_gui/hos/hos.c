@@ -398,7 +398,7 @@ int hos_keygen(void *keyblob, u32 kb, tsec_ctxt_t *tsec_ctxt)
 		tsec_ctxt->fw = sd_file_read("bootloader/sys/thk.bin", NULL);
 		if (!tsec_ctxt->fw)
 		{
-			EPRINTF("\nFailed to load thk.bin");
+			EPRINTF("\nthk.bin konnte nicht geladen werden");
 			return 0;
 		}
 
@@ -422,7 +422,7 @@ int hos_keygen(void *keyblob, u32 kb, tsec_ctxt_t *tsec_ctxt)
 		// We rely on racing conditions, make sure we cover even the unluckiest cases.
 		if (retries > 15)
 		{
-			EPRINTF("\nFailed to get TSEC keys. Please try again.");
+			EPRINTF("\nFehler beim Abrufen der TSEC-Keys. Bitte erneut versuchen.");
 			return 0;
 		}
 	}
@@ -566,12 +566,12 @@ static void _hos_validate_mkey()
 
 static void _hos_bis_print_key(u32 idx, u8 *key)
 {
-	gfx_printf("BIS %d Crypt: ", idx);
+	gfx_printf("BIS %d Verschluesselung: ", idx);
 	for (int i = 0; i < SE_KEY_128_SIZE; i++)
 		gfx_printf("%02X", key[((idx * 2 + 0) * SE_KEY_128_SIZE) + i]);
 	gfx_puts("\n");
 
-	gfx_printf("BIS %d Tweak: ", idx);
+	gfx_printf("BIS %d Anpassung: ", idx);
 	for (int i = 0; i < SE_KEY_128_SIZE; i++)
 		gfx_printf("%02X", key[((idx * 2 + 1) * SE_KEY_128_SIZE) + i]);
 	gfx_puts("\n");
@@ -593,7 +593,7 @@ int hos_bis_keygen()
 	// We check unconditionally in order to support downgrades.
 	keygen_rev = fuse_read_odm_keygen_rev();
 
-	gfx_printf("Keygen rev: %d\n", keygen_rev);
+	gfx_printf("Schluesselgenerator-Version: %d\n", keygen_rev);
 
 	if (keygen_rev)
 	{

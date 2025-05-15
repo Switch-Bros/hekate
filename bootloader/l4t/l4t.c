@@ -305,7 +305,7 @@ static const l4t_fw_t l4t_fw[] = {
 	{ BL33_LOAD_BASE,            "bl33.bin"        },
 	{ SC7ENTRY_BASE,             "sc7entry.bin"    },
 	{ SC7EXIT_BASE,              "sc7exit.bin"     },
-	{ SC7EXIT_B01_BASE,          "sc7exit_b01.bin" }, //!TODO: Update on fuse burns.
+	{ SC7EXIT_B01_BASE,          "sc7exit_b01.bin" },
 	{ BPMPFW_BASE,               "bpmpfw.bin"      },
 	{ BPMPFW_B01_BASE,           "bpmpfw_b01.bin"  },
 	{ BPMPFW_B01_MTC_TABLE_BASE, "mtc_tbl_b01.bin" },
@@ -325,8 +325,8 @@ enum {
 static void _l4t_crit_error(const char *text, bool needs_update)
 {
 	gfx_con.mute = false;
-	gfx_printf("%kL4T Error: %s!%sFailed to launch L4T!\n%k",
-		TXT_CLR_ERROR, text, needs_update ? "\nUpdate bootloader folder!\n\n" : "\n\n", TXT_CLR_DEFAULT);
+	gfx_printf("%kL4T Fehler: %s!%sL4T konnte nicht gestartet werden!\n%k",
+		TXT_CLR_ERROR, text, needs_update ? "\nAktualisiere den bootloader Ordner mit\ndem switchbros-updater im hbmenu oder am\nPC mit der SwitchBros_BasisPaket.bat\n\n" : "\n\n", TXT_CLR_DEFAULT);
 }
 
 char *sd_path;
@@ -500,7 +500,7 @@ static void _l4t_mc_config_carveout(bool t210b01)
 	MC(MC_SEC_CARVEOUT_REG_CTRL) = 0;
 
 	// Print real one, not temp disabled.
-	UPRINTF("TZD: TZDRAM Carveout: %08X - %08X\n", TZDRAM_BASE, TZDRAM_BASE - 1 + TZDRAM_SIZE);
+	UPRINTF("TZD: TZDRAM-Auslagerung: %08X - %08X\n", TZDRAM_BASE, TZDRAM_BASE - 1 + TZDRAM_SIZE);
 
 	// Configure generalized security carveouts.
 	u32 carveout_base = GEN_CARVEOUT_TOP;
@@ -536,7 +536,7 @@ static void _l4t_mc_config_carveout(bool t210b01)
 									 SEC_CARVEOUT_CFG_WR_FALCON_HS      |
 									 SEC_CARVEOUT_CFG_APERTURE_ID(1)    |
 									 SEC_CARVEOUT_CFG_FORCE_APERTURE_ID_MATCH;
-	UPRINTF("GSC1: NVDEC Carveout: %08X - %08X\n",
+	UPRINTF("GSC1: NVDEC-Auslagerung: %08X - %08X\n",
 		MC(MC_SECURITY_CARVEOUT1_BOM), MC(MC_SECURITY_CARVEOUT1_BOM) + MC(MC_SECURITY_CARVEOUT1_SIZE_128KB) * SZ_128K);
 
 #elif CARVEOUT_SECFW_ENABLE
@@ -564,7 +564,7 @@ static void _l4t_mc_config_carveout(bool t210b01)
 									 SEC_CARVEOUT_CFG_WR_NS  |
 									 SEC_CARVEOUT_CFG_WR_SEC |
 									 SEC_CARVEOUT_CFG_LOCKED;
-	UPRINTF("GSC1: SECFW Carveout: %08X - %08X\n",
+	UPRINTF("GSC1: SECFW-Auslagerung: %08X - %08X\n",
 		MC(MC_SECURITY_CARVEOUT1_BOM), MC(MC_SECURITY_CARVEOUT1_BOM) + MC(MC_SECURITY_CARVEOUT1_SIZE_128KB) * SZ_128K);
 
 #endif
@@ -606,7 +606,7 @@ static void _l4t_mc_config_carveout(bool t210b01)
 									 SEC_CARVEOUT_CFG_APERTURE_ID(2)    |
 									 SEC_CARVEOUT_CFG_SEND_CFG_TO_GPU   |
 									 SEC_CARVEOUT_CFG_FORCE_APERTURE_ID_MATCH; // SEC_CARVEOUT_CFG_IS_WPR is set from GPU.
-	UPRINTF("GSC2: GPUFW Carveout: %08X - %08X\n",
+	UPRINTF("GSC2: GPUFW-Auslagerung: %08X - %08X\n",
 		MC(MC_SECURITY_CARVEOUT2_BOM), MC(MC_SECURITY_CARVEOUT2_BOM) + MC(MC_SECURITY_CARVEOUT2_SIZE_128KB) * SZ_128K);
 
 	// Set GPU WPR carveout.
@@ -634,7 +634,7 @@ static void _l4t_mc_config_carveout(bool t210b01)
 									 SEC_CARVEOUT_CFG_APERTURE_ID(3)    |
 									 SEC_CARVEOUT_CFG_SEND_CFG_TO_GPU   |
 									 SEC_CARVEOUT_CFG_FORCE_APERTURE_ID_MATCH; // SEC_CARVEOUT_CFG_IS_WPR is set from GPU.
-	UPRINTF("GSC3: GPUW2 Carveout: %08X - %08X\n",
+	UPRINTF("GSC3: GPUW2-Auslagerung: %08X - %08X\n",
 		MC(MC_SECURITY_CARVEOUT3_BOM), MC(MC_SECURITY_CARVEOUT3_BOM) + MC(MC_SECURITY_CARVEOUT3_SIZE_128KB) * SZ_128K);
 
 	/*
@@ -654,7 +654,7 @@ static void _l4t_mc_config_carveout(bool t210b01)
 									 SEC_CARVEOUT_CFG_APERTURE_ID(4) |
 									 SEC_CARVEOUT_CFG_FORCE_APERTURE_ID_MATCH;
 
-	UPRINTF("GSC4: TSEC1 Carveout: %08X - %08X\n",
+	UPRINTF("GSC4: TSEC1-Auslagerung: %08X - %08X\n",
 		MC(MC_SECURITY_CARVEOUT4_BOM), MC(MC_SECURITY_CARVEOUT4_BOM) + MC(MC_SECURITY_CARVEOUT4_SIZE_128KB) * SZ_128K);
 
 	// Set TSECA carveout. Only for NVDEC bl/prod and TSEC. Otherwise disabled.
@@ -666,10 +666,10 @@ static void _l4t_mc_config_carveout(bool t210b01)
 									 SEC_CARVEOUT_CFG_WR_FALCON_HS   |
 									 SEC_CARVEOUT_CFG_APERTURE_ID(5) |
 									 SEC_CARVEOUT_CFG_FORCE_APERTURE_ID_MATCH;
-	UPRINTF("GSC5: TSEC2 Carveout: %08X - %08X\n",
+	UPRINTF("GSC5: TSEC2-Auslagerung: %08X - %08X\n",
 		MC(MC_SECURITY_CARVEOUT5_BOM), MC(MC_SECURITY_CARVEOUT5_BOM) + MC(MC_SECURITY_CARVEOUT5_SIZE_128KB) * SZ_128K);
 
-	UPRINTF("DRAM  Bank 0 TOP:     %08X\n", carveout_base);
+	UPRINTF("DRAM Bank 0 OBEN:     %08X\n", carveout_base);
 
 	// Save carveouts to lp0 pmc registers.
 	_l4t_sdram_lp0_save_params(t210b01);
@@ -789,7 +789,7 @@ static void _l4t_bpmpfw_b01_config(l4t_ctxt_t *ctxt)
 		// Enable table.
 		BPMPFW_B01_DTB_EMC_TBL_ENABLE(tbl_idx);
 
-		UPRINTF("RAM Frequency set to: %d KHz. Voltage: %d mV\n", ram_oc_freq, ctxt->ram_oc_vdd2);
+		UPRINTF("RAM-Frequenz eingestellt auf: %d KHz. Spannung: %d mV\n", ram_oc_freq, ctxt->ram_oc_vdd2);
 	}
 
 	// Save BPMP-FW entrypoint for TZ.
@@ -818,9 +818,9 @@ static int _l4t_sc7_exit_config(bool t210b01)
 		if (!pkg1_warmboot_config(&hos_ctxt, 0, fw_fuses, 0))
 		{
 			gfx_con.mute = false;
-			gfx_wputs("\nFailed to match warmboot with fuses!\nIf you continue, sleep wont work!");
+			gfx_wputs("\nFehler beim Abgleich von warmboot mit fuses!\nBeim fortfahren, funktioniert Ruhemodus nicht!");
 
-			gfx_puts("\nPress POWER to continue.\nPress VOL to go to the menu.\n");
+			gfx_puts("\nDruecke POWER um fortzufahren.\nDruecke VOL fuer Menue.\n");
 
 			if (!(btn_wait() & BTN_POWER))
 				return 0;
@@ -940,7 +940,7 @@ void launch_l4t(const ini_sec_t *ini_sec, int entry_idx, int is_list, bool t210b
 
 	if (!ctxt->path)
 	{
-		_l4t_crit_error("Path missing", false);
+		_l4t_crit_error("Pfad fehlt", false);
 		return;
 	}
 
@@ -948,21 +948,21 @@ void launch_l4t(const ini_sec_t *ini_sec, int entry_idx, int is_list, bool t210b
 	ctxt->mtc_table = minerva_get_mtc_table();
 	if (!t210b01 && !ctxt->mtc_table)
 	{
-		_l4t_crit_error("Minerva missing", true);
+		_l4t_crit_error("Minerva fehlt", true);
 		return;
 	}
 
 	// Load BL31 (ATF/TrustZone fw).
 	if (!_l4t_sd_load(BL31_FW))
 	{
-		_l4t_crit_error("BL31 missing", false);
+		_l4t_crit_error("BL31 fehlt", false);
 		return;
 	}
 
 	// Load BL33 (U-BOOT/CBOOT).
 	if (!_l4t_sd_load(BL33_FW))
 	{
-		_l4t_crit_error("BL33 missing", false);
+		_l4t_crit_error("BL33 fehlt", false);
 		return;
 	}
 
@@ -976,14 +976,14 @@ void launch_l4t(const ini_sec_t *ini_sec, int entry_idx, int is_list, bool t210b
 		ctxt->sc7entry_size = _l4t_sd_load(SC7ENTRY_FW);
 		if (!ctxt->sc7entry_size)
 		{
-			_l4t_crit_error("loading SC7-Entry", true);
+			_l4t_crit_error("Lade SC7-Entry", true);
 			return;
 		}
 
 		// Load BPMP-FW. Does power management.
 		if (!_l4t_sd_load(BPMPFW_FW))
 		{
-			_l4t_crit_error("loading BPMP-FW", true);
+			_l4t_crit_error("Lade BPMP-FW", true);
 			return;
 		}
 	}
@@ -992,14 +992,14 @@ void launch_l4t(const ini_sec_t *ini_sec, int entry_idx, int is_list, bool t210b
 		// Load BPMP-FW. Manages SC7-Entry also.
 		if (!_l4t_sd_load(BPMPFW_B01_FW))
 		{
-			_l4t_crit_error("loading BPMP-FW", true);
+			_l4t_crit_error("Lade BPMP-FW", true);
 			return;
 		}
 
 		// Load BPMP-FW MTC table.
 		if (!_l4t_sd_load(BPMPFW_B01_MTC_TBL))
 		{
-			_l4t_crit_error("loading BPMP-FW MTC", true);
+			_l4t_crit_error("Lade BPMP-FW MTC", true);
 			return;
 		}
 	}
@@ -1007,7 +1007,7 @@ void launch_l4t(const ini_sec_t *ini_sec, int entry_idx, int is_list, bool t210b
 	// Load SC7-Exit firmware.
 	if (!_l4t_sd_load(!t210b01 ? SC7EXIT_FW : SC7EXIT_B01_FW))
 	{
-		_l4t_crit_error("loading SC7-Exit", true);
+		_l4t_crit_error("Lade SC7-Exit", true);
 		return;
 	}
 
