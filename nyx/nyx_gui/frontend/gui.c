@@ -470,7 +470,7 @@ static bool _jc_virt_mouse_read(lv_indev_data_t *data)
 				console_enabled = true;
 				gfx_con_getpos(&gfx_con.savedx, &gfx_con.savedy, &gfx_con.savedcol);
 				gfx_con_setpos(964, 630, GFX_COL_AUTO);
-				gfx_printf("Dreucke -/+ zum schliessen");
+				gfx_printf("Druecke -/+ zum schliessen");
 				gfx_con_setpos(gfx_con.savedx, gfx_con.savedy, gfx_con.savedcol);
 			}
 			else
@@ -1053,16 +1053,16 @@ static void _check_sd_card_removed(void *params)
 		lv_obj_align(mbox, NULL, LV_ALIGN_CENTER, 0, 0);
 		lv_obj_set_top(mbox, true);
 
-		do_reload = true;
+		do_auto_reload = true;
 	}
 
 	// If in reload state and card was inserted, reload nyx.
-	if (do_reload && !sd_get_card_removed())
-		reload_nyx();
+	if (do_auto_reload && !sd_get_card_removed())
+		reload_nyx(dark_bg, false);
 }
 
 lv_task_t *task_emmc_errors;
-static void _nyx_emmc_issues(void *params)
+static void _nyx_emmc_issues_warning(void *params)
 {
 	if (emmc_get_mode() < EMMC_MMC_HS400)
 	{

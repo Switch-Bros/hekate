@@ -69,6 +69,7 @@ typedef struct _pkg3_meta_t
 	u32 hos_ver;
 	u32 version;
 	u32 git_rev;
+} pkg3_meta_t;
 
 // PKG3 Content Header.
 typedef struct _pkg3_content_t

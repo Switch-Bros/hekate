@@ -775,7 +775,7 @@ void hos_launch(ini_sec_t *cfg)
 	int res = emummc_storage_init_mmc();
 	if (res)
 	{
-		_hos_crit_error(res == 2 ? "Fehler beim initialisieren des emuMMC.");
+		_hos_crit_error(res == 2 ? "Initialisierungsfehler vom eMMC." : "Fehler beim initialisieren des emuMMC.");
 
 		goto error;
 	}
