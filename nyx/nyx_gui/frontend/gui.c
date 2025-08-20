@@ -1563,7 +1563,7 @@ static lv_obj_t *create_window_launch(const char *win_title)
 	lv_win_set_style(win, LV_WIN_STYLE_BG, &win_bg_style);
 
 	if(!n_cfg.safeui)
-		close_btn = lv_win_add_btn(win, NULL, SYMBOL_CLOSE" Close", _win_launch_close_action);
+		close_btn = lv_win_add_btn(win, NULL, SYMBOL_CLOSE" Schliessen", _win_launch_close_action);
 	else
 		close_btn = NULL;
 
@@ -2198,7 +2198,7 @@ static void _create_status_bar(lv_theme_t * th)
 	//! TODO: Utilize it for more.
 	lv_obj_t *btn_mid = lv_btn_create(status_bar_bg, NULL);
 	lv_obj_t *lbl_mid = lv_label_create(btn_mid, NULL);
-	lv_label_set_static_text(lbl_mid, "Speicheroptionen");
+	lv_label_set_static_text(lbl_mid, "Einstellungen speichern");
 	lv_obj_set_size(btn_mid, LV_DPI * 5 / 2, LV_DPI / 2);
 	lv_obj_align(btn_mid, NULL, LV_ALIGN_CENTER, 0, 0);
 	status_bar.mid = btn_mid;

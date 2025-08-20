@@ -618,8 +618,8 @@ static lv_res_t _create_window_nyx_colors(lv_obj_t *btn)
 	lv_obj_t *lbl_test = lv_label_create(h2, NULL);
 	lv_label_set_long_mode(lbl_test, LV_LABEL_LONG_BREAK);
 	lv_label_set_static_text(lbl_test,
-		"Dies ist ein Beispieltext, um Schrift und Schriftfarbe zu testen. "
-		"Er enthaelt keinen spezifischen Inhalt. "
+		"Dies ist ein Beispieltext, um Schrift und Schriftfarbe zu testen und "
+		"enthaelt keinen spezifischen Inhalt. "
 		"ABCDEFGHIJKLMNOPQRSTUVWXYZ - 123456789");
 	lv_obj_set_width(lbl_test, lv_obj_get_width(h2) - LV_DPI * 6 / 10);
 	lv_obj_align(lbl_test, lbl_sample, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 5);
@@ -1216,7 +1216,7 @@ lv_res_t create_win_nyx_options(lv_obj_t *parrent_btn)
 	lv_obj_t *btn = lv_btn_create(sw_h2, NULL);
 	lv_obj_t *label_btn = lv_label_create(btn, NULL);
 	lv_btn_set_fit(btn, true, true);
-	lv_label_set_static_text(label_btn, SYMBOL_COPY" Farbschema");
+	lv_label_set_static_text(label_btn, SYMBOL_COPY" Farben");
 	lv_obj_align(btn, label_sep, LV_ALIGN_OUT_BOTTOM_LEFT, LV_DPI / 4, -LV_DPI / 5 + 3);
 	lv_btn_set_action(btn, LV_BTN_ACTION_CLICK, _create_window_nyx_colors);
 

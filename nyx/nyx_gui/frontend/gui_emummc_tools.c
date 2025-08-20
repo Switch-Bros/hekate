@@ -262,9 +262,9 @@ static void _create_mbox_emummc_raw()
 	s_printf(txt_buf + strlen(txt_buf),
 		"Partitionstabelle:\n"
 		"#C0C0C0 Teil 0: Type: %02x, Beginn: %08x, Groesse: %08x#\n"
-		"#%s Teil 1: Type: %02x, Beginn: %08x, Groesse: %08x#\n"
-		"#%s Teil 2: Type: %02x, Beginn: %08x, Groesse: %08x#\n"
-		"#%s Teil 3: Type: %02x, Beginn: %08x, Groesse: %08x#",
+		"#%s Teil 1: Typ: %02x, Beginn: %08x, Groesse: %08x#\n"
+		"#%s Teil 2: Typ: %02x, Beginn: %08x, Groesse: %08x#\n"
+		"#%s Teil 3: Typ: %02x, Beginn: %08x, Groesse: %08x#",
 		mbr->partitions[0].type, mbr->partitions[0].start_sct, mbr->partitions[0].size_sct,
 		(mbr_ctx.available & BIT(0)) ? (mbr_ctx.resized_cnt[0] ? "FFDD00" : "C7EA46") : "C0C0C0",
 		 mbr->partitions[1].type, mbr->partitions[1].start_sct, mbr->partitions[1].size_sct,

@@ -1059,44 +1059,44 @@ static lv_res_t _create_mbox_fix_touchscreen(lv_obj_t *btn)
 		switch (err[0])
 		{
 		case ITO_FORCE_OPEN:
-			strcat(txt_buf, "Force Open");
+			strcat(txt_buf, "Oeffnen erzwingen");
 			break;
 		case ITO_SENSE_OPEN:
-			strcat(txt_buf, "Sense Open");
+			strcat(txt_buf, "Oeffnen erkennen");
 			break;
 		case ITO_FORCE_SHRT_GND:
-			strcat(txt_buf, "Force Short to GND");
+			strcat(txt_buf, "Kurzschluss nach Masse erzwingen");
 			break;
 		case ITO_SENSE_SHRT_GND:
-			strcat(txt_buf, "Sense Short to GND");
+			strcat(txt_buf, "Kurzschluss nach Masse erkennen");
 			break;
 		case ITO_FORCE_SHRT_VCM:
-			strcat(txt_buf, "Force Short to VDD");
+			strcat(txt_buf, "Kurzschluss nach VDD erzwingen");
 			break;
 		case ITO_SENSE_SHRT_VCM:
-			strcat(txt_buf, "Sense Short to VDD");
+			strcat(txt_buf, "Kurzschluss nach VDD erkennen");
 			break;
 		case ITO_FORCE_SHRT_FORCE:
-			strcat(txt_buf, "Force Short to Force");
+			strcat(txt_buf, "Kurzschluss-Signal auf Erzwingen legen");
 			break;
 		case ITO_SENSE_SHRT_SENSE:
-			strcat(txt_buf, "Sense Short to Sense");
+			strcat(txt_buf, "Kurzschluss-Signal auf Erkennung legen");
 			break;
 		case ITO_F2E_SENSE:
-			strcat(txt_buf, "Force Short to Sense");
+			strcat(txt_buf, "Kurzschluss auf Erkennung erzwingen");
 			break;
 		case ITO_FPC_FORCE_OPEN:
-			strcat(txt_buf, "FPC Force Open");
+			strcat(txt_buf, "FPC Oeffnung erzwingen");
 			break;
 		case ITO_FPC_SENSE_OPEN:
-			strcat(txt_buf, "FPC Sense Open");
+			strcat(txt_buf, "FPC Oeffnung erkennen");
 			break;
 		default:
 			strcat(txt_buf, "Unbekannt");
 			break;
 
 		}
-		s_printf(txt_buf + strlen(txt_buf), " (%d), Chn: %d#\n\n", err[0], err[1]);
+		s_printf(txt_buf + strlen(txt_buf), " (%d), Kanal: %d#\n\n", err[0], err[1]);
 		strcat(txt_buf, "#FFFF00 Touchscreen-Kalibrierung fehlgeschlagen!");
 		lv_mbox_set_text(mbox, txt_buf);
 		goto out2;
@@ -1233,11 +1233,11 @@ static lv_res_t _create_window_dump_pk12_tool(lv_obj_t *btn)
 
 		// Display info.
 		s_printf(txt_buf + strlen(txt_buf),
-			"#C7EA46 NX Bootloader Groesse:    #0x%05X\n"
-			"#C7EA46 Secure monitor Addresse:  #0x%05X\n"
-			"#C7EA46 Secure monitor Groesse:   #0x%05X\n"
-			"#C7EA46 Warmboot Addresse:        #0x%05X\n"
-			"#C7EA46 Warmboot Groesse:         #0x%05X\n\n",
+			"#C7EA46 NX Bootloader Groesse:        #0x%05X\n"
+			"#C7EA46 Sicherheitsmonitor Addresse:  #0x%05X\n"
+			"#C7EA46 Sicherheitsmonitor Groesse:   #0x%05X\n"
+			"#C7EA46 Warmboot Addresse:            #0x%05X\n"
+			"#C7EA46 Warmboot Groesse:             #0x%05X\n\n",
 			hdr_pk11->ldr_size, pkg1_id->secmon_base, hdr_pk11->sm_size, pkg1_id->warmboot_base, hdr_pk11->wb_size);
 
 		lv_label_set_text(lb_desc, txt_buf);
@@ -1263,7 +1263,7 @@ static lv_res_t _create_window_dump_pk12_tool(lv_obj_t *btn)
 		emmcsn_path_impl(path, "/pkg1", "secmon.bin", &emmc_storage);
 		if (sd_save_to_file(secmon, hdr_pk11->sm_size, path))
 			goto out_free;
-		strcat(txt_buf, "Secure Monitor nach secmon.bin gedumpt\n");
+		strcat(txt_buf, "Sicherheitsmonitor nach secmon.bin gedumpt\n");
 		lv_label_set_text(lb_desc, txt_buf);
 		manual_system_maintenance(true);
 

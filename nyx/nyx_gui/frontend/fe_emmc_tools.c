@@ -577,7 +577,7 @@ static int _dump_emmc_part(emmc_tool_gui_t *gui, char *sd_path, int active_part,
 						"#96FF00 Teilsicherung wird durchgefuehrt!#\n\n"
 						"#96FF00 1.# Druecke OK, um die SD-Karte zu entfernen.\n"
 						"#96FF00 2.# Entferne SD-Karte und verschiebe Dateien in freien Speicherplatz.\n"
-						"#FFDD00Verschiebe NICHT die partial.idx Datei!#\n"
+						"#FFDD00 Verschiebe NICHT die partial.idx Datei!#\n"
 						"#96FF00 3.# SD-Karte einstecken.\n"
 						"#96FF00 4.# Waehle die SELBE Option erneut, um fortzufahren.", true);
 

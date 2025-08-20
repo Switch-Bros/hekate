@@ -368,7 +368,7 @@ static lv_res_t _action_win_hw_info_status_close(lv_obj_t *btn)
 static lv_res_t _create_window_hw_info_status(lv_obj_t *btn)
 {
 	lv_obj_t *win = nyx_create_window_custom_close_btn(SYMBOL_CHIP" HW & Fuses Info", _action_win_hw_info_status_close);
-	lv_win_add_btn(win, NULL, SYMBOL_DOWNLOAD" Dump fuses", _fuse_dump_window_action);
+	lv_win_add_btn(win, NULL, SYMBOL_DOWNLOAD" Fuses dumpen", _fuse_dump_window_action);
 	lv_win_add_btn(win, NULL, SYMBOL_INFO" CAL0 Info", _create_mbox_cal0);
 
 	lv_obj_t *desc = lv_cont_create(win, NULL);
@@ -394,18 +394,18 @@ static lv_res_t _create_window_hw_info_status(lv_obj_t *btn)
 		"#FF8000 Verbrauchte Fuses (ODM 7/6):#\n"
 		"ODM Felder (4, 6, 7):\n"
 		"Secure Boot Key (SBK):\n"
-		"Device Key (DK):\n"
-		"Public Key (PK SHA256):\n\n"
+		"Geraetschluessel (DK):\n"
+		"Oeffentlicher Schluessel (PK SHA256):\n\n"
 		"HorizonOS Keygen Revision:\n"
 		"USB Stapel:\n"
-		"Final Test Revision:\n"
-		"Chip Probing Revision:\n"
-		"CPU Speedo 0 (CPU Wert):\n"
-		"CPU Speedo 1:\n"
-		"CPU Speedo 2 (GPU Wert):\n"
-		"SoC Speedo 0 (SoC Wert):\n"
-		"SoC Speedo 1 (BROM Wert):\n"
-		"SoC Speedo 2:\n"
+		"Letzte Testversion:\n"
+		"Revisionsstand der Chip-Pruefung\n"
+		"CPU Gueteklasse 0 (CPU Wert):\n"
+		"CPU Gueteklasse 1:\n"
+		"CPU Gueteklasse 2 (GPU Wert):\n"
+		"SoC Gueteklasse 0 (SoC Wert):\n"
+		"SoC Gueteklasse 1 (BROM Wert):\n"
+		"SoC Gueteklasse 2:\n"
 		"CPU IDDQ Wert:\n"
 		"SoC IDDQ Wert:\n"
 		"Gpu IDDQ Wert:\n"
@@ -618,7 +618,7 @@ static lv_res_t _create_window_hw_info_status(lv_obj_t *btn)
 		strcpy(fuses_hos_version, "20.0.0+");
 		break;
 	case 255:
-		strcpy(fuses_hos_version, "#FFD000 Fuses verbrannt#");
+		strcpy(fuses_hos_version, "#FFD000 Fuses verbraucht#");
 		break;
 	default:
 		strcpy(fuses_hos_version, "#FF8000 Unbekannt#");
@@ -1089,7 +1089,7 @@ static lv_res_t _create_window_bootrom_info_status(lv_obj_t *btn)
 
 	char *txt_buf = (char *)malloc(SZ_4K);
 	ipatches_txt = txt_buf;
-	s_printf(txt_buf, "#00DDFF Ipatches:#\n#FF8000 Addresse  "SYMBOL_DOT"  Val  "SYMBOL_DOT"  Instruktionen#\n");
+	s_printf(txt_buf, "#00DDFF Ipatches:#\n#FF8000 Addresse  "SYMBOL_DOT"  Wert  "SYMBOL_DOT"  Instruktionen#\n");
 
 	u32 res = fuse_read_ipatch(_ipatch_process);
 	if (res != 0)
@@ -1447,7 +1447,7 @@ static lv_res_t _create_mbox_benchmark(bool sd_bench)
 		u32 sector_num = sct_blk_seq;
 		u32 data_remaining = sct_rem_seq;
 
-		s_printf(txt_buf + strlen(txt_buf), "#C7EA46 %d/3# - Sektoroffset #C7EA46 %08X#:\n", iter_curr + 1, sector_off);
+		s_printf(txt_buf + strlen(txt_buf), "#C7EA46 %d/3# - Sektoradresse #C7EA46 %08X#:\n", iter_curr + 1, sector_off);
 
 		u32 render_min_ms = 66;
 		u32 render_timer  = get_tmr_ms() + render_min_ms;
@@ -1659,7 +1659,7 @@ error:
 		emmc_end();
 
 out:
-	s_printf(txt_buf, "#FF8000 %s Benchmark#\n[Raw Reads]", sd_bench ? "SD Card" : "eMMC");
+	s_printf(txt_buf, "#FF8000 %s Benchmark#\n[Direkte Lesezugriffe]", sd_bench ? "SD-Karte" : "eMMC");
 	lv_mbox_set_text(mbox, txt_buf);
 	free(txt_buf);
 
@@ -1868,7 +1868,7 @@ static lv_res_t _create_window_emmc_info_status(lv_obj_t *btn)
 
 	u32 idx = 0;
 	int lines_left = 20;
-	s_printf(txt_buf + strlen(txt_buf), "#FFBA00 Idx Name                      Groesse        Offset     Sektor#\n");
+	s_printf(txt_buf + strlen(txt_buf), "#FFBA00 Idx Name                      Groesse        Adresse     Sektor#\n");
 	LIST_FOREACH_ENTRY(emmc_part_t, part, &gpt, link)
 	{
 		int lines = strlen(part->name) > 25 ? 2 : 1;
@@ -2322,10 +2322,10 @@ static lv_res_t _create_window_sdcard_info_status(lv_obj_t *btn)
 	f_getfree("", &sd_fs.free_clst, NULL);
 
 	lv_label_set_text(lb_desc3,
-		"#00DDFF Found FAT FS:#\n"
-		"Filesystem:\n"
+		"#00DDFF Gefunden FAT FS:#\n"
+		"Dateisystem:\n"
 		"Cluster:\n"
-		"Size free/total:"
+		"Groesse Frei/Gesamt:"
 	);
 
 	lv_obj_set_width(lb_desc3, lv_obj_get_width(desc3));
@@ -2560,7 +2560,7 @@ static lv_res_t _create_window_battery_status(lv_obj_t *btn)
 	s_printf(txt_buf + strlen(txt_buf), "\n%d.%d W", wattage / 1000, (wattage % 1000) / 100);
 
 	if (!usb_pd.pdo_no)
-		strcat(txt_buf, "\nNon PD");
+		strcat(txt_buf, "\nKein PD");
 
 	// Limit to 6 profiles so it can fit.
 	usb_pd.pdo_no = MIN(usb_pd.pdo_no, 6);

@@ -1367,8 +1367,8 @@ static lv_res_t _action_part_manager_flash_options2(lv_obj_t *btns, const char *
 
 static int _backup_and_restore_files(bool backup, lv_obj_t **labels)
 {
-	const char *src_drv = backup ? "sd:"  : "ram:";
-	const char *dst_drv = backup ? "ram:" : "sd:";
+	const char *src_drv = backup ? "SD:"  : "RAM:";
+	const char *dst_drv = backup ? "RAM:" : "SD:";
 
 	int res = 0;
 	u32 total_size = 0;
@@ -1522,7 +1522,7 @@ static lv_res_t _create_mbox_start_partitioning(lv_obj_t *btn)
 		goto error;
 	}
 
-	f_mount(NULL, "sd:", 1); // Unmount SD card.
+	f_mount(NULL, "SD:", 1); // Unmount SD card.
 
 	lv_label_set_text(lbl_status, "#00DDFF Status:# Formatiere FAT32 Partition...");
 	lv_label_set_text(lbl_paths[0], "Bitte warten...");
@@ -1537,7 +1537,7 @@ static lv_res_t _create_mbox_start_partitioning(lv_obj_t *btn)
 
 	// Set cluster size to 64KB and try to format.
 	u32 cluster_size = 65536;
-	u32 mkfs_error = f_mkfs("sd:", FM_FAT32, cluster_size, buf, SZ_4M);
+	u32 mkfs_error = f_mkfs("SD:", FM_FAT32, cluster_size, buf, SZ_4M);
 
 	if (!mkfs_error)
 		goto mkfs_no_error;
@@ -1546,7 +1546,7 @@ static lv_res_t _create_mbox_start_partitioning(lv_obj_t *btn)
 	while (cluster_size > 4096)
 	{
 		cluster_size /= 2;
-		mkfs_error = f_mkfs("sd:", FM_FAT32, cluster_size, buf, SZ_4M);
+		mkfs_error = f_mkfs("SD:", FM_FAT32, cluster_size, buf, SZ_4M);
 
 		if (!mkfs_error)
 			break;
@@ -1584,7 +1584,7 @@ static lv_res_t _create_mbox_start_partitioning(lv_obj_t *btn)
 		}
 
 		lv_label_set_text(lbl_status, "#00DDFF Status:# Dateien wiederhergestellt, aber der Vorgang ist fehlgeschlagen!");
-		f_mount(NULL, "ram:", 1); // Unmount ramdisk.
+		f_mount(NULL, "RAM:", 1); // Unmount ramdisk.
 		free(buf);
 		goto error;
 	}
@@ -1593,7 +1593,7 @@ mkfs_no_error:
 	free(buf);
 
 	// Remount sd card as it was unmounted from formatting it.
-	f_mount(&sd_fs, "sd:", 1); // Mount SD card.
+	f_mount(&sd_fs, "SD:", 1); // Mount SD card.
 
 	lv_label_set_text(lbl_status, "#00DDFF Status:# Dateien wiederherstellen...");
 	manual_system_maintenance(true);
@@ -1609,8 +1609,8 @@ mkfs_no_error:
 		}
 	}
 
-	f_mount(NULL, "ram:", 1); // Unmount ramdisk.
-	f_chdrive("sd:");
+	f_mount(NULL, "RAM:", 1); // Unmount ramdisk.
+	f_chdrive("SD:");
 
 	// Set Volume label.
 	f_setlabel("0:SWITCH SD");
@@ -1665,7 +1665,7 @@ mkfs_no_error:
 	goto out;
 
 error:
-	f_chdrive("sd:");
+	f_chdrive("SD:");
 
 out:
 	lv_obj_del(lbl_paths[0]);
@@ -2098,7 +2098,7 @@ static void _create_mbox_check_files_total_size()
 	path[0] = 0;
 
 	// Check total size of files.
-	int res = _stat_and_copy_files("sd:", NULL, path, &total_files, &total_size, NULL);
+	int res = _stat_and_copy_files("SD:", NULL, path, &total_files, &total_size, NULL);
 
 	// Not more than 1.0GB.
 	part_info.backup_possible = !res && !(total_size > (RAM_DISK_SZ - SZ_16M));
@@ -2329,7 +2329,7 @@ static lv_res_t _action_fix_mbr(lv_obj_t *btn)
 		}
 
 		// Set up to max 2 emuMMC partitions.
-		if (!strcmp(part->name, "emummc") || !strcmp(part->name, "emummc2"))
+		if (!strcmp(part->name, "emuMMC") || !strcmp(part->name, "emuMMC2"))
 		{
 			mbr[1].partitions[mbr_idx].type = 0xE0;
 			mbr[1].partitions[mbr_idx].start_sct = part->lba_start;

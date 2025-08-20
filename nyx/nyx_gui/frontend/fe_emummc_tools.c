@@ -47,22 +47,22 @@ void load_emummc_cfg(emummc_cfg_t *emu_info)
 
 	LIST_FOREACH_ENTRY(ini_sec_t, ini_sec, &ini_sections, link)
 	{
-		if (!strcmp(ini_sec->name, "emummc"))
+		if (!strcmp(ini_sec->name, "emuMMC"))
 		{
 			LIST_FOREACH_ENTRY(ini_kv_t, kv, &ini_sec->kvs, link)
 			{
-				if (!strcmp("enabled",     kv->key))
+				if (!strcmp("Aktiviert",     kv->key))
 					emu_info->enabled = atoi(kv->val);
-				else if (!strcmp("sector", kv->key))
+				else if (!strcmp("Sektor", kv->key))
 					emu_info->sector = strtol(kv->val, NULL, 16);
-				else if (!strcmp("id",     kv->key))
+				else if (!strcmp("ID",     kv->key))
 					emu_info->id     = strtol(kv->val, NULL, 16);
-				else if (!strcmp("path",   kv->key))
+				else if (!strcmp("Pfad",   kv->key))
 				{
 					emu_info->path = (char *)malloc(strlen(kv->val) + 1);
 					strcpy(emu_info->path, kv->val);
 				}
-				else if (!strcmp("nintendo_path", kv->key))
+				else if (!strcmp("Nintendo_Pfad", kv->key))
 				{
 					emu_info->nintendo_path = (char *)malloc(strlen(kv->val) + 1);
 					strcpy(emu_info->nintendo_path, kv->val);
@@ -87,7 +87,7 @@ void save_emummc_cfg(u32 part_idx, u32 sector_start, const char *path)
 		return;
 
 	// Add config entry.
-	f_puts("[emummc]\nenabled=", &fp);
+	f_puts("[emuMMC]\nAktiviert=", &fp);
 	if (part_idx && sector_start)
 	{
 		itoa(part_idx, lbuf, 10);
@@ -99,16 +99,16 @@ void save_emummc_cfg(u32 part_idx, u32 sector_start, const char *path)
 		f_puts("0", &fp);
 
 	if (!sector_start)
-		f_puts("\nsector=0x0", &fp);
+		f_puts("\nSektor=0x0", &fp);
 	else
 	{
-		f_puts("\nsector=0x", &fp);
+		f_puts("\nSektor=0x", &fp);
 		itoa(sector_start, lbuf, 16);
 		f_puts(lbuf, &fp);
 	}
 	if (path)
 	{
-		f_puts("\npath=", &fp);
+		f_puts("\nPfad=", &fp);
 		f_puts(path, &fp);
 	}
 
@@ -116,11 +116,11 @@ void save_emummc_cfg(u32 part_idx, u32 sector_start, const char *path)
 	u32 id_from_path = 0;
 	if (path && strlen(path) >= 4)
 		memcpy(&id_from_path, path + strlen(path) - 4, 4);
-	f_puts("\nid=0x", &fp);
+	f_puts("\nID=0x", &fp);
 	itoa(id_from_path, lbuf, 16);
 	f_puts(lbuf, &fp);
 
-	f_puts("\nnintendo_path=", &fp);
+	f_puts("\nNintendo_Pfad=", &fp);
 	if (path)
 	{
 		f_puts(path, &fp);
@@ -487,7 +487,7 @@ out_failed:
 		s_printf(txt_buf, "Dauer: %dm %ds.\nAbgeschlossen!", timer / 60, timer % 60);
 		gui->base_path[strlen(gui->base_path) - 5] = '\0';
 		strcpy(sdPath, gui->base_path);
-		strcat(sdPath, "file_based");
+		strcat(sdPath, "Datei_basiert");
 		FIL fp;
 		f_open(&fp, sdPath, FA_CREATE_ALWAYS | FA_WRITE);
 		f_close(&fp);
@@ -964,7 +964,7 @@ out_failed:
 	{
 		s_printf(txt_buf, "Dauer: %dm %ds.\nAbgeschlossen!", timer / 60, timer % 60);
 		strcpy(sdPath, gui->base_path);
-		strcat(sdPath, "raw_based");
+		strcat(sdPath, "RAW_basiert");
 		FIL fp;
 		f_open(&fp, sdPath, FA_CREATE_ALWAYS | FA_WRITE);
 		f_write(&fp, &sector_start, 4, NULL);
