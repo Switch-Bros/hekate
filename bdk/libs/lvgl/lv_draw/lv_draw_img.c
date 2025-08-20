@@ -71,7 +71,7 @@ void lv_draw_img(const lv_area_t * coords, const lv_area_t * mask,
     if(src == NULL) {
         LV_LOG_WARN("Bildzeichnung: Quelle ist NULL");
         lv_draw_rect(coords, mask, &lv_style_plain, LV_OPA_COVER);
-        lv_draw_label(coords, mask, &lv_style_plain, LV_OPA_COVER, "No\ndata", LV_TXT_FLAG_NONE, NULL);
+        lv_draw_label(coords, mask, &lv_style_plain, LV_OPA_COVER, "Keine\nDaten", LV_TXT_FLAG_NONE, NULL);
         return;
     }
 
@@ -81,7 +81,7 @@ void lv_draw_img(const lv_area_t * coords, const lv_area_t * mask,
     if(res ==  LV_RES_INV) {
         LV_LOG_WARN("Fehler bei der Bildzeichnung");
         lv_draw_rect(coords, mask, &lv_style_plain, LV_OPA_COVER);
-        lv_draw_label(coords, mask, &lv_style_plain, LV_OPA_COVER, "No\ndata", LV_TXT_FLAG_NONE, NULL);
+        lv_draw_label(coords, mask, &lv_style_plain, LV_OPA_COVER, "Keine\nDaten", LV_TXT_FLAG_NONE, NULL);
         return;
     }
 }

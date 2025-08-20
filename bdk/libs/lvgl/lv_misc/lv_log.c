@@ -64,7 +64,7 @@ void lv_log_add(lv_log_level_t level, const char * file, int line, const char * 
     if(level >= LV_LOG_LEVEL) {
 
 #if LV_LOG_PRINTF && defined(DEBUG_UART_PORT)
-        static const char * lvl_prefix[] = {"Trace", "Info", "Warn", "Error"};
+        static const char * lvl_prefix[] = {"Ablaufverfolgung", "Info", "Warnung", "Fehler"};
         char *log = (char *)malloc(0x1000);
         s_printf(log, "%s: %s \t(%s #%d)\r\n", lvl_prefix[level], dsc,  file, line);
         uart_send(DEBUG_UART_PORT, (u8 *)log, strlen(log) + 1);
