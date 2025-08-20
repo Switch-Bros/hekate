@@ -314,7 +314,7 @@ void pkg1_secmon_patch(void *hos_ctxt, u32 secmon_base, bool t210b01)
 		return;
 
 	// Patch Secmon.
-	gfx_printf("%kPatche Secure Monitor%k\n", TXT_CLR_ORANGE, TXT_CLR_DEFAULT);
+	gfx_printf("%kPatche Sicherheitsmonitor%k\n", TXT_CLR_ORANGE, TXT_CLR_DEFAULT);
 	for (u32 i = 0; secmon_patchset[i].off != 0xFFFFFFFF; i++)
 		*(vu32 *)(secmon_base + secmon_patchset[i].off) = secmon_patchset[i].val;
 }

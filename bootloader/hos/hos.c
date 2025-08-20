@@ -1063,7 +1063,7 @@ void hos_launch(ini_sec_t *cfg)
 	{
 		EHPRINTFARGS("Fehler beim Anwenden von '%s'!", failed_patch);
 
-		bool emmc_patch_failed = !strcmp(failed_patch, "emummc");
+		bool emmc_patch_failed = !strcmp(failed_patch, "emuMMC");
 		if (!emmc_patch_failed)
 		{
 			gfx_puts("\nDruecke POWER um fortzufahren.\nDruecke VOL fuer das Menue.\n");

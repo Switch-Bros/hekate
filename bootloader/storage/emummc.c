@@ -50,20 +50,20 @@ void emummc_load_cfg()
 		{
 			if (ini_sec->type == INI_CHOICE)
 			{
-				if (strcmp(ini_sec->name, "emummc"))
+				if (strcmp(ini_sec->name, "emuMMC"))
 					continue;
 
 				LIST_FOREACH_ENTRY(ini_kv_t, kv, &ini_sec->kvs, link)
 				{
-					if (!strcmp("enabled",            kv->key))
+					if (!strcmp("aktiviert",            kv->key))
 						emu_cfg.enabled = atoi(kv->val);
-					else if (!strcmp("sector",        kv->key))
+					else if (!strcmp("Sektor",        kv->key))
 						emu_cfg.sector  = strtol(kv->val, NULL, 16);
-					else if (!strcmp("id",            kv->key))
+					else if (!strcmp("ID",            kv->key))
 						emu_cfg.id      = strtol(kv->val, NULL, 16);
-					else if (!strcmp("path",          kv->key))
+					else if (!strcmp("Pfad",          kv->key))
 						emu_cfg.path   = kv->val;
-					else if (!strcmp("nintendo_path", kv->key))
+					else if (!strcmp("nintendo_pfad", kv->key))
 						strcpy(emu_cfg.nintendo_path, kv->val);
 				}
 				break;
@@ -78,7 +78,7 @@ bool emummc_set_path(char *path)
 	bool found = false;
 
 	strcpy(emu_cfg.emummc_file_based_path, path);
-	strcat(emu_cfg.emummc_file_based_path, "/raw_based");
+	strcat(emu_cfg.emummc_file_based_path, "/RAW_basiert");
 
 	if (!f_open(&fp, emu_cfg.emummc_file_based_path, FA_READ))
 	{
@@ -89,7 +89,7 @@ bool emummc_set_path(char *path)
 	else
 	{
 		strcpy(emu_cfg.emummc_file_based_path, path);
-		strcat(emu_cfg.emummc_file_based_path, "/file_based");
+		strcat(emu_cfg.emummc_file_based_path, "/Datei_basiert");
 
 		if (!f_stat(emu_cfg.emummc_file_based_path, NULL))
 		{
