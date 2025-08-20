@@ -883,7 +883,7 @@ void _sd_storage_debug_print_csd(const u32 *raw_csd)
 	gfx_printf("WRITE_BL_PARTIAL:      %X\n",   unstuff_bits(raw_csd, 21, 1));
 
 	gfx_printf("FILE_FORMAT_GRP:       %X\n",   unstuff_bits(raw_csd, 15, 1));
-	gfx_printf("COPY:                  %X\n",   unstuff_bits(raw_csd, 14, 1));
+	gfx_printf("KOPIEREN:              %X\n",   unstuff_bits(raw_csd, 14, 1));
 	gfx_printf("PERM_WRITE_PROTECT:    %X\n",   unstuff_bits(raw_csd, 13, 1));
 	gfx_printf("TMP_WRITE_PROTECT:     %X\n",   unstuff_bits(raw_csd, 12, 1));
 	gfx_printf("FILE_FORMAT:           %X\n",   unstuff_bits(raw_csd, 10, 2));
@@ -901,17 +901,17 @@ void _sd_storage_debug_print_scr(const u32 *raw_scr)
 
 	gfx_printf("\n");
 
-	gfx_printf("SCR_STRUCTURE:         %X\n",   unstuff_bits(resp, 60, 4));
+	gfx_printf("SCR_STRUKTUR:         %X\n",   unstuff_bits(resp, 60, 4));
 	gfx_printf("SD_SPEC:               %X\n",   unstuff_bits(resp, 56, 4));
 	gfx_printf("DATA_STAT_AFTER_ERASE: %X\n",   unstuff_bits(resp, 55, 1));
 	gfx_printf("SD_SECURITY:           %X\n",   unstuff_bits(resp, 52, 3));
-	gfx_printf("SD_BUS widths:         %X\n",   unstuff_bits(resp, 48, 4));
+	gfx_printf("SD_BUS Breite:         %X\n",   unstuff_bits(resp, 48, 4));
 	gfx_printf("SD_SPEC3:              %X\n",   unstuff_bits(resp, 47, 1));
 	gfx_printf("EX_SECURITY:           %X\n",   unstuff_bits(resp, 43, 4));
 	gfx_printf("SD_SPEC4:              %X\n",   unstuff_bits(resp, 42, 1));
 	gfx_printf("SD_SPECX:              %X\n",   unstuff_bits(resp, 38, 4));
 	gfx_printf("CMD_SUPPORT:           %X\n",   unstuff_bits(resp, 32, 4));
-	gfx_printf("VENDOR:                %08X\n", unstuff_bits(resp, 0, 32));
+	gfx_printf("HERSTELLER:            %08X\n", unstuff_bits(resp, 0, 32));
 	gfx_printf("--RSVD--               %X\n",   unstuff_bits(resp, 36, 2));
 }
 
@@ -1632,7 +1632,7 @@ static void _sd_storage_parse_ext_reg(sdmmc_storage_t *storage, u8 *buf, u16 *ad
 		u16 off = reg_set_addr & 0x1FF;
 		u8 page = reg_set_addr >> 9 & 0xFF;
 		u8 fno  = reg_set_addr >> 18 & 0xFF;
-		gfx_printf("Addr: %04X sfc:%02X - fno:%02X, page:%02X, off:%04X\n", addr, sfc, fno, page, off);
+		gfx_printf("Adresse: %04X sfc:%02X - fno:%02X, Seite:%02X, off:%04X\n", addr, sfc, fno, page, off);
 	}
 #endif
 
@@ -1656,13 +1656,13 @@ void sd_storage_get_ext_regs(sdmmc_storage_t *storage, u8 *buf)
 
 	if (!(storage->scr.cmds & BIT(2)))
 	{
-		DREGPRINTF("Not Supported!\n");
+		DREGPRINTF("Nicht unterstuetzt!\n");
 		return;
 	}
 
 	if (!sd_storage_get_ext_reg(storage, 0, 0, 0, 512, buf))
 	{
-		DREGPRINTF("Failed to get general info!\n");
+		DREGPRINTF("Fehler beim Abrufen allgemeiner Informationen.!\n");
 		return;
 	}
 

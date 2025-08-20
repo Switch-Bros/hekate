@@ -44,14 +44,14 @@ int ram_disk_init(void *ram_fs, u32 ramdisk_size)
 		disk_set_info(DRIVE_RAM, SET_SECTOR_COUNT, &ramdisk_size);
 
 		// Unmount ramdisk.
-		f_mount(NULL, "ram:", 1);
+		f_mount(NULL, "RAM:", 1);
 
 		// Format as exFAT w/ 32KB cluster with no MBR.
-		res = f_mkfs("ram:", FM_EXFAT | FM_SFD, RAMDISK_CLUSTER_SZ, buf, 0x400000);
+		res = f_mkfs("RAM:", FM_EXFAT | FM_SFD, RAMDISK_CLUSTER_SZ, buf, 0x400000);
 
 		// Mount ramdisk.
 		if (!res)
-			res = f_mount(ram_fatfs, "ram:", 1);
+			res = f_mount(ram_fatfs, "RAM:", 1);
 
 		free(buf);
 	}
