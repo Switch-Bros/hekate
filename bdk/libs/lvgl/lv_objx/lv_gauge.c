@@ -61,7 +61,7 @@ static lv_signal_func_t ancestor_signal;
  */
 lv_obj_t * lv_gauge_create(lv_obj_t * par, const lv_obj_t * copy)
 {
-    LV_LOG_TRACE("gauge create started");
+    LV_LOG_TRACE("Messanzeigen-Erstellung gestartet");
 
     /*Create the ancestor gauge*/
     lv_obj_t * new_gauge = lv_lmeter_create(par, copy);
@@ -114,7 +114,7 @@ lv_obj_t * lv_gauge_create(lv_obj_t * par, const lv_obj_t * copy)
         lv_obj_refresh_style(new_gauge);
     }
 
-    LV_LOG_INFO("gauge created");
+    LV_LOG_INFO("Messanzeige erstellt");
 
     return new_gauge;
 }

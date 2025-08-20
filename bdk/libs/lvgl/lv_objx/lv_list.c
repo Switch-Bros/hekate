@@ -89,7 +89,7 @@ static lv_obj_t * last_clicked_btn;
  */
 lv_obj_t * lv_list_create(lv_obj_t * par, const lv_obj_t * copy)
 {
-    LV_LOG_TRACE("list create started");
+    LV_LOG_TRACE("Listen-Erstellung gestartet");
 
     /*Create the ancestor basic object*/
     lv_obj_t * new_list = lv_page_create(par, copy);
@@ -170,7 +170,7 @@ lv_obj_t * lv_list_create(lv_obj_t * par, const lv_obj_t * copy)
     }
 
 
-    LV_LOG_INFO("list created");
+    LV_LOG_INFO("Liste erstellt");
 
 
     return new_list;

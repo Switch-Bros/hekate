@@ -63,7 +63,7 @@ static lv_signal_func_t ancestor_signal;
  */
 lv_obj_t * lv_btnm_create(lv_obj_t * par, const lv_obj_t * copy)
 {
-    LV_LOG_TRACE("button matrix create started");
+    LV_LOG_TRACE("Schaltflaechen-Matrix-Erstellung gestartet");
 
     /*Create the ancestor object*/
     lv_obj_t * new_btnm = lv_obj_create(par, copy);
@@ -124,7 +124,7 @@ lv_obj_t * lv_btnm_create(lv_obj_t * par, const lv_obj_t * copy)
         lv_btnm_set_map(new_btnm, lv_btnm_get_map(copy));
     }
 
-    LV_LOG_INFO("button matrix created");
+    LV_LOG_INFO("Schaltflaechen-Matrix erstellt");
 
     return new_btnm;
 }

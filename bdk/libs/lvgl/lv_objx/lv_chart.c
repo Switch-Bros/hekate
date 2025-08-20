@@ -58,7 +58,7 @@ static lv_signal_func_t ancestor_signal;
  */
 lv_obj_t * lv_chart_create(lv_obj_t * par, const lv_obj_t * copy)
 {
-    LV_LOG_TRACE("chart create started");
+    LV_LOG_TRACE("Diagramm-Erstellung gestartet");
 
     /*Create the ancestor basic object*/
     lv_obj_t * new_chart = lv_obj_create(par, copy);
@@ -114,7 +114,7 @@ lv_obj_t * lv_chart_create(lv_obj_t * par, const lv_obj_t * copy)
         lv_obj_refresh_style(new_chart);
     }
 
-    LV_LOG_INFO("chart created");
+    LV_LOG_INFO("Diagramm erstellt");
 
 
     return new_chart;

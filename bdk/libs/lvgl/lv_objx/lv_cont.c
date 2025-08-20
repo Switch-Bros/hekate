@@ -63,7 +63,7 @@ lv_obj_t * lv_cont_create(lv_obj_t * par, const lv_obj_t * copy)
 {
 
 
-    LV_LOG_TRACE("container create started");
+    LV_LOG_TRACE("Container-Erstellung gestartet");
 
     /*Create a basic object*/
     lv_obj_t * new_cont = lv_obj_create(par, copy);
@@ -104,7 +104,7 @@ lv_obj_t * lv_cont_create(lv_obj_t * par, const lv_obj_t * copy)
         lv_obj_refresh_style(new_cont);
     }
 
-    LV_LOG_INFO("container created");
+    LV_LOG_INFO("Container erstellt");
 
 
     return new_cont;

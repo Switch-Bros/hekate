@@ -71,7 +71,7 @@ static lv_point_t ink_point;
  */
 lv_obj_t * lv_btn_create(lv_obj_t * par, const lv_obj_t * copy)
 {
-    LV_LOG_TRACE("button create started");
+    LV_LOG_TRACE("Schaltflaechen-Erstellung gestartet");
 
     lv_obj_t * new_btn;
 
@@ -150,7 +150,7 @@ lv_obj_t * lv_btn_create(lv_obj_t * par, const lv_obj_t * copy)
         lv_obj_refresh_style(new_btn);
     }
 
-    LV_LOG_INFO("button created");
+    LV_LOG_INFO("Schaltflaeche erstellt");
 
     return new_btn;
 }
@@ -236,7 +236,7 @@ void lv_btn_set_ink_in_time(lv_obj_t * btn, uint16_t time)
 #else
     (void)btn; /*Unused*/
     (void)time; /*Unused*/
-    LV_LOG_WARN("`lv_btn_set_ink_ink_time` has no effect if LV_BTN_INK_EFEFCT or USE_LV_ANIMATION is disabled")
+    LV_LOG_WARN("`lv_btn_set_ink_ink_time` hat keine Auswirkung, wenn LV_BTN_INK_EFEFCT oder USE_LV_ANIMATION deaktiviert ist")
 #endif
 }
 
@@ -254,7 +254,7 @@ void lv_btn_set_ink_wait_time(lv_obj_t * btn, uint16_t time)
 #else
     (void)btn; /*Unused*/
     (void)time; /*Unused*/
-    LV_LOG_WARN("`lv_btn_set_ink_wait_time` has no effect if LV_BTN_INK_EFEFCT or USE_LV_ANIMATION is disabled")
+    LV_LOG_WARN("`lv_btn_set_ink_wait_time` hat keine Auswirkung, wenn LV_BTN_INK_EFEFCT oder USE_LV_ANIMATION deaktiviert ist")
 #endif
 }
 
@@ -271,7 +271,7 @@ void lv_btn_set_ink_out_time(lv_obj_t * btn, uint16_t time)
 #else
     (void)btn; /*Unused*/
     (void)time; /*Unused*/
-    LV_LOG_WARN("`lv_btn_set_ink_out_time` has no effect if LV_BTN_INK_EFEFCT or USE_LV_ANIMATION is disabled")
+    LV_LOG_WARN("`lv_btn_set_ink_out_time` hat keine Auswirkung, wenn LV_BTN_INK_EFEFCT oder USE_LV_ANIMATION deaktiviert ist")
 #endif
 }
 

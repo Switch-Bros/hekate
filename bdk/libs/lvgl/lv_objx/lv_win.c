@@ -62,7 +62,7 @@ static lv_signal_func_t ancestor_signal;
  */
 lv_obj_t * lv_win_create(lv_obj_t * par, const lv_obj_t * copy)
 {
-    LV_LOG_TRACE("window create started");
+    LV_LOG_TRACE("Fenstererstellung gestartet");
 
     /*Create the ancestor object*/
     lv_obj_t * new_win = lv_obj_create(par, copy);
@@ -105,7 +105,7 @@ lv_obj_t * lv_win_create(lv_obj_t * par, const lv_obj_t * copy)
 
         /*Create a title on the header*/
         ext->title = lv_label_create(ext->header, NULL);
-        lv_label_set_text(ext->title, "My title");
+        lv_label_set_text(ext->title, "Mein Titel");
 
         /*Set the default styles*/
         lv_theme_t * th = lv_theme_get_current();
@@ -155,7 +155,7 @@ lv_obj_t * lv_win_create(lv_obj_t * par, const lv_obj_t * copy)
 
     lv_win_realign(new_win);
 
-    LV_LOG_INFO("window created");
+    LV_LOG_INFO("Fenster erstellt");
 
     return new_win;
 }

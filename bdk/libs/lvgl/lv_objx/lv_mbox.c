@@ -79,7 +79,7 @@ static lv_signal_func_t ancestor_signal;
  */
 lv_obj_t * lv_mbox_create(lv_obj_t * par, const lv_obj_t * copy)
 {
-    LV_LOG_TRACE("mesasge box create started");
+    LV_LOG_TRACE("Nachrichtenfeld-Erstellung gestartet");
 
     /*Create the ancestor message box*/
     lv_obj_t * new_mbox = lv_cont_create(par, copy);
@@ -105,7 +105,7 @@ lv_obj_t * lv_mbox_create(lv_obj_t * par, const lv_obj_t * copy)
         ext->text = lv_label_create(new_mbox, NULL);
         lv_label_set_align(ext->text, LV_LABEL_ALIGN_CENTER);
         lv_label_set_long_mode(ext->text, LV_LABEL_LONG_BREAK);
-        lv_label_set_text(ext->text, "Message");
+        lv_label_set_text(ext->text, "Nachricht");
 
         lv_cont_set_layout(new_mbox, LV_LAYOUT_COL_M);
         lv_cont_set_fit(new_mbox, false, true);
@@ -135,7 +135,7 @@ lv_obj_t * lv_mbox_create(lv_obj_t * par, const lv_obj_t * copy)
     }
 
 
-    LV_LOG_INFO("mesasge box created");
+    LV_LOG_INFO("Nachrichtenfeld erstellt");
 
     return new_mbox;
 }

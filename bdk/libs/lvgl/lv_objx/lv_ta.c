@@ -78,7 +78,7 @@ static lv_signal_func_t scrl_signal;
  */
 lv_obj_t * lv_ta_create(lv_obj_t * par, const lv_obj_t * copy)
 {
-    LV_LOG_TRACE("text area create started");
+    LV_LOG_TRACE("Textbereich-Erstellung gestartet");
 
     /*Create the ancestor object*/
     lv_obj_t * new_ta = lv_page_create(par, copy);
@@ -118,7 +118,7 @@ lv_obj_t * lv_ta_create(lv_obj_t * par, const lv_obj_t * copy)
         lv_obj_set_design_func(ext->page.scrl, lv_ta_scrollable_design);
 
         lv_label_set_long_mode(ext->label, LV_LABEL_LONG_BREAK);
-        lv_label_set_text(ext->label, "Text area");
+        lv_label_set_text(ext->label, "Textbereich");
         lv_obj_set_click(ext->label, false);
         lv_obj_set_size(new_ta, LV_TA_DEF_WIDTH, LV_TA_DEF_HEIGHT);
         lv_ta_set_sb_mode(new_ta, LV_SB_MODE_DRAG);
@@ -171,7 +171,7 @@ lv_obj_t * lv_ta_create(lv_obj_t * par, const lv_obj_t * copy)
     lv_anim_create(&a);
 #endif
 
-    LV_LOG_INFO("text area created");
+    LV_LOG_INFO("Textbereich erstellt");
 
     return new_ta;
 }
@@ -191,14 +191,14 @@ void lv_ta_add_char(lv_obj_t * ta, uint32_t c)
     lv_ta_ext_t * ext = lv_obj_get_ext_attr(ta);
 
     if(ext->one_line && (c == '\n' || c == '\r')) {
-        LV_LOG_INFO("Text area: line break ignored in one-line mode");
+        LV_LOG_INFO("Textbereich: Zeilenumbruch im Einzeilenmodus ignoriert");
         return;
     }
 
     uint32_t c_uni = lv_txt_encoded_next((const char *)&c, NULL);
 
     if(char_is_accepted(ta, c_uni) == false) {
-        LV_LOG_INFO("Character is no accepted by the text area (too long text or not in the accepted list)");
+        LV_LOG_INFO("Zeichen wird vom Textbereich nicht akzeptiert (Text zu lang oder nicht in der akzeptierten Liste))");
         return;
     }
 

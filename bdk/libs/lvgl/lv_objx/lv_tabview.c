@@ -82,7 +82,7 @@ static const char * tab_def[] = {""};
  */
 lv_obj_t * lv_tabview_create(lv_obj_t * par, const lv_obj_t * copy)
 {
-    LV_LOG_TRACE("tab view create started");
+    LV_LOG_TRACE("Tab-Ansicht-Erstellung gestartet");
 
     /*Create the ancestor of tab*/
     lv_obj_t * new_tabview = lv_obj_create(par, copy);
@@ -191,7 +191,7 @@ lv_obj_t * lv_tabview_create(lv_obj_t * par, const lv_obj_t * copy)
     }
 
 
-    LV_LOG_INFO("tab view created");
+    LV_LOG_INFO("Tab-Ansicht erstellt");
 
     return new_tabview;
 }

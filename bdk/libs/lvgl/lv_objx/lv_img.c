@@ -56,7 +56,7 @@ static lv_signal_func_t ancestor_signal;
  */
 lv_obj_t * lv_img_create(lv_obj_t * par, const lv_obj_t * copy)
 {
-    LV_LOG_TRACE("image create started");
+    LV_LOG_TRACE("Bild-Erstellung gestartet");
 
     lv_obj_t * new_img = NULL;
 
@@ -108,7 +108,7 @@ lv_obj_t * lv_img_create(lv_obj_t * par, const lv_obj_t * copy)
     }
 
 
-    LV_LOG_INFO("image created");
+    LV_LOG_INFO("Bild erstellt");
 
     return new_img;
 }
@@ -132,16 +132,16 @@ void lv_img_set_src(lv_obj_t * img, const void * src_img)
 #if LV_LOG_LEVEL >= LV_LOG_LEVEL_INFO
     switch(src_type) {
         case LV_IMG_SRC_FILE:
-            LV_LOG_TRACE("lv_img_set_src: `LV_IMG_SRC_FILE` type found");
+            LV_LOG_TRACE("lv_img_set_src: `LV_IMG_SRC_FILE` Typ gefunden");
             break;
         case LV_IMG_SRC_VARIABLE:
-            LV_LOG_TRACE("lv_img_set_src: `LV_IMG_SRC_VARIABLE` type found");
+            LV_LOG_TRACE("lv_img_set_src: `LV_IMG_SRC_VARIABLE` Typ gefunden");
             break;
         case LV_IMG_SRC_SYMBOL:
-            LV_LOG_TRACE("lv_img_set_src: `LV_IMG_SRC_SYMBOL` type found");
+            LV_LOG_TRACE("lv_img_set_src: `LV_IMG_SRC_SYMBOL` Typ gefunden");
             break;
         default:
-            LV_LOG_WARN("lv_img_set_src: unknown type");
+            LV_LOG_WARN("lv_img_set_src: unbekannter Typ");
     }
 #endif
 
@@ -163,7 +163,7 @@ void lv_img_set_src(lv_obj_t * img, const void * src_img)
 
     /*Save the source*/
     if(src_type == LV_IMG_SRC_VARIABLE) {
-        LV_LOG_INFO("lv_img_set_src:  `LV_IMG_SRC_VARIABLE` type found");
+        LV_LOG_INFO("lv_img_set_src:  `LV_IMG_SRC_VARIABLE` Typ gefunden");
 
         /*If memory was allocated because of the previous `src_type` then free it*/
         if(ext->src_type == LV_IMG_SRC_FILE || ext->src_type == LV_IMG_SRC_SYMBOL) {
@@ -325,7 +325,7 @@ static bool lv_img_design(lv_obj_t * img, const lv_area_t * mask, lv_design_mode
         lv_obj_get_coords(img, &coords);
 
         if(ext->src_type == LV_IMG_SRC_FILE || ext->src_type == LV_IMG_SRC_VARIABLE) {
-            LV_LOG_TRACE("lv_img_design: start to draw image");
+            LV_LOG_TRACE("lv_img_design: Beginne Bilderstellung");
             lv_area_t cords_tmp;
             cords_tmp.y1 = coords.y1;
             cords_tmp.y2 = coords.y1 + ext->h - 1;
@@ -338,14 +338,14 @@ static bool lv_img_design(lv_obj_t * img, const lv_area_t * mask, lv_design_mode
                 }
             }
         } else if(ext->src_type == LV_IMG_SRC_SYMBOL) {
-            LV_LOG_TRACE("lv_img_design: start to draw symbol");
+            LV_LOG_TRACE("lv_img_design: Beginne Symbolerstellung");
             lv_style_t style_mod;
             lv_style_copy(&style_mod, style);
             style_mod.text.color = style->image.color;
             lv_draw_label(&coords, mask, &style_mod, opa_scale, ext->src, LV_TXT_FLAG_NONE, NULL);
         } else {
             /*Trigger the error handler of image drawer*/
-            LV_LOG_WARN("lv_img_design: image source type is unknown");
+            LV_LOG_WARN("lv_img_design: Bilddatei-Typ ist unbekannt");
             lv_draw_img(&img->coords, mask, NULL, style, opa_scale);
         }
     }
@@ -389,7 +389,7 @@ static lv_res_t lv_img_signal(lv_obj_t * img, lv_signal_t sign, void * param)
             if(lang_src) {
                 lv_img_set_src(img, lang_src);
             } else {
-                LV_LOG_WARN("lv_lang_get_text return NULL for an image's source");
+                LV_LOG_WARN("`lv_lang_get_text` gibt NULL für die Quelle eines Bildes zurueck");
             }
         }
 #endif

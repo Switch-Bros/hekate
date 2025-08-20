@@ -80,7 +80,7 @@ static lv_signal_func_t ancestor_signal;
  */
 lv_obj_t * lv_page_create(lv_obj_t * par, const lv_obj_t * copy)
 {
-    LV_LOG_TRACE("page create started");
+    LV_LOG_TRACE("Seitenerstellung gestartet");
 
     /*Create the ancestor object*/
     lv_obj_t * new_page = lv_cont_create(par, copy);
@@ -178,7 +178,7 @@ lv_obj_t * lv_page_create(lv_obj_t * par, const lv_obj_t * copy)
 
     lv_page_sb_refresh(new_page);
 
-    LV_LOG_INFO("page created");
+    LV_LOG_INFO("Seite erstellt");
 
     return new_page;
 }

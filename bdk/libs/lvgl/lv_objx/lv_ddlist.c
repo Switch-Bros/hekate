@@ -84,7 +84,7 @@ static lv_design_func_t  ancestor_design;
  */
 lv_obj_t * lv_ddlist_create(lv_obj_t * par, const lv_obj_t * copy)
 {
-    LV_LOG_TRACE("drop down list create started");
+    LV_LOG_TRACE("Dropdown-Menue-Erstellung gestartet");
 
     /*Create the ancestor drop down list*/
     lv_obj_t * new_ddlist = lv_page_create(par, copy);
@@ -167,7 +167,7 @@ lv_obj_t * lv_ddlist_create(lv_obj_t * par, const lv_obj_t * copy)
         lv_obj_refresh_style(new_ddlist);
     }
 
-    LV_LOG_INFO("drop down list created");
+    LV_LOG_INFO("Dropdown-Menue erstellt");
 
 
     return new_ddlist;

@@ -46,7 +46,7 @@ static lv_design_func_t ancestor_design;
  */
 lv_obj_t * lv_imgbtn_create(lv_obj_t * par, const lv_obj_t * copy)
 {
-    LV_LOG_TRACE("image button create started");
+    LV_LOG_TRACE("Bildschaltflaechen-Erstellung gestartet");
 
     /*Create the ancestor of image button*/
     lv_obj_t * new_imgbtn = lv_btn_create(par, copy);
@@ -93,7 +93,7 @@ lv_obj_t * lv_imgbtn_create(lv_obj_t * par, const lv_obj_t * copy)
         lv_obj_refresh_style(new_imgbtn);
     }
 
-    LV_LOG_INFO("image button created");
+    LV_LOG_INFO("Bildschaltflaeche erstellt");
 
     return new_imgbtn;
 }
