@@ -61,9 +61,9 @@ void emummc_load_cfg()
 						emu_cfg.sector  = strtol(kv->val, NULL, 16);
 					else if (!strcmp("ID",            kv->key))
 						emu_cfg.id      = strtol(kv->val, NULL, 16);
-					else if (!strcmp("Pfad",          kv->key))
+					else if (!strcmp("path",          kv->key))
 						emu_cfg.path   = kv->val;
-					else if (!strcmp("nintendo_pfad", kv->key))
+					else if (!strcmp("nintendo_path", kv->key))
 						strcpy(emu_cfg.nintendo_path, kv->val);
 				}
 				break;
@@ -78,7 +78,7 @@ bool emummc_set_path(char *path)
 	bool found = false;
 
 	strcpy(emu_cfg.emummc_file_based_path, path);
-	strcat(emu_cfg.emummc_file_based_path, "/RAW_basiert");
+	strcat(emu_cfg.emummc_file_based_path, "/raw_based");
 
 	if (!f_open(&fp, emu_cfg.emummc_file_based_path, FA_READ))
 	{
@@ -89,7 +89,7 @@ bool emummc_set_path(char *path)
 	else
 	{
 		strcpy(emu_cfg.emummc_file_based_path, path);
-		strcat(emu_cfg.emummc_file_based_path, "/Datei_basiert");
+		strcat(emu_cfg.emummc_file_based_path, "/file_based");
 
 		if (!f_stat(emu_cfg.emummc_file_based_path, NULL))
 		{

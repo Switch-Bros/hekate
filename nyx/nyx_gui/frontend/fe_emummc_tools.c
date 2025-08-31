@@ -57,12 +57,12 @@ void load_emummc_cfg(emummc_cfg_t *emu_info)
 					emu_info->sector = strtol(kv->val, NULL, 16);
 				else if (!strcmp("ID",     kv->key))
 					emu_info->id     = strtol(kv->val, NULL, 16);
-				else if (!strcmp("Pfad",   kv->key))
+				else if (!strcmp("path",   kv->key))
 				{
 					emu_info->path = (char *)malloc(strlen(kv->val) + 1);
 					strcpy(emu_info->path, kv->val);
 				}
-				else if (!strcmp("Nintendo_Pfad", kv->key))
+				else if (!strcmp("nintendo_path", kv->key))
 				{
 					emu_info->nintendo_path = (char *)malloc(strlen(kv->val) + 1);
 					strcpy(emu_info->nintendo_path, kv->val);
@@ -120,7 +120,7 @@ void save_emummc_cfg(u32 part_idx, u32 sector_start, const char *path)
 	itoa(id_from_path, lbuf, 16);
 	f_puts(lbuf, &fp);
 
-	f_puts("\nNintendo_Pfad=", &fp);
+	f_puts("\nnintendo_path=", &fp);
 	if (path)
 	{
 		f_puts(path, &fp);
@@ -487,7 +487,7 @@ out_failed:
 		s_printf(txt_buf, "Dauer: %dm %ds.\nAbgeschlossen!", timer / 60, timer % 60);
 		gui->base_path[strlen(gui->base_path) - 5] = '\0';
 		strcpy(sdPath, gui->base_path);
-		strcat(sdPath, "Datei_basiert");
+		strcat(sdPath, "file_based");
 		FIL fp;
 		f_open(&fp, sdPath, FA_CREATE_ALWAYS | FA_WRITE);
 		f_close(&fp);
@@ -524,7 +524,7 @@ static int _dump_emummc_raw_part(emmc_tool_gui_t *gui, int active_part, int part
 	lv_label_set_text(gui->label_pct, " "SYMBOL_DOT" 0%");
 	manual_system_maintenance(true);
 
-	s_printf(gui->txt_buf, "#96FF00 Hauptordner:#\n%s\n#96FF00 Partitionsoffset:# #FF8000 0x%08X#",
+	s_printf(gui->txt_buf, "#96FF00 Hauptordner:#\n%s\n#96FF00 Partitions-Offset:# #FF8000 0x%08X#",
 		gui->base_path, sd_part_off);
 	lv_label_ins_text(gui->label_info, LV_LABEL_POS_LAST, gui->txt_buf);
 	manual_system_maintenance(true);
@@ -964,7 +964,7 @@ out_failed:
 	{
 		s_printf(txt_buf, "Dauer: %dm %ds.\nAbgeschlossen!", timer / 60, timer % 60);
 		strcpy(sdPath, gui->base_path);
-		strcat(sdPath, "RAW_basiert");
+		strcat(sdPath, "raw_based");
 		FIL fp;
 		f_open(&fp, sdPath, FA_CREATE_ALWAYS | FA_WRITE);
 		f_write(&fp, &sector_start, 4, NULL);
