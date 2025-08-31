@@ -47,15 +47,15 @@ void load_emummc_cfg(emummc_cfg_t *emu_info)
 
 	LIST_FOREACH_ENTRY(ini_sec_t, ini_sec, &ini_sections, link)
 	{
-		if (!strcmp(ini_sec->name, "emuMMC"))
+		if (!strcmp(ini_sec->name, "emummc"))
 		{
 			LIST_FOREACH_ENTRY(ini_kv_t, kv, &ini_sec->kvs, link)
 			{
-				if (!strcmp("Aktiviert",     kv->key))
+				if (!strcmp("enabled",     kv->key))
 					emu_info->enabled = atoi(kv->val);
-				else if (!strcmp("Sektor", kv->key))
+				else if (!strcmp("sector", kv->key))
 					emu_info->sector = strtol(kv->val, NULL, 16);
-				else if (!strcmp("ID",     kv->key))
+				else if (!strcmp("id",     kv->key))
 					emu_info->id     = strtol(kv->val, NULL, 16);
 				else if (!strcmp("path",   kv->key))
 				{
@@ -87,7 +87,7 @@ void save_emummc_cfg(u32 part_idx, u32 sector_start, const char *path)
 		return;
 
 	// Add config entry.
-	f_puts("[emuMMC]\nAktiviert=", &fp);
+	f_puts("[emummc]\nenabled=", &fp);
 	if (part_idx && sector_start)
 	{
 		itoa(part_idx, lbuf, 10);
@@ -99,16 +99,16 @@ void save_emummc_cfg(u32 part_idx, u32 sector_start, const char *path)
 		f_puts("0", &fp);
 
 	if (!sector_start)
-		f_puts("\nSektor=0x0", &fp);
+		f_puts("\nsector=0x0", &fp);
 	else
 	{
-		f_puts("\nSektor=0x", &fp);
+		f_puts("\nsector=0x", &fp);
 		itoa(sector_start, lbuf, 16);
 		f_puts(lbuf, &fp);
 	}
 	if (path)
 	{
-		f_puts("\nPfad=", &fp);
+		f_puts("\npath=", &fp);
 		f_puts(path, &fp);
 	}
 
@@ -116,7 +116,7 @@ void save_emummc_cfg(u32 part_idx, u32 sector_start, const char *path)
 	u32 id_from_path = 0;
 	if (path && strlen(path) >= 4)
 		memcpy(&id_from_path, path + strlen(path) - 4, 4);
-	f_puts("\nID=0x", &fp);
+	f_puts("\nid=0x", &fp);
 	itoa(id_from_path, lbuf, 16);
 	f_puts(lbuf, &fp);
 

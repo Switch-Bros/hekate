@@ -50,16 +50,16 @@ void emummc_load_cfg()
 		{
 			if (ini_sec->type == INI_CHOICE)
 			{
-				if (strcmp(ini_sec->name, "emuMMC"))
+				if (strcmp(ini_sec->name, "emummc"))
 					continue;
 
 				LIST_FOREACH_ENTRY(ini_kv_t, kv, &ini_sec->kvs, link)
 				{
-					if (!strcmp("aktiviert",            kv->key))
+					if (!strcmp("enabled",            kv->key))
 						emu_cfg.enabled = atoi(kv->val);
-					else if (!strcmp("Sektor",        kv->key))
+					else if (!strcmp("sector",        kv->key))
 						emu_cfg.sector  = strtol(kv->val, NULL, 16);
-					else if (!strcmp("ID",            kv->key))
+					else if (!strcmp("id",            kv->key))
 						emu_cfg.id      = strtol(kv->val, NULL, 16);
 					else if (!strcmp("path",          kv->key))
 						emu_cfg.path   = kv->val;
