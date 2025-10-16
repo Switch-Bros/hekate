@@ -65,7 +65,7 @@ static lv_signal_func_t ancestor_signal;
  */
 lv_obj_t * lv_label_create(lv_obj_t * par, const lv_obj_t * copy)
 {
-    LV_LOG_TRACE("Beschriftungs-Erstellung gestartet");
+    LV_LOG_TRACE("label create started");
 
     /*Create a basic object*/
     lv_obj_t * new_label = lv_obj_create(par, copy);
@@ -130,7 +130,7 @@ lv_obj_t * lv_label_create(lv_obj_t * par, const lv_obj_t * copy)
     }
 
 
-    LV_LOG_INFO("Beschriftung erstellt");
+    LV_LOG_INFO("label created");
 
     return new_label;
 }
@@ -760,7 +760,7 @@ static lv_res_t lv_label_signal(lv_obj_t * label, lv_signal_t sign, void * param
             if(lang_txt) {
                 lv_label_set_text(label, lang_txt);
             } else {
-                LV_LOG_WARN("`lv_lang_get_text` gibt NULL für den Text einer Beschriftung zurueck");
+                LV_LOG_WARN("lv_lang_get_text return NULL for a label's text");
             }
         }
 #endif

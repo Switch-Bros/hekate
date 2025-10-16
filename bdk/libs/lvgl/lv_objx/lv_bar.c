@@ -52,7 +52,7 @@ static lv_signal_func_t ancestor_signal;
  */
 lv_obj_t * lv_bar_create(lv_obj_t * par, const lv_obj_t * copy)
 {
-    LV_LOG_TRACE("lv_bar Erstellung gestartet");
+    LV_LOG_TRACE("lv_bar create started");
 
     /*Create the ancestor basic object*/
     lv_obj_t * new_bar = lv_obj_create(par, copy);
@@ -102,7 +102,7 @@ lv_obj_t * lv_bar_create(lv_obj_t * par, const lv_obj_t * copy)
         lv_bar_set_value(new_bar, ext->cur_value);
     }
 
-    LV_LOG_INFO("Balken erstellt");
+    LV_LOG_INFO("bar created");
 
     return new_bar;
 }

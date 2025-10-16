@@ -60,7 +60,7 @@ static lv_design_func_t ancestor_design;
  */
 lv_obj_t * lv_tileview_create(lv_obj_t * par, const lv_obj_t * copy)
 {
-    LV_LOG_TRACE("Kachelansicht-Erstellung gestartet");
+    LV_LOG_TRACE("tileview create started");
 
     /*Create the ancestor of tileview*/
     lv_obj_t * new_tileview = lv_page_create(par, copy);
@@ -115,7 +115,7 @@ lv_obj_t * lv_tileview_create(lv_obj_t * par, const lv_obj_t * copy)
         lv_obj_refresh_style(new_tileview);
     }
 
-    LV_LOG_INFO("Kachelansicht erstellt");
+    LV_LOG_INFO("tileview created");
 
     return new_tileview;
 }

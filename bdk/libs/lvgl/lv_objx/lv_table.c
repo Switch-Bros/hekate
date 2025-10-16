@@ -52,7 +52,7 @@ static lv_design_func_t ancestor_scrl_design;
  */
 lv_obj_t * lv_table_create(lv_obj_t * par, const lv_obj_t * copy)
 {
-    LV_LOG_TRACE("Tabellenerstellung gestartet");
+    LV_LOG_TRACE("table create started");
 
     /*Create the ancestor of table*/
     lv_obj_t * new_table = lv_obj_create(par, copy);
@@ -112,7 +112,7 @@ lv_obj_t * lv_table_create(lv_obj_t * par, const lv_obj_t * copy)
         lv_obj_refresh_style(new_table);
     }
 
-    LV_LOG_INFO("Tabelle erstellt");
+    LV_LOG_INFO("table created");
 
     return new_table;
 }
@@ -132,7 +132,7 @@ void lv_table_set_cell_value(lv_obj_t * table, uint16_t row, uint16_t col, const
 {
     lv_table_ext_t * ext = lv_obj_get_ext_attr(table);
     if(row >= ext->row_cnt || col >= ext->col_cnt) {
-        LV_LOG_WARN("lv_table_set_cell_value: ungueltige Zeile oder Spalte");
+        LV_LOG_WARN("lv_table_set_cell_value: invalid row or column");
         return;
     }
     uint32_t cell = row * ext->col_cnt + col;
@@ -195,7 +195,7 @@ void lv_table_set_col_cnt(lv_obj_t * table, uint16_t col_cnt)
 {
 
     if(col_cnt >= LV_TABLE_COL_MAX) {
-        LV_LOG_WARN("lv_table_set_col_cnt: zu viele Spalten. Muss < LV_TABLE_COL_MAX sein.");
+        LV_LOG_WARN("lv_table_set_col_cnt: too many columns. Must be < LV_TABLE_COL_MAX.");
         return;
     }
 
@@ -229,7 +229,7 @@ void lv_table_set_col_cnt(lv_obj_t * table, uint16_t col_cnt)
 void lv_table_set_col_width(lv_obj_t * table, uint16_t col_id, lv_coord_t w)
 {
     if(col_id >= LV_TABLE_COL_MAX) {
-        LV_LOG_WARN("`lv_table_set_col_width`: 'col_id' zu gross. Muss < `LV_TABLE_COL_MAX` sein.");
+        LV_LOG_WARN("lv_table_set_col_width: too big 'col_id'. Must be < LV_TABLE_COL_MAX.");
         return;
     }
 
@@ -249,7 +249,7 @@ void lv_table_set_cell_align(lv_obj_t * table, uint16_t row, uint16_t col, lv_la
 {
     lv_table_ext_t * ext = lv_obj_get_ext_attr(table);
      if(row >= ext->row_cnt || col >= ext->col_cnt) {
-         LV_LOG_WARN("`lv_table_set_cell_align`: ungueltige Zeile oder Spalte");
+         LV_LOG_WARN("lv_table_set_cell_align: invalid row or column");
          return;
      }
      uint32_t cell = row * ext->col_cnt + col;
@@ -277,7 +277,7 @@ void lv_table_set_cell_type(lv_obj_t * table, uint16_t row, uint16_t col, uint8_
 {
     lv_table_ext_t * ext = lv_obj_get_ext_attr(table);
      if(row >= ext->row_cnt || col >= ext->col_cnt) {
-         LV_LOG_WARN("lv_table_set_cell_type: ungueltige Zeile oder Spalte");
+         LV_LOG_WARN("lv_table_set_cell_type: invalid row or column");
          return;
      }
      uint32_t cell = row * ext->col_cnt + col;
@@ -308,7 +308,7 @@ void lv_table_set_cell_crop(lv_obj_t * table, uint16_t row, uint16_t col, bool c
 {
     lv_table_ext_t * ext = lv_obj_get_ext_attr(table);
      if(row >= ext->row_cnt || col >= ext->col_cnt) {
-         LV_LOG_WARN("lv_table_set_cell_crop: ungueltige Zeile oder Spalte");
+         LV_LOG_WARN("lv_table_set_cell_crop: invalid row or column");
          return;
      }
      uint32_t cell = row * ext->col_cnt + col;
@@ -337,7 +337,7 @@ void lv_table_set_cell_merge_right(lv_obj_t * table, uint16_t row, uint16_t col,
 {
     lv_table_ext_t * ext = lv_obj_get_ext_attr(table);
     if(row >= ext->row_cnt || col >= ext->col_cnt) {
-        LV_LOG_WARN("lv_table_set_cell_merge_right: ungueltige Zeile oder Spalte");
+        LV_LOG_WARN("lv_table_set_cell_merge_right: invalid row or column");
         return;
     }
 
@@ -405,7 +405,7 @@ const char * lv_table_get_cell_value(lv_obj_t * table, uint16_t row, uint16_t co
 {
     lv_table_ext_t * ext = lv_obj_get_ext_attr(table);
     if(row >= ext->row_cnt || col >= ext->col_cnt) {
-        LV_LOG_WARN("lv_table_set_cell_value: ungueltige Zeile oder Spalte");
+        LV_LOG_WARN("lv_table_set_cell_value: invalid row or column");
         return "";
     }
     uint32_t cell = row * ext->col_cnt + col;
@@ -446,7 +446,7 @@ uint16_t lv_table_get_col_cnt(lv_obj_t * table)
 lv_coord_t lv_table_get_col_width(lv_obj_t * table, uint16_t col_id)
 {
     if(col_id >= LV_TABLE_COL_MAX) {
-        LV_LOG_WARN("`lv_table_set_col_width`: 'col_id' zu gross. Muss < `LV_TABLE_COL_MAX` sein.");
+        LV_LOG_WARN("lv_table_set_col_width: too big 'col_id'. Must be < LV_TABLE_COL_MAX.");
         return 0;
     }
 
@@ -465,7 +465,7 @@ lv_label_align_t lv_table_get_cell_align(lv_obj_t * table, uint16_t row, uint16_
 {
     lv_table_ext_t * ext = lv_obj_get_ext_attr(table);
      if(row >= ext->row_cnt || col >= ext->col_cnt) {
-         LV_LOG_WARN("lv_table_set_cell_align: ungueltige Zeile oder Spalte");
+         LV_LOG_WARN("lv_table_set_cell_align: invalid row or column");
          return LV_LABEL_ALIGN_LEFT;    /*Just return with something*/
      }
      uint32_t cell = row * ext->col_cnt + col;
@@ -489,7 +489,7 @@ lv_label_align_t lv_table_get_cell_type(lv_obj_t * table, uint16_t row, uint16_t
 {
     lv_table_ext_t * ext = lv_obj_get_ext_attr(table);
      if(row >= ext->row_cnt || col >= ext->col_cnt) {
-         LV_LOG_WARN("lv_table_get_cell_type: ungueltige Zeile oder Spalte");
+         LV_LOG_WARN("lv_table_get_cell_type: invalid row or column");
          return 1;    /*Just return with something*/
      }
      uint32_t cell = row * ext->col_cnt + col;
@@ -513,7 +513,7 @@ lv_label_align_t lv_table_get_cell_crop(lv_obj_t * table, uint16_t row, uint16_t
 {
     lv_table_ext_t * ext = lv_obj_get_ext_attr(table);
      if(row >= ext->row_cnt || col >= ext->col_cnt) {
-         LV_LOG_WARN("lv_table_get_cell_crop: ungueltige Zeile oder Spalte");
+         LV_LOG_WARN("lv_table_get_cell_crop: invalid row or column");
          return false;    /*Just return with something*/
      }
      uint32_t cell = row * ext->col_cnt + col;
@@ -537,7 +537,7 @@ bool lv_table_get_cell_merge_right(lv_obj_t * table, uint16_t row, uint16_t col)
 {
     lv_table_ext_t * ext = lv_obj_get_ext_attr(table);
     if(row >= ext->row_cnt || col >= ext->col_cnt) {
-        LV_LOG_WARN("lv_table_get_cell_merge_right: ungueltige Zeile oder Spalte");
+        LV_LOG_WARN("lv_table_get_cell_merge_right: invalid row or column");
         return false;
     }
 

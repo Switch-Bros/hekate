@@ -147,7 +147,7 @@ typedef struct __attribute__((__packed__)) _boot_cfg_t
 	};
 } boot_cfg_t;
 
-static_assert(sizeof(boot_cfg_t) == 0x84, "Groesse des Boot-Konfigurationsspeichers ist falsch!");
+static_assert(sizeof(boot_cfg_t) == 0x84, "Boot cfg storage size is wrong!");
 
 typedef struct __attribute__((__packed__)) _ipl_ver_meta_t
 {

@@ -48,7 +48,7 @@ static lv_design_func_t ancestor_design;
  */
 lv_obj_t * lv_spinbox_create(lv_obj_t * par, const lv_obj_t * copy)
 {
-    LV_LOG_TRACE("Zahlenfeld-Erstellung gestartet");
+    LV_LOG_TRACE("spinbox create started");
 
     /*Create the ancestor of spinbox*/
     lv_obj_t * new_spinbox = lv_ta_create(par, copy);
@@ -107,7 +107,7 @@ lv_obj_t * lv_spinbox_create(lv_obj_t * par, const lv_obj_t * copy)
 
     lv_spinbox_updatevalue(new_spinbox);
 
-    LV_LOG_INFO("Zahlenfeld erstellt");
+    LV_LOG_INFO("spinbox created");
 
     return new_spinbox;
 }

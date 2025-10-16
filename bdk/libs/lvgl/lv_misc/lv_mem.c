@@ -62,7 +62,7 @@ typedef union {
     MEM_UNIT align[8];          //Align header size to MEM_UNIT * 8 bytes
 } lv_mem_header_t;
 
-static_assert(sizeof(lv_mem_header_t) == 32, "Der Knoten-Header muss 32 Bytes gross sein!");
+static_assert(sizeof(lv_mem_header_t) == 32, "Node header must be 32 bytes!");
 
 typedef struct {
     lv_mem_header_t header;
@@ -172,7 +172,7 @@ void * lv_mem_alloc(uint32_t size)
     if(alloc != NULL) memset(alloc, 0xaa, size);
 #endif
 
-    if(alloc == NULL) LV_LOG_WARN("Konnte keinen Speicher zuweisen");
+    if(alloc == NULL) LV_LOG_WARN("Couldn't allocate memory");
 
     return alloc;
 }
@@ -272,7 +272,7 @@ void * lv_mem_realloc(void * data_p, uint32_t new_size)
     }
 
 
-    if(new_p == NULL) LV_LOG_WARN("Konnte keinen Speicher zuweisen");
+    if(new_p == NULL) LV_LOG_WARN("Couldn't allocate memory");
 
     return new_p;
 }
@@ -282,7 +282,7 @@ void * lv_mem_realloc(void * data_p, uint32_t new_size)
 void * lv_mem_realloc(void * data_p, uint32_t new_size)
 {
     void * new_p = LV_MEM_CUSTOM_REALLOC(data_p, new_size);
-    if(new_p == NULL) LV_LOG_WARN("Konnte keinen Speicher zuweisen");
+    if(new_p == NULL) LV_LOG_WARN("Couldn't allocate memory");
     return new_p;
 }
 

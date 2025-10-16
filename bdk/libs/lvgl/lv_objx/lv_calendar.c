@@ -54,10 +54,10 @@ static uint8_t is_leap_year(uint32_t year);
  **********************/
 static lv_signal_func_t ancestor_signal;
 static lv_design_func_t ancestor_design;
-static const char * day_name[7] = {"So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"};
-static const char * month_name[12] = {"Januar",   "Februar",   "Maerz",    "April",
-        "Mai",       "Juni",       "Juli",     "August",
-        "September", "Oktober",    "November", "Dezember"
+static const char * day_name[7] = {"Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"};
+static const char * month_name[12] = {"January",   "February",   "March",    "April",
+        "May",       "June",       "July",     "August",
+        "September", "October",    "November", "December"
 };
 
 /**********************
@@ -76,7 +76,7 @@ static const char * month_name[12] = {"Januar",   "Februar",   "Maerz",    "Apri
  */
 lv_obj_t * lv_calendar_create(lv_obj_t * par, const lv_obj_t * copy)
 {
-    LV_LOG_TRACE("Kalender-Erstellung gestartet");
+    LV_LOG_TRACE("calendar create started");
 
     /*Create the ancestor of calendar*/
     lv_obj_t * new_calendar = lv_obj_create(par, copy);
@@ -180,7 +180,7 @@ lv_obj_t * lv_calendar_create(lv_obj_t * par, const lv_obj_t * copy)
         lv_obj_refresh_style(new_calendar);
     }
 
-    LV_LOG_INFO("Kalender erstellt");
+    LV_LOG_INFO("calendar created");
 
     return new_calendar;
 }

@@ -97,7 +97,7 @@ static const char * kb_map_hex[] = {
  */
 lv_obj_t * lv_kb_create(lv_obj_t * par, const lv_obj_t * copy)
 {
-    LV_LOG_TRACE("Tastatur-Erstellung gestartet");
+    LV_LOG_TRACE("keyboard create started");
 
     /*Create the ancestor of keyboard*/
     lv_obj_t * new_kb = lv_btnm_create(par, copy);
@@ -157,7 +157,7 @@ lv_obj_t * lv_kb_create(lv_obj_t * par, const lv_obj_t * copy)
     }
 
 
-    LV_LOG_INFO("Tastatur erstellt");
+    LV_LOG_INFO("keyboard created");
 
 
     return new_kb;
@@ -457,7 +457,7 @@ static lv_res_t lv_kb_def_action(lv_obj_t * kb, const char * txt)
     /*Add the characters to the text area if set*/
     if(ext->ta == NULL) return res;
 
-    if(strcmp(txt, "Eingabe") == 0)lv_ta_add_char(ext->ta, '\n');
+    if(strcmp(txt, "Enter") == 0)lv_ta_add_char(ext->ta, '\n');
     else if(strcmp(txt, SYMBOL_LEFT) == 0) lv_ta_cursor_left(ext->ta);
     else if(strcmp(txt, SYMBOL_RIGHT) == 0) lv_ta_cursor_right(ext->ta);
     else if(strcmp(txt, "Bksp") == 0)  lv_ta_del_char(ext->ta);

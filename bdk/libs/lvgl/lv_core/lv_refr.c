@@ -184,12 +184,12 @@ static void lv_refr_task(void * param)
 {
     (void)param;
 
-    LV_LOG_TRACE("Display-Aktualisierungsaufgabe gestartet");
+    LV_LOG_TRACE("display refresh task started");
 
     uint32_t start = lv_tick_get();
 
     if(lv_disp_get_active() == NULL) {
-        LV_LOG_TRACE("Kein Display registriert");
+        LV_LOG_TRACE("No display is registered");
         return;
     }
 
@@ -246,7 +246,7 @@ static void lv_refr_task(void * param)
         }
     }
 
-    LV_LOG_TRACE("Display-Aktualisierungsaufgabe abgeschlossen");
+    LV_LOG_TRACE("display refresh task finished");
 }
 
 
@@ -373,7 +373,7 @@ static void lv_refr_area_with_vdb(const lv_area_t * area_p)
         } while(y_tmp != 0);
 
         if(y_tmp == 0) {
-            LV_LOG_WARN("VDB kann mit Rundungsfunktion nicht festgesetzt werden. (Falsche Rundungsfunktion oder zu kleiner VDB)");
+            LV_LOG_WARN("Can't set VDB height using the round function. (Wrong round_cb or to small VDB)");
             return;
         } else {
             max_row = tmp.y2 + 1;
@@ -386,7 +386,7 @@ static void lv_refr_area_with_vdb(const lv_area_t * area_p)
     for(row = area_p->y1; row  + max_row - 1 <= y2; row += max_row)  {
         lv_vdb_t * vdb_p = lv_vdb_get();
         if(!vdb_p) {
-            LV_LOG_WARN("Ungueltiger VDB-Zeiger");
+            LV_LOG_WARN("Invalid VDB pointer");
             return;
         }
 
@@ -404,7 +404,7 @@ static void lv_refr_area_with_vdb(const lv_area_t * area_p)
     if(y2 != row_last) {
         lv_vdb_t * vdb_p = lv_vdb_get();
         if(!vdb_p) {
-            LV_LOG_WARN("Ungueltiger VDB-Zeiger");
+            LV_LOG_WARN("Invalid VDB pointer");
             return;
         }
 
@@ -435,7 +435,7 @@ static void lv_refr_area_part_vdb(const lv_area_t * area_p)
 {
     lv_vdb_t * vdb_p = lv_vdb_get();
     if(!vdb_p) {
-        LV_LOG_WARN("Ungueltiger VDB-Zeiger");
+        LV_LOG_WARN("Invalid VDB pointer");
         return;
     }
     lv_obj_t * top_p;

@@ -53,7 +53,7 @@ static lv_signal_func_t ancestor_signal;
  */
 lv_obj_t * lv_slider_create(lv_obj_t * par, const lv_obj_t * copy)
 {
-    LV_LOG_TRACE("Schieberegler-Erstellung gestartet");
+    LV_LOG_TRACE("slider create started");
 
     /*Create the ancestor slider*/
     lv_obj_t * new_slider = lv_bar_create(par, copy);
@@ -104,7 +104,7 @@ lv_obj_t * lv_slider_create(lv_obj_t * par, const lv_obj_t * copy)
     }
 
 
-    LV_LOG_INFO("Schieberegler erstellt");
+    LV_LOG_INFO("slider created");
 
 
     return new_slider;

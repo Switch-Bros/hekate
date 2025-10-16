@@ -56,8 +56,8 @@ typedef struct _pte_t {
 	u32 attr:3;
 } pte_t;
 
-static_assert(sizeof(pde_t) == sizeof(u32), "pde_t Groesse ist falsch!");
-static_assert(sizeof(pte_t) == sizeof(u32), "pte_t Groesse ist falsch!");
+static_assert(sizeof(pde_t) == sizeof(u32), "pde_t size is wrong!");
+static_assert(sizeof(pte_t) == sizeof(u32), "pte_t size is wrong!");
 
 void *smmu_page_zalloc(u32 num);
 void  smmu_flush_all();

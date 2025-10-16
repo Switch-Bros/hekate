@@ -67,7 +67,7 @@ void lv_anim_init(void)
  */
 void lv_anim_create(lv_anim_t * anim_p)
 {
-    LV_LOG_TRACE("Animationserstellung begonnen")
+    LV_LOG_TRACE("animation create started")
     /* Do not let two animations for the  same 'var' with the same 'fp'*/
     if(anim_p->fp != NULL) lv_anim_del(anim_p->var, anim_p->fp);       /*fp == NULL would delete all animations of var*/
 
@@ -87,7 +87,7 @@ void lv_anim_create(lv_anim_t * anim_p)
      * It's important if it happens in a ready callback. (see `anim_task`)*/
     anim_list_changed = true;
 
-    LV_LOG_TRACE("Animation erstellt")
+    LV_LOG_TRACE("animation created")
 }
 
 /**

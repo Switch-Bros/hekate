@@ -423,12 +423,12 @@ LZ4_FORCE_INLINE void LZ4_prepareTable(
           || tableType == byPtr
           || inputSize >= 4 KB)
         {
-            DEBUGLOG(4, "LZ4_prepareTable: Tabelle in %p wird zurueckgesetzt", cctx);
+            DEBUGLOG(4, "LZ4_prepareTable: Resetting table in %p", cctx);
             MEM_INIT(cctx->hashTable, 0, LZ4_HASHTABLESIZE);
             cctx->currentOffset = 0;
             cctx->tableType = clearedTable;
         } else {
-            DEBUGLOG(4, "LZ4_prepareTable: Hash-Tabelle wiederverwenden (kein Zuruecksetzen)");
+            DEBUGLOG(4, "LZ4_prepareTable: Re-use hash table (no reset)");
         }
     }
 
@@ -437,7 +437,7 @@ LZ4_FORCE_INLINE void LZ4_prepareTable(
      * currentOffset == 0 is faster still, so we preserve that case.
      */
     if (cctx->currentOffset != 0 && tableType == byU32) {
-        DEBUGLOG(5, "LZ4_prepareTable: 64 KB zu currentOffset hinzugefuegt");
+        DEBUGLOG(5, "LZ4_prepareTable: adding 64KB to currentOffset");
         cctx->currentOffset += 64 KB;
     }
 
@@ -650,11 +650,11 @@ _next_match:
                     matchCode += more;
                     ip += more;
                 }
-                DEBUGLOG(6, "             mit matchLength=%u beginnend in extDict", matchCode+MINMATCH);
+                DEBUGLOG(6, "             with matchLength=%u starting in extDict", matchCode+MINMATCH);
             } else {
                 matchCode = LZ4_count(ip+MINMATCH, match+MINMATCH, matchlimit);
                 ip += MINMATCH + matchCode;
-                DEBUGLOG(6, "             mit matchLength=%u", matchCode+MINMATCH);
+                DEBUGLOG(6, "             with matchLength=%u", matchCode+MINMATCH);
             }
 
             if ( outputLimited &&    /* Check output buffer overflow */
@@ -1096,7 +1096,7 @@ int LZ4_loadDict (LZ4_stream_t* LZ4_dict, const char* dictionary, int dictSize)
     const BYTE* const dictEnd = p + dictSize;
     const BYTE* base;
 
-    DEBUGLOG(4, "LZ4_loadDict (%i Bytes von %p nach %p)", dictSize, dictionary, LZ4_dict);
+    DEBUGLOG(4, "LZ4_loadDict (%i bytes from %p into %p)", dictSize, dictionary, LZ4_dict);
 
     LZ4_prepareTable(dict, 0, tableType);
 

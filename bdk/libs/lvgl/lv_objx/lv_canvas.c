@@ -44,7 +44,7 @@ static lv_design_func_t ancestor_design;
  */
 lv_obj_t * lv_canvas_create(lv_obj_t * par, const lv_obj_t * copy)
 {
-    LV_LOG_TRACE("Zeichenflaechen-Erstellung gestartet");
+    LV_LOG_TRACE("canvas create started");
 
     /*Create the ancestor of canvas*/
     lv_obj_t * new_canvas = lv_img_create(par, copy);
@@ -83,7 +83,7 @@ lv_obj_t * lv_canvas_create(lv_obj_t * par, const lv_obj_t * copy)
         lv_obj_refresh_style(new_canvas);
     }
 
-    LV_LOG_INFO("Zeichenflaeche erstellt");
+    LV_LOG_INFO("canvas created");
 
     return new_canvas;
 }
@@ -130,7 +130,7 @@ void lv_canvas_set_px(lv_obj_t * canvas, lv_coord_t x, lv_coord_t y, lv_color_t 
 
     lv_canvas_ext_t * ext = lv_obj_get_ext_attr(canvas);
     if(x >= ext->dsc.header.w || y >= ext->dsc.header.h) {
-        LV_LOG_WARN("`lv_canvas_set_px`: x oder y ausserhalb der Zeichenflaeche");
+        LV_LOG_WARN("lv_canvas_set_px: x or y out of the canvas");
         return;
     }
 
@@ -210,7 +210,7 @@ lv_color_t lv_canvas_get_px(lv_obj_t * canvas, lv_coord_t x, lv_coord_t y)
     lv_color_t p_color = LV_COLOR_BLACK;
     lv_canvas_ext_t * ext = lv_obj_get_ext_attr(canvas);
     if(x >= ext->dsc.header.w || y >= ext->dsc.header.h) {
-        LV_LOG_WARN("lv_canvas_get_px: x oder y ausserhalb der Zeichenflaeche");
+        LV_LOG_WARN("lv_canvas_get_px: x or y out of the canvas");
         return p_color;
     }
 
@@ -293,7 +293,7 @@ void lv_canvas_copy_buf(lv_obj_t * canvas, const void * to_copy, lv_coord_t w, l
 {
     lv_canvas_ext_t * ext = lv_obj_get_ext_attr(canvas);
     if(x + w >= ext->dsc.header.w || y + h >= ext->dsc.header.h) {
-        LV_LOG_WARN("lv_canvas_copy_buf: x oder y ausserhalb der Zeichenflaeche");
+        LV_LOG_WARN("lv_canvas_copy_buf: x or y out of the canvas");
         return;
     }
 
@@ -321,12 +321,12 @@ void lv_canvas_mult_buf(lv_obj_t * canvas, void * to_copy, lv_coord_t w, lv_coor
 {
     lv_canvas_ext_t * ext = lv_obj_get_ext_attr(canvas);
     if(x + w >= ext->dsc.header.w || y + h >= ext->dsc.header.h) {
-        LV_LOG_WARN("lv_canvas_mult_buf: x oder y ausserhalb der Zeichenflaeche");
+        LV_LOG_WARN("lv_canvas_mult_buf: x or y out of the canvas");
         return;
     }
 
     if(ext->dsc.header.cf == LV_IMG_CF_TRUE_COLOR_ALPHA) {
-        LV_LOG_WARN("lv_canvas_mult_buf: LV_IMG_CF_TRUE_COLOR_ALPHA wird nicht unterstuetzt");
+        LV_LOG_WARN("lv_canvas_mult_buf: LV_IMG_CF_TRUE_COLOR_ALPHA is not supported");
         return;
     }
 

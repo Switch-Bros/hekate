@@ -62,7 +62,7 @@ static lv_design_func_t ancestor_design;
  */
 lv_obj_t * lv_preload_create(lv_obj_t * par, const lv_obj_t * copy)
 {
-    LV_LOG_TRACE("Vorauslade-Prozess gestartet");
+    LV_LOG_TRACE("preload create started");
 
     /*Create the ancestor of pre loader*/
     lv_obj_t * new_preload = lv_arc_create(par, copy);
@@ -113,7 +113,7 @@ lv_obj_t * lv_preload_create(lv_obj_t * par, const lv_obj_t * copy)
     lv_preload_set_animation_type(new_preload, ext->anim_type);
 
 
-    LV_LOG_INFO("Vorausladeprozess erstellt");
+    LV_LOG_INFO("preload created");
 
     return new_preload;
 }

@@ -53,7 +53,7 @@ static lv_signal_func_t ancestor_signal;
  */
 lv_obj_t * lv_sw_create(lv_obj_t * par, const lv_obj_t * copy)
 {
-    LV_LOG_TRACE("Schalter-Erstellung gestartet");
+    LV_LOG_TRACE("switch create started");
 
     /*Create the ancestor of switch*/
     lv_obj_t * new_sw = lv_slider_create(par, copy);
@@ -114,7 +114,7 @@ lv_obj_t * lv_sw_create(lv_obj_t * par, const lv_obj_t * copy)
         lv_obj_refresh_style(new_sw);
     }
 
-    LV_LOG_INFO("Schalter erstellt");
+    LV_LOG_INFO("switch created");
 
     return new_sw;
 }

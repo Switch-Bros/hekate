@@ -154,7 +154,7 @@ void irq_handler()
 
 	if (err == IRQ_NONE)
 	{
-		DPRINTF("Unbehandelter IRQ wurde deaktiviert: %d!\n", irq);
+		DPRINTF("Unhandled IRQ got disabled: %d!\n", irq);
 	}
 }
 
@@ -204,8 +204,8 @@ irq_status_t irq_request(u32 irq, irq_handler_t handler, void *data, irq_flags_t
 		if (irqs[idx].handler == NULL ||
 			(irqs[idx].irq == irq && irqs[idx].flags & IRQ_FLAG_REPLACEABLE))
 		{
-			DPRINTF("Haendler registriert, IRQ: %d, Slot: %d\n", irq, idx);
-			DPRINTF("Haendler: %08p, Flags: %x\n", (u32)handler, flags);
+			DPRINTF("Registered handler, IRQ: %d, Slot: %d\n", irq, idx);
+			DPRINTF("Handler: %08p, Flags: %x\n", (u32)handler, flags);
 
 			irqs[idx].irq     = irq;
 			irqs[idx].handler = handler;
